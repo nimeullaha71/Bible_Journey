@@ -16,7 +16,7 @@ void main() async {
       ],
       path: 'lib/localization',
       fallbackLocale: const Locale('en'),
-      child: const MyApp(),
+      child:  MyApp(),
     ),
   );
 }

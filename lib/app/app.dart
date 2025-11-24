@@ -18,8 +18,9 @@ class _MyAppState extends State<MyApp> {
       supportedLocales: context.supportedLocales,
       locale: context.locale,
       debugShowCheckedModeBanner: false,
+      onGenerateRoute: AppRoutes.generateRoute,
       initialRoute: AppRoutes.splash,
-      home: const SplashScreen(),
+      //home: const SplashScreen(),
     );
   }
 }

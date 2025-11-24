@@ -1,3 +1,4 @@
+import 'package:bible_journey/features/auth/screens/login_screen.dart';
 import 'package:bible_journey/features/auth/screens/splash_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -5,7 +6,7 @@ import 'package:flutter/material.dart';
 class AppRoutes{
     static const String splash = '/splash';
     static const String home = '/home';
-    static const String signIn = '/signIn';
+    static const String logIn = '/signIn';
     static const String signUp = '/signUp';
 
 
@@ -14,6 +15,8 @@ class AppRoutes{
       switch(settings.name){
         case splash:
           return MaterialPageRoute(builder: (_)=>const SplashScreen());
+        case logIn:
+          return MaterialPageRoute(builder: (_)=>const LoginScreen());
 
         //case home:
           //return MaterialPageRoute(builder: (_)=>HomeScreen());

@@ -14,14 +14,14 @@ class AppImages{
 
 class AppTextStyles{
   static const heading = TextStyle(
-    fontSize: 22,
+    fontSize: 20,
     fontWeight: FontWeight.bold,
-    color: Colors.black
+    color: Color.fromRGBO(84, 84, 84, 1)
   );
 
   static const normal = TextStyle(
-    fontSize: 16,
-    color: Colors.black,
+    fontSize: 14,
+    color: Colors.white,
   );
 }
 
