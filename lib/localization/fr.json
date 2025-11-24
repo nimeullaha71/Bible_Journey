@@ -1,0 +1,41 @@
+{
+  "splash": {
+    "title": "Bienvenue à Duomo",
+    "subtitle": "Commencez votre parcours spirituel avec Dieu"
+  },
+  "common": {
+    "app_name": "Duomo",
+    "next": "Suivant",
+    "back": "Retour",
+    "skip": "Passer",
+    "continue": "Continuer",
+    "loading": "Chargement..."
+  },
+  "auth": {
+    "login_title": "Bon retour",
+    "login_subtitle": "Entrez vos informations pour continuer",
+    "email": "Adresse e-mail",
+    "password": "Mot de passe",
+    "login_button": "Se connecter",
+    "forgot_password": "Mot de passe oublié ?",
+    "no_account": "Vous n'avez pas de compte ?",
+    "create_account": "Créer un compte",
+    "register_title": "Créez votre compte",
+    "register_button": "S'inscrire"
+  },
+  "home": {
+    "greeting": "Bonjour",
+    "daily_prayer": "Prière quotidienne",
+    "today_devotion": "Dévotion du jour",
+    "journeys": "Parcours",
+    "micro_actions": "Micro-actions",
+    "quizzes": "Quiz"
+  },
+  "journey": {
+    "marriage": "Mariage",
+    "parenting": "Parentalité",
+    "happiness": "Bonheur",
+    "work": "Travail",
+    "community": "Communauté"
+  }
+}

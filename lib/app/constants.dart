@@ -9,7 +9,7 @@ class AppColors {
 
 class AppImages{
     static const splashBg = "assets/images/Rectangle.jpg";
-    static const appLogo = "assets/images/image 2.jpg";
+    static const appLogo = "assets/images/image 2.png";
 }
 
 class AppTextStyles{

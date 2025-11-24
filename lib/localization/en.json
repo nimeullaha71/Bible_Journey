@@ -1,6 +1,46 @@
 {
   "splash": {
-    "title": "Welcome to Duomo",
-    "subtitle": "Start your day with God"
+    "title": "Find Your Peace",
+    "subtitle": "Daily Devotionals, Bible study, and moments of reflection"
+  },
+
+  "common": {
+    "app_name": "Duomo",
+    "next": "Next",
+    "back": "Back",
+    "skip": "Skip",
+    "continue": "Continue",
+    "loading": "Loading..."
+  },
+
+  "auth": {
+    "login_title": "Welcome Back",
+    "login_subtitle": "Enter your details to continue",
+    "email": "Email Address",
+    "password": "Password",
+    "login_button": "Sign In",
+    "forgot_password": "Forgot Password?",
+    "no_account": "Don’t have an account?",
+    "create_account": "Create Account",
+
+    "register_title": "Create Your Account",
+    "register_button": "Sign Up"
+  },
+
+  "home": {
+    "greeting": "Good Morning",
+    "daily_prayer": "Daily Prayer",
+    "today_devotion": "Today’s Devotion",
+    "journeys": "Journeys",
+    "micro_actions": "Micro Actions",
+    "quizzes": "Quizzes"
+  },
+
+  "journey": {
+    "marriage": "Marriage",
+    "parenting": "Parenting",
+    "happiness": "Happiness",
+    "work": "Work",
+    "community": "Community"
   }
 }

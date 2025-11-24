@@ -1,0 +1,41 @@
+{
+  "splash": {
+    "title": "Willkommen bei Duomo",
+    "subtitle": "Beginne deine spirituelle Reise mit Gott"
+  },
+  "common": {
+    "app_name": "Duomo",
+    "next": "Weiter",
+    "back": "Zurück",
+    "skip": "Überspringen",
+    "continue": "Fortfahren",
+    "loading": "Laden..."
+  },
+  "auth": {
+    "login_title": "Willkommen zurück",
+    "login_subtitle": "Gib deine Daten ein, um fortzufahren",
+    "email": "E-Mail-Adresse",
+    "password": "Passwort",
+    "login_button": "Anmelden",
+    "forgot_password": "Passwort vergessen?",
+    "no_account": "Noch keinen Account?",
+    "create_account": "Konto erstellen",
+    "register_title": "Erstelle dein Konto",
+    "register_button": "Registrieren"
+  },
+  "home": {
+    "greeting": "Guten Morgen",
+    "daily_prayer": "Tägliches Gebet",
+    "today_devotion": "Tägliche Andacht",
+    "journeys": "Reisen",
+    "micro_actions": "Mikro-Aktionen",
+    "quizzes": "Quiz"
+  },
+  "journey": {
+    "marriage": "Ehe",
+    "parenting": "Elternschaft",
+    "happiness": "Glück",
+    "work": "Arbeit",
+    "community": "Gemeinschaft"
+  }
+}
