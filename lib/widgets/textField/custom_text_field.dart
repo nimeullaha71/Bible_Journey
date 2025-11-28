@@ -28,10 +28,24 @@ class _CustomTextFieldState extends State<CustomTextField> {
   @override
   Widget build(BuildContext context) {
     return TextField(
+      style: TextStyle(color: Colors.black),
       controller: widget.controller,
       obscureText: _obscureText,
       decoration: InputDecoration(
+        filled: true,
+        fillColor: Color.fromRGBO(227, 233, 227, 1),
         labelText: widget.label,
+        labelStyle: TextStyle(
+          color: Color.fromRGBO(154, 154, 154, 1)
+        ),
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(8),
+          borderSide: const BorderSide(color: Colors.white),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(8),
+          borderSide: const BorderSide(color: Colors.green, width: 2),
+        ),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(8),
         ),

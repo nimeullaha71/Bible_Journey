@@ -1,5 +1,6 @@
 import 'package:bible_journey/app/constants.dart';
 import 'package:bible_journey/app/routes.dart';
+import 'package:bible_journey/widgets/buttons/auth_flow_custom_button.dart';
 import 'package:bible_journey/widgets/buttons/custom_button.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -85,10 +86,10 @@ class SplashScreen extends StatelessWidget {
                 /// Custom Button
                 SizedBox(
                   width: double.infinity,
-                  child: CustomButton(
+                  child: AuthCustomButton(
                     text: "Get Started",
                     onTap: () {},
-                    height: height * 0.065, // responsive button height
+                    height: height * 0.055, // responsive button height
                   ),
                 ),
 

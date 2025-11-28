@@ -1,4 +1,6 @@
 import 'package:bible_journey/app/constants.dart';
+import 'package:bible_journey/app/routes.dart';
+import 'package:bible_journey/widgets/buttons/auth_flow_custom_button.dart';
 import 'package:bible_journey/widgets/buttons/custom_button.dart';
 import 'package:flutter/material.dart';
 import '../../../widgets/textField/custom_text_field.dart';
@@ -79,18 +81,32 @@ class _LoginScreenState extends State<LoginScreen> {
                   SizedBox(height: height * 0.03),
 
                   /// Email
-                  CustomTextField(
-                    label: "Email",
-                    controller: emailController,
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text("Email",style: TextStyle(color: Colors.white,fontWeight: FontWeight.w600,),),
+                      SizedBox(height: 8,),
+                      CustomTextField(
+                        label: "Email",
+                        controller: emailController,
+                      ),
+                    ],
                   ),
 
                   SizedBox(height: height * 0.02),
 
                   /// Password
-                  CustomTextField(
-                    label: "Password",
-                    controller: passwordController,
-                    obscureText: true,
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text("Password",style: TextStyle(color: Colors.white,fontWeight: FontWeight.w600,),),
+                      SizedBox(height: 8,),
+                      CustomTextField(
+                        label: "Password",
+                        controller: passwordController,
+                        obscureText: true,
+                      ),
+                    ],
                   ),
 
                   SizedBox(height: height * 0.015),
@@ -101,6 +117,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       Row(
                         children: [
                           Checkbox(
+                            checkColor: Colors.green,
                             value: rememberMe,
                             onChanged: (val) {
                               setState(() {
@@ -108,15 +125,15 @@ class _LoginScreenState extends State<LoginScreen> {
                               });
                             },
                           ),
-                          const Text("Remember me"),
+                          const Text("Remember me",style: TextStyle(color: Colors.white),),
                         ],
                       ),
                       const Spacer(),
                       const Text(
                         "Forgot password?",
                         style: TextStyle(
-                          decoration: TextDecoration.underline,
-                          color: Colors.black,
+                          //decoration: TextDecoration.underline,
+                          color: Colors.white,
                         ),
                       ),
                     ],
@@ -125,9 +142,9 @@ class _LoginScreenState extends State<LoginScreen> {
                   SizedBox(height: height * 0.025),
 
                   /// Login Button
-                  CustomButton(
+                  AuthCustomButton(
                     text: "Log in",
-                    height: 55,
+                    height: height*0.055,
                     onTap: () {
                       // Handle login
                     },
@@ -146,23 +163,28 @@ class _LoginScreenState extends State<LoginScreen> {
                   SizedBox(height: 15),
 
                   /// Bottom Sign Up Text
-                  RichText(
-                    text: const TextSpan(
-                      text: "Don’t have an account? ",
-                      style: TextStyle(color: Colors.black),
-                      children: [
-                        TextSpan(
-                          text: "Sign up",
-                          style: TextStyle(
-                            color: Color(0xFF015093),
-                            fontWeight: FontWeight.w700,
+                  GestureDetector(
+                    onTap: (){
+                      Navigator.pushNamed(context, AppRoutes.signUp);
+                    },
+                    child: RichText(
+                      text: const TextSpan(
+                        text: "Don’t have an account? ",
+                        style: TextStyle(color: Colors.white),
+                        children: [
+                          TextSpan(
+                            text: "Sign up",
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.w700,
+                            ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   ),
 
-                  SizedBox(height: 40),
+                  SizedBox(height: 80),
                 ],
               ),
             ),
@@ -177,7 +199,7 @@ class _LoginScreenState extends State<LoginScreen> {
     return Container(
       height: 55,
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(15),
+        borderRadius: BorderRadius.circular(40),
         border: Border.all(color: Colors.white),
         color: Colors.white.withOpacity(0.15),
       ),
