@@ -84,7 +84,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text("Email",style: TextStyle(color: Colors.white,fontWeight: FontWeight.w600,),),
+                      Text("Email",style: TextStyle(color: Color.fromRGBO(73, 76, 79, 1),fontSize: 16, fontWeight: FontWeight.w600,),),
                       SizedBox(height: 8,),
                       CustomTextField(
                         label: "Email",
@@ -99,7 +99,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text("Password",style: TextStyle(color: Colors.white,fontWeight: FontWeight.w600,),),
+                      Text("Password",style: TextStyle(color: Color.fromRGBO(73, 76, 79, 1),fontSize: 16, fontWeight: FontWeight.w600,),),
                       SizedBox(height: 8,),
                       CustomTextField(
                         label: "Password",
@@ -129,11 +129,16 @@ class _LoginScreenState extends State<LoginScreen> {
                         ],
                       ),
                       const Spacer(),
-                      const Text(
-                        "Forgot password?",
-                        style: TextStyle(
-                          //decoration: TextDecoration.underline,
-                          color: Colors.white,
+                      GestureDetector(
+                        onTap: (){
+                          Navigator.pushNamed(context, AppRoutes.forgotPassword);
+                        },
+                        child: const Text(
+                          "Forgot password?",
+                          style: TextStyle(
+                            //decoration: TextDecoration.underline,
+                            color: Colors.white,
+                          ),
                         ),
                       ),
                     ],

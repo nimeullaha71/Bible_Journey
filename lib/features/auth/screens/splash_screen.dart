@@ -96,16 +96,6 @@ class SplashScreen extends StatelessWidget {
                 SizedBox(height: height * 0.02),
 
                 /// Login text
-                // GestureDetector(
-                //   onTap: () {},
-                //   child: Text(
-                //     "Already have an account? Log in",
-                //     style: AppTextStyles.normal.copyWith(
-                //       color: Colors.white,
-                //       fontSize: height * 0.02,
-                //     ),
-                //   ),
-                // ),
 
                 GestureDetector(
                   onTap: (){

@@ -1,5 +1,8 @@
+import 'package:bible_journey/features/auth/screens/forgot_password_screen.dart';
 import 'package:bible_journey/features/auth/screens/login_screen.dart';
+import 'package:bible_journey/features/auth/screens/set_new_password_screen.dart';
 import 'package:bible_journey/features/auth/screens/splash_screen.dart';
+import 'package:bible_journey/features/auth/screens/verify_otp_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -10,6 +13,9 @@ class AppRoutes{
     static const String home = '/home';
     static const String logIn = '/signIn';
     static const String signUp = '/signUp';
+    static const String forgotPassword = '/forgotPassword';
+    static const String otpScreen = '/otpScreen';
+    static const String setPasswordScreen = '/setPasswordScreen';
 
 
 
@@ -21,6 +27,12 @@ class AppRoutes{
           return MaterialPageRoute(builder: (_)=>const LoginScreen());
         case signUp:
           return MaterialPageRoute(builder: (_)=>const SignUpScreen());
+        case forgotPassword:
+          return MaterialPageRoute(builder: (_)=>const ForgotPasswordScreen());
+        case otpScreen:
+          return MaterialPageRoute(builder: (_)=>const VerifyOtpScreen());
+        case setPasswordScreen:
+          return MaterialPageRoute(builder: (_)=>const SetNewPasswordScreen());
 
 
         //case home:

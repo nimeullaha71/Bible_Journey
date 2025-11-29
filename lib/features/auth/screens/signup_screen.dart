@@ -62,12 +62,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   /// Logo
                   Image.asset(AppImages.appLogo, height: height * 0.13),
 
-                  SizedBox(height: height * 0.018),
+                  SizedBox(height: height * 0.015),
                   
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text("Full Name",style: TextStyle(color: Colors.white,fontWeight: FontWeight.w600,),),
+                      Text("Full Name",style: TextStyle(color: Color.fromRGBO(73, 76, 79, 1),fontSize: 16, fontWeight: FontWeight.w600,),),
                       SizedBox(height: 8,),
                       ///Full Name
                       CustomTextField(
@@ -77,13 +77,13 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     ],
                   ),
 
-                  SizedBox(height: height * 0.02),
+                  SizedBox(height: height * 0.01),
 
                   ///Email
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text("Email",style: TextStyle(color: Colors.white,fontWeight: FontWeight.w600,),),
+                      Text("Email",style: TextStyle(color: Color.fromRGBO(73, 76, 79, 1),fontSize: 16, fontWeight: FontWeight.w600,),),
                       SizedBox(height: 8,),
                       CustomTextField(
                         label: "Email",
@@ -92,13 +92,13 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     ],
                   ),
 
-                  SizedBox(height: height * 0.02),
+                  SizedBox(height: height * 0.01),
 
                   /// Phone
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text("Phone Number",style: TextStyle(color: Colors.white,fontWeight: FontWeight.w600,),),
+                      Text("Phone Number",style: TextStyle(color: Color.fromRGBO(73, 76, 79, 1),fontSize: 16, fontWeight: FontWeight.w600,),),
                       SizedBox(height: 8,),
                       CustomTextField(
                         label: "Phone Number",
@@ -107,13 +107,13 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     ],
                   ),
 
-                  SizedBox(height: height * 0.02),
+                  SizedBox(height: height * 0.01),
 
                   /// Password
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text("Password",style: TextStyle(color: Colors.white,fontWeight: FontWeight.w600,),),
+                      Text("Password",style: TextStyle(color: Color.fromRGBO(73, 76, 79, 1),fontSize: 16, fontWeight: FontWeight.w600,),),
                       SizedBox(height: 8,),
                       CustomTextField(
                         label: "Password",
@@ -123,13 +123,13 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     ],
                   ),
 
-                  SizedBox(height: height * 0.015),
+                  SizedBox(height: height * 0.01),
 
                   ///Confirm Password
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text("Confirm Password",style: TextStyle(color: Colors.white,fontWeight: FontWeight.w600,),),
+                      Text("Confirm Password",style: TextStyle(color: Color.fromRGBO(73, 76, 79, 1),fontSize: 16, fontWeight: FontWeight.w600,),),
                       SizedBox(height: 8,),
                       CustomTextField(
                         label: "Confirm Password",
