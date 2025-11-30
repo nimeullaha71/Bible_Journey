@@ -5,12 +5,15 @@ class AppColors {
   static const secondary = Color(0xFFE3E9E3);
   static const black = Colors.black;
   static const white = Colors.white;
+  static const bgColor = Color(0xFFF4EFEA);
 }
 
 class AppImages{
     static const splashBg = "assets/images/Rectangle.jpg";
     static const signUpBg = "assets/images/registrationBg.jpg";
     static const appLogo = "assets/images/image 2.png";
+    static const maleImg = "assets/images/Male.png";
+    static const femaleImg = "assets/images/Female.png";
 }
 
 class AppTextStyles{

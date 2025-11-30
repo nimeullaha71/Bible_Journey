@@ -151,7 +151,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     text: "Log in",
                     height: height*0.055,
                     onTap: () {
-                      // Handle login
+                      Navigator.pushNamed(context, AppRoutes.quizIntroScreen);
                     },
                   ),
 
