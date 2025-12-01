@@ -88,7 +88,9 @@ class SplashScreen extends StatelessWidget {
                   width: double.infinity,
                   child: AuthCustomButton(
                     text: "Get Started",
-                    onTap: () {},
+                    onTap: () {
+                      Navigator.pushNamed(context, AppRoutes.mainBottomNavScreen);
+                    },
                     height: height * 0.055, // responsive button height
                   ),
                 ),
