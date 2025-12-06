@@ -2,6 +2,9 @@ import 'package:bible_journey/app/constants.dart';
 import 'package:bible_journey/features/home/widgets/home_box.dart';
 import 'package:bible_journey/features/questionnaire/widget/custom_quiz_app_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
+
+import '../../../app/routes.dart';
 
 class JourneyScreen extends StatefulWidget {
   const JourneyScreen({super.key});
@@ -37,50 +40,86 @@ class _JourneyScreenState extends State<JourneyScreen> {
                     shrinkWrap: true,
                     children: [
                       HomeBox(
-                        icon: Icons.favorite,
-                        title: "Faith and Perseverance",
-                        subtitle: "Nurturing your sacred bond",
-                        onTap: () {},
+                        icon: SvgPicture.asset(
+                          "assets/images/Vector (3).svg",
+                          width: 28,
+                          height: 28,
+                          color: Colors.green,
+                        ),
+                        title: "Happiness & Joy",
+                        subtitle: "Discovering true contentment",
+                        onTap: () {
+                          Navigator.pushNamed(context, AppRoutes.prayerScreen);
+                        },
                       ),
                       HomeBox(
-                        icon: Icons.favorite,
+                        icon: SvgPicture.asset(
+                          "assets/images/Vector (1).svg",
+                          width: 28,
+                          height: 28,
+                          color: Colors.green,
+                        ),
                         title: "Parenting",
                         subtitle: "Parenting Raising a family in faith",
                         onTap: () {},
                       ),
                       HomeBox(
-                        icon: Icons.favorite,
-                        title: "Happiness & Joy",
+                        icon: SvgPicture.asset(
+                          "assets/images/Vector (4).svg",
+                          width: 28,
+                          height: 28,
+                          color: Colors.green,
+                        ),                        title: "Happiness & Joy",
                         subtitle: "Discovering true contentment",
                         onTap: () {},
                       ),
                       HomeBox(
-                        icon: Icons.favorite,
-                        title: "Friendship",
+                        icon: SvgPicture.asset(
+                          "assets/images/Vector (2).svg",
+                          width: 28,
+                          height: 28,
+                          color: Colors.green,
+                        ),                        title: "Friendship",
                         subtitle: "Building godly relationships",
                         onTap: () {},
                       ),
                       HomeBox(
-                        icon: Icons.favorite,
-                        title: "Work & Career",
+                        icon: SvgPicture.asset(
+                          "assets/images/Vector (3).svg",
+                          width: 28,
+                          height: 28,
+                          color: Colors.green,
+                        ),                        title: "Work & Career",
                         subtitle: "Navigating your Friendship",
                         onTap: () {},
                       ),
                       HomeBox(
-                        icon: Icons.favorite,
-                        title: "Community",
+                        icon: SvgPicture.asset(
+                          "assets/images/Vector (1).svg",
+                          width: 28,
+                          height: 28,
+                          color: Colors.green,
+                        ),                        title: "Community",
                         subtitle: "Connecting with professional life believers",
                         onTap: () {},
                       ),
                       HomeBox(
-                        icon: Icons.favorite,
-                        title: "Overcoming Anxiety",
+                        icon: SvgPicture.asset(
+                          "assets/images/Vector (4).svg",
+                          width: 28,
+                          height: 28,
+                          color: Colors.green,
+                        ),                        title: "Overcoming Anxiety",
                         subtitle: "Finding peace in His presence",
                         onTap: () {},
                       ),
                       HomeBox(
-                        icon: Icons.favorite,
-                        title: "Finding Purpose",
+                        icon: SvgPicture.asset(
+                          "assets/images/Vector (2).svg",
+                          width: 28,
+                          height: 28,
+                          color: Colors.green,
+                        ),                        title: "Finding Purpose",
                         subtitle: "Living a life of meaning.",
                         onTap: () {},
                       ),

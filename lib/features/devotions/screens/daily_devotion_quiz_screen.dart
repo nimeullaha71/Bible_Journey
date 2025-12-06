@@ -1,19 +1,21 @@
 import 'package:bible_journey/app/routes.dart';
+import 'package:bible_journey/features/devotions/screens/devotion_detail_screen.dart';
+import 'package:bible_journey/features/devotions/screens/quiz_mark_screen.dart';
 import 'package:bible_journey/features/questionnaire/widget/custom_quiz_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:bible_journey/app/constants.dart';
 
-class QuizQuestionScreen extends StatefulWidget {
-  const QuizQuestionScreen({super.key});
+class DailyDevotionQuizScreen extends StatefulWidget {
+  const DailyDevotionQuizScreen({super.key});
 
   @override
-  State<QuizQuestionScreen> createState() => _QuizQuestionScreenState();
+  State<DailyDevotionQuizScreen> createState() => _DailyDevotionQuizScreenState();
 }
 
-class _QuizQuestionScreenState extends State<QuizQuestionScreen> {
+class _DailyDevotionQuizScreenState extends State<DailyDevotionQuizScreen> {
   int currentQuestionIndex = 0;
 
-  /// 🔥 10 Question List
+  /// 3 Question List
   List<Map<String, dynamic>> quizData = [
     {
       "question": "How would you describe your Bible study experience so far?",
@@ -22,7 +24,8 @@ class _QuizQuestionScreenState extends State<QuizQuestionScreen> {
         "I know some parts",
         "I've studied it deeply",
         "Not sure"
-      ]
+      ],
+      "correctIndex": 2,   // <-- correct answer
     },
     {
       "question": "How would you describe your Bible study experience so far?",
@@ -31,7 +34,8 @@ class _QuizQuestionScreenState extends State<QuizQuestionScreen> {
         "I know some parts",
         "I've studied it deeply",
         "Not sure"
-      ]
+      ],
+      "correctIndex": 1,
     },
     {
       "question": "Describe your current relationship with God?",
@@ -40,80 +44,9 @@ class _QuizQuestionScreenState extends State<QuizQuestionScreen> {
         "In need of renewal",
         "Unsure",
         "Other"
-      ]
+      ],
+      "correctIndex": 0,
     },
-    {
-      "question": "What personal need led you to Scripture?",
-      "options": [
-        "Needing spiritual renewal",
-        "Searching for inner peace",
-        "Longing for hope",
-        "Other"
-      ]
-    },
-    {
-      "question": "Which struggles feel most present in your life right now? ",
-      "options": [
-        "Stress or anxiety",
-        "Searching for inner peace",
-        "Feeling alone",
-        "Screen and time-wasting habits",
-        "Lack of purpose",
-        "Not sure",
-        "Overthinking and guilt",
-        "Lack of purpose",
-      ]
-    },
-    {
-      "question": "In hard seasons, do you tend to turn toward God or away?",
-      "options": [
-        "I pull closer",
-        "I drift away",
-        "It depends",
-        "I'm not sure"
-      ]
-    },
-    {
-      "question": "When life gets heavy, where do you usually turn first?",
-      "options": [
-        "Prayer",
-        "Family or friends",
-        "Bible",
-        "My phone",
-        "I keep it in",
-        "I'm not sure",
-      ]
-    },
-    {
-      "question": "Have you noticed anything that creates distance between you and God? ",
-      "options": [
-        "Not hearing from Him",
-        "Distraction and busyness",
-        "Distraction and busyness",
-        "Emotional exhaustion",
-        "Feeling unworthy",
-        "I’m not sure",
-        "Other",
-      ]
-    },
-    {
-      "question": "What can help you stay motivated to study the Bible? ",
-      "options": [
-        "A clear plan",
-        "Encouraging truth",
-        "Haven’t found it yet",
-        "Other"
-      ]
-    },
-    {
-      "question": "Which type of Bible content feels most helpful for you? ",
-      "options": [
-        "Short and simple",
-        "In-depth",
-        "Not sure",
-      ]
-    },
-    // Add 6 more...
   ];
 
 
@@ -123,13 +56,11 @@ class _QuizQuestionScreenState extends State<QuizQuestionScreen> {
         currentQuestionIndex--;
       });
     } else {
-      Navigator.pop(context);  // প্রথম প্রশ্ন হলে স্ক্রিন ব্যাক হবে
+      Navigator.push(context, MaterialPageRoute(builder: (context)=>DevotionDetailScreen()));
     }
   }
 
-
-  /// 🔥 Multiple answers → index based store
-  List<List<int>> selectedAnswers = List.generate(10, (index) => []);
+  List<int> selectedAnswers = List.filled(3, -1);
 
   @override
   Widget build(BuildContext context) {
@@ -149,9 +80,6 @@ class _QuizQuestionScreenState extends State<QuizQuestionScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            /// -------------------
-            /// Top Text
-            /// -------------------
             Text(
               "Question ${currentQuestionIndex + 1} of ${quizData.length}",
               style: const TextStyle(color: Colors.black54, fontSize: 14),
@@ -159,9 +87,6 @@ class _QuizQuestionScreenState extends State<QuizQuestionScreen> {
 
             const SizedBox(height: 6),
 
-            /// -------------------
-            /// Progress Bar
-            /// -------------------
             LinearProgressIndicator(
               value: (currentQuestionIndex + 1) / quizData.length,
               backgroundColor: Colors.grey.shade300,
@@ -172,9 +97,6 @@ class _QuizQuestionScreenState extends State<QuizQuestionScreen> {
 
             const SizedBox(height: 30),
 
-            /// -------------------
-            /// Question Text
-            /// -------------------
             Text(
               question,
               style: const TextStyle(
@@ -183,9 +105,6 @@ class _QuizQuestionScreenState extends State<QuizQuestionScreen> {
 
             const SizedBox(height: 20),
 
-            /// -------------------
-            /// Options
-            /// -------------------
             Expanded(
               child: ListView.builder(
                 itemCount: options.length,
@@ -230,21 +149,13 @@ class _QuizQuestionScreenState extends State<QuizQuestionScreen> {
     );
   }
 
-  /// ------------------------------------------------------------------
-  /// OPTION TILE (Multiple Selection)
-  /// ------------------------------------------------------------------
   Widget optionTile(int index, String optionText) {
-    bool isActive =
-    selectedAnswers[currentQuestionIndex].contains(index);
+    bool isActive = selectedAnswers[currentQuestionIndex] == index;
 
     return GestureDetector(
       onTap: () {
         setState(() {
-          if (isActive) {
-            selectedAnswers[currentQuestionIndex].remove(index);
-          } else {
-            selectedAnswers[currentQuestionIndex].add(index);
-          }
+          selectedAnswers[currentQuestionIndex] = index;
         });
       },
       child: Container(
@@ -277,18 +188,29 @@ class _QuizQuestionScreenState extends State<QuizQuestionScreen> {
     );
   }
 
-  /// ------------------------------------------------------------------
-  /// NEXT QUESTION LOGIC
-  /// ------------------------------------------------------------------
   void goToNext() {
     if (currentQuestionIndex < quizData.length - 1) {
       setState(() {
         currentQuestionIndex++;
       });
     } else {
-      Navigator.pushNamed(context, AppRoutes.mainBottomNavScreen);
-      /// Finish Page / Result Page এ নেওয়া যাবে
-      print(selectedAnswers);
+
+      int score = 0;
+
+      for (int i = 0; i < quizData.length; i++) {
+        int correctIndex = quizData[i]["correctIndex"];
+        if (selectedAnswers[i] == correctIndex) {
+          score++;
+        }
+      }
+
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => QuizMarkScreen(correctAnswers: score),
+        ),
+      );
     }
   }
+
 }

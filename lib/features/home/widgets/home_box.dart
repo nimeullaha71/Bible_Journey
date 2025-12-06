@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 
 class HomeBox extends StatelessWidget {
-  final IconData icon;
+  final Widget icon;
   final String title;
   final String subtitle;
   final VoidCallback onTap;
-  final Color? backgroundColor; // ✅ ADD
 
   const HomeBox({
     super.key,
@@ -13,37 +12,51 @@ class HomeBox extends StatelessWidget {
     required this.title,
     required this.subtitle,
     required this.onTap,
-    this.backgroundColor, // ✅ OPTIONAL COLOR
   });
 
   @override
   Widget build(BuildContext context) {
+    final width = MediaQuery.of(context).size.width;
+
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        padding: EdgeInsets.all(16),
+        padding: EdgeInsets.all(width * 0.04),
         decoration: BoxDecoration(
-          color: backgroundColor ?? Colors.white,  // ✅ DEFAULT WHITE
-          borderRadius: BorderRadius.circular(12),
-          border: Border.all(color: Colors.green.shade200),
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(16),
         ),
+
+        /// This prevents overflow
         child: Column(
+          mainAxisSize: MainAxisSize.min,  // 🔥 Fix #1
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Icon(icon, color: Colors.green, size: 24),
-            SizedBox(height: 8),
+            icon,                           // Already has fixed width/height
+
+            SizedBox(height: width * 0.03),
+
             Text(
               title,
               style: TextStyle(
-                fontSize: 16,
+                fontSize: width * 0.045,
                 fontWeight: FontWeight.w600,
               ),
+              maxLines: 1,                  // 🔥 Fix #2
+              overflow: TextOverflow.ellipsis,
             ),
-            SizedBox(height: 6),
-            Text(
-              subtitle,
-              style: TextStyle(
-                color: Colors.grey.shade700,
+
+            SizedBox(height: width * 0.015),
+
+            Flexible(                       // 🔥 Fix #3
+              child: Text(
+                subtitle,
+                style: TextStyle(
+                  fontSize: width * 0.032,
+                  color: Colors.grey.shade600,
+                ),
+                maxLines: 2,                // Prevent overflow
+                overflow: TextOverflow.ellipsis,
               ),
             ),
           ],
