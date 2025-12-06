@@ -1,6 +1,7 @@
 import 'package:bible_journey/app/constants.dart';
 import 'package:bible_journey/app/routes.dart';
 import 'package:bible_journey/features/devotions/screens/daily_devotion_screen.dart';
+import 'package:bible_journey/features/todays_actions/screens/todays_action_screen.dart';
 import 'package:bible_journey/widgets/buttons/custom_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -92,7 +93,9 @@ class HomeScreen extends StatelessWidget {
                     ),
                     title: "Today's Actions",
                     subtitle: "Small tasks to grow faith.",
-                    onTap: () {},
+                    onTap: () {
+                      Navigator.push(context, MaterialPageRoute(builder: (context)=>TodayActionScreen()));
+                    },
                   ),
 
                   HomeBox(
