@@ -15,7 +15,7 @@ class TodayActionScreen extends StatefulWidget {
 }
 
 class _TodayActionScreenState extends State<TodayActionScreen> {
-  int _selectedIndex = 0;
+  int _selectedIndex = 2;
 
   @override
   Widget build(BuildContext context) {

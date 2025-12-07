@@ -18,13 +18,13 @@ class DevotionDetailScreen extends StatefulWidget {
 }
 
 class _DevotionDetailScreenState extends State<DevotionDetailScreen> {
-  int _selectedIndex = 0;
+  int _selectedIndex = 2;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color(0xffF8F5F2),
-      appBar: CustomAppBar(title: "Quiz Details", onBack: (){
+      appBar: CustomAppBar(title: "Quiz Details", onTap: (){
         Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context)=>DailyDevotionScreen()), (pre)=>false);
       }),
 

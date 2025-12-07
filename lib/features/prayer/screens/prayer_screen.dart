@@ -17,13 +17,13 @@ class PrayerScreen extends StatefulWidget {
 }
 
 class _PrayerScreenState extends State<PrayerScreen> {
-  int _selectedIndex = 0;
+  int _selectedIndex = 2;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.bgColor,
-      appBar: CustomAppBar(title: "Daily Prayer", onBack: (){
+      appBar: CustomAppBar(title: "Daily Prayer", onTap: (){
         Navigator.pop(context);
       }),
       body: SafeArea(

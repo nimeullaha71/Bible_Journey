@@ -19,14 +19,14 @@ class DailyDevotionScreen extends StatefulWidget {
 }
 
 class _DailyDevotionScreenState extends State<DailyDevotionScreen> {
-  int _selectedIndex = 0;
+  int _selectedIndex = 2;
   int _selectedContainer = -1;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color(0xFFF8F5F2),
-      appBar: CustomAppBar(title: "Daily Devotion", onBack: (){
+      appBar: CustomAppBar(title: "Daily Devotion", onTap: (){
         Navigator.push(context, MaterialPageRoute(builder: (context)=>HomeScreen()));
       }),
       body: SingleChildScrollView(

@@ -3,12 +3,12 @@ import 'package:flutter/material.dart';
 class CustomAppBar extends StatelessWidget
     implements PreferredSizeWidget {
   final String title;
-  final VoidCallback onBack;
+  final VoidCallback onTap;
 
   const CustomAppBar({
     super.key,
     required this.title,
-    required this.onBack,
+    required this.onTap,
   });
 
   @override
@@ -23,7 +23,7 @@ class CustomAppBar extends StatelessWidget
       centerTitle: true,
 
       leading: GestureDetector(
-        onTap: onBack,
+        onTap: onTap,
         child: const Padding(
           padding: EdgeInsets.all(12),
           child: Icon(

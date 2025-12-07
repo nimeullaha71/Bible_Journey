@@ -18,7 +18,7 @@ class QuizMarkScreen extends StatefulWidget {
 }
 
 class _QuizMarkScreenState extends State<QuizMarkScreen> {
-  int _selectedIndex = 0;
+  int _selectedIndex = 2;
 
 
   @override
