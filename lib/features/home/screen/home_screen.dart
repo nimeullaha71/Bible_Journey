@@ -1,6 +1,8 @@
 import 'package:bible_journey/app/constants.dart';
 import 'package:bible_journey/app/routes.dart';
 import 'package:bible_journey/features/devotions/screens/daily_devotion_screen.dart';
+import 'package:bible_journey/features/home/screen/notification_screen.dart';
+import 'package:bible_journey/features/journeys/screens/journey_screen.dart';
 import 'package:bible_journey/features/todays_actions/screens/todays_action_screen.dart';
 import 'package:bible_journey/widgets/buttons/custom_button.dart';
 import 'package:flutter/material.dart';
@@ -41,7 +43,10 @@ class HomeScreen extends StatelessWidget {
                       overflow: TextOverflow.ellipsis,
                     ),
                   ),
-                  Icon(Icons.notifications_none, size: width * 0.07)
+                  //Icon(Icons.notifications_none, size: width * 0.07)
+                  IconButton(onPressed: (){
+                    Navigator.push(context, MaterialPageRoute(builder: (context)=>NotificationScreen()));
+                  }, icon: Icon(Icons.notifications_none))
                 ],
               ),
 
@@ -107,7 +112,9 @@ class HomeScreen extends StatelessWidget {
                     ),
                     title: "Begin a Journey",
                     subtitle: "Guided plans for growth.",
-                    onTap: () {},
+                    onTap: () {
+                      Navigator.push(context, MaterialPageRoute(builder: (context)=>JourneyScreen()));
+                    },
                   ),
                 ],
               ),

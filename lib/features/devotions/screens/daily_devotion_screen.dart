@@ -27,7 +27,7 @@ class _DailyDevotionScreenState extends State<DailyDevotionScreen> {
     return Scaffold(
       backgroundColor: Color(0xFFF8F5F2),
       appBar: CustomAppBar(title: "Daily Devotion", onTap: (){
-        Navigator.push(context, MaterialPageRoute(builder: (context)=>HomeScreen()));
+        Navigator.push(context, MaterialPageRoute(builder: (context)=>MainBottomNavScreen()));
       }),
       body: SingleChildScrollView(
         child: SafeArea(

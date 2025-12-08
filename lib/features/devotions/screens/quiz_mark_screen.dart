@@ -1,5 +1,6 @@
 import 'package:bible_journey/features/devotions/screens/daily_devotion_quiz_screen.dart';
 import 'package:bible_journey/features/devotions/screens/devotion_detail_screen.dart';
+import 'package:bible_journey/features/todays_actions/screens/todays_action_screen.dart';
 import 'package:bible_journey/widgets/buttons/custom_button.dart';
 import 'package:flutter/material.dart';
 import '../../../widgets/custom_nav_bar.dart';
@@ -100,6 +101,7 @@ class _QuizMarkScreenState extends State<QuizMarkScreen> {
                 ),
                 SizedBox(height: 50),
                 CustomButton(text: "Continue", onTap: (){
+                  Navigator.push(context, MaterialPageRoute(builder: (context)=>TodayActionScreen()));
                 }),
 
                 SizedBox(height: 10),
