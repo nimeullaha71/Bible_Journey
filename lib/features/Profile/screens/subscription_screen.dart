@@ -31,82 +31,85 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
       ),
       body: SingleChildScrollView(
         child: Center(
-          child: Column(
-            children: [
-              const Text(
-                "Unlock Your Full Journey",
-                style: TextStyle(
-                  fontSize: 22,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.black87,
+          child: Padding(
+            padding: const EdgeInsets.all(10.0),
+            child: Column(
+              children: [
+                const Text(
+                  "Unlock Your Full Journey",
+                  style: TextStyle(
+                    fontSize: 22,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black87,
+                  ),
+                  textAlign: TextAlign.center,
                 ),
-                textAlign: TextAlign.center,
-              ),
-              const Text(
-                "Gain access to our complete library of guided \nplans, studies, and an ad-free experience.",
-                style: TextStyle(
-                  fontSize: 16,
-                  color: Colors.black54,
+                const Text(
+                  "Gain access to our complete library of guided \nplans, studies, and an ad-free experience.",
+                  style: TextStyle(
+                    fontSize: 16,
+                    color: Colors.black54,
+                  ),
+                  textAlign: TextAlign.center,
                 ),
-                textAlign: TextAlign.center,
-              ),
-              const SizedBox(height: 10),
+                const SizedBox(height: 10),
 
-              CustomPremium(
-                  icon: Icons.explore,
-                  title: "Access All Journeys",
-                  subtitle: "Explore our full library of devotional journeys."),
-              const SizedBox(height: 5),
+                CustomPremium(
+                    icon: Icons.explore,
+                    title: "Access All Journeys",
+                    subtitle: "Explore our full library of devotional journeys."),
+                const SizedBox(height: 5),
 
-              CustomPremium(
-                  icon: Icons.book,
-                  title: "Guided Bible Studies",
-                  subtitle: "Unlimited access to all study plans."),
-              const SizedBox(height: 5),
+                CustomPremium(
+                    icon: Icons.book,
+                    title: "Guided Bible Studies",
+                    subtitle: "Unlimited access to all study plans."),
+                const SizedBox(height: 5),
 
-              CustomPremium(
-                  icon: Icons.eleven_mp,
-                  title: "Ad-Free Experience",
-                  subtitle: "Enjoy uninterrupted time for reflection."),
-              const SizedBox(height: 5),
+                CustomPremium(
+                    icon: Icons.eleven_mp,
+                    title: "Ad-Free Experience",
+                    subtitle: "Enjoy uninterrupted time for reflection."),
+                const SizedBox(height: 5),
 
-              CustomPremium(
-                  icon: Icons.menu_book,
-                  title: "Daily Devotion",
-                  subtitle: "Download content for your quiet time."),
-              const SizedBox(height: 10),
+                CustomPremium(
+                    icon: Icons.menu_book,
+                    title: "Daily Devotion",
+                    subtitle: "Download content for your quiet time."),
+                const SizedBox(height: 10),
 
-              CustomPremium1(
-                  title: "Yearly Premium",
-                  subtitle: "\$39.99/year (equals \$3.33/month)"),
+                CustomPremium1(
+                    title: "Yearly Premium",
+                    subtitle: "\$39.99/year (equals \$3.33/month)"),
 
-              CustomPremium1(
-                  title: "Monthly Premium",
-                  subtitle: "\$5.99/month"),
-              const SizedBox(height: 10),
-              CustomButton(text: "Start 7-Day Free Trial", onTap: (){
-                //Navigator.push(
-                    //context, MaterialPageRoute(builder: (_) => const PaymentPage()));
-              }),
+                CustomPremium1(
+                    title: "Monthly Premium",
+                    subtitle: "\$5.99/month"),
+                const SizedBox(height: 10),
+                CustomButton(text: "Start 7-Day Free Trial", onTap: (){
+                  //Navigator.push(
+                      //context, MaterialPageRoute(builder: (_) => const PaymentPage()));
+                }),
 
-              const SizedBox(height: 4),
-              Text(
-                "Restore Purchase",
-                style: TextStyle(
-                  fontSize: 12,
-                  color: Colors.black87,
+                const SizedBox(height: 4),
+                Text(
+                  "Restore Purchase",
+                  style: TextStyle(
+                    fontSize: 12,
+                    color: Colors.black87,
+                  ),
+                  textAlign: TextAlign.center,
                 ),
-                textAlign: TextAlign.center,
-              ),
-              Text(
-                "A 7-day free trial is available for the annual plan. Your subscription will \nautomatically renew unless cancelled at least 24 hours before the end of the trial \nperiod. You can manage your subscription in \nyour App Store settings.",
-                style: TextStyle(
-                  fontSize: 10,
-                  color: Colors.black87,
+                Text(
+                  "A 7-day free trial is available for the annual plan. Your subscription will \nautomatically renew unless cancelled at least 24 hours before the end of the trial \nperiod. You can manage your subscription in \nyour App Store settings.",
+                  style: TextStyle(
+                    fontSize: 10,
+                    color: Colors.black87,
+                  ),
                 ),
-              ),
 
-            ],
+              ],
+            ),
           ),
         ),
       ),
