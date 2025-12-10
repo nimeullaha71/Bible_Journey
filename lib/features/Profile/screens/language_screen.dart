@@ -3,7 +3,9 @@ import 'package:bible_journey/features/bible/screens/bible_screen.dart';
 import 'package:bible_journey/features/journeys/screens/journey_screen.dart';
 import 'package:bible_journey/main_bottom_nav_screen.dart';
 import 'package:bible_journey/widgets/buttons/custom_button.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../widgets/custom_nav_bar.dart';
 import '../widgets/custom_language.dart';
@@ -17,6 +19,35 @@ class LanguageScreen extends StatefulWidget {
 
 class _LanguageScreenState extends State<LanguageScreen> {
   int _selectedIndex = 3;
+  Locale selectedLocale = const Locale('en'); // default English
+
+  @override
+  void initState() {
+    super.initState();
+    loadLocale(); // load last selected language
+  }
+
+  Future<void> saveLocale(Locale locale) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setString('language_code', locale.languageCode);
+  }
+
+  Future<void> loadLocale() async {
+    final prefs = await SharedPreferences.getInstance();
+    final code = prefs.getString('language_code') ?? 'en';
+    setState(() {
+      selectedLocale = Locale(code);
+    });
+    context.setLocale(selectedLocale);
+  }
+
+  void changeLanguage(Locale locale) {
+    setState(() {
+      selectedLocale = locale;
+    });
+    context.setLocale(locale);
+    saveLocale(locale);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -34,57 +65,75 @@ class _LanguageScreenState extends State<LanguageScreen> {
           children: [
             const SizedBox(height: 10),
 
+            // English (US)
             CustomLanguage(
-                svgAssetPath: "assets/images/US.svg",
-                title: "English (US)",
-                onTap: (){}),
-
-            const SizedBox(height: 10),
-            CustomLanguage(
-                svgAssetPath: "assets/images/England.svg",
-                title: "English (EN)",
-                onTap: (){}),
-
+              svgAssetPath: "assets/images/US.svg",
+              title: "English (US)",
+              isSelected: selectedLocale == const Locale('en'),
+              onTap: () => changeLanguage(const Locale('en')),
+            ),
             const SizedBox(height: 10),
 
+            // Spanish
             CustomLanguage(
-                svgAssetPath: "assets/images/Spain.svg",
-                title: "Spanish",
-                onTap: (){}),
-
+              svgAssetPath: "assets/images/Spain.svg",
+              title: "Spanish",
+              isSelected: selectedLocale == const Locale('es'),
+              onTap: () => changeLanguage(const Locale('es')),
+            ),
             const SizedBox(height: 10),
 
+            // Italian
             CustomLanguage(
-                svgAssetPath: "assets/images/Italy.svg",
-                title: "Italian",
-                onTap: (){}),
+              svgAssetPath: "assets/images/Italy.svg",
+              title: "Italian",
+              isSelected: selectedLocale == const Locale('it'),
+              onTap: () => changeLanguage(const Locale('it')),
+            ),
             const SizedBox(height: 10),
 
+            // German
             CustomLanguage(
-                svgAssetPath: "assets/images/German.svg",
-                title: "German",
-                onTap: (){}),
+              svgAssetPath: "assets/images/German.svg",
+              title: "German",
+              isSelected: selectedLocale == const Locale('de'),
+              onTap: () => changeLanguage(const Locale('de')),
+            ),
             const SizedBox(height: 10),
 
+            // French
             CustomLanguage(
-                svgAssetPath: "assets/images/France.svg",
-                title: "French",
-                onTap: (){}),
+              svgAssetPath: "assets/images/France.svg",
+              title: "French",
+              isSelected: selectedLocale == const Locale('fr'),
+              onTap: () => changeLanguage(const Locale('fr')),
+            ),
+            const SizedBox(height: 10),
 
+            // Portuguese
+            CustomLanguage(
+              svgAssetPath: "assets/images/Portugal.svg",
+              title: "Portuguese",
+              isSelected: selectedLocale == const Locale('pt'),
+              onTap: () => changeLanguage(const Locale('pt')),
+            ),
             const SizedBox(height: 115),
 
+            // Done button
             Padding(
               padding: const EdgeInsets.only(left: 20),
               child: CustomButton(
                 text: "Done",
-                onTap: () {},
+                onTap: () {
+                  Navigator.pop(context); // back to previous screen
+                },
               ),
-            )
-
+            ),
           ],
         ),
       ),
 
+      // Bottom navigation
       bottomNavigationBar: CustomNavbar(
         currentIndex: _selectedIndex,
         onItemPressed: (index) {
@@ -94,8 +143,8 @@ class _LanguageScreenState extends State<LanguageScreen> {
 
           switch (index) {
             case 0:
-              Navigator.push(
-                  context, MaterialPageRoute(builder: (_) => const MainBottomNavScreen()));
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (_) => const MainBottomNavScreen()));
               break;
             case 1:
               Navigator.push(

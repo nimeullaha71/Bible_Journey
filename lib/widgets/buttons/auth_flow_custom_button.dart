@@ -3,9 +3,10 @@ import 'package:flutter/material.dart';
 class AuthCustomButton extends StatelessWidget {
   final String text;
   final VoidCallback onTap;
-  final double? height;     // <-- Add this
-  final double? width;      // <-- optional
+  final double? height;
+  final double? width;
   final double borderRadius;
+  final bool isLoading;  // <-- add this
 
   const AuthCustomButton({
     super.key,
@@ -13,13 +14,14 @@ class AuthCustomButton extends StatelessWidget {
     required this.onTap,
     this.height,
     this.width,
-    this.borderRadius = 40,  // default radius
+    this.borderRadius = 40,
+    this.isLoading = false, // default false
   });
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: height ?? 60,   // <-- default height
+      height: height ?? 60,
       width: width ?? double.infinity,
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
@@ -28,8 +30,17 @@ class AuthCustomButton extends StatelessWidget {
             borderRadius: BorderRadius.circular(borderRadius),
           ),
         ),
-        onPressed: onTap,
-        child: Text(
+        onPressed: isLoading ? () {} : onTap, // disable tap when loading
+        child: isLoading
+            ? const SizedBox(
+          height: 24,
+          width: 24,
+          child: CircularProgressIndicator(
+            color: Colors.white,
+            strokeWidth: 3,
+          ),
+        )
+            : Text(
           text,
           style: const TextStyle(
             fontSize: 18,

@@ -4,12 +4,14 @@ class CustomTextField extends StatefulWidget {
   final String label;
   final bool obscureText;
   final TextEditingController controller;
+  final String? Function(String?)? validator; // <-- Validator added
 
   const CustomTextField({
     super.key,
     required this.label,
     required this.controller,
     this.obscureText = false,
+    this.validator,
   });
 
   @override
@@ -22,22 +24,21 @@ class _CustomTextFieldState extends State<CustomTextField> {
   @override
   void initState() {
     super.initState();
-    _obscureText = widget.obscureText; // initially set from parent
+    _obscureText = widget.obscureText;
   }
 
   @override
   Widget build(BuildContext context) {
-    return TextField(
-      style: TextStyle(color: Colors.black),
+    return TextFormField(
       controller: widget.controller,
       obscureText: _obscureText,
+      validator: widget.validator, // <-- Use validator from parent
+      style: const TextStyle(color: Colors.black),
       decoration: InputDecoration(
         filled: true,
-        fillColor: Color.fromRGBO(227, 233, 227, 1),
+        fillColor: const Color.fromRGBO(227, 233, 227, 1),
         labelText: widget.label,
-        labelStyle: TextStyle(
-          color: Color.fromRGBO(154, 154, 154, 1)
-        ),
+        labelStyle: const TextStyle(color: Color.fromRGBO(154, 154, 154, 1)),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(8),
           borderSide: const BorderSide(color: Colors.white),
@@ -56,7 +57,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
           ),
           onPressed: () {
             setState(() {
-              _obscureText = !_obscureText; // toggle visibility
+              _obscureText = !_obscureText;
             });
           },
         )

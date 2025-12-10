@@ -1,5 +1,4 @@
 import 'package:bible_journey/app/routes.dart';
-import 'package:bible_journey/features/auth/screens/splash_screen.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 

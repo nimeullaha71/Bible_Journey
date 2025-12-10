@@ -4,43 +4,51 @@
     "subtitle": "Daily Devotionals, Bible study, and moments of reflection"
   },
 
-  "common": {
-    "app_name": "Duomo",
-    "next": "Next",
-    "back": "Back",
-    "skip": "Skip",
-    "continue": "Continue",
-    "loading": "Loading..."
-  },
-
-  "auth": {
-    "login_title": "Welcome Back",
-    "login_subtitle": "Enter your details to continue",
-    "email": "Email Address",
+  "login": {
+    "begin_journey": "Begin Your Journey",
+    "subtitle": "Your companion daily reflection\nand Growth",
+    "email": "Email",
     "password": "Password",
-    "login_button": "Sign In",
-    "forgot_password": "Forgot Password?",
+    "remember_me": "Remember me",
+    "forgot_password": "Forgot password?",
+    "login_button": "Log in",
+    "sign_in_google": "Sign in with Google",
+    "sign_in_apple": "Sign in with Apple",
     "no_account": "Don’t have an account?",
-    "create_account": "Create Account",
-
-    "register_title": "Create Your Account",
-    "register_button": "Sign Up"
+    "sign_up": "Sign up"
   },
-
-  "home": {
-    "greeting": "Good Morning",
-    "daily_prayer": "Daily Prayer",
-    "today_devotion": "Today’s Devotion",
-    "journeys": "Journeys",
-    "micro_actions": "Micro Actions",
-    "quizzes": "Quizzes"
+  "otp": {
+    "check_email": "Check Your Email",
+    "verification_sent": "We have sent the verification code to your email address",
+    "enter_otp": "Enter your 6 digit OTP",
+    "resend_otp": "Resend OTP",
+    "verify_button": "Verify Code"
   },
-
-  "journey": {
-    "marriage": "Marriage",
-    "parenting": "Parenting",
-    "happiness": "Happiness",
-    "work": "Work",
-    "community": "Community"
-  }
+  "forgot_password": {
+    "title": "Forgot Password",
+    "subtitle": "Enter your email and we will send you a verification code",
+    "email_hint": "Enter Your Email",
+    "send_code": "Send Code"
+  },
+  "set_new_password": {
+    "title": "Set a new password",
+    "subtitle": "Create a new password. Ensure it differs from previous ones for security",
+    "new_password": "Enter New Password",
+    "confirm_password": "Confirm New Password",
+    "password_hint": "Password",
+    "set_password_button": "Set Password"
+  },
+  "sign_up": {
+    "full_name": "Full Name",
+    "email": "Email",
+    "phone": "Phone Number",
+    "password": "Password",
+    "confirm_password": "Confirm Password",
+    "login_button": "Log in",
+    "already_account": "Already have an account?",
+    "sign_in": "Sign In"
+  },
+  "get_started": "Get Started",
+  "already_account": "Already have an account?",
+  "log_in": "Log in"
 }

@@ -2,6 +2,7 @@ import 'package:bible_journey/app/constants.dart';
 import 'package:bible_journey/app/routes.dart';
 import 'package:bible_journey/widgets/buttons/auth_flow_custom_button.dart';
 import 'package:bible_journey/widgets/textField/custom_text_field.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 class ForgotPasswordScreen extends StatefulWidget {
@@ -44,9 +45,9 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                 Image.asset(AppImages.appLogo,height: height*0.13,),
                 SizedBox(height: height * 0.018),
 
-                Text("Forgot Password",textAlign: TextAlign.center, style: TextStyle(fontSize: 22, color: Color.fromRGBO(51, 51, 51, 1) ),),
+                Text("forgot_password.title".tr(),textAlign: TextAlign.center, style: TextStyle(fontSize: 22, color: Color.fromRGBO(51, 51, 51, 1) ),),
                 SizedBox(height: height * 0.018),
-                Text("Enter your email and we will send you a verification codeForgot Password",
+                Text("forgot_password.subtitle".tr(),
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontSize: 16,
@@ -56,14 +57,14 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text("Email",style: TextStyle(color: Color.fromRGBO(73, 76, 79, 1),fontSize: 16, fontWeight: FontWeight.w600,),),
-                    CustomTextField(label: "Enter Your Email", controller: emailController)
+                    Text("sign_up.email".tr(),style: TextStyle(color: Color.fromRGBO(73, 76, 79, 1),fontSize: 16, fontWeight: FontWeight.w600,),),
+                    CustomTextField(label: "forgot_password.email_hint".tr(), controller: emailController)
                   ],
                 ),
 
                 SizedBox(height: height*0.018,),
 
-                AuthCustomButton( text: "Send Code",height: height*0.06, onTap: (){
+                AuthCustomButton( text: "forgot_password.send_code".tr(),height: height*0.06, onTap: (){
                   Navigator.pushNamed(context, AppRoutes.otpScreen);
                 })
               ],

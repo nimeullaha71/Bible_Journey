@@ -3,39 +3,51 @@
     "title": "Bem-vindo ao Duomo",
     "subtitle": "Comece sua jornada espiritual com Deus"
   },
-  "common": {
-    "app_name": "Duomo",
-    "next": "Próximo",
-    "back": "Voltar",
-    "skip": "Pular",
-    "continue": "Continuar",
-    "loading": "Carregando..."
-  },
-  "auth": {
-    "login_title": "Bem-vindo de volta",
-    "login_subtitle": "Digite seus dados para continuar",
-    "email": "E-mail",
+  "login": {
+    "begin_journey": "Comece sua jornada",
+    "subtitle": "Seu companheiro para reflexão diária\ne crescimento",
+    "email": "Email",
     "password": "Senha",
-    "login_button": "Entrar",
+    "remember_me": "Lembrar-me",
     "forgot_password": "Esqueceu a senha?",
+    "login_button": "Entrar",
+    "sign_in_google": "Entrar com Google",
+    "sign_in_apple": "Entrar com Apple",
     "no_account": "Não tem uma conta?",
-    "create_account": "Criar conta",
-    "register_title": "Crie sua conta",
-    "register_button": "Registrar"
+    "sign_up": "Inscrever-se"
   },
-  "home": {
-    "greeting": "Bom dia",
-    "daily_prayer": "Oração diária",
-    "today_devotion": "Devoção de hoje",
-    "journeys": "Jornadas",
-    "micro_actions": "Microações",
-    "quizzes": "Quiz"
+  "otp": {
+    "check_email": "Verifique seu e-mail",
+    "verification_sent": "Enviamos o código de verificação para seu e-mail",
+    "enter_otp": "Digite seu OTP de 6 dígitos",
+    "resend_otp": "Reenviar OTP",
+    "verify_button": "Verificar código"
   },
-  "journey": {
-    "marriage": "Casamento",
-    "parenting": "Parentalidade",
-    "happiness": "Felicidade",
-    "work": "Trabalho",
-    "community": "Comunidade"
-  }
+  "forgot_password": {
+    "title": "Esqueceu a senha",
+    "subtitle": "Digite seu email e enviaremos um código de verificação",
+    "email_hint": "Digite seu email",
+    "send_code": "Enviar código"
+  },
+  "set_new_password": {
+    "title": "Definir uma nova senha",
+    "subtitle": "Crie uma nova senha. Certifique-se de que seja diferente das anteriores",
+    "new_password": "Digite a nova senha",
+    "confirm_password": "Confirme a nova senha",
+    "password_hint": "Senha",
+    "set_password_button": "Definir senha"
+  },
+  "sign_up": {
+    "full_name": "Nome completo",
+    "email": "Email",
+    "phone": "Número de telefone",
+    "password": "Senha",
+    "confirm_password": "Confirme a senha",
+    "login_button": "Entrar",
+    "already_account": "Já tem uma conta?",
+    "sign_in": "Entrar"
+  },
+  "get_started": "Começar",
+  "already_account": "Já tem uma conta?",
+  "log_in": "Entrar"
 }

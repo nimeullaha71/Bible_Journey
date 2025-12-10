@@ -3,39 +3,51 @@
     "title": "Benvenuto in Duomo",
     "subtitle": "Inizia il tuo percorso spirituale con Dio"
   },
-  "common": {
-    "app_name": "Duomo",
-    "next": "Avanti",
-    "back": "Indietro",
-    "skip": "Salta",
-    "continue": "Continua",
-    "loading": "Caricamento..."
-  },
-  "auth": {
-    "login_title": "Bentornato",
-    "login_subtitle": "Inserisci i tuoi dati per continuare",
-    "email": "Indirizzo e-mail",
+  "login": {
+    "begin_journey": "Inizia il tuo viaggio",
+    "subtitle": "Il tuo compagno per la riflessione quotidiana\ne la crescita",
+    "email": "Email",
     "password": "Password",
-    "login_button": "Accedi",
+    "remember_me": "Ricordami",
     "forgot_password": "Password dimenticata?",
+    "login_button": "Accedi",
+    "sign_in_google": "Accedi con Google",
+    "sign_in_apple": "Accedi con Apple",
     "no_account": "Non hai un account?",
-    "create_account": "Crea un account",
-    "register_title": "Crea il tuo account",
-    "register_button": "Registrati"
+    "sign_up": "Registrati"
   },
-  "home": {
-    "greeting": "Buongiorno",
-    "daily_prayer": "Preghiera giornaliera",
-    "today_devotion": "Devozione di oggi",
-    "journeys": "Percorsi",
-    "micro_actions": "Microazioni",
-    "quizzes": "Quiz"
+  "otp": {
+    "check_email": "Controlla la tua email",
+    "verification_sent": "Abbiamo inviato il codice di verifica al tuo indirizzo email",
+    "enter_otp": "Inserisci il tuo OTP di 6 cifre",
+    "resend_otp": "Reinvia OTP",
+    "verify_button": "Verifica codice"
   },
-  "journey": {
-    "marriage": "Matrimonio",
-    "parenting": "Genitorialità",
-    "happiness": "Felicità",
-    "work": "Lavoro",
-    "community": "Comunità"
-  }
+  "forgot_password": {
+    "title": "Password dimenticata",
+    "subtitle": "Inserisci la tua email e ti invieremo un codice di verifica",
+    "email_hint": "Inserisci la tua email",
+    "send_code": "Invia codice"
+  },
+  "set_new_password": {
+    "title": "Imposta una nuova password",
+    "subtitle": "Crea una nuova password. Assicurati che sia diversa dalle precedenti",
+    "new_password": "Inserisci nuova password",
+    "confirm_password": "Conferma nuova password",
+    "password_hint": "Password",
+    "set_password_button": "Imposta password"
+  },
+  "sign_up": {
+    "full_name": "Nome completo",
+    "email": "Email",
+    "phone": "Numero di telefono",
+    "password": "Password",
+    "confirm_password": "Conferma password",
+    "login_button": "Accedi",
+    "already_account": "Hai già un account?",
+    "sign_in": "Accedi"
+  },
+  "get_started": "Inizia",
+  "already_account": "Hai già un account?",
+  "log_in": "Accedi"
 }

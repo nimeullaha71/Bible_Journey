@@ -1,7 +1,6 @@
 import 'package:bible_journey/app/constants.dart';
 import 'package:bible_journey/app/routes.dart';
 import 'package:bible_journey/widgets/buttons/auth_flow_custom_button.dart';
-import 'package:bible_journey/widgets/buttons/custom_button.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
@@ -87,7 +86,7 @@ class SplashScreen extends StatelessWidget {
                 SizedBox(
                   width: double.infinity,
                   child: AuthCustomButton(
-                    text: "Get Started",
+                    text: "get_started".tr(),
                     onTap: () {
                       Navigator.pushNamed(context, AppRoutes.mainBottomNavScreen);
                     },
@@ -105,13 +104,13 @@ class SplashScreen extends StatelessWidget {
                   },
                   child: Text.rich(
                     TextSpan(
-                      text: "Already have an account? ",
+                      text: "already_account".tr(),
                       style: AppTextStyles.normal.copyWith(
                         fontSize: height * 0.022,
                       ),
                       children: [
                         TextSpan(
-                          text: "Log in",
+                          text: "log_in".tr(),
                           style: TextStyle(color: Color(0xFF015093), fontWeight: FontWeight.w600),
                         ),
                       ],

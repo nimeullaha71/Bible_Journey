@@ -3,39 +3,51 @@
     "title": "Bienvenue à Duomo",
     "subtitle": "Commencez votre parcours spirituel avec Dieu"
   },
-  "common": {
-    "app_name": "Duomo",
-    "next": "Suivant",
-    "back": "Retour",
-    "skip": "Passer",
-    "continue": "Continuer",
-    "loading": "Chargement..."
-  },
-  "auth": {
-    "login_title": "Bon retour",
-    "login_subtitle": "Entrez vos informations pour continuer",
-    "email": "Adresse e-mail",
+  "login": {
+    "begin_journey": "Commencez votre voyage",
+    "subtitle": "Votre compagnon pour la réflexion quotidienne\net la croissance",
+    "email": "Email",
     "password": "Mot de passe",
-    "login_button": "Se connecter",
+    "remember_me": "Se souvenir de moi",
     "forgot_password": "Mot de passe oublié ?",
+    "login_button": "Se connecter",
+    "sign_in_google": "Se connecter avec Google",
+    "sign_in_apple": "Se connecter avec Apple",
     "no_account": "Vous n'avez pas de compte ?",
-    "create_account": "Créer un compte",
-    "register_title": "Créez votre compte",
-    "register_button": "S'inscrire"
+    "sign_up": "S'inscrire"
   },
-  "home": {
-    "greeting": "Bonjour",
-    "daily_prayer": "Prière quotidienne",
-    "today_devotion": "Dévotion du jour",
-    "journeys": "Parcours",
-    "micro_actions": "Micro-actions",
-    "quizzes": "Quiz"
+  "otp": {
+    "check_email": "Vérifiez votre email",
+    "verification_sent": "Nous avons envoyé le code de vérification à votre adresse e-mail",
+    "enter_otp": "Entrez votre code OTP à 6 chiffres",
+    "resend_otp": "Renvoyer OTP",
+    "verify_button": "Vérifier le code"
   },
-  "journey": {
-    "marriage": "Mariage",
-    "parenting": "Parentalité",
-    "happiness": "Bonheur",
-    "work": "Travail",
-    "community": "Communauté"
-  }
+  "forgot_password": {
+    "title": "Mot de passe oublié",
+    "subtitle": "Entrez votre email et nous vous enverrons un code de vérification",
+    "email_hint": "Entrez votre email",
+    "send_code": "Envoyer le code"
+  },
+  "set_new_password": {
+    "title": "Définir un nouveau mot de passe",
+    "subtitle": "Créez un nouveau mot de passe. Assurez-vous qu'il diffère des précédents pour la sécurité",
+    "new_password": "Entrez le nouveau mot de passe",
+    "confirm_password": "Confirmez le nouveau mot de passe",
+    "password_hint": "Mot de passe",
+    "set_password_button": "Définir le mot de passe"
+  },
+  "sign_up": {
+    "full_name": "Nom complet",
+    "email": "Email",
+    "phone": "Numéro de téléphone",
+    "password": "Mot de passe",
+    "confirm_password": "Confirmez le mot de passe",
+    "login_button": "Se connecter",
+    "already_account": "Vous avez déjà un compte ?",
+    "sign_in": "Se connecter"
+  },
+  "get_started": "Commencer",
+  "already_account": "Vous avez déjà un compte ?",
+  "log_in": "Se connecter"
 }

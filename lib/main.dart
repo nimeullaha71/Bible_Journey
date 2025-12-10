@@ -10,9 +10,12 @@ void main() async {
   runApp(
     EasyLocalization(
       supportedLocales: const [
-        Locale('en'),
-        Locale('es'),
-        Locale('fr'),
+        Locale('en'), // English
+        Locale('fr'), // French
+        Locale('de'), // German
+        Locale('it'), // Italian
+        Locale('pt'), // Portuguese
+        Locale('es'), // Spanish
       ],
       path: 'lib/localization',
       fallbackLocale: const Locale('en'),

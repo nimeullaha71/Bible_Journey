@@ -1,5 +1,3 @@
-import 'package:bible_journey/app/routes.dart';
-import 'package:bible_journey/features/devotions/screens/devotion_detail_screen.dart';
 import 'package:bible_journey/features/devotions/screens/quiz_mark_screen.dart';
 import 'package:bible_journey/features/questionnaire/widget/custom_quiz_app_bar.dart';
 import 'package:flutter/material.dart';

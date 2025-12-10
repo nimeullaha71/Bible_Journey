@@ -3,39 +3,51 @@
     "title": "Bienvenido a Duomo",
     "subtitle": "Comienza tu viaje espiritual con Dios"
   },
-  "common": {
-    "app_name": "Duomo",
-    "next": "Siguiente",
-    "back": "Atrás",
-    "skip": "Saltar",
-    "continue": "Continuar",
-    "loading": "Cargando..."
-  },
-  "auth": {
-    "login_title": "Bienvenido de nuevo",
-    "login_subtitle": "Ingresa tus datos para continuar",
+  "login": {
+    "begin_journey": "Comienza tu viaje",
+    "subtitle": "Tu compañero para la reflexión diaria\ny crecimiento",
     "email": "Correo electrónico",
     "password": "Contraseña",
-    "login_button": "Iniciar sesión",
+    "remember_me": "Recuérdame",
     "forgot_password": "¿Olvidaste tu contraseña?",
-    "no_account": "¿No tienes cuenta?",
-    "create_account": "Crear cuenta",
-    "register_title": "Crea tu cuenta",
-    "register_button": "Registrarse"
+    "login_button": "Iniciar sesión",
+    "sign_in_google": "Iniciar sesión con Google",
+    "sign_in_apple": "Iniciar sesión con Apple",
+    "no_account": "¿No tienes una cuenta?",
+    "sign_up": "Registrarse"
   },
-  "home": {
-    "greeting": "Buenos días",
-    "daily_prayer": "Oración diaria",
-    "today_devotion": "Devoción de hoy",
-    "journeys": "Recorridos",
-    "micro_actions": "Microacciones",
-    "quizzes": "Cuestionarios"
+  "otp": {
+    "check_email": "Revisa tu correo electrónico",
+    "verification_sent": "Hemos enviado el código de verificación a tu correo electrónico",
+    "enter_otp": "Ingrese su OTP de 6 dígitos",
+    "resend_otp": "Reenviar OTP",
+    "verify_button": "Verificar código"
   },
-  "journey": {
-    "marriage": "Matrimonio",
-    "parenting": "Paternidad",
-    "happiness": "Felicidad",
-    "work": "Trabajo",
-    "community": "Comunidad"
-  }
+  "forgot_password": {
+    "title": "Olvidó su contraseña",
+    "subtitle": "Ingrese su correo electrónico y le enviaremos un código de verificación",
+    "email_hint": "Ingrese su correo electrónico",
+    "send_code": "Enviar código"
+  },
+  "set_new_password": {
+    "title": "Establecer una nueva contraseña",
+    "subtitle": "Cree una nueva contraseña. Asegúrese de que sea diferente de las anteriores",
+    "new_password": "Ingrese nueva contraseña",
+    "confirm_password": "Confirme la nueva contraseña",
+    "password_hint": "Contraseña",
+    "set_password_button": "Establecer contraseña"
+  },
+  "sign_up": {
+    "full_name": "Nombre completo",
+    "email": "Correo electrónico",
+    "phone": "Número de teléfono",
+    "password": "Contraseña",
+    "confirm_password": "Confirmar contraseña",
+    "login_button": "Iniciar sesión",
+    "already_account": "¿Ya tienes una cuenta?",
+    "sign_in": "Iniciar sesión"
+  },
+  "get_started": "Comenzar",
+  "already_account": "¿Ya tienes una cuenta?",
+  "log_in": "Iniciar sesión"
 }
