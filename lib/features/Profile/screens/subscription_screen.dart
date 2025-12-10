@@ -1,11 +1,9 @@
-import 'package:bible_journey/features/Profile/screens/payment_screen.dart';
 import 'package:bible_journey/features/Profile/screens/profile_screen.dart';
 import 'package:bible_journey/features/bible/screens/bible_screen.dart';
 import 'package:bible_journey/features/journeys/screens/journey_screen.dart';
 import 'package:bible_journey/main_bottom_nav_screen.dart';
 import 'package:bible_journey/widgets/buttons/custom_button.dart';
 import 'package:flutter/material.dart';
-
 import '../../../widgets/custom_nav_bar.dart';
 import '../../payment/payment_screen.dart';
 import '../widgets/custom_premium.dart';
