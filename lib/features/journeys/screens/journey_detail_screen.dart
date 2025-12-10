@@ -1,3 +1,5 @@
+import 'package:bible_journey/features/journeys/screens/journey_screen.dart';
+import 'package:bible_journey/widgets/appbars/custom_appbar.dart';
 import 'package:flutter/material.dart';
 import '../widgets/custom_form.dart';
 import 'daily_journey_screen.dart';
@@ -15,12 +17,9 @@ class _JourneyDetailScreenState extends State<JourneyDetailScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xffF8F5F2),
-      appBar: AppBar(
-        backgroundColor: const Color(0xFFF8F5F2),
-        title: const Text("Journey Details"),
-        centerTitle: true,
-        elevation: 0,
-      ),
+      appBar: CustomAppBar(title: "Journey Details", onTap: (){
+        Navigator.push(context, MaterialPageRoute(builder: (context)=>JourneyScreen()));
+      }),
 
       body: SingleChildScrollView(
         child: Column(

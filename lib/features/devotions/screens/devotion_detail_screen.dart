@@ -1,3 +1,4 @@
+import 'package:bible_journey/app/constants.dart';
 import 'package:bible_journey/features/devotions/screens/daily_devotion_quiz_screen.dart';
 import 'package:bible_journey/features/devotions/screens/daily_devotion_screen.dart';
 import 'package:bible_journey/main_bottom_nav_screen.dart';
@@ -7,7 +8,6 @@ import 'package:flutter/material.dart';
 import '../../../widgets/custom_nav_bar.dart';
 import '../../Profile/screens/profile_screen.dart';
 import '../../bible/screens/bible_screen.dart';
-import '../../home/screen/home_screen.dart';
 import '../../journeys/screens/journey_screen.dart';
 
 class DevotionDetailScreen extends StatefulWidget {
@@ -23,9 +23,9 @@ class _DevotionDetailScreenState extends State<DevotionDetailScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xffF8F5F2),
+      backgroundColor: AppColors.bgColor,
       appBar: CustomAppBar(title: "Quiz Details", onTap: (){
-        Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context)=>DailyDevotionScreen()), (pre)=>false);
+        Navigator.pop(context);
       }),
 
       body: SingleChildScrollView(

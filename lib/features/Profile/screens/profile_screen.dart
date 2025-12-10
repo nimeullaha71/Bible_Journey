@@ -1,4 +1,6 @@
+import 'package:bible_journey/app/constants.dart';
 import 'package:bible_journey/features/Profile/screens/change_password_screen.dart';
+import 'package:bible_journey/features/Profile/screens/deactivated_pop_up.dart';
 import 'package:bible_journey/features/Profile/screens/help_support_screen.dart';
 import 'package:bible_journey/features/Profile/screens/language_screen.dart';
 import 'package:bible_journey/features/Profile/screens/privacy_policy_screen.dart';
@@ -23,7 +25,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xffF8F5F2),
+      backgroundColor: AppColors.bgColor,
       appBar: CustomAppBar(title: "Profile", onTap: (){
         Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context)=>MainBottomNavScreen()), (predicate)=>false);
       }),
@@ -185,7 +187,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     CustomText(
                         textIconPath: 'assets/images/ShieldSlash.svg',
                         text: "Disabled Account",
-                        trailingIcon: Icons.arrow_forward_ios),
+                        trailingIcon: Icons.arrow_forward_ios,
+                        onTap: (){
+                          showDeactivatePopup(context, onConfirm: (){
+                            print("Deactivated your account");
+                          });
+                        },
+                    ),
                     const SizedBox(height: 10),
 
                   ],

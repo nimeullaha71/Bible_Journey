@@ -4,6 +4,7 @@ import 'package:bible_journey/features/bible/screens/bible_screen.dart';
 import 'package:bible_journey/features/devotions/screens/daily_devotion_screen.dart';
 import 'package:bible_journey/features/home/screen/home_screen.dart';
 import 'package:bible_journey/features/journeys/screens/journey_screen.dart';
+import 'package:bible_journey/main_bottom_nav_screen.dart';
 import 'package:bible_journey/widgets/appbars/custom_appbar.dart';
 import 'package:bible_journey/widgets/buttons/custom_button.dart';
 import 'package:flutter/material.dart';

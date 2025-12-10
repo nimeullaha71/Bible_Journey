@@ -1,7 +1,9 @@
 import 'package:bible_journey/features/Profile/screens/profile_screen.dart';
 import 'package:bible_journey/features/bible/screens/bible_screen.dart';
+import 'package:bible_journey/features/journeys/screens/journey_detail_screen.dart';
 import 'package:bible_journey/features/journeys/screens/journey_screen.dart';
 import 'package:bible_journey/main_bottom_nav_screen.dart';
+import 'package:bible_journey/widgets/appbars/custom_appbar.dart';
 import 'package:bible_journey/widgets/buttons/custom_button.dart';
 
 import 'package:flutter/material.dart';
@@ -22,12 +24,9 @@ class _DailyReflectionScreenState extends State<DailyReflectionScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color(0xFFF8F5F2),
-      appBar: AppBar(
-        backgroundColor: Color(0xFFF8F5F2),
-        title: const Text("Daily Reflection Space"),
-        centerTitle: true,
-        elevation: 0,
-      ),
+      appBar: CustomAppBar(title: "Daily Reflection", onTap: (){
+        Navigator.pop(context);
+      }),
 
       body: SingleChildScrollView(
         child: SafeArea(
@@ -68,7 +67,9 @@ class _DailyReflectionScreenState extends State<DailyReflectionScreen> {
                 ),
 
                 SizedBox(height: 80),
-                CustomButton(text: "Mark as Done", onTap: (){})
+                CustomButton(text: "Mark as Done", onTap: (){
+                  Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context)=>JourneyDetailScreen()), (predicate)=>false);
+                })
               ],
             ),
           ),

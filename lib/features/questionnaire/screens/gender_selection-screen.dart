@@ -2,6 +2,7 @@ import 'package:bible_journey/app/constants.dart';
 import 'package:bible_journey/features/questionnaire/screens/quiz_sction_screen.dart';
 import 'package:bible_journey/features/questionnaire/widget/custom_quiz_app_bar.dart';
 import 'package:flutter/material.dart';
+
 class GenderSelectScreen extends StatelessWidget {
   const GenderSelectScreen({super.key});
 
@@ -12,39 +13,42 @@ class GenderSelectScreen extends StatelessWidget {
       appBar: CustomQuizAppBar(title: "Bible Journey"),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20),
-        child: Column(
-          children: [
-            Image.asset(AppImages.appLogo, height: 100),
-            const SizedBox(height: 30),
+        child: Padding(
+          padding: const EdgeInsets.all(32.0),
+          child: Column(
+            children: [
+              Image.asset(AppImages.appLogo, height: 100),
+              const SizedBox(height: 30),
 
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                genderCard(
-                  image: AppImages.maleImg,
-                  label: "Male",
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (_) => const QuizQuestionScreen()),
-                    );
-                  },
-                ),
-                genderCard(
-                  image: AppImages.femaleImg,
-                  label: "Female",
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (_) => const QuizQuestionScreen()),
-                    );
-                  },
-                )
-              ],
-            )
-          ],
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  genderCard(
+                    image: AppImages.maleImg,
+                    label: "Male",
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (_) => const QuizQuestionScreen()),
+                      );
+                    },
+                  ),
+                  genderCard(
+                    image: AppImages.femaleImg,
+                    label: "Female",
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (_) => const QuizQuestionScreen()),
+                      );
+                    },
+                  )
+                ],
+              )
+            ],
+          ),
         ),
       ),
     );

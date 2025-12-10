@@ -56,7 +56,7 @@ class _DailyDevotionQuizScreenState extends State<DailyDevotionQuizScreen> {
         currentQuestionIndex--;
       });
     } else {
-      Navigator.push(context, MaterialPageRoute(builder: (context)=>DevotionDetailScreen()));
+      Navigator.pop(context);
     }
   }
 

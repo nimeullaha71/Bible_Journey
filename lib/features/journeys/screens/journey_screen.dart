@@ -1,13 +1,11 @@
 import 'package:bible_journey/app/constants.dart';
 import 'package:bible_journey/features/home/widgets/home_box.dart';
 import 'package:bible_journey/features/journeys/screens/journey_detail_screen.dart';
-import 'package:bible_journey/features/questionnaire/widget/custom_quiz_app_bar.dart';
 import 'package:bible_journey/main_bottom_nav_screen.dart';
 import 'package:bible_journey/widgets/appbars/custom_appbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
-import '../../../app/routes.dart';
 
 class JourneyScreen extends StatefulWidget {
   const JourneyScreen({super.key});

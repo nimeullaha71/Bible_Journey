@@ -1,92 +1,92 @@
 import 'package:flutter/material.dart';
 
 class CustomPassword extends StatefulWidget {
-  final String title;
-  final VoidCallback onTap;
+  final String label;
+  final String hintText;
+  final TextEditingController controller;
 
   const CustomPassword({
     super.key,
-    required this.title,
-    required this.onTap,
+    required this.label,
+    required this.hintText,
+    required this.controller,
   });
 
   @override
-  CustomPasswordState createState() => CustomPasswordState();
+  State<CustomPassword> createState() => _CustomPasswordState();
 }
 
-class CustomPasswordState extends State<CustomPassword> {
-  bool _isPasswordVisible = false;
-  bool _isTextVisible = false;
-
-
-  void _togglePasswordVisibility() {
-    setState(() {
-      _isPasswordVisible = !_isPasswordVisible;
-      _isTextVisible = !_isTextVisible;
-    });
-    widget.onTap();
-  }
+class _CustomPasswordState extends State<CustomPassword> {
+  bool _passwordVisible = false;
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: _togglePasswordVisibility,
-      child: Container(
-        height: 100,
-        width: 381,
-        padding: const EdgeInsets.only(left: 16, right: 16, top: 1, bottom: 1),
-        margin: const EdgeInsets.only(left: 13, right: 13, top: 1, bottom: 1),
-        decoration: BoxDecoration(
-          color: const Color(0xffF8F5F2),
-          borderRadius: BorderRadius.circular(14),
-        ),
+    return Container(
+      margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          /// Label
+          Text(
+            widget.label,
+            style: const TextStyle(
+              fontSize: 16,
+              color: Colors.black87,
+            ),
+          ),
+          const SizedBox(height: 6),
 
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              widget.title,
-              style: const TextStyle(
-                fontSize: 16,
+          /// TextField Container
+          Container(
+            height: 55,
+            padding: const EdgeInsets.symmetric(horizontal: 12),
+            decoration: BoxDecoration(
+              color: Colors.white,               // White background
+              borderRadius: BorderRadius.circular(12),
+              border: Border.all(
+                color: const Color(0xffBFBFBF),
+                width: 1,
               ),
             ),
-            const SizedBox(height: 5),
 
-            Container(
-              height: 56,
-              width:381 ,
-              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-              decoration: BoxDecoration(
-                color: const Color(0xffFFFFFF),
-                borderRadius: BorderRadius.circular(10),
-                border: Border.all(color: Colors.grey),
-              ),
-              child: Row(
-                children: [
-                  Expanded(
-                    child: TextField(
-                      obscureText: !_isPasswordVisible,
-                      decoration: const InputDecoration(
-                        hintText: 'Enter your password',
-                        border: InputBorder.none,
-                      ),
-                      style: TextStyle(
+            child: Row(
+              children: [
+                /// Actual TextField
+                Expanded(
+                  child: TextField(
+                    controller: widget.controller,
+                    obscureText: !_passwordVisible,
+                    decoration: InputDecoration(
+                      hintText: widget.hintText,
+                      border: InputBorder.none,
+                      hintStyle: const TextStyle(
                         fontSize: 14,
+                        color: Colors.grey,
                       ),
                     ),
+                    style: const TextStyle(fontSize: 15),
                   ),
-                  IconButton(
-                    icon: Icon(
-                      _isPasswordVisible ? Icons.visibility : Icons.visibility_off,
-                      color: Colors.grey,
-                    ),
-                    onPressed: _togglePasswordVisibility,
+                ),
+
+                /// Eye Icon Button
+                GestureDetector(
+                  onTap: () {
+                    setState(() {
+                      _passwordVisible = !_passwordVisible;
+                    });
+                  },
+                  child: Icon(
+                    _passwordVisible
+                        ? Icons.visibility
+                        : Icons.visibility_off,
+                    color: Colors.grey,
+                    size: 24,
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

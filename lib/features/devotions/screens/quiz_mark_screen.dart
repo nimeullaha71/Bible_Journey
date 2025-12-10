@@ -1,6 +1,7 @@
 import 'package:bible_journey/features/devotions/screens/daily_devotion_quiz_screen.dart';
 import 'package:bible_journey/features/devotions/screens/devotion_detail_screen.dart';
 import 'package:bible_journey/features/todays_actions/screens/todays_action_screen.dart';
+import 'package:bible_journey/widgets/appbars/custom_appbar.dart';
 import 'package:bible_journey/widgets/buttons/custom_button.dart';
 import 'package:flutter/material.dart';
 import '../../../widgets/custom_nav_bar.dart';
@@ -26,13 +27,9 @@ class _QuizMarkScreenState extends State<QuizMarkScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color(0xFFF8F5F2),
-      appBar: AppBar(
-        backgroundColor: Color(0xFFF8F5F2),
-        title: const Text("Quiz Complete"),
-        centerTitle: true,
-        elevation: 0,
-        automaticallyImplyLeading: false,
-      ),
+      appBar: CustomAppBar(title: "Quiz Complete", onTap: (){
+        Navigator.pop(context);
+      }),
       body: SingleChildScrollView(
         child: SafeArea(
           child: Padding(

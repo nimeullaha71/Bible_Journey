@@ -1,3 +1,6 @@
+import 'package:bible_journey/app/constants.dart';
+import 'package:bible_journey/main_bottom_nav_screen.dart';
+
 import '../widgets/book_section.dart';
 import '../widgets/old_new_testiment_section.dart';
 import 'package:flutter/material.dart';
@@ -20,14 +23,24 @@ class _BibleScreenState extends State<BibleScreen> {
     final data = isOld ? oldTestamentSections : newTestamentSections;
 
     return Scaffold(
-      backgroundColor: const Color(0xffF8F5F2),
+      backgroundColor: AppColors.bgColor,
       appBar: AppBar(
         backgroundColor: const Color(0xffF8F5F2),
         title: Text(isOld ? "Old Testament" : "New Testament Browser"),
         centerTitle: true,
-        leading: const BackButton(color: Colors.black),
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back, color: Colors.black),
+          onPressed: () {
+            // Notun page e navigate korbe
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const MainBottomNavScreen()),
+            );
+          },
+        ),
         elevation: 0,
       ),
+
       body: SingleChildScrollView(
         child: Column(
           children: [

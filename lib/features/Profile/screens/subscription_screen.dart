@@ -1,3 +1,4 @@
+import 'package:bible_journey/features/Profile/screens/payment_screen.dart';
 import 'package:bible_journey/features/Profile/screens/profile_screen.dart';
 import 'package:bible_journey/features/bible/screens/bible_screen.dart';
 import 'package:bible_journey/features/journeys/screens/journey_screen.dart';
@@ -6,6 +7,7 @@ import 'package:bible_journey/widgets/buttons/custom_button.dart';
 import 'package:flutter/material.dart';
 
 import '../../../widgets/custom_nav_bar.dart';
+import '../../payment/payment_screen.dart';
 import '../widgets/custom_premium.dart';
 import '../widgets/custom_premium1.dart';
 
@@ -80,11 +82,19 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
 
                 CustomPremium1(
                     title: "Yearly Premium",
-                    subtitle: "\$39.99/year (equals \$3.33/month)"),
+                    subtitle: "\$39.99/year (equals \$3.33/month)",
+                    onTap: (){
+                      Navigator.push(context, MaterialPageRoute(builder: (context)=>PaymentScreen()));
+                    },
+                ),
 
                 CustomPremium1(
                     title: "Monthly Premium",
-                    subtitle: "\$5.99/month"),
+                    subtitle: "\$5.99/month",
+                  onTap: (){
+                    Navigator.push(context, MaterialPageRoute(builder: (context)=>PaymentScreen()));
+                  },
+                ),
                 const SizedBox(height: 10),
                 CustomButton(text: "Start 7-Day Free Trial", onTap: (){
                   //Navigator.push(

@@ -1,7 +1,7 @@
 import 'package:bible_journey/features/bible/model/bible_model.dart';
 import 'package:flutter/material.dart';
-
 import 'old_new_testiment_section.dart';
+
 class BookSection extends StatefulWidget {
   final BibleBook book;
   final CollapseController controller;

@@ -1,3 +1,4 @@
+import 'package:bible_journey/app/constants.dart';
 import 'package:bible_journey/features/prayer/screens/prayer_screen.dart';
 import 'package:bible_journey/main_bottom_nav_screen.dart';
 import 'package:bible_journey/widgets/appbars/custom_appbar.dart';
@@ -25,9 +26,9 @@ class _DailyDevotionScreenState extends State<DailyDevotionScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFFF8F5F2),
+      backgroundColor: AppColors.bgColor,
       appBar: CustomAppBar(title: "Daily Devotion", onTap: (){
-        Navigator.push(context, MaterialPageRoute(builder: (context)=>MainBottomNavScreen()));
+        Navigator.pop(context);
       }),
       body: SingleChildScrollView(
         child: SafeArea(

@@ -1,7 +1,9 @@
+import 'package:bible_journey/app/constants.dart';
 import 'package:bible_journey/features/Profile/screens/profile_screen.dart';
 import 'package:bible_journey/features/bible/screens/bible_screen.dart';
 import 'package:bible_journey/features/journeys/screens/journey_screen.dart';
 import 'package:bible_journey/main_bottom_nav_screen.dart';
+import 'package:bible_journey/widgets/appbars/custom_appbar.dart';
 import 'package:flutter/material.dart';
 import '../../../widgets/custom_nav_bar.dart';
 import '../widgets/custom_notification.dart';
@@ -19,13 +21,10 @@ class _NotificationScreenState extends State<NotificationScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xffF8F5F2),
-      appBar: AppBar(
-        backgroundColor: const Color(0xFFF8F5F2),
-        title: const Text("Notifications"),
-        centerTitle: true,
-        elevation: 0,
-      ),
+      backgroundColor: AppColors.bgColor,
+      appBar: CustomAppBar(title: "Notification", onTap: (){
+        Navigator.pop(context);
+      }),
       body: SingleChildScrollView(
         child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
