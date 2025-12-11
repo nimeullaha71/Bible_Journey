@@ -1,6 +1,5 @@
 import 'package:bible_journey/app/constants.dart';
 import 'package:bible_journey/main_bottom_nav_screen.dart';
-
 import '../widgets/book_section.dart';
 import '../widgets/old_new_testiment_section.dart';
 import 'package:flutter/material.dart';

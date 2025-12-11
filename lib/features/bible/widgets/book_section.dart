@@ -1,5 +1,6 @@
 import 'package:bible_journey/features/bible/model/bible_model.dart';
 import 'package:flutter/material.dart';
+import '../screens/chapter_screen.dart';
 import 'old_new_testiment_section.dart';
 
 class BookSection extends StatefulWidget {
@@ -64,15 +65,34 @@ class _BookSectionState extends State<BookSection> {
                   mainAxisSpacing: 8,
                 ),
                 itemBuilder: (_, i) {
-                  return Container(
-                    alignment: Alignment.center,
-                    decoration: BoxDecoration(
-                      color: const Color(0xff83BF8B).withOpacity(.20),
-                      borderRadius: BorderRadius.circular(6),
+                  return GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => ChapterScreen(
+                            bookName: widget.book.title,
+                            chapterNumber: i + 1,
+                            verses: [
+                              "Verse 1 sample text for ${widget.book.title} chapter ${i + 1}",
+                              "Verse 2 sample text for ${widget.book.title} chapter ${i + 1}",
+                              "Verse 3 sample text for ${widget.book.title} chapter ${i + 1}",
+                            ],
+                          ),
+                        ),
+                      );
+                    },
+                    child: Container(
+                      alignment: Alignment.center,
+                      decoration: BoxDecoration(
+                        color: const Color(0xff83BF8B).withOpacity(.20),
+                        borderRadius: BorderRadius.circular(6),
+                      ),
+                      child: Text("${i + 1}"),
                     ),
-                    child: Text("${i + 1}"),
                   );
                 },
+
               ),
             ),
         ],

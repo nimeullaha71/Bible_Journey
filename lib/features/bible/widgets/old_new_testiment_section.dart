@@ -1,5 +1,4 @@
 import '../model/bible_model.dart';
-
 import 'dart:ui';
 
 class CollapseController {

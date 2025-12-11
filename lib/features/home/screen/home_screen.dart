@@ -43,7 +43,6 @@ class HomeScreen extends StatelessWidget {
                       overflow: TextOverflow.ellipsis,
                     ),
                   ),
-                  //Icon(Icons.notifications_none, size: width * 0.07)
                   IconButton(onPressed: (){
                     Navigator.push(context, MaterialPageRoute(builder: (context)=>NotificationScreen()));
                   }, icon: Icon(Icons.notifications_none))
