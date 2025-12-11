@@ -9,6 +9,7 @@ import 'package:bible_journey/widgets/appbars/custom_appbar.dart';
 import 'package:bible_journey/widgets/buttons/custom_button.dart';
 import 'package:flutter/material.dart';
 import '../../../widgets/custom_nav_bar.dart';
+import '../widgets/audio_player_card.dart';
 
 class PrayerScreen extends StatefulWidget {
   const PrayerScreen({super.key});
@@ -65,119 +66,16 @@ class _PrayerScreenState extends State<PrayerScreen> {
           
           
                 Container(
-                  height: 230,
-                  width: double.infinity,
-                  decoration: BoxDecoration(
-                    //color: Color.fromRGBO(236, 229, 229, 0.5411764705882353),
-                    borderRadius: BorderRadius.circular(16),
-                  ),
-                  padding: const EdgeInsets.all(16),
                   child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Row(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-          
-                          Container(
-                            height: 80,
-                            width: 80,
-                            decoration: BoxDecoration(
-                              color: Color.fromRGBO(
-                                  152, 143, 143, 0.5411764705882353),
-                              borderRadius: BorderRadius.circular(12),
-                            ),
-                            alignment: Alignment.topLeft,
-                            child: const Text(""),
-                          ),
-          
-                          const SizedBox(width: 13),
-          
-                          Expanded(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: const [
-                                Text(
-                                  "A Morning Prayer for Gratitude",
-                                  style: TextStyle(
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                                SizedBox(height: 5),
-                                Text(
-                                  "Read by Daily Devotions.",
-                                  style: TextStyle(
-                                    fontSize: 14,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
-          
-                      const SizedBox(height: 30),
-          
-                      Container(
-                        height: 6,
-                        width: double.infinity,
-                        decoration: BoxDecoration(
-                          color: Colors.white54,
-                          borderRadius: BorderRadius.circular(4),
+                      Padding(
+                        padding: const EdgeInsets.all(15.0),
+                        child: AudioPlayerCard(
+                          url: "https://codeskulptor-demos.commondatastorage.googleapis.com/pang/paza-moduless.mp3",
+                          title: "A Morning Prayer for Gratitude",
+                          subtitle: "Read by Daily Devotions",
+                          thumbnail: Container(color: Colors.redAccent.shade100),
                         ),
-                        child: LayoutBuilder(
-                          builder: (context, constraints) {
-                            double progress = 0.5;
-                            return Stack(
-                              children: [
-                                Container(
-                                  width: constraints.maxWidth * progress,
-                                  height: 6,
-                                  decoration: BoxDecoration(
-                                    color: Colors.green,
-                                    borderRadius: BorderRadius.circular(4),
-                                  ),
-                                ),
-                              ],
-                            );
-                          },
-                        ),
-                      ),
-          
-                      const SizedBox(height: 30),
-          
-                      Stack(
-                        alignment: Alignment.center,
-                        children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: const [
-                              Text(
-                                "2:30",
-                                style: TextStyle(fontSize: 12),
-                              ),
-                              Text(
-                                "4:30",
-                                style: TextStyle(fontSize: 12),
-                              ),
-                            ],
-                          ),
-                          Container(
-                            width: 30,
-                            height: 30,
-                            decoration: const BoxDecoration(
-                              color: Colors.green,
-                              shape: BoxShape.circle,
-                            ),
-                            child: const Icon(
-                              Icons.play_arrow,
-                              color: Colors.white,
-                              size: 25,
-                            ),
-                          ),
-                        ],
                       ),
                     ],
                   ),
