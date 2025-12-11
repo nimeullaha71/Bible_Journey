@@ -1,6 +1,7 @@
 import 'package:bible_journey/app/constants.dart';
 import 'package:bible_journey/app/routes.dart';
 import 'package:bible_journey/widgets/buttons/auth_flow_custom_button.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 import '../../../widgets/textField/custom_text_field.dart';
@@ -35,10 +36,10 @@ class _SetNewPasswordScreenState extends State<SetNewPasswordScreen> {
               child: Column(
                 children: [
                   Align(
+                    alignment: Alignment.centerLeft,
                     child: IconButton(onPressed: (){
                       Navigator.pop(context);
                     }, icon: Icon(Icons.arrow_back)),
-                    alignment: Alignment.centerLeft,
                   ),
 
                   Image.asset(AppImages.appLogo,height: height*0.13,),
@@ -46,7 +47,7 @@ class _SetNewPasswordScreenState extends State<SetNewPasswordScreen> {
                   SizedBox(height: height*0.001,),
 
                   Text(
-                    "Set a new password",
+                    "set_password_button.title".tr(),
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontSize: 22,
@@ -57,7 +58,7 @@ class _SetNewPasswordScreenState extends State<SetNewPasswordScreen> {
                   SizedBox(height: height * 0.001),
 
                   Text(
-                    "Create a new password. Ensure it differs from previous ones for security",
+                    "set_new_password.subtitle".tr(),
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontSize: 16,
@@ -72,10 +73,10 @@ class _SetNewPasswordScreenState extends State<SetNewPasswordScreen> {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text("Enter New Password",style: TextStyle(color: Color.fromRGBO(73, 76, 79, 1),fontSize: 16, fontWeight: FontWeight.w600,),),
+                      Text("set_new_password.new_password".tr(),style: TextStyle(color: Color.fromRGBO(73, 76, 79, 1),fontSize: 16, fontWeight: FontWeight.w600,),),
                       SizedBox(height: 8,),
                       CustomTextField(
-                        label: "Password",
+                        label: "set_new_password.password_hint".tr(),
                         controller: passwordController,
                         obscureText: true,
                       ),
@@ -85,10 +86,10 @@ class _SetNewPasswordScreenState extends State<SetNewPasswordScreen> {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text("Confirm New Password",style: TextStyle(color: Color.fromRGBO(73, 76, 79, 1),fontSize: 16, fontWeight: FontWeight.w600,),),
+                      Text("set_new_password.confirm_password".tr(),style: TextStyle(color: Color.fromRGBO(73, 76, 79, 1),fontSize: 16, fontWeight: FontWeight.w600,),),
                       SizedBox(height: 8,),
                       CustomTextField(
-                        label: "Password",
+                        label: "set_new_password.password_hint".tr(),
                         controller: confirmPasswordController,
                         obscureText: true,
                       ),
@@ -98,7 +99,7 @@ class _SetNewPasswordScreenState extends State<SetNewPasswordScreen> {
 
                   SizedBox(height: height*0.03,),
                   
-                  AuthCustomButton(text: "Set Password", onTap: (){
+                  AuthCustomButton(text: "set_new_password.set_password_button".tr(), onTap: (){
                     Navigator.pushNamed(context, AppRoutes.logIn);
                   })
                   

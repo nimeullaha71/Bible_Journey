@@ -48,6 +48,60 @@
     "already_account": "Already have an account?",
     "sign_in": "Sign In"
   },
+  "testaments": {
+    "old": "Old Testament",
+    "new": "New Testament"
+  },
+
+  "sections": {
+    "pentateuch": "The Law (Pentateuch)",
+    "historical": "Historical Books",
+    "poetic": "Poetic Books",
+    "gospels": "The Gospels",
+    "history": "History",
+    "pauline": "Paul's Letters"
+  },
+
+  "quiz": {
+    "title": "Today's Quiz",
+    "completed_line": "You've completed a step in 'Finding Peace'!",
+
+    "q1": "How would you describe your Bible study experience so far?",
+    "q1_options": [
+      "I'm a beginner",
+      "I know some parts",
+      "I've studied it deeply",
+      "Not sure"
+    ],
+
+    "q2": "Describe your current relationship with God?",
+    "q2_options": [
+      "Strong and growing",
+      "In need of renewal",
+      "Unsure",
+      "Other"
+    ],
+
+    "buttons": {
+      "next": "Next",
+      "finish": "Finish",
+      "continue": "Continue",
+      "retry": "Retry Quiz",
+      "start_quiz": "Start Quiz"
+    },
+
+    "score": {
+      "correct": "Correct"
+    }
+  },
+
+  "devotion": {
+    "title": "Daily Devotion",
+    "scripture": "Scripture",
+    "reflection": "Reflection",
+    "practical": "Practical Application",
+    "completed": "Completed Devotion"
+  },
   "get_started": "Get Started",
   "already_account": "Already have an account?",
   "log_in": "Log in"

@@ -1,5 +1,6 @@
 import 'package:bible_journey/app/constants.dart';
 import 'package:bible_journey/main_bottom_nav_screen.dart';
+import 'package:easy_localization/easy_localization.dart';
 import '../widgets/book_section.dart';
 import '../widgets/old_new_testiment_section.dart';
 import 'package:flutter/material.dart';
@@ -25,7 +26,7 @@ class _BibleScreenState extends State<BibleScreen> {
       backgroundColor: AppColors.bgColor,
       appBar: AppBar(
         backgroundColor: const Color(0xffF8F5F2),
-        title: Text(isOld ? "Old Testament" : "New Testament Browser"),
+        title: Text(isOld ? "testaments.old".tr() : "testaments.new".tr()),
         centerTitle: true,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back, color: Colors.black),
@@ -99,7 +100,7 @@ class _BibleScreenState extends State<BibleScreen> {
                   borderRadius: BorderRadius.circular(30),
                 ),
                 alignment: Alignment.center,
-                child: Text("Old Testament",
+                child: Text("testaments.old".tr(),
                     style: TextStyle(
                         color: isOld ? Colors.white : Colors.black)),
               ),
@@ -117,7 +118,7 @@ class _BibleScreenState extends State<BibleScreen> {
                   borderRadius: BorderRadius.circular(30),
                 ),
                 alignment: Alignment.center,
-                child: Text("New Testament",
+                child: Text("testaments.new".tr(),
                     style: TextStyle(
                         color: !isOld ? Colors.white : Colors.black)),
               ),

@@ -1,5 +1,6 @@
 import 'package:bible_journey/features/devotions/screens/quiz_mark_screen.dart';
 import 'package:bible_journey/features/questionnaire/widget/custom_quiz_app_bar.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:bible_journey/app/constants.dart';
 
@@ -134,8 +135,8 @@ class _DailyDevotionQuizScreenState extends State<DailyDevotionQuizScreen> {
                 },
                 child: Text(
                   currentQuestionIndex == quizData.length - 1
-                      ? "Finish"
-                      : "Next",
+                      ? "buttons.finish".tr()
+                      : "buttons.next".tr(),
                   style: const TextStyle(
                       color: Colors.white, fontSize: 18),
                 ),

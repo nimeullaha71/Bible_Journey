@@ -1,9 +1,9 @@
 import 'package:bible_journey/app/constants.dart';
 import 'package:bible_journey/features/devotions/screens/daily_devotion_quiz_screen.dart';
-import 'package:bible_journey/features/devotions/screens/daily_devotion_screen.dart';
 import 'package:bible_journey/main_bottom_nav_screen.dart';
 import 'package:bible_journey/widgets/appbars/custom_appbar.dart';
 import 'package:bible_journey/widgets/buttons/custom_button.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import '../../../widgets/custom_nav_bar.dart';
 import '../../Profile/screens/profile_screen.dart';
@@ -46,18 +46,18 @@ class _DevotionDetailScreenState extends State<DevotionDetailScreen> {
 
               const SizedBox(height: 25),
 
-              const Column(
+              Column(
                 children: [
                   Text(
-                    "Today's Quiz",
-                    style: TextStyle(
+                    "quiz.title".tr(),
+                    style: const TextStyle(
                       fontSize: 24,
                       color: Colors.black,
                     ),
                     textAlign: TextAlign.center,
                   ),
                   Text(
-                    "You've completed a step in 'Finding Peace'!",
+                    "quiz.completed_line".tr(),
                     style: TextStyle(
                       fontSize: 15,
                       color: Colors.grey,

@@ -1,3 +1,5 @@
+import 'package:easy_localization/easy_localization.dart';
+
 import '../model/bible_model.dart';
 import 'dart:ui';
 
@@ -20,16 +22,16 @@ class CollapseItem {
 
 
 final oldTestamentSections = {
-  "The Law (Pentateuch)": [
+  "sections.pentateuch".tr(): [
     BibleBook(title: "Genesis", chapters: 50),
     BibleBook(title: "Exodus", chapters: 40),
     BibleBook(title: "Leviticus", chapters: 27),
   ],
-  "Historical Books": [
+  "sections.historical".tr(): [
     BibleBook(title: "Joshua", chapters: 24),
     BibleBook(title: "Judges", chapters: 21),
   ],
-  "Poetic Books": [
+  "sections.poetic".tr(): [
     BibleBook(title: "Job", chapters: 42),
     BibleBook(title: "Psalms", chapters: 150),
     BibleBook(title: "Proverbs", chapters: 31),
@@ -37,15 +39,15 @@ final oldTestamentSections = {
 };
 
 final newTestamentSections = {
-  "The Gospels": [
+  "sections.gospels".tr(): [
     BibleBook(title: "Matthew", chapters: 28),
     BibleBook(title: "Mark", chapters: 24),
     BibleBook(title: "Luke", chapters: 24),
   ],
-  "History": [
+  "sections.history".tr(): [
     BibleBook(title: "Acts", chapters: 24),
   ],
-  "Paul's Letters": [
+  "sections.pauline".tr(): [
     BibleBook(title: "Romans", chapters: 16),
     BibleBook(title: "1 Corinthians", chapters: 16),
     BibleBook(title: "2 Corinthians", chapters: 13),

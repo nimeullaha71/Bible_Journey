@@ -47,6 +47,60 @@
     "already_account": "Sie haben bereits ein Konto?",
     "sign_in": "Anmelden"
   },
+  "testaments": {
+    "old": "Altes Testament",
+    "new": "Neues Testament"
+  },
+
+  "sections": {
+    "pentateuch": "Das Gesetz (Pentateuch)",
+    "historical": "Geschichtsbücher",
+    "poetic": "Poetische Bücher",
+    "gospels": "Die Evangelien",
+    "history": "Geschichte",
+    "pauline": "Paulusbriefe"
+  },
+
+  "quiz": {
+    "title": "Heutiges Quiz",
+    "completed_line": "Sie haben einen Schritt in 'Finding Peace' abgeschlossen!",
+
+    "q1": "Wie würden Sie Ihre Bibelstudien-Erfahrung bisher beschreiben?",
+    "q1_options": [
+      "Ich bin ein Anfänger",
+      "Ich kenne einige Teile",
+      "Ich habe es tiefgehend studiert",
+      "Nicht sicher"
+    ],
+
+    "q2": "Beschreiben Sie Ihre derzeitige Beziehung zu Gott?",
+    "q2_options": [
+      "Stark und wachsend",
+      "Erneuerung nötig",
+      "Unsicher",
+      "Andere"
+    ],
+
+    "buttons": {
+      "next": "Weiter",
+      "finish": "Fertig",
+      "continue": "Fortsetzen",
+      "retry": "Quiz wiederholen",
+      "start_quiz": "Quiz starten"
+    },
+
+    "score": {
+      "correct": "Richtig"
+    }
+  },
+
+  "devotion": {
+    "title": "Tägliche Andacht",
+    "scripture": "Schrift",
+    "reflection": "Reflexion",
+    "practical": "Praktische Anwendung",
+    "completed": "Andacht abgeschlossen"
+  },
   "get_started": "Loslegen",
   "already_account": "Sie haben bereits ein Konto?",
   "log_in": "Anmelden"

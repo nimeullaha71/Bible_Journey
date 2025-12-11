@@ -1,6 +1,7 @@
 import 'package:bible_journey/app/constants.dart';
 import 'package:bible_journey/app/routes.dart';
 import 'package:bible_journey/widgets/buttons/auth_flow_custom_button.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 
@@ -46,7 +47,7 @@ class _VerifyOtpScreenState extends State<VerifyOtpScreen> {
                   SizedBox(height: height * 0.001),
 
                   Text(
-                    "Check Your Email",
+                    "otp.check_email".tr(),
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontSize: 22,
@@ -57,7 +58,7 @@ class _VerifyOtpScreenState extends State<VerifyOtpScreen> {
                   SizedBox(height: height * 0.001),
 
                   Text(
-                    "We have sent the verification code to your email address",
+                    "otp.verification_sent".tr(),
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontSize: 16,
@@ -87,7 +88,7 @@ class _VerifyOtpScreenState extends State<VerifyOtpScreen> {
                     appContext: context,
                     validator: (value) {
                       if (value == null || value.length < 6) {
-                        return 'Enter your 6 digit OTP';
+                        return 'otp.enter_otp'.tr();
                       }
                       return null;
                     },
@@ -99,7 +100,7 @@ class _VerifyOtpScreenState extends State<VerifyOtpScreen> {
                     alignment: Alignment.centerRight,
                     child: TextButton(
                       onPressed: () {},
-                      child: Text("Resend OTP"),
+                      child: Text("otp.resend_otp".tr()),
                     ),
                   ),
                   
@@ -107,7 +108,7 @@ class _VerifyOtpScreenState extends State<VerifyOtpScreen> {
 
                   SizedBox(height: height * 0.02),
 
-                  AuthCustomButton(text: "Verify Code", onTap: (){
+                  AuthCustomButton(text: "otp.verify_button".tr(), onTap: (){
                     Navigator.pushNamed(context, AppRoutes.setPasswordScreen);
                   })
                 ],

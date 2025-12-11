@@ -3,6 +3,7 @@ import 'package:bible_journey/features/devotions/screens/devotion_detail_screen.
 import 'package:bible_journey/features/todays_actions/screens/todays_action_screen.dart';
 import 'package:bible_journey/widgets/appbars/custom_appbar.dart';
 import 'package:bible_journey/widgets/buttons/custom_button.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import '../../../widgets/custom_nav_bar.dart';
 import '../../Profile/screens/profile_screen.dart';
@@ -97,12 +98,12 @@ class _QuizMarkScreenState extends State<QuizMarkScreen> {
                   ),
                 ),
                 SizedBox(height: 50),
-                CustomButton(text: "Continue", onTap: (){
+                CustomButton(text: "continue.continue".tr(), onTap: (){
                   Navigator.push(context, MaterialPageRoute(builder: (context)=>TodayActionScreen()));
                 }),
 
                 SizedBox(height: 10),
-                CustomButton(text: "Retry Quiz", onTap: (){
+                CustomButton(text: "continue.retry".tr(), onTap: (){
                   Navigator.push( context, MaterialPageRoute(builder: (context) => DevotionDetailScreen()), );
                 }),
 

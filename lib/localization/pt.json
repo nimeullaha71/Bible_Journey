@@ -47,6 +47,60 @@
     "already_account": "Já tem uma conta?",
     "sign_in": "Entrar"
   },
+  "testaments": {
+    "old": "Antigo Testamento",
+    "new": "Novo Testamento"
+  },
+
+  "sections": {
+    "pentateuch": "A Lei (Pentateuco)",
+    "historical": "Livros históricos",
+    "poetic": "Livros poéticos",
+    "gospels": "Os Evangelhos",
+    "history": "História",
+    "pauline": "Cartas de Paulo"
+  },
+
+  "quiz": {
+    "title": "Quiz de hoje",
+    "completed_line": "Você completou uma etapa de 'Finding Peace'!",
+
+    "q1": "Como você descreveria sua experiência de estudo bíblico até agora?",
+    "q1_options": [
+      "Sou iniciante",
+      "Conheço algumas partes",
+      "Estudei profundamente",
+      "Não tenho certeza"
+    ],
+
+    "q2": "Descreva sua relação atual com Deus?",
+    "q2_options": [
+      "Forte e crescendo",
+      "Precisa de renovação",
+      "Inseguro",
+      "Outro"
+    ],
+
+    "buttons": {
+      "next": "Próximo",
+      "finish": "Finalizar",
+      "continue": "Continuar",
+      "retry": "Refazer quiz",
+      "start_quiz": "Iniciar quiz"
+    },
+
+    "score": {
+      "correct": "Correto"
+    }
+  },
+
+  "devotion": {
+    "title": "Devoção diária",
+    "scripture": "Escritura",
+    "reflection": "Reflexão",
+    "practical": "Aplicação prática",
+    "completed": "Devoção concluída"
+  },
   "get_started": "Começar",
   "already_account": "Já tem uma conta?",
   "log_in": "Entrar"

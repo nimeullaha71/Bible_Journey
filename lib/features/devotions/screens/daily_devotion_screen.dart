@@ -1,8 +1,7 @@
 import 'package:bible_journey/app/constants.dart';
-import 'package:bible_journey/features/prayer/screens/prayer_screen.dart';
-import 'package:bible_journey/main_bottom_nav_screen.dart';
 import 'package:bible_journey/widgets/appbars/custom_appbar.dart';
 import 'package:bible_journey/widgets/buttons/custom_button.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import '../../../widgets/custom_nav_bar.dart';
 import '../../Profile/screens/profile_screen.dart';
@@ -26,7 +25,7 @@ class _DailyDevotionScreenState extends State<DailyDevotionScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.bgColor,
-      appBar: CustomAppBar(title: "Daily Devotion", onTap: (){
+      appBar: CustomAppBar(title: "devotion.title".tr(), onTap: (){
         Navigator.pop(context);
       }),
       body: SingleChildScrollView(
@@ -72,7 +71,7 @@ class _DailyDevotionScreenState extends State<DailyDevotionScreen> {
 
                 const SizedBox(height: 30),
                 CustomButton(
-                  text: "Completed Devotion",
+                  text: "devotion.completed".tr(),
                   onTap: () {
                     Navigator.push(
                       context,
