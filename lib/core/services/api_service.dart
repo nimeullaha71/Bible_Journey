@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 import 'package:bible_journey/app/Urls.dart';
 import 'package:http/http.dart' as http;
 import 'local_storage_service.dart';
@@ -25,5 +26,43 @@ class ApiServices{
       print(response.body);
       return null;
     }
+  }
+
+
+  static Future<bool> updateProfile({
+    required String name,
+    required String email,
+    required String phone,
+    required String gender,
+    required String dateOfBirth,
+    File? avatar, // image file
+  }) async {
+    final token = await LocalStorage.getToken();
+
+    final url = Uri.parse(Urls.editProfileUrl);
+
+    var request = http.MultipartRequest("PUT", url);
+
+    // Add headers
+    request.headers["Authorization"] = "Bearer $token";
+
+    // Add text fields
+    request.fields["name"] = name;
+    request.fields["email"] = email;
+    request.fields["phone"] = phone;
+    request.fields["gender"] = gender;
+    request.fields["date_of_birth"] = dateOfBirth;
+
+    // Add Image If Selected
+    if (avatar != null) {
+      request.files.add(await http.MultipartFile.fromPath("avatar", avatar.path));
+    }
+
+    final response = await request.send();
+    final responseBody = await response.stream.bytesToString();
+
+    print("🔵 PROFILE UPDATE RESPONSE: $responseBody");
+
+    return response.statusCode == 200;
   }
 }

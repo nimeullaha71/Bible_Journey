@@ -3,17 +3,17 @@ import 'package:flutter/material.dart';
 class CustomProfile extends StatelessWidget {
   final String title;
   final String box;
+  final TextEditingController controller;   // <-- Add this
 
   const CustomProfile({
     super.key,
     required this.title,
     required this.box,
+    required this.controller,              // <-- Receive controller
   });
 
   @override
   Widget build(BuildContext context) {
-    final TextEditingController controller = TextEditingController();
-
     return Padding(
       padding: const EdgeInsets.all(2),
       child: Column(
@@ -21,14 +21,15 @@ class CustomProfile extends StatelessWidget {
         children: [
           Padding(
             padding: const EdgeInsets.only(left: 20),
-            child:   Text(
+            child: Text(
               title,
               style: const TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold
+                fontSize: 16,
+                fontWeight: FontWeight.bold,
               ),
             ),
           ),
+
           const SizedBox(height: 8),
 
           Padding(
@@ -36,15 +37,18 @@ class CustomProfile extends StatelessWidget {
             child: Container(
               padding: const EdgeInsets.symmetric(horizontal: 10),
               decoration: BoxDecoration(
-                border: Border.all(color: const Color(0xffDAD6D6)),
+                border: Border.all(color: Color(0xffDAD6D6)),
                 borderRadius: BorderRadius.circular(14),
               ),
               child: TextField(
-                controller: controller,
+                controller: controller,       // <-- Use passed controller
                 decoration: InputDecoration(
                   hintText: box,
                   border: InputBorder.none,
-                  contentPadding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 12.0),
+                  contentPadding: EdgeInsets.symmetric(
+                    horizontal: 10,
+                    vertical: 12,
+                  ),
                 ),
               ),
             ),
