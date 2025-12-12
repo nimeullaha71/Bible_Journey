@@ -1,3 +1,4 @@
+import 'package:bible_journey/core/services/api_service.dart';
 import 'package:bible_journey/features/Profile/screens/edit_profile.dart';
 import 'package:bible_journey/features/Profile/screens/profile_screen.dart';
 import 'package:bible_journey/features/bible/screens/bible_screen.dart';
@@ -19,13 +20,30 @@ class ProfileDetails extends StatefulWidget {
 class _ProfileDetailsState extends State<ProfileDetails> {
   int _selectedIndex = 3;
 
+  Map<String, dynamic>? userData;
+  bool isLoading = true;
+
+  @override
+  void initState() {
+    super.initState();
+    loadProfile();
+  }
+
+  Future<void> loadProfile() async {
+    final data = await ApiServices.getProfile();
+    setState(() {
+      userData = data;
+      isLoading = false;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xffF8F5F2),
       appBar: AppBar(
         backgroundColor: const Color(0xFFF8F5F2),
-        title:  Text("profile_details".tr()),
+        title: Text("profile_details".tr()),
         centerTitle: true,
         elevation: 0,
       ),
@@ -61,21 +79,27 @@ class _ProfileDetailsState extends State<ProfileDetails> {
                           ),
                         ),
                         const SizedBox(height: 1),
-                        const Text(
-                          'Anik',
-                          style: TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold,
-                            color: Color(0xff83BF8B),
-                          ),
-                        ),
-                        const Text(
-                          'Premium User',
-                          style: TextStyle(
-                            fontSize: 14,
-                            color: Color(0xffABABAB),
-                          ),
-                        ),
+                        isLoading
+                            ? const Center(child: CircularProgressIndicator())
+                            : Column(
+                                children: [
+                                  Text(
+                                    userData?["name"] ?? "No Name",
+                                    style: const TextStyle(
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.bold,
+                                      color: Color(0xff83BF8B),
+                                    ),
+                                  ),
+                                  Text(
+                                    userData?["role"] ?? "User",
+                                    style: const TextStyle(
+                                      fontSize: 14,
+                                      color: Color(0xffABABAB),
+                                    ),
+                                  ),
+                                ],
+                              ),
                       ],
                     ),
                   ],
@@ -84,38 +108,49 @@ class _ProfileDetailsState extends State<ProfileDetails> {
               SizedBox(height: 25),
 
               CustomPersonal(
-                  textIcon: Icons.person,
-                  text: "FULL NAME",
-                  subText: "Itunuoluwa Abidoye"),
+                textIcon: Icons.person,
+                text: "FULL NAME",
+                subText: userData?["name"] ?? "",
+              ),
+
+              CustomPersonal(
+                textIcon: Icons.email,
+                text: "YOUR EMAIL",
+                subText: userData?["email"] ?? "",
+              ),
+              SizedBox(height: 18),
+
+              CustomPersonal(
+                textIcon: Icons.date_range,
+                text: "DATE OF BIRTH",
+                subText: "18 May, 2001",
+              ),
 
               SizedBox(height: 18),
               CustomPersonal(
-                  textIcon: Icons.email,
-                  text: "YOUR EMAIL",
-                  subText: 'Itunuoluwa@petra.africa' ),
-              SizedBox(height: 18),
+                textIcon: Icons.phone,
+                text: "PHONE",
+                subText: userData?["phone"] ?? "",
+              ),
 
               CustomPersonal(
-                  textIcon: Icons.date_range,
-                  text: "DATE OF BIRTH",
-                  subText: "18 May, 2001"),
-
-              SizedBox(height: 18),
-              CustomPersonal(
-                  textIcon: Icons.phone ,
-                  text: "PHONE",
-                  subText: "+880 173101292373"),
-
-              SizedBox(height: 18),
-              CustomPersonal(
-                  textIcon: Icons.accessibility,
-                  text: "Gender",
-                  subText: "Male"),
+                textIcon: Icons.accessibility,
+                text: "GENDER",
+                subText: userData?["gender"] ?? "",
+              ),
 
               SizedBox(height: 125),
-              CustomButton(text: "Edit", onTap: (){
-                Navigator.push(context, MaterialPageRoute(builder: (context)=>EditProfileScreen()));
-              })
+              CustomButton(
+                text: "Edit",
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => EditProfileScreen(),
+                    ),
+                  );
+                },
+              ),
             ],
           ),
         ),
@@ -131,19 +166,27 @@ class _ProfileDetailsState extends State<ProfileDetails> {
           switch (index) {
             case 0:
               Navigator.push(
-                  context, MaterialPageRoute(builder: (_) => const MainBottomNavScreen()));
+                context,
+                MaterialPageRoute(builder: (_) => const MainBottomNavScreen()),
+              );
               break;
             case 1:
               Navigator.push(
-                  context, MaterialPageRoute(builder: (_) => const BibleScreen()));
+                context,
+                MaterialPageRoute(builder: (_) => const BibleScreen()),
+              );
               break;
             case 2:
               Navigator.push(
-                  context, MaterialPageRoute(builder: (_) => const JourneyScreen()));
+                context,
+                MaterialPageRoute(builder: (_) => const JourneyScreen()),
+              );
               break;
             case 3:
               Navigator.push(
-                  context, MaterialPageRoute(builder: (_) => const ProfileScreen()));
+                context,
+                MaterialPageRoute(builder: (_) => const ProfileScreen()),
+              );
               break;
           }
         },

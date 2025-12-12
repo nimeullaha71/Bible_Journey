@@ -3,4 +3,5 @@ class Urls {
   static const String signUpUrl = '${_baseUrl}/api/auth/signup/';
   static const String signInUrl = '${_baseUrl}/api/auth/login/';
   static const String categoryQuestionUrl = '${_baseUrl}/api/user/categorize/';
+  static const String profileUrl = '${_baseUrl}/api/profile/';
 }
