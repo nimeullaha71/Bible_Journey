@@ -1,8 +1,14 @@
+import 'dart:convert';
+
+import 'package:bible_journey/app/Urls.dart';
 import 'package:bible_journey/app/routes.dart';
 import 'package:bible_journey/features/questionnaire/widget/custom_quiz_app_bar.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:bible_journey/app/constants.dart';
+import 'package:http/http.dart' as http;
+
+import '../../../core/services/local_storage_service.dart';
 
 class QuizQuestionScreen extends StatefulWidget {
   const QuizQuestionScreen({super.key});
@@ -114,7 +120,7 @@ class _QuizQuestionScreenState extends State<QuizQuestionScreen> {
         "Not sure",
       ]
     },
-    // Add 6 more...
+
   ];
 
 
@@ -124,13 +130,65 @@ class _QuizQuestionScreenState extends State<QuizQuestionScreen> {
         currentQuestionIndex--;
       });
     } else {
-      Navigator.pop(context);  // প্রথম প্রশ্ন হলে স্ক্রিন ব্যাক হবে
+      Navigator.pop(context);
     }
   }
 
 
-  /// 🔥 Multiple answers → index based store
   List<List<int>> selectedAnswers = List.generate(10, (index) => []);
+
+  List<Map<String, String>> buildQAPairs() {
+    List<Map<String, String>> qaPairs = [];
+
+    for (int i = 0; i < quizData.length; i++) {
+      List<int> selectedIndexes = selectedAnswers[i];
+      for (var idx in selectedIndexes) {
+        qaPairs.add({
+          "question": quizData[i]["question"],
+          "answer": quizData[i]["options"][idx]
+        });
+      }
+    }
+
+    return qaPairs;
+  }
+
+  Future<void> submitQuiz() async {
+
+    String? token = await LocalStorage.getToken();
+    final url = Uri.parse(Urls.categoryQuestionUrl);
+
+    final body = jsonEncode({
+      "qa_pairs": buildQAPairs(),
+    });
+
+
+    try {
+      final response = await http.post(
+        url,
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": "Bearer $token",
+        },
+        body: body,
+      );
+
+      if (response.statusCode == 200) {
+        final data = jsonDecode(response.body);
+        print("Response: $data");
+        final decoded = jsonDecode(response.body);
+
+        print("📢 Message: ${decoded['message']}");
+        print("📌 Category: ${decoded['category']}");
+
+      } else {
+        print("Failed: ${response.statusCode}");
+      }
+    } catch (e) {
+      print("Error: $e");
+    }
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -150,9 +208,6 @@ class _QuizQuestionScreenState extends State<QuizQuestionScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            /// -------------------
-            /// Top Text
-            /// -------------------
             Text(
               "Question ${currentQuestionIndex + 1} of ${quizData.length}",
               style: const TextStyle(color: Colors.black54, fontSize: 14),
@@ -160,9 +215,6 @@ class _QuizQuestionScreenState extends State<QuizQuestionScreen> {
 
             const SizedBox(height: 6),
 
-            /// -------------------
-            /// Progress Bar
-            /// -------------------
             LinearProgressIndicator(
               value: (currentQuestionIndex + 1) / quizData.length,
               backgroundColor: Colors.grey.shade300,
@@ -173,9 +225,6 @@ class _QuizQuestionScreenState extends State<QuizQuestionScreen> {
 
             const SizedBox(height: 30),
 
-            /// -------------------
-            /// Question Text
-            /// -------------------
             Text(
               question,
               style: const TextStyle(
@@ -184,9 +233,6 @@ class _QuizQuestionScreenState extends State<QuizQuestionScreen> {
 
             const SizedBox(height: 20),
 
-            /// -------------------
-            /// Options
-            /// -------------------
             Expanded(
               child: ListView.builder(
                 itemCount: options.length,
@@ -201,9 +247,6 @@ class _QuizQuestionScreenState extends State<QuizQuestionScreen> {
 
             const SizedBox(height: 10),
 
-            /// -------------------
-            /// Next Button
-            /// -------------------
             SizedBox(
               width: double.infinity,
               child: ElevatedButton(
@@ -231,9 +274,6 @@ class _QuizQuestionScreenState extends State<QuizQuestionScreen> {
     );
   }
 
-  /// ------------------------------------------------------------------
-  /// OPTION TILE (Multiple Selection)
-  /// ------------------------------------------------------------------
   Widget optionTile(int index, String optionText) {
     bool isActive =
     selectedAnswers[currentQuestionIndex].contains(index);
@@ -278,18 +318,15 @@ class _QuizQuestionScreenState extends State<QuizQuestionScreen> {
     );
   }
 
-  /// ------------------------------------------------------------------
-  /// NEXT QUESTION LOGIC
-  /// ------------------------------------------------------------------
   void goToNext() {
     if (currentQuestionIndex < quizData.length - 1) {
       setState(() {
         currentQuestionIndex++;
       });
     } else {
+      submitQuiz();
       Navigator.pushNamed(context, AppRoutes.mainBottomNavScreen);
-      /// Finish Page / Result Page এ নেওয়া যাবে
-      print(selectedAnswers);
+      print(buildQAPairs);
     }
   }
 }
