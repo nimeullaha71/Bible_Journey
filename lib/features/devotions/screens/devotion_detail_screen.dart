@@ -24,7 +24,7 @@ class _DevotionDetailScreenState extends State<DevotionDetailScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.bgColor,
-      appBar: CustomAppBar(title: "Quiz Details", onTap: (){
+      appBar: CustomAppBar(title: "quiz_details".tr(), onTap: (){
         Navigator.pop(context);
       }),
 
@@ -176,7 +176,7 @@ class _DevotionDetailScreenState extends State<DevotionDetailScreen> {
               const SizedBox(height: 35),
 
               CustomButton(
-                text: "Start Quiz",
+                text: "buttons.start_quiz".tr(),
                 onTap: () {
                   Navigator.push(
                     context,

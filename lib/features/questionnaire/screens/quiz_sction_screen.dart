@@ -1,5 +1,6 @@
 import 'package:bible_journey/app/routes.dart';
 import 'package:bible_journey/features/questionnaire/widget/custom_quiz_app_bar.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:bible_journey/app/constants.dart';
 
@@ -139,7 +140,7 @@ class _QuizQuestionScreenState extends State<QuizQuestionScreen> {
     return Scaffold(
       backgroundColor: AppColors.bgColor,
       appBar: CustomQuizAppBar(
-        title: "Bible Journey",
+        title: "bible_journey".tr(),
         onBack: () => goPrevious(),
       ),
 
@@ -217,8 +218,8 @@ class _QuizQuestionScreenState extends State<QuizQuestionScreen> {
                 },
                 child: Text(
                   currentQuestionIndex == quizData.length - 1
-                      ? "Finish"
-                      : "Next",
+                      ? "buttons.finish".tr()
+                      : "buttons.next".tr(),
                   style: const TextStyle(
                       color: Colors.white, fontSize: 18),
                 ),

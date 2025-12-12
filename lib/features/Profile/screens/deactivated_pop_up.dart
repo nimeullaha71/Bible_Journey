@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 void showDeactivatePopup(BuildContext context, {required VoidCallback onConfirm}) {
@@ -26,8 +27,8 @@ void showDeactivatePopup(BuildContext context, {required VoidCallback onConfirm}
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
 
-              const Text(
-                "Confirm Deactivated",
+               Text(
+                "confirm_deactivated".tr(),
                 style: TextStyle(
                   fontSize: 20,
                   fontWeight: FontWeight.bold,
@@ -36,8 +37,8 @@ void showDeactivatePopup(BuildContext context, {required VoidCallback onConfirm}
 
               const SizedBox(height: 15),
 
-              const Text(
-                "Are you sure you want to deactivate your Account ?",
+               Text(
+                "deactivate_question".tr(),
                 style: TextStyle(
                   fontSize: 15,
                   height: 1.4,
@@ -52,8 +53,8 @@ void showDeactivatePopup(BuildContext context, {required VoidCallback onConfirm}
 
                   InkWell(
                     onTap: () => Navigator.pop(context),
-                    child: const Text(
-                      "Cancel",
+                    child:  Text(
+                      "cancel".tr(),
                       style: TextStyle(
                         fontSize: 16,
                         color: Color(0xFF8BC38A),
@@ -69,8 +70,8 @@ void showDeactivatePopup(BuildContext context, {required VoidCallback onConfirm}
                       Navigator.pop(context);
                       onConfirm();
                     },
-                    child: const Text(
-                      "Deactivated",
+                    child:  Text(
+                      "deactivated".tr(),
                       style: TextStyle(
                         fontSize: 16,
                         color: Colors.red,

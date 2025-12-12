@@ -4,6 +4,7 @@ import 'package:bible_journey/features/bible/screens/bible_screen.dart';
 import 'package:bible_journey/features/journeys/screens/journey_screen.dart';
 import 'package:bible_journey/main_bottom_nav_screen.dart';
 import 'package:bible_journey/widgets/buttons/custom_button.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import '../../../widgets/custom_nav_bar.dart';
 import '../widgets/custom_profile.dart';
@@ -24,7 +25,7 @@ class _ProfileDetailsState extends State<EditProfileScreen> {
       backgroundColor: const Color(0xffF8F5F2),
       appBar: AppBar(
         backgroundColor: const Color(0xFFF8F5F2),
-        title: const Text("Profile Details"),
+        title:  Text("profile_details".tr()),
         centerTitle: true,
         elevation: 0,
       ),
@@ -81,15 +82,15 @@ class _ProfileDetailsState extends State<EditProfileScreen> {
 
               const SizedBox(height: 20),
 
-              CustomProfile(title: "Name", box: ""),
-              CustomProfile(title: "Your Email", box: ""),
-              CustomProfile(title: "Date of Birth", box: ""),
-              CustomProfile(title: "Phone", box: ""),
-              CustomProfile(title: "Gender", box: ""),
+              CustomProfile(title: "name".tr(), box: ""),
+              CustomProfile(title: "your_email".tr(), box: ""),
+              CustomProfile(title: "date_of_birth".tr(), box: ""),
+              CustomProfile(title: "phone".tr(), box: ""),
+              CustomProfile(title: "gender".tr(), box: ""),
 
               const SizedBox(height: 15),
               CustomButton(
-                text: "Update",
+                text: "update".tr(),
                 onTap: () {
                   Navigator.push(
                       context,

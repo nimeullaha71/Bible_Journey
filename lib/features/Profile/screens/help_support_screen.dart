@@ -1,6 +1,6 @@
 import 'package:bible_journey/features/Profile/screens/profile_screen.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-
 import '../../../main_bottom_nav_screen.dart';
 import '../../../widgets/custom_nav_bar.dart';
 import '../../bible/screens/bible_screen.dart';
@@ -21,7 +21,7 @@ class _HelpSupportScreenState extends State<HelpSupportScreen> {
       backgroundColor: Color(0xFFF8F5F2),
       appBar: AppBar(
         backgroundColor: const Color(0xFFF8F5F2),
-        title: const Text("Terms of Service"),
+        title:  Text("terms_of_service".tr()),
         centerTitle: true,
         elevation: 0,
       ),

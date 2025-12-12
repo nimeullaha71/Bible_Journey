@@ -10,6 +10,7 @@ import 'package:bible_journey/features/Profile/screens/terms_service_screen.dart
 import 'package:bible_journey/features/auth/screens/login_screen.dart';
 import 'package:bible_journey/main_bottom_nav_screen.dart';
 import 'package:bible_journey/widgets/appbars/custom_appbar.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import '../widgets/custom_box.dart';
 
@@ -34,10 +35,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
             children: [
               Padding(
                 padding: const EdgeInsets.only(left: 20),
-                child: const Align(
+                child:  Align(
                   alignment: Alignment.centerLeft,
                   child: Text(
-                    "Account",
+                    "account".tr(),
                     style: TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.bold,
@@ -73,7 +74,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             const SizedBox(height: 5),
                             CustomText(
                                 textIconPath: 'assets/images/User.svg',
-                                text: "Profile Details",
+                                text: "profile_details".tr(),
                                 trailingIcon: Icons.arrow_forward_ios,
                                 onTap: (){
                                   Navigator.push(
@@ -82,8 +83,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
                             Padding(
                               padding: const EdgeInsets.only(left: 30),
-                              child: const Text(
-                                "Username, Email ",
+                              child:  Text(
+                                "username_email".tr(),
                                 style: TextStyle(
                                   fontSize: 12,
                                   color: Colors.grey,
@@ -95,7 +96,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
                             CustomText(
                                 textIconPath: 'assets/images/HandCoins.svg',
-                                text: "Subscription",
+                                text: "subscription".tr(),
                                 trailingIcon: Icons.arrow_forward_ios,
                                 onTap: (){
                                   Navigator.push(
@@ -104,8 +105,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
                             Padding(
                               padding: const EdgeInsets.only(left: 30),
-                              child: const Text(
-                                "Manage Subscription",
+                              child:  Text(
+                                "manage_subscription".tr(),
                                 style: TextStyle(
                                   fontSize: 12,
                                   color: Colors.grey,
@@ -122,10 +123,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
               ),
               Padding(
                 padding: const EdgeInsets.only(left: 20),
-                child: const Align(
+                child:  Align(
                   alignment: Alignment.centerLeft,
                   child: Text(
-                    "Account Settings",
+                    "account_settings".tr(),
                     style: TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.bold
@@ -153,7 +154,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     const SizedBox(height: 10),
                     CustomText(
                         textIconPath: 'assets/images/Globe.svg',
-                        text: "Change Language",
+                        text: "change_language".tr(),
                         trailingIcon: Icons.arrow_forward_ios,
                         onTap: (){
                          Navigator.push(
@@ -164,7 +165,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
                     CustomText(
                         textIconPath: 'assets/images/Bell.svg',
-                        text: "Notifications",
+                        text: "notifications".tr(),
                         trailingIcon: Icons.arrow_forward_ios,
                         onTap: (){
                           //Navigator.push(
@@ -175,7 +176,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
                     CustomText(
                         textIconPath: 'assets/images/LockOpen.svg',
-                        text: "Change Password",
+                        text: "change_password".tr(),
                         trailingIcon: Icons.arrow_forward_ios,
                         onTap: (){
                           Navigator.push(
@@ -186,7 +187,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
                     CustomText(
                         textIconPath: 'assets/images/ShieldSlash.svg',
-                        text: "Disabled Account",
+                        text: "disabled_account".tr(),
                         trailingIcon: Icons.arrow_forward_ios,
                         onTap: (){
                           showDeactivatePopup(context, onConfirm: (){
@@ -202,10 +203,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
               SizedBox(height: 5),
               Padding(
                 padding: const EdgeInsets.only(left: 20),
-                child: const Align(
+                child:  Align(
                   alignment: Alignment.centerLeft,
                   child: Text(
-                    "Support & Legal",
+                    "support_legal".tr(),
                     style: TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.bold
@@ -234,7 +235,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
                     CustomText(
                         textIconPath: 'assets/images/Headset.svg',
-                        text:  "Help & Support",
+                        text:  "help_support".tr(),
                         trailingIcon: Icons.arrow_forward_ios,
                         onTap: (){
                           Navigator.push(context, MaterialPageRoute(builder: (context)=>HelpSupportScreen()));
@@ -244,7 +245,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     const SizedBox(height: 10),
 
                     CustomText(
-                        text: "Terms of Service",
+                        text: "terms_of_service".tr(),
                         textIconPath: 'assets/images/FileLock.svg',
                         trailingIcon:  Icons.arrow_forward_ios,
                         onTap: (){
@@ -256,7 +257,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
                     CustomText(
                       textIconPath: 'assets/images/Warning.svg',
-                      text: "Privacy Policy ",
+                      text: "privacy_policy".tr(),
                       trailingIcon:  Icons.arrow_forward_ios,
                       onTap: (){
                         Navigator.push(context, MaterialPageRoute(builder: (context)=>PrivacyPolicyScreen()));
@@ -302,8 +303,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
                             const SizedBox(width: 10),
 
-                            const Text(
-                              "Log Out",
+                             Text(
+                              "logout".tr(),
                               style: TextStyle(
                                 fontSize: 14,
                               ),

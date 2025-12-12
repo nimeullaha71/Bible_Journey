@@ -5,6 +5,7 @@ import 'package:bible_journey/features/home/screen/notification_screen.dart';
 import 'package:bible_journey/features/journeys/screens/journey_screen.dart';
 import 'package:bible_journey/features/todays_actions/screens/todays_action_screen.dart';
 import 'package:bible_journey/widgets/buttons/custom_button.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import '../widgets/home_box.dart';
@@ -164,7 +165,7 @@ class HomeScreen extends StatelessWidget {
                     SizedBox(height: height * 0.02),
 
                     CustomButton(
-                      text: "View All Journeys",
+                      text: "view_all_journeys".tr(),
                       onTap: () {
                         Navigator.pushNamed(context, AppRoutes.journeyScreen);
                       },

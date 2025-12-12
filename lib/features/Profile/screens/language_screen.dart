@@ -55,7 +55,7 @@ class _LanguageScreenState extends State<LanguageScreen> {
       backgroundColor: const Color(0xffF8F5F2),
       appBar: AppBar(
         backgroundColor: const Color(0xFFF8F5F2),
-        title: const Text("Language"),
+        title:  Text("change_language".tr()),
         centerTitle: true,
         elevation: 0,
       ),

@@ -3,6 +3,7 @@ import 'package:bible_journey/features/bible/screens/bible_screen.dart';
 import 'package:bible_journey/features/journeys/screens/journey_screen.dart';
 import 'package:bible_journey/main_bottom_nav_screen.dart';
 import 'package:bible_journey/widgets/buttons/custom_button.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import '../../../widgets/custom_nav_bar.dart';
 import '../../payment/payment_screen.dart';
@@ -25,7 +26,7 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
       backgroundColor: const Color(0xffF8F5F2),
       appBar: AppBar(
         backgroundColor: const Color(0xFFF8F5F2),
-        title: const Text("Go Premium"),
+        title:  Text("go_premium".tr()),
         centerTitle: true,
         elevation: 0,
       ),
@@ -94,7 +95,7 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
                   },
                 ),
                 const SizedBox(height: 10),
-                CustomButton(text: "Start 7-Day Free Trial", onTap: (){
+                CustomButton(text: "start_free_trial".tr(), onTap: (){
                   //Navigator.push(
                       //context, MaterialPageRoute(builder: (_) => const PaymentPage()));
                 }),

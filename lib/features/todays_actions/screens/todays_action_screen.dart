@@ -6,6 +6,7 @@ import 'package:bible_journey/features/reflection/screens/daily_reflection_scree
 import 'package:bible_journey/main_bottom_nav_screen.dart';
 import 'package:bible_journey/widgets/appbars/custom_appbar.dart';
 import 'package:bible_journey/widgets/buttons/custom_button.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import '../../../widgets/custom_nav_bar.dart';
 
@@ -23,7 +24,7 @@ class _TodayActionScreenState extends State<TodayActionScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.bgColor,
-      appBar: CustomAppBar(title: "Today's Action", onTap: (){
+      appBar: CustomAppBar(title: "todays_actions".tr(), onTap: (){
         Navigator.pop(context);
       }),
       body: SafeArea(
@@ -58,7 +59,7 @@ class _TodayActionScreenState extends State<TodayActionScreen> {
                 ),
               ),
               SizedBox(height: 270),
-              CustomButton(text: "Mark as Done", onTap: (){
+              CustomButton(text: "mark_as_done".tr(), onTap: (){
                 Navigator.push(
                   context,
                   MaterialPageRoute(builder: (context) => DailyReflectionScreen()),

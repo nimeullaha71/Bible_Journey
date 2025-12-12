@@ -1,4 +1,3 @@
-
 import 'package:bible_journey/features/Profile/screens/profile_screen.dart';
 import 'package:bible_journey/features/bible/screens/bible_screen.dart';
 import 'package:bible_journey/features/journeys/screens/journey_screen.dart';
@@ -6,8 +5,8 @@ import 'package:bible_journey/features/prayer/screens/prayer_screen.dart';
 import 'package:bible_journey/features/reflection/screens/daily_reflection_screen.dart';
 import 'package:bible_journey/features/todays_actions/screens/todays_action_screen.dart';
 import 'package:bible_journey/main_bottom_nav_screen.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-
 import '../../../widgets/custom_nav_bar.dart';
 import '../../devotions/screens/daily_devotion_screen.dart';
 import '../widgets/custom_form.dart';
@@ -28,7 +27,7 @@ class _DailyJourneyScreenState extends State<DailyJourneyScreen> {
       backgroundColor: const Color(0xffF8F5F2),
       appBar: AppBar(
         backgroundColor: const Color(0xFFF8F5F2),
-        title: const Text("Journey Details"),
+        title:  Text("journey_details".tr(),),
         centerTitle: true,
         elevation: 0,
       ),

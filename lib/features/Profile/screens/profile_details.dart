@@ -4,6 +4,7 @@ import 'package:bible_journey/features/bible/screens/bible_screen.dart';
 import 'package:bible_journey/features/journeys/screens/journey_screen.dart';
 import 'package:bible_journey/main_bottom_nav_screen.dart';
 import 'package:bible_journey/widgets/buttons/custom_button.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import '../../../widgets/custom_nav_bar.dart';
 import '../widgets/custom_personal.dart';
@@ -24,7 +25,7 @@ class _ProfileDetailsState extends State<ProfileDetails> {
       backgroundColor: const Color(0xffF8F5F2),
       appBar: AppBar(
         backgroundColor: const Color(0xFFF8F5F2),
-        title: const Text("Profile Details"),
+        title:  Text("profile_details".tr()),
         centerTitle: true,
         elevation: 0,
       ),

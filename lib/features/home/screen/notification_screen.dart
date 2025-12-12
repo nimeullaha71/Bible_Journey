@@ -4,6 +4,7 @@ import 'package:bible_journey/features/bible/screens/bible_screen.dart';
 import 'package:bible_journey/features/journeys/screens/journey_screen.dart';
 import 'package:bible_journey/main_bottom_nav_screen.dart';
 import 'package:bible_journey/widgets/appbars/custom_appbar.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import '../../../widgets/custom_nav_bar.dart';
 import '../widgets/custom_notification.dart';
@@ -22,7 +23,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.bgColor,
-      appBar: CustomAppBar(title: "Notification", onTap: (){
+      appBar: CustomAppBar(title: "notification".tr(), onTap: (){
         Navigator.pop(context);
       }),
       body: SingleChildScrollView(
@@ -34,15 +35,15 @@ class _NotificationScreenState extends State<NotificationScreen> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    const Text(
-                      "Today",
+                     Text(
+                      "today".tr(),
                       style: TextStyle(
                         fontSize: 24,
                         color: Colors.black87,
                       ),
                     ),
-                    const Text(
-                      "Clear All",
+                     Text(
+                      "clear_all".tr(),
                       style: TextStyle(
                         fontSize: 16,
                         color: Color(0xff83BF8B),
@@ -89,8 +90,8 @@ class _NotificationScreenState extends State<NotificationScreen> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    const Text(
-                      "Yesterday",
+                     Text(
+                      "yesterday".tr(),
                       style: TextStyle(
                         fontSize: 24,
                         color: Colors.black87,

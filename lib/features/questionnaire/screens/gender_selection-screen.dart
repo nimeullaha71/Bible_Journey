@@ -1,6 +1,7 @@
 import 'package:bible_journey/app/constants.dart';
 import 'package:bible_journey/features/questionnaire/screens/quiz_sction_screen.dart';
 import 'package:bible_journey/features/questionnaire/widget/custom_quiz_app_bar.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 class GenderSelectScreen extends StatelessWidget {
@@ -10,7 +11,7 @@ class GenderSelectScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.bgColor,
-      appBar: CustomQuizAppBar(title: "Bible Journey"),
+      appBar: CustomQuizAppBar(title: "bible_journey".tr()),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20),
         child: Padding(
@@ -25,7 +26,7 @@ class GenderSelectScreen extends StatelessWidget {
                 children: [
                   genderCard(
                     image: AppImages.maleImg,
-                    label: "Male",
+                    label: "male".tr(),
                     onTap: () {
                       Navigator.push(
                         context,
@@ -36,7 +37,7 @@ class GenderSelectScreen extends StatelessWidget {
                   ),
                   genderCard(
                     image: AppImages.femaleImg,
-                    label: "Female",
+                    label: "female".tr(),
                     onTap: () {
                       Navigator.push(
                         context,

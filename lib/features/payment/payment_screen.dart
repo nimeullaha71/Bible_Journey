@@ -1,6 +1,7 @@
 import 'package:bible_journey/app/constants.dart';
 import 'package:bible_journey/features/payment/payment_input_field.dart';
 import 'package:bible_journey/widgets/appbars/custom_appbar.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 class PaymentScreen extends StatefulWidget {
@@ -20,7 +21,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.bgColor,
-      appBar: CustomAppBar(title: "Payment", onTap: (){
+      appBar: CustomAppBar(title: "payment".tr(), onTap: (){
         Navigator.pop(context);
       }),
 

@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -30,7 +31,7 @@ class CustomNavbar extends StatelessWidget {
                 ? const Color(0xff83BF8B)
                 : const Color(0xff595959),
           ),
-          label: "Home",
+          label: "home".tr(),
         ),
         BottomNavigationBarItem(
           icon: SvgPicture.asset(
@@ -41,7 +42,7 @@ class CustomNavbar extends StatelessWidget {
                 ? const Color(0xff83BF8B)
                 : const Color(0xff595959),
           ),
-          label: "Bible",
+          label: "bible".tr(),
         ),
         BottomNavigationBarItem(
           icon: SvgPicture.asset(
@@ -52,7 +53,7 @@ class CustomNavbar extends StatelessWidget {
                 ? const Color(0xff83BF8B)
                 : const Color(0xff595959),
           ),
-          label: "Journey",
+          label: "journey".tr(),
         ),
         BottomNavigationBarItem(
           icon: SvgPicture.asset(
@@ -63,7 +64,7 @@ class CustomNavbar extends StatelessWidget {
                 ? const Color(0xff83BF8B)
                 : const Color(0xff595959),
           ),
-          label: "Profile",
+          label: "profile".tr(),
         ),
       ],
     );

@@ -5,6 +5,7 @@ import 'package:bible_journey/features/journeys/screens/journey_screen.dart';
 import 'package:bible_journey/main_bottom_nav_screen.dart';
 import 'package:bible_journey/widgets/appbars/custom_appbar.dart';
 import 'package:bible_journey/widgets/buttons/custom_button.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 import 'package:flutter/material.dart';
 
@@ -24,7 +25,7 @@ class _DailyReflectionScreenState extends State<DailyReflectionScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color(0xFFF8F5F2),
-      appBar: CustomAppBar(title: "Daily Reflection", onTap: (){
+      appBar: CustomAppBar(title: "daily_reflection".tr(), onTap: (){
         Navigator.pop(context);
       }),
 
@@ -36,7 +37,7 @@ class _DailyReflectionScreenState extends State<DailyReflectionScreen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const SizedBox(height: 20),
-                const Text("Write your Daily Reflection",
+                 Text("write_daily_reflection".tr(),
                     style: TextStyle(
                         fontSize: 14,
                         color: Colors.black
@@ -58,7 +59,7 @@ class _DailyReflectionScreenState extends State<DailyReflectionScreen> {
                       maxLines: null,
                       expands: true,
                       decoration: InputDecoration(
-                        hintText: "Write your Daily reflection here...",
+                        hintText: "write_here".tr(),
                         border: InputBorder.none,
                       ),
                       style: TextStyle(fontSize: 16, color: Colors.black),
@@ -67,7 +68,7 @@ class _DailyReflectionScreenState extends State<DailyReflectionScreen> {
                 ),
 
                 SizedBox(height: 80),
-                CustomButton(text: "Mark as Done", onTap: (){
+                CustomButton(text: "mark_as_done".tr(), onTap: (){
                   Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context)=>JourneyDetailScreen()), (predicate)=>false);
                 })
               ],

@@ -2,7 +2,9 @@ import 'package:bible_journey/features/Profile/screens/profile_screen.dart';
 import 'package:bible_journey/features/bible/screens/bible_screen.dart';
 import 'package:bible_journey/features/journeys/screens/journey_screen.dart';
 import 'package:bible_journey/main_bottom_nav_screen.dart';
+import 'package:bible_journey/widgets/appbars/custom_appbar.dart';
 import 'package:bible_journey/widgets/buttons/custom_button.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import '../../../widgets/custom_nav_bar.dart';
 import '../widgets/custom_password.dart';  // New improved widget
@@ -26,17 +28,9 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xffF8F5F2),
-      appBar: AppBar(
-        backgroundColor: const Color(0xFFF8F5F2),
-        title: const Text("Password Change"),
-        centerTitle: true,
-        elevation: 0,
-        automaticallyImplyLeading: false,
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back_ios_new, color: Colors.black),
-          onPressed: () => Navigator.pop(context),
-        ),
-      ),
+      appBar: CustomAppBar(title: "password_change".tr(), onTap: (){
+        Navigator.pop(context);
+      }),
 
       body: SingleChildScrollView(
         child: Padding(
@@ -49,29 +43,29 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
 
               // Old Password
               CustomPassword(
-                label: "Enter Your Old Password",
-                hintText: "Old password",
+                label: "enter_old_password".tr(),
+                hintText: "old_password".tr(),
                 controller: oldPasswordController,
               ),
 
               // New Password
               CustomPassword(
-                label: "Enter a New Password",
-                hintText: "New password",
+                label: "enter_new_password".tr(),
+                hintText: "new_password".tr(),
                 controller: newPasswordController,
               ),
 
               // Confirm Password
               CustomPassword(
-                label: "Re-enter Your New Password",
-                hintText: "Confirm new password",
+                label: "re_enter_new_password".tr(),
+                hintText: "confirm_new_password".tr(),
                 controller: confirmPasswordController,
               ),
 
               const SizedBox(height: 180),
 
               CustomButton(
-                text: "Done",
+                text: "done".tr(),
                 onTap: () {
                   /// TODO: Add validation
                   print("Old: ${oldPasswordController.text}");

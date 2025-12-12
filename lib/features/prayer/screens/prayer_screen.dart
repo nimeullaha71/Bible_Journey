@@ -7,6 +7,7 @@ import 'package:bible_journey/features/journeys/screens/journey_screen.dart';
 import 'package:bible_journey/main_bottom_nav_screen.dart';
 import 'package:bible_journey/widgets/appbars/custom_appbar.dart';
 import 'package:bible_journey/widgets/buttons/custom_button.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import '../../../widgets/custom_nav_bar.dart';
 import '../widgets/audio_player_card.dart';
@@ -25,7 +26,7 @@ class _PrayerScreenState extends State<PrayerScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.bgColor,
-      appBar: CustomAppBar(title: "Daily Prayer", onTap: (){
+      appBar: CustomAppBar(title: "daily_prayer".tr(), onTap: (){
         Navigator.pop(context);
       }),
       body: SafeArea(

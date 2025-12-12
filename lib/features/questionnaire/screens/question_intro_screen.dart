@@ -1,7 +1,7 @@
 import 'package:bible_journey/app/constants.dart';
 import 'package:bible_journey/widgets/buttons/custom_button.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-
 import 'gender_selection-screen.dart';
 
 class QuizIntroScreen extends StatelessWidget {
@@ -16,8 +16,8 @@ class QuizIntroScreen extends StatelessWidget {
         elevation: 0,
         centerTitle: true,
         automaticallyImplyLeading: false,
-        title: const Text(
-          "Bible Journey",
+        title:  Text(
+          "bible_journey".tr(),
           style: TextStyle(
             fontSize: 18,
             fontWeight: FontWeight.w500,
@@ -48,7 +48,7 @@ class QuizIntroScreen extends StatelessWidget {
 
                 const SizedBox(height: 60),
 
-                CustomButton(text: "Start", onTap: (){
+                CustomButton(text: "start".tr(), onTap: (){
                   Navigator.push(context, MaterialPageRoute(builder: (context)=>GenderSelectScreen()));
                 })
               ],
