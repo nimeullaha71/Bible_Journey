@@ -1,16 +1,32 @@
 import 'package:flutter/material.dart';
+import '../model/bible_model.dart';
+import '../services/bible_api_service.dart';
 
-class ChapterScreen extends StatelessWidget {
+class ChapterScreen extends StatefulWidget {
   final String bookName;
   final int chapterNumber;
-  final List<String> verses; // <-- verse list directly
 
   const ChapterScreen({
     super.key,
     required this.bookName,
     required this.chapterNumber,
-    required this.verses,
   });
+
+  @override
+  State<ChapterScreen> createState() => _ChapterScreenState();
+}
+
+class _ChapterScreenState extends State<ChapterScreen> {
+  late Future<List<Verse>> futureVerses;
+
+  @override
+  void initState() {
+    super.initState();
+    futureVerses = BibleApiService.fetchChapter(
+      bookName: widget.bookName,
+      chapter: widget.chapterNumber,
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -24,75 +40,70 @@ class ChapterScreen extends StatelessWidget {
           icon: const Icon(Icons.arrow_back, color: Colors.black),
           onPressed: () => Navigator.pop(context),
         ),
-        title: Text(
-          bookName,
-          style: const TextStyle(
-            fontSize: 20,
-            color: Colors.black,
-            fontWeight: FontWeight.w500,
-          ),
-        ),
+        title: Text(widget.bookName),
         centerTitle: true,
       ),
 
       body: Column(
         children: [
-          const SizedBox(height: 4),
-
+          const SizedBox(height: 10),
           Text(
-            "Chapter $chapterNumber",
+            "Chapter ${widget.chapterNumber}",
             style: const TextStyle(
               fontSize: 18,
               fontWeight: FontWeight.w600,
-              color: Colors.black87,
             ),
           ),
-
-          const SizedBox(height: 20),
+          const SizedBox(height: 10),
 
           Expanded(
-            child: ListView.builder(
-              padding: const EdgeInsets.symmetric(horizontal: 20),
-              itemCount: verses.length,
-              itemBuilder: (context, index) {
-                return Container(
-                  padding: const EdgeInsets.all(14),
-                  margin: const EdgeInsets.only(bottom: 16),
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(14),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.black.withOpacity(.03),
-                        blurRadius: 4,
-                        offset: const Offset(0, 2),
-                      )
-                    ],
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        "Verse: ${index + 1}",
-                        style: const TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
+            child: FutureBuilder<List<Verse>>(
+              future: futureVerses,
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return const Center(child: CircularProgressIndicator());
+                }
 
-                      const SizedBox(height: 8),
+                if (snapshot.hasError) {
+                  return Center(child: Text("Error loading chapter"));
+                }
 
-                      Text(
-                        verses[index],
-                        style: const TextStyle(
-                          fontSize: 15,
-                          height: 1.5,
-                          color: Colors.black87,
-                          fontStyle: FontStyle.italic,
-                        ),
+                final verses = snapshot.data!;
+
+                return ListView.builder(
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                  itemCount: verses.length,
+                  itemBuilder: (context, index) {
+                    final verse = verses[index];
+                    return Container(
+                      padding: const EdgeInsets.all(14),
+                      margin: const EdgeInsets.only(bottom: 16),
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(14),
                       ),
-                    ],
-                  ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            "Verse ${verse.verse}",
+                            style: const TextStyle(
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          const SizedBox(height: 8),
+                          Text(
+                            verse.text,
+                            style: const TextStyle(
+                              fontSize: 15,
+                              height: 1.5,
+                              fontStyle: FontStyle.italic,
+                            ),
+                          ),
+                        ],
+                      ),
+                    );
+                  },
                 );
               },
             ),

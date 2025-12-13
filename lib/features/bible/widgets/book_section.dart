@@ -70,14 +70,9 @@ class _BookSectionState extends State<BookSection> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => ChapterScreen(
+                          builder: (_) => ChapterScreen(
                             bookName: widget.book.title,
                             chapterNumber: i + 1,
-                            verses: [
-                              "Verse 1 sample text for ${widget.book.title} chapter ${i + 1}",
-                              "Verse 2 sample text for ${widget.book.title} chapter ${i + 1}",
-                              "Verse 3 sample text for ${widget.book.title} chapter ${i + 1}",
-                            ],
                           ),
                         ),
                       );
