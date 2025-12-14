@@ -1,8 +1,11 @@
 class Urls {
-  static const String _baseUrl = "http://172.252.13.97:8002";
+  static const String _baseUrl = "http://10.0.2.2:8000";
   static const String signUpUrl = '${_baseUrl}/api/auth/signup/';
   static const String signInUrl = '${_baseUrl}/api/auth/login/';
   static const String categoryQuestionUrl = '${_baseUrl}/api/user/categorize/';
   static const String profileUrl = '${_baseUrl}/api/profile/';
   static const String editProfileUrl = '${_baseUrl}/api/profile/';
+  static const String journeyCardUrl = '${_baseUrl}/journey/all_journy/';
+  static const String dailyJourneyDetailsUrl = '${_baseUrl}/progress/current-journey/days/';
+  static const String dailyJourneyUrl = '${_baseUrl}/progress/today/';
 }

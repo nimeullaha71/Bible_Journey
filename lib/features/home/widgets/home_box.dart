@@ -42,7 +42,7 @@ class HomeBox extends StatelessWidget {
                 fontSize: width * 0.045,
                 fontWeight: FontWeight.w600,
               ),
-              maxLines: 1,                  // 🔥 Fix #2
+              maxLines: 3,                  // 🔥 Fix #2
               overflow: TextOverflow.ellipsis,
             ),
 
@@ -55,7 +55,7 @@ class HomeBox extends StatelessWidget {
                   fontSize: width * 0.032,
                   color: Colors.grey.shade600,
                 ),
-                maxLines: 2,                // Prevent overflow
+                maxLines: 3,                // Prevent overflow
                 overflow: TextOverflow.ellipsis,
               ),
             ),

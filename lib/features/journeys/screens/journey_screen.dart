@@ -7,6 +7,9 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
+import '../models/journey_model.dart';
+import '../services/journey_api.dart';
+
 
 class JourneyScreen extends StatefulWidget {
   const JourneyScreen({super.key});
@@ -16,125 +19,85 @@ class JourneyScreen extends StatefulWidget {
 }
 
 class _JourneyScreenState extends State<JourneyScreen> {
+  late Future<List<Journey>> journeyFuture;
+
+  @override
+  void initState() {
+    super.initState();
+    journeyFuture = JourneyApi.getJourneys();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.bgColor,
-      appBar: CustomAppBar(title: "life_area_journey".tr(), onTap: (){
-        Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context)=>MainBottomNavScreen()), (predicate)=>false);
-      }),
-
+      appBar: CustomAppBar(
+        title: "life_area_journey".tr(),
+        onTap: () {
+          Navigator.pushAndRemoveUntil(
+            context,
+            MaterialPageRoute(builder: (_) => MainBottomNavScreen()),
+                (_) => false,
+          );
+        },
+      ),
       body: SafeArea(
-        child: SingleChildScrollView(
-          padding: EdgeInsets.all(16),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text("Find guidance and wisdom for every season of life."),
-              SizedBox(height: 8,),
+        child: Padding(
+          padding: const EdgeInsets.all(16),
+          child: FutureBuilder<List<Journey>>(
+            future: journeyFuture,
+            builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return Center(child: CircularProgressIndicator());
+              }
 
-              Column(
-                children: [
-                  GridView.count(
-                    crossAxisCount: 2,
-                    crossAxisSpacing: 20,
-                    mainAxisSpacing: 12,
-                    childAspectRatio: 1.1,
-                    physics: NeverScrollableScrollPhysics(),
-                    shrinkWrap: true,
-                    children: [
-                      HomeBox(
-                        icon: SvgPicture.asset(
-                          "assets/images/Vector (3).svg",
-                          width: 28,
-                          height: 28,
-                          color: Colors.green,
+              if (snapshot.hasError) {
+                return Center(child: Text("Something went wrong"));
+              }
+
+              final journeys = snapshot.data!;
+
+              return GridView.builder(
+                itemCount: journeys.length,
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2,
+                  crossAxisSpacing: 20,
+                  mainAxisSpacing: 12,
+                  childAspectRatio: 1.1,
+                ),
+                itemBuilder: (context, index) {
+                  final journey = journeys[index];
+
+                  return HomeBox(
+                    icon: Image.network(
+                      journey.icons.isNotEmpty
+                          ? journey.icons.first.icon
+                          : "",
+                      width: 28,
+                      height: 28,
+                    ),
+                    title: journey.name,
+                    subtitle: journey.details.isNotEmpty
+                        ? journey.details.first.details
+                        : "",
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (_) => JourneyDetailScreen(
+                            journeyId: journey.id,
+                          ),
                         ),
-                        title: "Happiness & Joy",
-                        subtitle: "Discovering true contentment",
-                        onTap: () {
-                          Navigator.push(context, MaterialPageRoute(builder: (context)=>JourneyDetailScreen()));
-                        },
-                      ),
-                      HomeBox(
-                        icon: SvgPicture.asset(
-                          "assets/images/Vector (1).svg",
-                          width: 28,
-                          height: 28,
-                          color: Colors.green,
-                        ),
-                        title: "Parenting",
-                        subtitle: "Parenting Raising a family in faith",
-                        onTap: () {},
-                      ),
-                      HomeBox(
-                        icon: SvgPicture.asset(
-                          "assets/images/Vector (4).svg",
-                          width: 28,
-                          height: 28,
-                          color: Colors.green,
-                        ),                        title: "Happiness & Joy",
-                        subtitle: "Discovering true contentment",
-                        onTap: () {},
-                      ),
-                      HomeBox(
-                        icon: SvgPicture.asset(
-                          "assets/images/Vector (2).svg",
-                          width: 28,
-                          height: 28,
-                          color: Colors.green,
-                        ),                        title: "Friendship",
-                        subtitle: "Building godly relationships",
-                        onTap: () {},
-                      ),
-                      HomeBox(
-                        icon: SvgPicture.asset(
-                          "assets/images/Vector (3).svg",
-                          width: 28,
-                          height: 28,
-                          color: Colors.green,
-                        ),                        title: "Work & Career",
-                        subtitle: "Navigating your Friendship",
-                        onTap: () {},
-                      ),
-                      HomeBox(
-                        icon: SvgPicture.asset(
-                          "assets/images/Vector (1).svg",
-                          width: 28,
-                          height: 28,
-                          color: Colors.green,
-                        ),                        title: "Community",
-                        subtitle: "Connecting with professional life believers",
-                        onTap: () {},
-                      ),
-                      HomeBox(
-                        icon: SvgPicture.asset(
-                          "assets/images/Vector (4).svg",
-                          width: 28,
-                          height: 28,
-                          color: Colors.green,
-                        ),                        title: "Overcoming Anxiety",
-                        subtitle: "Finding peace in His presence",
-                        onTap: () {},
-                      ),
-                      HomeBox(
-                        icon: SvgPicture.asset(
-                          "assets/images/Vector (2).svg",
-                          width: 28,
-                          height: 28,
-                          color: Colors.green,
-                        ),                        title: "Finding Purpose",
-                        subtitle: "Living a life of meaning.",
-                        onTap: () {},
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-            ],
+                      );
+                    },
+                  );
+                },
+              );
+            },
           ),
         ),
       ),
     );
   }
 }
+
