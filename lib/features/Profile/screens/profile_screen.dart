@@ -1,4 +1,5 @@
 import 'package:bible_journey/app/constants.dart';
+import 'package:bible_journey/core/services/auth_service.dart';
 import 'package:bible_journey/features/Profile/screens/change_password_screen.dart';
 import 'package:bible_journey/features/Profile/screens/deactivated_pop_up.dart';
 import 'package:bible_journey/features/Profile/screens/help_support_screen.dart';
@@ -12,6 +13,8 @@ import 'package:bible_journey/main_bottom_nav_screen.dart';
 import 'package:bible_journey/widgets/appbars/custom_appbar.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import '../../../core/services/local_storage_service.dart';
 import '../widgets/custom_box.dart';
 
 class ProfileScreen extends StatefulWidget {
@@ -25,6 +28,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final authService = AuthService();
     return Scaffold(
       backgroundColor: AppColors.bgColor,
       appBar: CustomAppBar(title: "Profile", onTap: (){
@@ -290,8 +294,29 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     Padding(
                       padding: const EdgeInsets.only(top: 13),
                       child: GestureDetector(
-                        onTap: (){
-                          Navigator.push(context, MaterialPageRoute(builder: (context)=>LoginScreen()));
+                        onTap: () async {
+                          try {
+                            final email = await LocalStorage.getEmail(); // এখানে login_id / email পাবে
+                            final token = await LocalStorage.getToken();
+
+                            if (email != null && token != null) {
+                              await AuthService().logOut(email: email); // email ঠিকভাবে পাঠাচ্ছে
+                              await LocalStorage.clearAll();
+
+                              Navigator.pushReplacement(
+                                context,
+                                MaterialPageRoute(builder: (_) => LoginScreen()),
+                              );
+                            } else {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(content: Text('User not logged in')),
+                              );
+                            }
+                          } catch (e) {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(content: Text('Logout failed: $e')),
+                            );
+                          }
                         },
                         child: Row(
                           children: [
@@ -300,14 +325,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               color: Color(0xff83BF8B),
                               size: 20,
                             ),
-
                             const SizedBox(width: 10),
-
-                             Text(
+                            Text(
                               "logout".tr(),
-                              style: TextStyle(
-                                fontSize: 14,
-                              ),
+                              style: TextStyle(fontSize: 14),
                             ),
                           ],
                         ),

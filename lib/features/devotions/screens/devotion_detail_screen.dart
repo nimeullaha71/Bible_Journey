@@ -9,13 +9,20 @@ import '../../../widgets/custom_nav_bar.dart';
 import '../../Profile/screens/profile_screen.dart';
 import '../../bible/screens/bible_screen.dart';
 import '../../journeys/screens/journey_screen.dart';
+import '../models/daily_journey_model.dart';
 
 class DevotionDetailScreen extends StatefulWidget {
-  const DevotionDetailScreen({super.key});
+  final JourneyContentResponse response;
+
+  const DevotionDetailScreen({
+    super.key,
+    required this.response,
+  });
 
   @override
   State<DevotionDetailScreen> createState() => _DevotionDetailScreenState();
 }
+
 
 class _DevotionDetailScreenState extends State<DevotionDetailScreen> {
   int _selectedIndex = 2;
@@ -181,11 +188,14 @@ class _DevotionDetailScreenState extends State<DevotionDetailScreen> {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => const DailyDevotionQuizScreen(),
+                      builder: (context) => DailyDevotionQuizScreen(
+                        quizzes: widget.response.quiz, // <-- এখান থেকে পাঠাচ্ছি
+                      ),
                     ),
                   );
                 },
               ),
+
             ],
           ),
         ),

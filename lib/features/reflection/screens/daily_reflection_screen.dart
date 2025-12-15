@@ -69,7 +69,7 @@ class _DailyReflectionScreenState extends State<DailyReflectionScreen> {
 
                 SizedBox(height: 80),
                 CustomButton(text: "mark_as_done".tr(), onTap: (){
-                  Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context)=>JourneyDetailScreen()), (predicate)=>false);
+                  Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context)=>JourneyDetailScreen(journeyId: 4,)), (predicate)=>false);
                 })
               ],
             ),

@@ -2,6 +2,10 @@ class Urls {
   static const String _baseUrl = "http://10.0.2.2:8000";
   static const String signUpUrl = '${_baseUrl}/api/auth/signup/';
   static const String signInUrl = '${_baseUrl}/api/auth/login/';
+  static const String logOutUrl = '${_baseUrl}/api/auth/logout/';
+  static const String forgotPasswordUrl = '${_baseUrl}/api/forgot/password/';
+  static const String otpVerifyUrl = '${_baseUrl}/api/auth/otp/verify/';
+  static const String resetPasswordUrl = '${_baseUrl}/api/reset/password/';
   static const String categoryQuestionUrl = '${_baseUrl}/api/user/categorize/';
   static const String profileUrl = '${_baseUrl}/api/profile/';
   static const String editProfileUrl = '${_baseUrl}/api/profile/';

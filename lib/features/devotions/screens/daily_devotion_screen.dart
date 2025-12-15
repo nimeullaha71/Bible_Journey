@@ -8,10 +8,19 @@ import '../../Profile/screens/profile_screen.dart';
 import '../../bible/screens/bible_screen.dart';
 import '../../home/screen/home_screen.dart';
 import '../../journeys/screens/journey_screen.dart';
+import '../models/daily_journey_model.dart';
 import 'devotion_detail_screen.dart';
 
 class DailyDevotionScreen extends StatefulWidget {
-  const DailyDevotionScreen({super.key});
+  final Devotion devotion;
+  final JourneyContentResponse devotionResponse;
+
+  const DailyDevotionScreen({
+    super.key,
+    required this.devotion,
+     required this.devotionResponse,
+  });
+
 
   @override
   State<DailyDevotionScreen> createState() => _DailyDevotionScreenState();
@@ -35,9 +44,9 @@ class _DailyDevotionScreenState extends State<DailyDevotionScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text(
-                  "Finding Peace in His Presence",
-                  style: TextStyle(
+                Text(
+                  widget.devotion.scriptureName,
+                  style: const TextStyle(
                     fontSize: 24,
                     fontWeight: FontWeight.bold,
                     color: Colors.black,
@@ -49,36 +58,45 @@ class _DailyDevotionScreenState extends State<DailyDevotionScreen> {
                 _buildSelectableContainer(
                   index: 0,
                   title: "Scripture",
-                  content: "I have told you these things, so that in me you may have peace. In this world you will have trouble. But take heart! I have overcome the world",
+                  content: widget.devotion.devotion,
                   centerText: true,
                 ),
+
 
                 const SizedBox(height: 16),
 
                 _buildSelectableContainer(
                   index: 1,
                   title: "Reflection",
-                  content: "Jesus doesn't promise a life free from hardship. Instead, He offers unshakable peace found only in Him. This assurance reminds us that His presence remains with us through every struggle, and the ultimate victory has already been won.",
+                  content: widget.devotion.reflection,
                 ),
+
 
                 const SizedBox(height: 16),
 
-                _buildSelectableContainer(
-                  index: 2,
-                  title: "Practical Application",
-                  content: "Today, when you feel overwhelmed by the troubles promise. How can you actively take heart and your circumstances? Consider one specific worry and intentionally surrender it to Him in prayer.",
-                ),
+                // _buildSelectableContainer(
+                //   index: 2,
+                //   title: "Practical Application",
+                //   content: "Today, when you feel overwhelmed by the troubles promise. How can you actively take heart and your circumstances? Consider one specific worry and intentionally surrender it to Him in prayer.",
+                // ),
 
                 const SizedBox(height: 30),
+
+
                 CustomButton(
                   text: "devotion.completed".tr(),
                   onTap: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => const DevotionDetailScreen()),
+                      MaterialPageRoute(
+                        builder: (context) => DevotionDetailScreen(
+                          response: widget.devotionResponse, // <-- Now it's valid
+                        ),
+                      ),
                     );
                   },
                 ),
+
               ],
             ),
           ),

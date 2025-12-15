@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import '../models/daily_journey_details_model.dart';
 import '../services/daily_journey_details_api.dart';
 import '../widgets/custom_form.dart';
-import 'daily_journey_screen.dart';
+import 'daily_journey_details1_screen.dart';
 
 class JourneyDetailScreen extends StatefulWidget {
   final int journeyId; // journeyId pass করা হবে
@@ -142,8 +142,9 @@ class _JourneyDetailScreenState extends State<JourneyDetailScreen> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (_) => DailyJourneyScreen(
-                                //dayId: day.dayId,
+                              builder: (_) => JourneyDetails1(
+                                journeyId: data.journey.id,
+                                dayId: day.dayId,
                               ),
                             ),
                           );
@@ -152,6 +153,7 @@ class _JourneyDetailScreenState extends State<JourneyDetailScreen> {
                     }).toList(),
                   ),
                 ),
+
               ],
             ),
           );

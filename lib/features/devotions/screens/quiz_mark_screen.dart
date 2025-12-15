@@ -104,7 +104,7 @@ class _QuizMarkScreenState extends State<QuizMarkScreen> {
 
                 SizedBox(height: 10),
                 CustomButton(text: "continue.retry".tr(), onTap: (){
-                  Navigator.push( context, MaterialPageRoute(builder: (context) => DevotionDetailScreen()), );
+                  //Navigator.push( context, MaterialPageRoute(builder: (context) => DevotionDetailScreen()), );
                 }),
 
               ],

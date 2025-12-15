@@ -85,7 +85,7 @@ class HomeScreen extends StatelessWidget {
                     title: "Daily Devotion",
                     subtitle: "Reflect on today's scripture.",
                     onTap: () {
-                      Navigator.push(context, MaterialPageRoute(builder: (context)=>DailyDevotionScreen()));
+                      Navigator.pushNamed(context, AppRoutes.dailyDevotionScreen);
                     },
                   ),
 
