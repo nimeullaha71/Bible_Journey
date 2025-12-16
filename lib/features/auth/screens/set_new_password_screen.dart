@@ -1,9 +1,11 @@
+import 'package:bible_journey/features/auth/screens/login_screen.dart';
+import 'package:bible_journey/features/auth/screens/reset_successful_screen.dart';
+import 'package:flutter/material.dart';
 import 'package:bible_journey/app/constants.dart';
 import 'package:bible_journey/app/routes.dart';
 import 'package:bible_journey/widgets/buttons/auth_flow_custom_button.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:flutter/material.dart';
-
+import '../../../core/services/auth_service.dart';
 import '../../../widgets/textField/custom_text_field.dart';
 
 class SetNewPasswordScreen extends StatefulWidget {
@@ -14,67 +16,121 @@ class SetNewPasswordScreen extends StatefulWidget {
 }
 
 class _SetNewPasswordScreenState extends State<SetNewPasswordScreen> {
+  final TextEditingController passwordController = TextEditingController();
+  final TextEditingController confirmPasswordController = TextEditingController();
+
+  late String email;
+  bool isLoading = false;
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    final args = ModalRoute.of(context)?.settings.arguments;
+    if (args == null || args is! String) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        _showMessage("Email missing. Please try again.");
+        Navigator.pop(context);
+      });
+      return;
+    }
+    email = args;
+  }
+
+  Future<void> _resetPassword() async {
+    final pass = passwordController.text.trim();
+    final confirm = confirmPasswordController.text.trim();
+
+    if (pass.length < 6) {
+      _showMessage("Password too short");
+      return;
+    }
+    if (pass != confirm) {
+      _showMessage("Passwords do not match");
+      return;
+    }
+
+    setState(() => isLoading = true);
+
+    try {
+      final result = await AuthService.resetPassword(
+        email: email,
+        new_password: pass,
+      );
+
+      // ⚠️ Backend message check should match exactly
+      if (result['message'] == "Password reset successfully.") {
+        ScaffoldMessenger.of(context)
+            .showSnackBar(
+          const SnackBar(content: Text("Password reset successful")),
+        )
+            .closed
+            .then((_) {
+          if (!mounted) return;
+          // ✅ Navigate to ResetSuccessfulScreen
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const ResetSuccessfulScreen(),
+            ),
+          );
+        });
+      } else {
+        _showMessage(result['message'] ?? "Failed to reset password");
+      }
+    } catch (e) {
+      _showMessage("Error: ${e.toString().replaceAll("Exception: ", "")}");
+    }
+
+    if (!mounted) return;
+    setState(() => isLoading = false);
+  }
 
 
-  TextEditingController passwordController = TextEditingController();
-  TextEditingController confirmPasswordController = TextEditingController();
+  void _showMessage(String msg) {
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(msg)));
+  }
 
   @override
   Widget build(BuildContext context) {
-
     final height = MediaQuery.of(context).size.height;
-
     return Scaffold(
       body: Stack(
         children: [
-          Positioned(child: Image.asset(AppImages.splashBg,fit: BoxFit.cover,)),
-
+          Positioned(child: Image.asset(AppImages.splashBg, fit: BoxFit.cover)),
           SafeArea(
-
             child: SingleChildScrollView(
               padding: const EdgeInsets.symmetric(horizontal: 18.0),
               child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Align(
                     alignment: Alignment.centerLeft,
-                    child: IconButton(onPressed: (){
-                      Navigator.pop(context);
-                    }, icon: Icon(Icons.arrow_back)),
-                  ),
-
-                  Image.asset(AppImages.appLogo,height: height*0.13,),
-
-                  SizedBox(height: height*0.001,),
-
-                  Text(
-                    "set_password_button.title".tr(),
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      fontSize: 22,
-                      color: Color.fromRGBO(51, 51, 51, 1),
+                    child: IconButton(
+                      onPressed: () => Navigator.pop(context),
+                      icon: const Icon(Icons.arrow_back),
                     ),
                   ),
-
-                  SizedBox(height: height * 0.001),
-
-                  Text(
-                    "set_new_password.subtitle".tr(),
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      fontSize: 16,
-                      color: Colors.black.withOpacity(0.7),
-                    ),
-                  ),
-
-
-                  SizedBox(height: height * 0.06),
-
-
+                  Image.asset(AppImages.appLogo, height: height * 0.13),
+                  SizedBox(height: height * 0.01),
+                  Text("set_password_button.title".tr(),
+                      textAlign: TextAlign.center,
+                      style: const TextStyle(
+                          fontSize: 22, color: Color.fromRGBO(51, 51, 51, 1))),
+                  SizedBox(height: height * 0.01),
+                  Text("set_new_password.subtitle".tr(),
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                          fontSize: 16, color: Colors.black.withOpacity(0.7))),
+                  SizedBox(height: height * 0.05),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text("set_new_password.new_password".tr(),style: TextStyle(color: Color.fromRGBO(73, 76, 79, 1),fontSize: 16, fontWeight: FontWeight.w600,),),
-                      SizedBox(height: 8,),
+                      Text("set_new_password.new_password".tr(),
+                          style: const TextStyle(
+                              color: Color.fromRGBO(73, 76, 79, 1),
+                              fontSize: 16,
+                              fontWeight: FontWeight.w600)),
+                      const SizedBox(height: 8),
                       CustomTextField(
                         label: "set_new_password.password_hint".tr(),
                         controller: passwordController,
@@ -82,12 +138,16 @@ class _SetNewPasswordScreenState extends State<SetNewPasswordScreen> {
                       ),
                     ],
                   ),
-
+                  const SizedBox(height: 20),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text("set_new_password.confirm_password".tr(),style: TextStyle(color: Color.fromRGBO(73, 76, 79, 1),fontSize: 16, fontWeight: FontWeight.w600,),),
-                      SizedBox(height: 8,),
+                      Text("set_new_password.confirm_password".tr(),
+                          style: const TextStyle(
+                              color: Color.fromRGBO(73, 76, 79, 1),
+                              fontSize: 16,
+                              fontWeight: FontWeight.w600)),
+                      const SizedBox(height: 8),
                       CustomTextField(
                         label: "set_new_password.password_hint".tr(),
                         controller: confirmPasswordController,
@@ -95,19 +155,17 @@ class _SetNewPasswordScreenState extends State<SetNewPasswordScreen> {
                       ),
                     ],
                   ),
-
-
-                  SizedBox(height: height*0.03,),
-                  
-                  AuthCustomButton(text: "set_new_password.set_password_button".tr(), onTap: (){
-                    Navigator.pushNamed(context, AppRoutes.logIn);
-                  })
-                  
-                  
+                  const SizedBox(height: 30),
+                  AuthCustomButton(
+                    text: "set_new_password.set_password_button".tr(),
+                    height: height * 0.06,
+                    isLoading: isLoading,
+                    onTap: _resetPassword,
+                  ),
                 ],
               ),
             ),
-          )
+          ),
         ],
       ),
     );
