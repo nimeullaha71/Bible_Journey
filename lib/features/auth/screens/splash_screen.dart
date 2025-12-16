@@ -1,5 +1,6 @@
 import 'package:bible_journey/app/constants.dart';
 import 'package:bible_journey/app/routes.dart';
+import 'package:bible_journey/features/auth/screens/reset_successful_screen.dart';
 import 'package:bible_journey/widgets/buttons/auth_flow_custom_button.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -88,7 +89,8 @@ class SplashScreen extends StatelessWidget {
                   child: AuthCustomButton(
                     text: "get_started".tr(),
                     onTap: () {
-                      Navigator.pushNamed(context, AppRoutes.mainBottomNavScreen);
+                      //Navigator.pushNamed(context, AppRoutes.mainBottomNavScreen);
+                      Navigator.push(context, MaterialPageRoute(builder: (context)=>ResetSuccessfulScreen()));
                     },
                     height: height * 0.055, // responsive button height
                   ),

@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
-
 class AuthCustomButton extends StatelessWidget {
   final String text;
   final VoidCallback onTap;
   final double? height;
   final double? width;
   final double borderRadius;
-  final bool isLoading;  // <-- add this
+  final bool isLoading;
 
   const AuthCustomButton({
     super.key,
@@ -15,7 +14,7 @@ class AuthCustomButton extends StatelessWidget {
     this.height,
     this.width,
     this.borderRadius = 40,
-    this.isLoading = false, // default false
+    this.isLoading = false,
   });
 
   @override
@@ -26,11 +25,13 @@ class AuthCustomButton extends StatelessWidget {
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
           backgroundColor: const Color.fromRGBO(131, 191, 139, 1),
+          disabledBackgroundColor:
+          const Color.fromRGBO(131, 191, 139, 0.5),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(borderRadius),
           ),
         ),
-        onPressed: isLoading ? () {} : onTap, // disable tap when loading
+        onPressed: isLoading ? null : onTap,
         child: isLoading
             ? const SizedBox(
           height: 24,

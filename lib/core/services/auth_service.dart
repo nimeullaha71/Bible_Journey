@@ -83,4 +83,81 @@ class AuthService {
       throw Exception("LogOut Failed : ${response.body}");
     }
   }
+
+
+  static Future<Map<String, dynamic>> forgotPassword(String email) async {
+    final url = Uri.parse(Urls.forgotPasswordUrl);
+    final response = await http.post(
+      url,
+      headers: {"Content-Type": "application/json"},
+      body: jsonEncode({"email": email}),
+    );
+
+    if (response.statusCode == 200) {
+      return jsonDecode(response.body);
+    } else {
+      throw Exception('Failed to send reset code');
+    }
+  }
+
+  static Future<bool> verifyForgotPasswordOtp(
+      String email, String otp) async {
+    final url = Uri.parse(Urls.otpVerifyUrl);
+
+    final response = await http.post(
+      url,
+      headers: {"Content-Type": "application/json"},
+      body: jsonEncode({
+        "email": email,
+        "otp": int.parse(otp), // 🔥 OTP number হিসেবে পাঠাও
+      }),
+    );
+
+    final data = jsonDecode(response.body);
+
+    if (response.statusCode == 200 && data["status"] == "verified") {
+      return true;
+    } else {
+      throw Exception(data["message"] ?? "Invalid OTP");
+    }
+  }
+
+
+  static Future<Map<String, dynamic>> resetPassword({
+    required String email,
+    required String new_password,
+  }) async {
+    final url = Uri.parse(Urls.resetPasswordUrl);
+
+    try {
+      final response = await http.post(
+        url,
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: jsonEncode({
+          'email': email,
+          'new_password': new_password,
+        }),
+      );
+
+      print("Status code: ${response.statusCode}");
+      print("Response body: ${response.body}");
+
+      if (response.statusCode == 200) {
+        final data = jsonDecode(response.body);
+        return data;
+      } else {
+        return {
+          'success': false,
+          'message': 'Failed to reset password. Status: ${response.statusCode}',
+        };
+      }
+    } catch (e) {
+      return {
+        'success': false,
+        'message': 'Error: ${e.toString()}',
+      };
+    }
+  }
 }
