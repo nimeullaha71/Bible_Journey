@@ -1,83 +1,58 @@
 import 'package:flutter/material.dart';
 
-class CustomForm extends StatefulWidget {
+class CustomForm extends StatelessWidget {
   final String title;
-  final VoidCallback onTap;
+  final Widget? leading;
+  final VoidCallback? onTap;
 
   const CustomForm({
     super.key,
     required this.title,
-    required this.onTap,
+    this.leading,
+    this.onTap,
   });
 
   @override
-  State<CustomForm> createState() => _CustomFormState();
-}
-
-class _CustomFormState extends State<CustomForm> {
-  bool isUnlocked = false;
-
-  @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {
-        setState(() {
-          isUnlocked = true;
-        });
-        widget.onTap();
-      },
-      child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 18),
-        margin: const EdgeInsets.symmetric(vertical: 5, horizontal: 12),
-        height: 50,
-        decoration: BoxDecoration(
-          color: const Color(0xffE5EDE8),
-          borderRadius: BorderRadius.circular(24),
-        ),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
+    final bool isLocked = onTap == null;
 
-            Expanded(
-              child: Text(
-                widget.title,
-                style: const TextStyle(
-                  fontSize: 14,
-                  fontWeight: FontWeight.bold,
+    return Opacity(
+      opacity: isLocked ? 0.5 : 1,
+      child: GestureDetector(
+        onTap: onTap,
+        child: Container(
+          padding: const EdgeInsets.symmetric(horizontal: 18),
+          margin: const EdgeInsets.symmetric(vertical: 6),
+          height: 50,
+          decoration: BoxDecoration(
+            color: const Color(0xffE5EDE8),
+            borderRadius: BorderRadius.circular(24),
+          ),
+          child: Row(
+            children: [
+              if (leading != null) ...[
+                leading!,
+                const SizedBox(width: 12),
+              ],
+              Expanded(
+                child: Text(
+                  title,
+                  style: const TextStyle(
+                    fontSize: 14,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               ),
-            ),
-
-            GestureDetector(
-              onTap: () {
-                setState(() {
-                  isUnlocked = true;
-                });
-                widget.onTap();
-              },
-              child: Container(
-                width: 28,
-                height: 28,
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  shape: BoxShape.circle,
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.black12,
-                      blurRadius: 4,
-                    )
-                  ],
-                ),
-                child: Icon(
-                  isUnlocked ? Icons.check : Icons.lock,
-                  size: 16,
-                  color: isUnlocked ? Colors.green : Colors.black54,
-                ),
+              Icon(
+                isLocked ? Icons.lock : Icons.arrow_forward_ios,
+                size: 16,
+                color: isLocked ? Colors.grey : Colors.black54,
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
   }
 }
+

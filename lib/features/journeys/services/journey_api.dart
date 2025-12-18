@@ -5,7 +5,6 @@ import '../../../core/services/local_storage_service.dart';
 import '../models/journey_model.dart';
 
 class JourneyApi {
-
   static Future<List<Journey>> getJourneys() async {
     final token = await LocalStorage.getToken();
     final url = Uri.parse(Urls.journeyCardUrl);
@@ -17,8 +16,6 @@ class JourneyApi {
         "Content-Type": "application/json",
       },
     );
-    print("Status code: ${response.statusCode}");
-    print("Response body: ${response.body}");
 
     if (response.statusCode == 200) {
       final data = json.decode(response.body);
@@ -29,3 +26,4 @@ class JourneyApi {
     }
   }
 }
+

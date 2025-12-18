@@ -88,36 +88,6 @@ class _ResetSuccessfulScreenState extends State<ResetSuccessfulScreen> {
 
                     const SizedBox(height: 40),
 
-                    // Log in button
-                    // SizedBox(
-                    //   width: double.infinity,
-                    //   child: ElevatedButton(
-                    //     style: ElevatedButton.styleFrom(
-                    //       backgroundColor: const Color(0xFF004E92),
-                    //       shape: RoundedRectangleBorder(
-                    //         borderRadius: BorderRadius.circular(30),
-                    //       ),
-                    //       padding: const EdgeInsets.symmetric(vertical: 16),
-                    //     ),
-                    //     onPressed: () {
-                    //       Navigator.pushAndRemoveUntil(
-                    //         context,
-                    //         MaterialPageRoute(
-                    //           builder: (context) => const LoginScreen(),
-                    //         ),
-                    //             (route) => false,
-                    //       );
-                    //     },
-                    //     child: const Text(
-                    //       "Log in",
-                    //       style: TextStyle(
-                    //         fontSize: 18,
-                    //         fontWeight: FontWeight.w500,
-                    //         color: Colors.white,
-                    //       ),
-                    //     ),
-                    //   ),
-                    // ),
                     CustomButton(text: "Log In", onTap: (){
                       Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context)=>LoginScreen()), (route)=>false);
                     }),

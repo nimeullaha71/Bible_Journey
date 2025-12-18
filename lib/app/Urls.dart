@@ -10,6 +10,7 @@ class Urls {
   static const String profileUrl = '${_baseUrl}/api/profile/';
   static const String editProfileUrl = '${_baseUrl}/api/profile/';
   static const String journeyCardUrl = '${_baseUrl}/journey/all_journy/';
-  static const String dailyJourneyDetailsUrl = '${_baseUrl}/progress/current-journey/days/';
+  //static const String dailyJourneyDetailsUrl = '${_baseUrl}/progress/current-journey/days/';
+  static String dailyJourneyDetailsUrl(journeyId) => "${_baseUrl}/progress/journey/$journeyId";
   static const String dailyJourneyUrl = '${_baseUrl}/progress/today/';
 }
