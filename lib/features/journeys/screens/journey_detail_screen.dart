@@ -7,8 +7,133 @@ import '../services/daily_journey_details_api.dart';
 import '../widgets/custom_form.dart';
 import 'daily_journey_details1_screen.dart';
 
+// class JourneyDetailScreen extends StatefulWidget {
+//   final int journeyId; // journeyId pass করা হবে
+//
+//   const JourneyDetailScreen({super.key, required this.journeyId});
+//
+//   @override
+//   State<JourneyDetailScreen> createState() => _JourneyDetailScreenState();
+// }
+//
+// class _JourneyDetailScreenState extends State<JourneyDetailScreen> {
+//   late Future<DailyJourneyResponse> dailyJourneyFuture;
+//
+//   @override
+//   void initState() {
+//     super.initState();
+//     dailyJourneyFuture = DailyJourneyApi.getDailyJourney(widget.journeyId);
+//   }
+//
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//       backgroundColor: const Color(0xffF8F5F2),
+//       appBar: CustomAppBar(
+//         title: "journey_details".tr(),
+//         onTap: () {
+//           Navigator.push(
+//               context,
+//               MaterialPageRoute(
+//                   builder: (context) => const JourneyScreen()));
+//         },
+//       ),
+//       body: FutureBuilder<DailyJourneyResponse>(
+//         future: dailyJourneyFuture,
+//         builder: (context, snapshot) {
+//           if (snapshot.connectionState == ConnectionState.waiting) {
+//             return const Center(child: CircularProgressIndicator());
+//           }
+//
+//           if (snapshot.hasError) {
+//             return Center(
+//                 child: Text("Something went wrong: ${snapshot.error}"));
+//           }
+//
+//           final data = snapshot.data!;
+//
+//           return SingleChildScrollView(
+//             child: Column(
+//               children: [
+//                 // Banner Image
+//                 Container(
+//                   width: double.infinity,
+//                   height: 200,
+//                   margin: const EdgeInsets.all(16),
+//                   decoration: BoxDecoration(
+//                     borderRadius: BorderRadius.circular(12),
+//                     image: DecorationImage(
+//                       image: NetworkImage(data.journeyDetails.image),
+//                       fit: BoxFit.cover,
+//                     ),
+//                   ),
+//                 ),
+//
+//                 Padding(
+//                   padding: const EdgeInsets.symmetric(horizontal: 16),
+//                   child: Column(
+//                     crossAxisAlignment: CrossAxisAlignment.start,
+//                     children: [
+//                       Text(
+//                         data.journey.name,
+//                         style: const TextStyle(
+//                           fontSize: 24,
+//                           fontWeight: FontWeight.bold,
+//                         ),
+//                       ),
+//                       const SizedBox(height: 6),
+//                       Text(
+//                         data.journeyDetails.details,
+//                         style: const TextStyle(fontSize: 14),
+//                       ),
+//                       const SizedBox(height: 8),
+//                       Text(
+//                         "${data.days.length}-Day Devotional series",
+//                         style: const TextStyle(
+//                           fontSize: 14,
+//                           fontWeight: FontWeight.bold,
+//                         ),
+//                       ),
+//                     ],
+//                   ),
+//                 ),
+//
+//
+//                 // Dynamic Days List
+//                 Padding(
+//                   padding: const EdgeInsets.symmetric(horizontal: 16),
+//                   child: Column(
+//                     children: data.days.map((day) {
+//                       return CustomForm(
+//                         title: "Day ${day.order}: ${day.dayName}",
+//                         onTap: () {
+//                           Navigator.push(
+//                             context,
+//                             MaterialPageRoute(
+//                               builder: (_) => JourneyDetails1(
+//                                 journeyId: data.journey.id,
+//                                 dayId: day.dayId,
+//                               ),
+//                             ),
+//                           );
+//                         },
+//                       );
+//                     }).toList(),
+//                   ),
+//                 ),
+//
+//               ],
+//             ),
+//           );
+//         },
+//       ),
+//     );
+//   }
+// }
+
+
 class JourneyDetailScreen extends StatefulWidget {
-  final int journeyId; // journeyId pass করা হবে
+  final int journeyId;
 
   const JourneyDetailScreen({super.key, required this.journeyId});
 
@@ -25,6 +150,32 @@ class _JourneyDetailScreenState extends State<JourneyDetailScreen> {
     dailyJourneyFuture = DailyJourneyApi.getDailyJourney(widget.journeyId);
   }
 
+  bool canAccess(String status) {
+    return status == "current" || status == "completed";
+  }
+
+  IconData getIcon(String status) {
+    switch (status) {
+      case "completed":
+        return Icons.check_circle;
+      case "current":
+        return Icons.play_circle_fill;
+      default:
+        return Icons.lock;
+    }
+  }
+
+  Color getColor(String status) {
+    switch (status) {
+      case "completed":
+        return Colors.green;
+      case "current":
+        return Colors.orange;
+      default:
+        return Colors.grey;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -32,10 +183,10 @@ class _JourneyDetailScreenState extends State<JourneyDetailScreen> {
       appBar: CustomAppBar(
         title: "journey_details".tr(),
         onTap: () {
-          Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context) => const JourneyScreen()));
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(builder: (_) => const JourneyScreen()),
+          );
         },
       ),
       body: FutureBuilder<DailyJourneyResponse>(
@@ -47,83 +198,53 @@ class _JourneyDetailScreenState extends State<JourneyDetailScreen> {
 
           if (snapshot.hasError) {
             return Center(
-                child: Text("Something went wrong: ${snapshot.error}"));
+              child: Text("Something went wrong: ${snapshot.error}"),
+            );
           }
 
           final data = snapshot.data!;
 
           return SingleChildScrollView(
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                // Banner Image
+                /// 🔹 Banner Image
                 Container(
                   width: double.infinity,
                   height: 200,
                   margin: const EdgeInsets.all(16),
                   decoration: BoxDecoration(
-                    color: const Color(0xff83BF8B),
                     borderRadius: BorderRadius.circular(12),
-                    image: const DecorationImage(
-                      image: AssetImage('assets/images/tree.png'),
+                    image: DecorationImage(
+                      image: NetworkImage(data.journeyDetails.image),
                       fit: BoxFit.cover,
                     ),
                   ),
                 ),
 
-                //Journey Info
-                // Padding(
-                //   padding: const EdgeInsets.symmetric(horizontal: 16),
-                //   child: Column(
-                //     crossAxisAlignment: CrossAxisAlignment.start,
-                //     children: [
-                //       Text(
-                //         data.journey.name,
-                //         style: const TextStyle(
-                //           fontSize: 24,
-                //           fontWeight: FontWeight.bold,
-                //           color: Colors.black,
-                //         ),
-                //       ),
-                //       const SizedBox(height: 4),
-                //       Text(
-                //         "${data.days.length}-Day Devotional series",
-                //         style: const TextStyle(
-                //           fontSize: 14,
-                //           fontWeight: FontWeight.bold,
-                //           color: Colors.black,
-                //         ),
-                //       ),
-                //       const SizedBox(height: 16),
-                //     ],
-                //   ),
-                // ),
+                /// 🔹 Journey Info
                 Padding(
-                  padding: const EdgeInsets.only(right: 16),
+                  padding: const EdgeInsets.symmetric(horizontal: 16),
                   child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        "Faith and Perseverance",
-                        style: TextStyle(
+                        data.journey.name,
+                        style: const TextStyle(
                           fontSize: 24,
                           fontWeight: FontWeight.bold,
-                          color: Colors.black,
                         ),
                       ),
+                      const SizedBox(height: 6),
                       Text(
-                        "A short, inspiring introduction  to the Journey’s purpose \nand what the user will learn about nurturing their \nsacred bond through spiritual focus",
-                        style: TextStyle(
-                          fontSize: 14,
-                          color: Colors.black,
-                        ),
+                        data.journeyDetails.details,
+                        style: const TextStyle(fontSize: 14),
                       ),
-                      SizedBox(height: 4),
+                      const SizedBox(height: 8),
                       Text(
-                        "7- Day Devotional series",
-                        style: TextStyle(
+                        "${data.days.length}-Day Devotional series",
+                        style: const TextStyle(
                           fontSize: 14,
-                          color: Colors.black,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
@@ -131,29 +252,41 @@ class _JourneyDetailScreenState extends State<JourneyDetailScreen> {
                   ),
                 ),
 
-                // Dynamic Days List
+                const SizedBox(height: 16),
+
+                /// 🔹 Days List (STATUS-BASED ACCESS)
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 16),
                   child: Column(
                     children: data.days.map((day) {
-                      return CustomForm(
-                        title: "Day ${day.dayOrder}: ${day.dayName}",
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (_) => JourneyDetails1(
-                                journeyId: data.journey.id,
-                                dayId: day.dayId,
+                      final isAllowed = canAccess(day.status);
+
+                      return Opacity(
+                        opacity: isAllowed ? 1 : 0.5,
+                        child: CustomForm(
+                          title: "Day ${day.order}: ${day.dayName}",
+                          leading: Icon(
+                            getIcon(day.status),
+                            color: getColor(day.status),
+                          ),
+                          onTap: isAllowed
+                              ? () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (_) => JourneyDetails1(
+                                  journeyId: data.journey.id,
+                                  dayId: day.dayId,
+                                ),
                               ),
-                            ),
-                          );
-                        },
+                            );
+                          }
+                              : null, // 🔒 locked → no access
+                        ),
                       );
                     }).toList(),
                   ),
                 ),
-
               ],
             ),
           );
@@ -162,3 +295,4 @@ class _JourneyDetailScreenState extends State<JourneyDetailScreen> {
     );
   }
 }
+

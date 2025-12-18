@@ -7,7 +7,7 @@ import '../../../core/services/local_storage_service.dart';
 class DailyJourneyApi {
   static Future<DailyJourneyResponse> getDailyJourney(int journeyId) async {
     final token = await LocalStorage.getToken();
-    final url = Uri.parse(Urls.dailyJourneyDetailsUrl);
+    final url = Uri.parse(Urls.dailyJourneyDetailsUrl(journeyId)); // ✅ FIX
 
     final response = await http.get(
       url,
@@ -16,11 +16,6 @@ class DailyJourneyApi {
         "Content-Type": "application/json",
       },
     );
-
-    print("DailyJourney API URL: $url");
-    print("Status Code: ${response.statusCode}");
-    print("Response Body: ${response.body}");
-
 
     if (response.statusCode == 200) {
       final data = json.decode(response.body);
