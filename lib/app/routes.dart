@@ -1,3 +1,4 @@
+import 'package:bible_journey/app/route_args.dart';
 import 'package:flutter/material.dart';
 import 'package:bible_journey/features/auth/screens/forgot_password_screen.dart';
 import 'package:bible_journey/features/auth/screens/login_screen.dart';
@@ -12,7 +13,7 @@ import 'package:bible_journey/features/reflection/screens/daily_reflection_scree
 import 'package:bible_journey/main_bottom_nav_screen.dart';
 
 import '../features/auth/screens/signup_screen.dart';
-import '../features/devotions/models/daily_journey_model.dart';
+
 import '../features/questionnaire/screens/question_intro_screen.dart';
 import '../features/journeys/models/daily_journey_details_model.dart';
 class AppRoutes {
@@ -62,25 +63,26 @@ class AppRoutes {
         return MaterialPageRoute(builder: (_) => const JourneyScreen());
 
     /// ✅ PRAYER SCREEN
+    /// ✅ PRAYER SCREEN
       case prayerScreen:
-        final data = settings.arguments as JourneyContentResponse;
+        final args = settings.arguments as JourneyStepArgs;
         return MaterialPageRoute(
           builder: (_) => PrayerScreen(
-            prayer: data.prayer,
-            devotion: data.devotion,
-            devotionResponse: data,
+            journeyId: args.journeyId,
+            dayId: args.dayId,
           ),
         );
 
     /// ✅ DAILY DEVOTION SCREEN
-      case dailyDevotionScreen:
-        final data = settings.arguments as JourneyContentResponse;
-        return MaterialPageRoute(
-          builder: (_) => DailyDevotionScreen(
-            devotion: data.devotion,
-            devotionResponse: data,
-          ),
-        );
+    //   case dailyDevotionScreen:
+    //     final args = settings.arguments as JourneyStepArgs;
+    //     return MaterialPageRoute(
+    //       builder: (_) => DailyDevotionScreen(
+    //         journeyId: args.journeyId,
+    //         dayId: args.dayId,
+    //       ),
+    //     );
+
 
       default:
         return MaterialPageRoute(

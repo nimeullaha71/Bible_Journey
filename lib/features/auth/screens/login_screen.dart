@@ -42,7 +42,7 @@ class _LoginScreenState extends State<LoginScreen> {
       );
 
       // Navigate to Home or QuizIntroScreen
-      Navigator.pushReplacementNamed(context, AppRoutes.mainBottomNavScreen);
+      Navigator.pushReplacementNamed(context, AppRoutes.quizIntroScreen);
     } catch (e) {
       ScaffoldMessenger.of(
         context,

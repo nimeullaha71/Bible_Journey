@@ -1,5 +1,6 @@
 class Urls {
   static const String _baseUrl = "http://10.0.2.2:8000";
+  static const String baseUrl = "http://10.0.2.2:8000";
   static const String signUpUrl = '${_baseUrl}/api/auth/signup/';
   static const String signInUrl = '${_baseUrl}/api/auth/login/';
   static const String logOutUrl = '${_baseUrl}/api/auth/logout/';
@@ -13,4 +14,7 @@ class Urls {
   //static const String dailyJourneyDetailsUrl = '${_baseUrl}/progress/current-journey/days/';
   static String dailyJourneyDetailsUrl(journeyId) => "${_baseUrl}/progress/journey/$journeyId";
   static const String dailyJourneyUrl = '${_baseUrl}/progress/today/';
+  static String journeyContentUrl(journeyId,dayId) => '${_baseUrl}/progress/steps/$journeyId/$dayId';
+  static const String dailyPrayerUrl = '${_baseUrl}/progress/today/prayer';
+  static const String stepCompletedUrl = '${_baseUrl}/progress/stepcopmplete/';
 }

@@ -22,12 +22,16 @@ class Journey {
   final String name;
   final String status;
   final int completedDays;
+  final String journeyIcon;
+  final JourneyDetails details;
 
   Journey({
     required this.id,
     required this.name,
     required this.status,
     required this.completedDays,
+    required this.journeyIcon,
+    required this.details,
   });
 
   factory Journey.fromJson(Map<String, dynamic> json) {
@@ -36,6 +40,26 @@ class Journey {
       name: json['name'] ?? "",
       status: json['status'] ?? "",
       completedDays: json['completed_days'] ?? 0,
+      journeyIcon: json['journey_icon'] ?? "",
+      details: JourneyDetails.fromJson(json['details'] ?? {}),
     );
   }
 }
+
+class JourneyDetails {
+  final String image;
+  final String description;
+
+  JourneyDetails({
+    required this.image,
+    required this.description,
+  });
+
+  factory JourneyDetails.fromJson(Map<String, dynamic> json) {
+    return JourneyDetails(
+      image: json['image'] ?? "",
+      description: json['details'] ?? "",
+    );
+  }
+}
+

@@ -67,7 +67,16 @@ class _JourneyScreenState extends State<JourneyScreen> {
                   final journey = journeys[index];
 
                   return HomeBox(
-                    icon: Icon(
+                    icon: journey.journeyIcon.isNotEmpty
+                        ? Image.network(
+                      journey.journeyIcon,
+                      width: 32,
+                      height: 32,
+                      color: journey.status == "locked"
+                          ? Colors.grey
+                          : null,
+                    )
+                        : Icon(
                       Icons.explore,
                       size: 28,
                       color: journey.status == "current"
@@ -89,6 +98,7 @@ class _JourneyScreenState extends State<JourneyScreen> {
                       );
                     },
                   );
+
                 },
               );
 

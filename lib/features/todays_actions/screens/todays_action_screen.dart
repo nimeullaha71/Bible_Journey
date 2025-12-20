@@ -1,14 +1,12 @@
-import 'package:bible_journey/app/constants.dart';
-import 'package:bible_journey/features/Profile/screens/profile_screen.dart';
-import 'package:bible_journey/features/bible/screens/bible_screen.dart';
-import 'package:bible_journey/features/journeys/screens/journey_screen.dart';
-import 'package:bible_journey/features/reflection/screens/daily_reflection_screen.dart';
-import 'package:bible_journey/main_bottom_nav_screen.dart';
-import 'package:bible_journey/widgets/appbars/custom_appbar.dart';
-import 'package:bible_journey/widgets/buttons/custom_button.dart';
+import 'dart:convert';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import '../../../widgets/custom_nav_bar.dart';
+import 'package:http/http.dart' as http;
+import 'package:bible_journey/app/constants.dart';
+import 'package:bible_journey/app/Urls.dart';
+import '../../../core/services/local_storage_service.dart';
+import '../../../widgets/buttons/custom_button.dart';
+import '../../reflection/screens/daily_reflection_screen.dart';
 
 class TodayActionScreen extends StatefulWidget {
   const TodayActionScreen({super.key});
@@ -18,86 +16,91 @@ class TodayActionScreen extends StatefulWidget {
 }
 
 class _TodayActionScreenState extends State<TodayActionScreen> {
-  int _selectedIndex = 2;
+  bool isLoading = true;
+  String actionText = "";
+  int actionId = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    fetchTodayAction();
+  }
+
+  Future<void> fetchTodayAction() async {
+    final token = await LocalStorage.getToken();
+    final response = await http.get(
+      Uri.parse('${Urls.baseUrl}/progress/today/action'),
+      headers: {'Authorization': 'Bearer $token'},
+    );
+
+    if (response.statusCode == 200) {
+      final data = jsonDecode(response.body);
+      setState(() {
+        actionText = data['data']['action'];
+        actionId = data['data']['id'];
+        isLoading = false;
+      });
+    } else {
+      setState(() => isLoading = false);
+    }
+  }
+
+  Future<void> markAsDone() async {
+    final token = await LocalStorage.getToken();
+
+    await http.post(
+      Uri.parse('${Urls.baseUrl}/progress/today/action'),
+      headers: {
+        'Authorization': 'Bearer $token',
+        'Content-Type': 'application/json'
+      },
+      body: jsonEncode({"action_id": actionId}),
+    );
+
+    // Navigator.push(
+    //   //context,
+    //   //MaterialPageRoute(builder: (_) => const DailyReflectionScreen()),
+    // );
+  }
 
   @override
   Widget build(BuildContext context) {
+    if (isLoading) {
+      return const Scaffold(
+        body: Center(child: CircularProgressIndicator()),
+      );
+    }
+
     return Scaffold(
       backgroundColor: AppColors.bgColor,
-      appBar: CustomAppBar(title: "todays_actions".tr(), onTap: (){
-        Navigator.pop(context);
-      }),
-      body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
-            children: [
-              SizedBox(height: 40),
-
-              Padding(
-                padding: const EdgeInsets.only(left: 20.0, right: 16.0),
-                child: Container(
-                  height: 292,
-                  width: 355,
-                  padding: const EdgeInsets.all(16.0),
-                  decoration: BoxDecoration(
-                    color: Color(0xffE3E9E3),
-                    borderRadius: BorderRadius.circular(16),
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        'Write down one area of your life that feels "formless and empty" right now. It could be a  relationship, a career decision, a health concern, or an emotional struggle.  Now, next to it, write: "God, speak light into this darkness."  Put this note somewhere you'"ll see it today—your mirror, your desk, your phone wallpaper.  Each time you see it, remember: God is already at work.",
-                        style: TextStyle(
-                          fontSize: 16,
-                          color: Color(0xff616161),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
+      appBar: AppBar(title: const Text("Today's Action")),
+      body: Padding(
+        padding: const EdgeInsets.all(16),
+        child: Column(
+          children: [
+            Container(
+              padding: const EdgeInsets.all(16),
+              decoration: BoxDecoration(
+                color: const Color(0xffE3E9E3),
+                borderRadius: BorderRadius.circular(16),
               ),
-              SizedBox(height: 270),
-              CustomButton(text: "mark_as_done".tr(), onTap: (){
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => DailyReflectionScreen()),
-                );
-              }),
-
-            ],
-          ),
+              child: Text(
+                actionText,
+                style: const TextStyle(fontSize: 16, color: Color(0xff616161)),
+              ),
+            ),
+            const Spacer(),
+            CustomButton(
+                text: "mark_as_done".tr(),
+                onTap: (){
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => DailyReflectionScreen()),
+                  );
+                }
+            )
+          ],
         ),
-      ),
-
-      bottomNavigationBar: CustomNavbar(
-        currentIndex: _selectedIndex,
-        onItemPressed: (index) {
-          setState(() {
-            _selectedIndex = index;
-          });
-
-          switch (index) {
-            case 0:
-              Navigator.push(
-                  context, MaterialPageRoute(builder: (_) => const MainBottomNavScreen()));
-              break;
-            case 1:
-              Navigator.push(
-                  context, MaterialPageRoute(builder: (_) => const BibleScreen()));
-              break;
-            case 2:
-              Navigator.push(
-                  context, MaterialPageRoute(builder: (_) => const JourneyScreen()));
-              break;
-            case 3:
-              Navigator.push(
-                  context, MaterialPageRoute(builder: (_) => const ProfileScreen()));
-              break;
-
-          }
-        },
       ),
     );
   }

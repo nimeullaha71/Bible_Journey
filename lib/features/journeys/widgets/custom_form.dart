@@ -3,12 +3,14 @@ import 'package:flutter/material.dart';
 class CustomForm extends StatelessWidget {
   final String title;
   final Widget? leading;
+  final Widget? trailing; // ✅ NEW
   final VoidCallback? onTap;
 
   const CustomForm({
     super.key,
     required this.title,
     this.leading,
+    this.trailing, // ✅ NEW
     this.onTap,
   });
 
@@ -34,6 +36,7 @@ class CustomForm extends StatelessWidget {
                 leading!,
                 const SizedBox(width: 12),
               ],
+
               Expanded(
                 child: Text(
                   title,
@@ -43,11 +46,16 @@ class CustomForm extends StatelessWidget {
                   ),
                 ),
               ),
-              Icon(
-                isLocked ? Icons.lock : Icons.arrow_forward_ios,
-                size: 16,
-                color: isLocked ? Colors.grey : Colors.black54,
-              ),
+
+              // ✅ trailing থাকলে সেটা দেখাবে
+              if (trailing != null)
+                trailing!
+              else
+                Icon(
+                  isLocked ? Icons.lock : Icons.arrow_forward_ios,
+                  size: 16,
+                  color: isLocked ? Colors.grey : Colors.black54,
+                ),
             ],
           ),
         ),
@@ -55,4 +63,5 @@ class CustomForm extends StatelessWidget {
     );
   }
 }
+
 
