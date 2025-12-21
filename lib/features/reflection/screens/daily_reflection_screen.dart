@@ -1,3 +1,6 @@
+import 'dart:convert';
+import 'package:bible_journey/app/Urls.dart';
+import 'package:bible_journey/core/services/local_storage_service.dart';
 import 'package:bible_journey/features/Profile/screens/profile_screen.dart';
 import 'package:bible_journey/features/bible/screens/bible_screen.dart';
 import 'package:bible_journey/features/journeys/screens/journey_detail_screen.dart';
@@ -6,9 +9,8 @@ import 'package:bible_journey/main_bottom_nav_screen.dart';
 import 'package:bible_journey/widgets/appbars/custom_appbar.dart';
 import 'package:bible_journey/widgets/buttons/custom_button.dart';
 import 'package:easy_localization/easy_localization.dart';
-
 import 'package:flutter/material.dart';
-
+import 'package:http/http.dart' as http;
 import '../../../widgets/custom_nav_bar.dart';
 
 class DailyReflectionScreen extends StatefulWidget {
@@ -20,6 +22,66 @@ class DailyReflectionScreen extends StatefulWidget {
 
 class _DailyReflectionScreenState extends State<DailyReflectionScreen> {
   int _selectedIndex = 2;
+  bool _isLoading = false;
+
+  final TextEditingController _reflectionController = TextEditingController();
+
+
+  Future<void> completeDay() async {
+
+    if (_reflectionController.text.trim().isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text("Write Your Reflection ")),
+      );
+      return;
+    }
+
+    setState(() => _isLoading = true);
+
+    final token = LocalStorage.getToken();
+    try {
+      final response = await http.post(
+        Uri.parse("${Urls.baseUrl}/progress/complete-day/"),
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": "Bearer $token",
+        },
+        body: jsonEncode({
+          "journey_id": 4,
+          "day_id": 29,
+          "action": "complete",
+          "reflecton_note": _reflectionController.text.trim(),
+        }),
+      );
+
+      final data = jsonDecode(response.body);
+
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text(data["message"])),
+        );
+
+        Navigator.pushAndRemoveUntil(
+          context,
+          MaterialPageRoute(
+            builder: (_) => JourneyScreen()
+          ),
+              (route) => false,
+        );
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text(data["message"] ?? "Failed")),
+        );
+      }
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text("Network error")),
+      );
+    } finally {
+      setState(() => _isLoading = false);
+    }
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -58,6 +120,7 @@ class _DailyReflectionScreenState extends State<DailyReflectionScreen> {
                     child: TextField(
                       maxLines: null,
                       expands: true,
+                      controller: _reflectionController,
                       decoration: InputDecoration(
                         hintText: "write_here".tr(),
                         border: InputBorder.none,

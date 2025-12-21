@@ -1,3 +1,5 @@
+import 'package:bible_journey/features/reflection/screens/daily_reflection_screen.dart';
+import 'package:bible_journey/features/todays_actions/screens/todays_action_screen.dart';
 import 'package:flutter/material.dart';
 import '../../../main_bottom_nav_screen.dart';
 import '../../../widgets/custom_nav_bar.dart';
@@ -131,28 +133,22 @@ class _JourneyDetails1State extends State<JourneyDetails1> {
                               ),
                             );
                             break;
-                          // case "action":
-                          //   Navigator.push(
-                          //     context,
-                          //     MaterialPageRoute(
-                          //       builder: (_) => ActionScreen(
-                          //         journeyId: widget.journeyId,
-                          //         dayId: widget.dayId,
-                          //       ),
-                          //     ),
-                          //   );
-                          //   break;
-                          // case "reflection":
-                          //   Navigator.push(
-                          //     context,
-                          //     MaterialPageRoute(
-                          //       builder: (_) => ReflectionScreen(
-                          //         journeyId: widget.journeyId,
-                          //         dayId: widget.dayId,
-                          //       ),
-                          //     ),
-                          //   );
-                          //   break;
+                          case "action":
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (_) => TodayActionScreen(),
+                              ),
+                            );
+                            break;
+                          case "reflection":
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (_) => DailyReflectionScreen(),
+                              ),
+                            );
+                            break;
                         }
                       },
 

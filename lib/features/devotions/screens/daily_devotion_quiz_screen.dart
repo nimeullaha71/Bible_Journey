@@ -135,7 +135,7 @@ class _DailyDevotionQuizScreenState extends State<DailyDevotionQuizScreen> {
       final data = jsonDecode(response.body);
 
       // 👈 এখানে backend response অনুযায়ী score নাও
-      int score = data['total_points_for_day'] ?? 0;
+      int score = data['points_added'] ?? 0;
 
       Navigator.pushReplacement(
         context,
