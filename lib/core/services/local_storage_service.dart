@@ -1,7 +1,7 @@
 import 'package:shared_preferences/shared_preferences.dart';
 
 class LocalStorage {
-  // Token
+
   static Future<void> saveToken(String token) async {
     final prefs = await SharedPreferences.getInstance();
     await prefs.setString('token', token);
@@ -17,7 +17,7 @@ class LocalStorage {
     await prefs.remove('token');
   }
 
-  // Email
+
   static Future<void> saveEmail(String email) async {
     final prefs = await SharedPreferences.getInstance();
     await prefs.setString('email', email);
@@ -33,7 +33,7 @@ class LocalStorage {
     await prefs.remove('email');
   }
 
-  // Name
+
   static Future<void> saveName(String name) async {
     final prefs = await SharedPreferences.getInstance();
     await prefs.setString('name', name);
@@ -49,11 +49,12 @@ class LocalStorage {
     await prefs.remove('name');
   }
 
-  // Optional: সব একসাথে clear করা
+
   static Future<void> clearAll() async {
     final prefs = await SharedPreferences.getInstance();
-    await prefs.remove('token');
-    await prefs.remove('email');
-    await prefs.remove('name');
+    // await prefs.remove('token');
+    // await prefs.remove('email');
+    // await prefs.remove('name');
+    await prefs.clear();
   }
 }

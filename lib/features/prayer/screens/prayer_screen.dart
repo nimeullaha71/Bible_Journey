@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:bible_journey/app/Urls.dart';
 import 'package:bible_journey/core/services/local_storage_service.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -38,8 +37,6 @@ class _PrayerScreenState extends State<PrayerScreen> {
   }
 
   Future<void> completePrayerStep() async {
-    // final String baseUrl = AppConstants.baseUrl;
-    // final String token = AppConstants.token; // JWT token
 
     try {
       final token = LocalStorage.getToken();
@@ -58,14 +55,12 @@ class _PrayerScreenState extends State<PrayerScreen> {
       final data = jsonDecode(response.body);
 
       if (response.statusCode == 200 || response.statusCode == 201) {
-        // ✅ success
         print("Step completed: ${data['completed']}");
 
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(content: Text(data["message"])),
         );
 
-        // back or next screen
         Navigator.pop(context, true);
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
@@ -95,13 +90,11 @@ class _PrayerScreenState extends State<PrayerScreen> {
             return const Center(child: CircularProgressIndicator());
           }
 
-          // ✅ API call e error
           if (snapshot.hasError) {
             print("Prayer API Error: ${snapshot.error}");
             return Center(child: Text("Something went wrong"));
           }
 
-          // ✅ Null or empty data
           if (!snapshot.hasData || snapshot.data == null) {
             return Center(child: Text("No prayer data found"));
           }

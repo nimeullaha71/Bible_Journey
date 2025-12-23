@@ -15,6 +15,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../../core/services/local_storage_service.dart';
+import '../services/deactivated_service.dart';
 import '../widgets/custom_box.dart';
 
 class ProfileScreen extends StatefulWidget {
@@ -193,11 +194,38 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         textIconPath: 'assets/images/ShieldSlash.svg',
                         text: "disabled_account".tr(),
                         trailingIcon: Icons.arrow_forward_ios,
-                        onTap: (){
-                          showDeactivatePopup(context, onConfirm: (){
-                            print("Deactivated your account");
-                          });
-                        },
+                      onTap: () {
+                        showDeactivatePopup(
+                          context,
+                          onConfirm: () async {
+
+                            showDialog(
+                              context: context,
+                              barrierDismissible: false,
+                              builder: (_) => const Center(child: CircularProgressIndicator()),
+                            );
+
+                            final success = await DeactivateAccountService.deactivateAccount();
+
+                            Navigator.pop(context);
+                            if (success) {
+                              await LocalStorage.clearAll();
+
+                              Navigator.of(context).pushAndRemoveUntil(
+                                MaterialPageRoute(builder: (_) => const LoginScreen()),
+                                    (route) => false,
+                              );
+                            } else {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                const SnackBar(
+                                  content: Text("Account deactivation failed"),
+                                ),
+                              );
+                            }
+                          },
+                        );
+                      },
+
                     ),
                     const SizedBox(height: 10),
 

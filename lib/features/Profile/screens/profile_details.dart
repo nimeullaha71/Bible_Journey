@@ -70,11 +70,17 @@ class _ProfileDetailsState extends State<ProfileDetails> {
                         const SizedBox(height: 15),
                         Center(
                           child: ClipOval(
-                            child: Image.asset(
-                              'assets/images/User.png',
+                            child: isLoading ? const SizedBox(
                               width: 78,
                               height: 78,
+                              child: CircularProgressIndicator(),
+                            ): Image.network(userData?["avatar"] ?? "",
+                            width: 78,
+                              height: 78,
                               fit: BoxFit.cover,
+                              errorBuilder: (context,error,stackTrace){
+                              return Image.asset('assets/images/User.png',width: 78,height: 78,fit: BoxFit.cover,);
+                              },
                             ),
                           ),
                         ),

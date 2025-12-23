@@ -4,6 +4,8 @@ class Urls {
   static const String signUpUrl = '${_baseUrl}/api/auth/signup/';
   static const String signInUrl = '${_baseUrl}/api/auth/login/';
   static const String logOutUrl = '${_baseUrl}/api/auth/logout/';
+  static const String changePasswordUrl = '${_baseUrl}/api/change/password/';
+  static const String disableAccountUrl = '${_baseUrl}/api/account/disable/';
   static const String forgotPasswordUrl = '${_baseUrl}/api/forgot/password/';
   static const String otpVerifyUrl = '${_baseUrl}/api/auth/otp/verify/';
   static const String resetPasswordUrl = '${_baseUrl}/api/reset/password/';
