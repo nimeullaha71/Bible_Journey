@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:bible_journey/app/constants.dart';
 import 'package:bible_journey/core/services/api_service.dart';
 import 'package:bible_journey/features/Profile/screens/profile_details.dart';
 import 'package:bible_journey/features/Profile/screens/profile_screen.dart';
@@ -8,6 +9,7 @@ import 'package:bible_journey/main_bottom_nav_screen.dart';
 import 'package:bible_journey/widgets/buttons/custom_button.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import '../../../widgets/custom_nav_bar.dart';
 import '../widgets/custom_profile.dart';
 
@@ -27,49 +29,60 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
   final genderController = TextEditingController();
   final dobController = TextEditingController();
 
+  Map<String, dynamic>? userData;
+  bool isLoading = true;
+
   File? selectedImage;
 
   @override
   void initState() {
     super.initState();
-
-    /// 💡 এখানে তুমি initial data load করবে API / Local storage থেকে
-    /// এখন demo data বসিয়ে দিলাম—তুমি পরে API response দিয়ে fill করবে
-    // nameController.text = "Anik";
-    // emailController.text = "anik@gmail.com";
-    // phoneController.text = "01700000000";
-    // genderController.text = "Male";
-    // dobController.text = "1998-10-12";
+    loadProfile();
   }
 
-  @override
-  void dispose() {
-    nameController.dispose();
-    emailController.dispose();
-    phoneController.dispose();
-    genderController.dispose();
-    dobController.dispose();
-    super.dispose();
+  Future<void> loadProfile() async {
+    final data = await ApiServices.getProfile();
+
+    setState(() {
+      userData = data;
+      nameController.text = data?["name"] ?? "";
+      emailController.text = data?["email"] ?? "";
+      phoneController.text = data?["phone"] ?? "";
+      genderController.text = data?["gender"] ?? "";
+      dobController.text = data?["date_of_birth"] ?? "";
+      isLoading = false;
+    });
+  }
+
+  Future<void> pickImage() async {
+    final picker = ImagePicker();
+    final picked = await picker.pickImage(source: ImageSource.gallery);
+
+    if (picked != null) {
+      setState(() {
+        selectedImage = File(picked.path);
+      });
+    }
   }
 
   void onUpdatePressed() async {
     final success = await ApiServices.updateProfile(
       name: nameController.text,
-      email: emailController.text,
       phone: phoneController.text,
       gender: genderController.text,
       dateOfBirth: dobController.text,
+      avatar: selectedImage,
     );
 
     if (success) {
-      print("Profile Updated Successfully");
-
-      Navigator.push(
+      Navigator.pushReplacement(
         context,
         MaterialPageRoute(builder: (_) => const ProfileDetails()),
       );
     } else {
-      print("Failed to update");
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text("Profile update failed")),
+      );
     }
   }
 
@@ -83,13 +96,14 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
         centerTitle: true,
         elevation: 0,
       ),
-
-      body: SingleChildScrollView(
+      body: isLoading
+          ? const Center(child: CircularProgressIndicator())
+          : SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(10.0),
           child: Column(
             children: [
-              // Profile header
+              /// HEADER
               Container(
                 height: 173,
                 width: 380,
@@ -100,15 +114,59 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                 child: Column(
                   children: [
                     const SizedBox(height: 15),
-                    ClipOval(
-                      child: Image.asset(
-                        'assets/images/User.png',
-                        width: 78,
-                        height: 78,
-                        fit: BoxFit.cover,
-                      ),
+
+                    /// IMAGE + ICON
+                    Stack(
+                      children: [
+                        ClipOval(
+                          child: selectedImage != null
+                              ? Image.file(
+                            selectedImage!,
+                            width: 78,
+                            height: 78,
+                            fit: BoxFit.cover,
+                          )
+                              : (userData?["avatar"] != null &&
+                              userData!["avatar"]
+                                  .toString()
+                                  .isNotEmpty)
+                              ? Image.network(
+                            userData!["avatar"],
+                            width: 78,
+                            height: 78,
+                            fit: BoxFit.cover,
+                          )
+                              : Image.asset(
+                            'assets/images/User.png',
+                            width: 78,
+                            height: 78,
+                          ),
+                        ),
+                        Positioned(
+                          bottom: 0,
+                          right: 0,
+                          child: GestureDetector(
+                            onTap: pickImage,
+                            child: Container(
+                              padding: const EdgeInsets.all(6),
+                              decoration: const BoxDecoration(
+                                color: Colors.green,
+                                shape: BoxShape.circle,
+                              ),
+                              child: const Icon(
+                                Icons.camera_alt,
+                                size: 16,
+                                color: Colors.white,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
-                    const SizedBox(height: 5),
+
+                    const SizedBox(height: 8),
+
+                    /// USER NAME (API)
                     Text(
                       nameController.text,
                       style: const TextStyle(
@@ -117,24 +175,26 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                         color: Color(0xff83BF8B),
                       ),
                     ),
-                    const Text(
-                      'Premium User',
-                      style: TextStyle(
-                        fontSize: 14,
-                        color: Color(0xffABABAB),
-                      ),
-                    ),
                   ],
                 ),
               ),
 
               const SizedBox(height: 20),
 
-              CustomProfile(title: "name".tr(), controller: nameController, box: ""),
-              CustomProfile(title: "your_email".tr(), controller: emailController, box: ""),
-              CustomProfile(title: "date_of_birth".tr(), controller: dobController, box: ""),
-              CustomProfile(title: "phone".tr(), controller: phoneController, box: ""),
-              CustomProfile(title: "gender".tr(), controller: genderController, box: ""),
+              /// FORM
+              CustomProfile(title: "name".tr(), controller: nameController),
+              CustomProfile(
+                title: "your_email".tr(),
+                controller: emailController,
+                enabled: false, // 👈 READ ONLY
+              ),
+              CustomProfile(
+                  title: "date_of_birth".tr(),
+                  controller: dobController),
+              CustomProfile(
+                  title: "phone".tr(), controller: phoneController),
+              CustomProfile(
+                  title: "gender".tr(), controller: genderController),
 
               const SizedBox(height: 20),
 
@@ -147,23 +207,27 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
         ),
       ),
 
+      /// BOTTOM NAV
       bottomNavigationBar: CustomNavbar(
         currentIndex: _selectedIndex,
         onItemPressed: (index) {
           setState(() => _selectedIndex = index);
-
           switch (index) {
             case 0:
-              Navigator.push(context, MaterialPageRoute(builder: (_) => const MainBottomNavScreen()));
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (_) => const MainBottomNavScreen()));
               break;
             case 1:
-              Navigator.push(context, MaterialPageRoute(builder: (_) => const BibleScreen()));
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (_) => const BibleScreen()));
               break;
             case 2:
-              Navigator.push(context, MaterialPageRoute(builder: (_) => const JourneyScreen()));
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (_) => const JourneyScreen()));
               break;
             case 3:
-              Navigator.push(context, MaterialPageRoute(builder: (_) => const ProfileScreen()));
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (_) => const ProfileScreen()));
               break;
           }
         },
