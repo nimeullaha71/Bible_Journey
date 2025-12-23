@@ -6,14 +6,13 @@ import 'package:bible_journey/features/Profile/screens/help_support_screen.dart'
 import 'package:bible_journey/features/Profile/screens/language_screen.dart';
 import 'package:bible_journey/features/Profile/screens/privacy_policy_screen.dart';
 import 'package:bible_journey/features/Profile/screens/profile_details.dart';
-import 'package:bible_journey/features/Profile/screens/subscription_screen.dart';
 import 'package:bible_journey/features/Profile/screens/terms_service_screen.dart';
 import 'package:bible_journey/features/auth/screens/login_screen.dart';
+import 'package:bible_journey/features/payment/payment_screen.dart';
 import 'package:bible_journey/main_bottom_nav_screen.dart';
 import 'package:bible_journey/widgets/appbars/custom_appbar.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import '../../../core/services/local_storage_service.dart';
 import '../services/deactivated_service.dart';
 import '../widgets/custom_box.dart';
@@ -105,7 +104,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 trailingIcon: Icons.arrow_forward_ios,
                                 onTap: (){
                                   Navigator.push(
-                                      context, MaterialPageRoute(builder: (_) => const SubscriptionScreen()));
+                                      context, MaterialPageRoute(builder: (_) => const PaymentScreen()));
                                 }),
 
                             Padding(

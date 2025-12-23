@@ -1,5 +1,6 @@
 import 'package:bible_journey/app/constants.dart';
 import 'package:bible_journey/app/routes.dart';
+import 'package:bible_journey/features/auth/screens/trial_expired_payment_screen.dart';
 import 'package:bible_journey/widgets/buttons/auth_flow_custom_button.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -22,7 +23,7 @@ class _LoginScreenState extends State<LoginScreen> {
   bool _isLoading = false;
 
   void login() async {
-    if (!_formKey.currentState!.validate()) return; // Validate fields first
+    if (!_formKey.currentState!.validate()) return;
 
     setState(() {
       _isLoading = true;
@@ -34,25 +35,36 @@ class _LoginScreenState extends State<LoginScreen> {
         password: passwordController.text.trim(),
       );
 
-      // Save token
       await LocalStorage.saveToken(response['token']);
+      await LocalStorage.saveEmail(emailController.text.trim());
 
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text(response['message'] ?? "Login successful")),
       );
 
-      // Navigate to Home or QuizIntroScreen
-      Navigator.pushReplacementNamed(context, AppRoutes.mainBottomNavScreen);
-    } catch (e) {
-      ScaffoldMessenger.of(
-        context,
-      ).showSnackBar(SnackBar(content: Text("Email or Password is incorrect")));
-    }
+      if (response['trial_expired'] != null &&
+          response['trial_expired'].toString().toLowerCase().contains("expired")) {
+        Navigator.push(context, MaterialPageRoute(builder: (context)=>TrialExpiredPaymentScreen(planType: "planType")));
+        return;
+      }
 
-    setState(() {
-      _isLoading = false;
-    });
+      if (response['category'] == null || response['category'].toString().isEmpty) {
+        Navigator.pushReplacementNamed(context, AppRoutes.quizIntroScreen);
+      } else {
+        Navigator.pushReplacementNamed(context, AppRoutes.mainBottomNavScreen);
+      }
+
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text("Email or Password is incorrect")),
+      );
+    } finally {
+      setState(() {
+        _isLoading = false;
+      });
+    }
   }
+
 
   @override
   Widget build(BuildContext context) {
@@ -68,11 +80,10 @@ class _LoginScreenState extends State<LoginScreen> {
             child: SingleChildScrollView(
               padding: const EdgeInsets.symmetric(horizontal: 18.0),
               child: Form(
-                key: _formKey, // Form key
+                key: _formKey,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    /// Back Button
                     Align(
                       alignment: Alignment.centerLeft,
                       child: IconButton(
@@ -84,11 +95,9 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                     SizedBox(height: height * 0.02),
 
-                    /// Logo
                     Image.asset(AppImages.appLogo, height: height * 0.13),
                     SizedBox(height: height * 0.018),
 
-                    /// Title
                     Text(
                       "login.begin_journey".tr(),
                       style: const TextStyle(
@@ -99,7 +108,6 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                     const SizedBox(height: 5),
 
-                    /// Subtitle
                     Text(
                       "login.subtitle".tr(),
                       textAlign: TextAlign.center,
@@ -110,7 +118,6 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                     SizedBox(height: height * 0.03),
 
-                    /// Email
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -142,7 +149,6 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                     SizedBox(height: height * 0.02),
 
-                    /// Password
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -173,7 +179,6 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                     SizedBox(height: height * 0.015),
 
-                    /// Remember Me + Forgot Password
                     Row(
                       children: [
                         Row(
@@ -210,7 +215,6 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                     SizedBox(height: height * 0.025),
 
-                    /// Login Button
                     AuthCustomButton(
                       text: _isLoading ? "Loading..." : "log_in".tr(),
                       height: height * 0.055,
@@ -219,7 +223,6 @@ class _LoginScreenState extends State<LoginScreen> {
 
                     SizedBox(height: height * 0.02),
 
-                    /// Sign in with Google
                     _socialButton(
                       icon: Icons.g_mobiledata,
                       text: "login.sign_in_google".tr(),
@@ -227,7 +230,6 @@ class _LoginScreenState extends State<LoginScreen> {
 
                     SizedBox(height: 12),
 
-                    /// Apple Login
                     _socialButton(
                       icon: Icons.apple,
                       text: "login.sign_in_apple".tr(),
@@ -235,7 +237,6 @@ class _LoginScreenState extends State<LoginScreen> {
 
                     SizedBox(height: 15),
 
-                    /// Bottom Sign Up Text
                     GestureDetector(
                       onTap: () {
                         Navigator.pushNamed(context, AppRoutes.signUp);
@@ -268,7 +269,6 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
-  /// Social Button (Google + Apple)
   Widget _socialButton({required IconData icon, required String text}) {
     return Container(
       height: 55,

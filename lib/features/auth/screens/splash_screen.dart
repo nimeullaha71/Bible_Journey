@@ -17,7 +17,6 @@ class SplashScreen extends StatelessWidget {
     return Scaffold(
       body: Stack(
         children: [
-          /// Background Image
           Positioned.fill(
             child: Image.asset(
               AppImages.splashBg,
@@ -25,27 +24,24 @@ class SplashScreen extends StatelessWidget {
             ),
           ),
 
-          /// TOP CONTENT — Responsive
           SafeArea(
             child: Align(
               alignment: Alignment.topCenter,
               child: Padding(
-                padding: EdgeInsets.only(top: height * 0.07), // Responsive top padding
+                padding: EdgeInsets.only(top: height * 0.07),
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
 
-                    /// Logo (Responsive size)
                     Image.asset(
                       AppImages.appLogo,
-                      height: height * 0.22, // 20–22% of screen height
+                      height: height * 0.22,
                       width: width * 0.45,
                       fit: BoxFit.contain,
                     ),
 
                     SizedBox(height: height * 0.025),
 
-                    /// Title
                     Text(
                       "splash.title".tr(),
                       style: TextStyle(
@@ -58,7 +54,6 @@ class SplashScreen extends StatelessWidget {
 
                     SizedBox(height: height * 0.015),
 
-                    /// Subtitle
                     Padding(
                       padding: EdgeInsets.symmetric(horizontal: width * 0.10),
                       child: Text(
@@ -75,9 +70,8 @@ class SplashScreen extends StatelessWidget {
             ),
           ),
 
-          /// Bottom Buttons — Responsive
           Positioned(
-            bottom: height * 0.25, // responsive bottom distance
+            bottom: height * 0.25,
             left: width * 0.07,
             right: width * 0.07,
             child: Column(
@@ -92,13 +86,11 @@ class SplashScreen extends StatelessWidget {
                       //Navigator.pushNamed(context, AppRoutes.mainBottomNavScreen);
                       Navigator.push(context, MaterialPageRoute(builder: (context)=>ResetSuccessfulScreen()));
                     },
-                    height: height * 0.055, // responsive button height
+                    height: height * 0.055,
                   ),
                 ),
 
                 SizedBox(height: height * 0.02),
-
-                /// Login text
 
                 GestureDetector(
                   onTap: (){

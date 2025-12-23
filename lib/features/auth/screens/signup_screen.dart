@@ -40,23 +40,29 @@ class _SignUpScreenState extends State<SignUpScreen> {
         confirmPassword: confirmPasswordController.text,
       );
 
-      await LocalStorage.saveToken(response['token']);
+      if (response['token'] != null && response['token'].toString().isNotEmpty) {
+        await LocalStorage.saveToken(response['token']);
+        await LocalStorage.saveEmail(emailController.text.trim());
 
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(response['messge'] ?? 'Signup Successful')),
-      );
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text(response['message'] ?? 'Signup Successful')),
+        );
 
-      Navigator.pushReplacementNamed(context, AppRoutes.mainBottomNavScreen);
-
+        Navigator.pushReplacementNamed(context, AppRoutes.quizIntroScreen);
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text("Signup failed. Token not received")),
+        );
+      }
     } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text("Given Unique Number and email")),
+        SnackBar(content: Text("Signup failed: ${e.toString()}")),
       );
+    } finally {
+      setState(() {
+        _isLoading = false;
+      });
     }
-
-    setState(() {
-      _isLoading = false;
-    });
   }
 
   @override
@@ -67,7 +73,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
       body: Stack(
         children: [
 
-          /// Background Image
           Positioned.fill(
             child: Image.asset(
               AppImages.signUpBg,
