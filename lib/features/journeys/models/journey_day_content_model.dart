@@ -1,14 +1,14 @@
 class JourneyDayContentResponse {
-  final int userId;
-  final int journeyId;
-  final int dayId;
+  final int? userId;
+  final int? journeyId;
+  final int? dayId;
   final String dayTitle;
   final List<JourneyStep> steps;
 
   JourneyDayContentResponse({
-    required this.userId,
-    required this.journeyId,
-    required this.dayId,
+    this.userId,
+    this.journeyId,
+    this.dayId,
     required this.dayTitle,
     required this.steps,
   });
@@ -19,24 +19,25 @@ class JourneyDayContentResponse {
       journeyId: json['journey_id'],
       dayId: json['day_id'],
       dayTitle: json['day_title'] ?? "",
-      steps: (json['steps'] as List)
+      steps: (json['steps'] as List? ?? [])
           .map((e) => JourneyStep.fromJson(e))
           .toList(),
     );
   }
 }
 
+
 class JourneyStep {
-  final int id;
-  final int journeyId;
-  final int dayId;
+  final int? id;
+  final int? journeyId;
+  final int? dayId;
   final String stepName;
   final bool isCompleted;
 
   JourneyStep({
-    required this.id,
-    required this.journeyId,
-    required this.dayId,
+    this.id,
+    this.journeyId,
+    this.dayId,
     required this.stepName,
     required this.isCompleted,
   });
@@ -46,8 +47,9 @@ class JourneyStep {
       id: json['id'],
       journeyId: json['journey_id'],
       dayId: json['days_id'],
-      stepName: json['step_name'],
-      isCompleted: json['is_completed'],
+      stepName: json['step_name'] ?? "",
+      isCompleted: json['is_completed'] ?? false,
     );
   }
 }
+

@@ -8,6 +8,7 @@ import 'package:bible_journey/features/Profile/screens/privacy_policy_screen.dar
 import 'package:bible_journey/features/Profile/screens/profile_details.dart';
 import 'package:bible_journey/features/Profile/screens/terms_service_screen.dart';
 import 'package:bible_journey/features/auth/screens/login_screen.dart';
+import 'package:bible_journey/features/auth/screens/trial_expired_payment_screen.dart';
 import 'package:bible_journey/features/payment/payment_screen.dart';
 import 'package:bible_journey/main_bottom_nav_screen.dart';
 import 'package:bible_journey/widgets/appbars/custom_appbar.dart';
@@ -104,7 +105,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 trailingIcon: Icons.arrow_forward_ios,
                                 onTap: (){
                                   Navigator.push(
-                                      context, MaterialPageRoute(builder: (_) => const PaymentScreen()));
+                                      context, MaterialPageRoute(builder: (_) => const TrialExpiredPaymentScreen()));
                                 }),
 
                             Padding(

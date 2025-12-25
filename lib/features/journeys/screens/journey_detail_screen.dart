@@ -144,18 +144,35 @@ class _JourneyDetailScreenState extends State<JourneyDetailScreen> {
                             getIcon(day.status),
                             color: getColor(day.status),
                           ),
+                          //onTap: isAllowed
                           onTap: isAllowed
                               ? () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (_) => JourneyDetails1(
-                                  journeyId: data.journey.id,
-                                  dayId: day.dayId,
-                                ),
-                              ),
-                            );
-                          }
+                                  // 🔍 DEBUG PRINT
+                                  print("Journey ID: ${data.journey.id}");
+                                  print("Day ID: ${day.dayId}");
+
+                                  if (data.journey.id == null ||
+                                      day.dayId == null) {
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      const SnackBar(
+                                        content: Text(
+                                          "Invalid journey/day data",
+                                        ),
+                                      ),
+                                    );
+                                    return;
+                                  }
+
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (_) => JourneyDetails1(
+                                        journeyId: data.journey.id!,
+                                        dayId: day.dayId!,
+                                      ),
+                                    ),
+                                  );
+                                }
                               : null, // 🔒 locked → no access
                         ),
                       );
@@ -170,4 +187,3 @@ class _JourneyDetailScreenState extends State<JourneyDetailScreen> {
     );
   }
 }
-

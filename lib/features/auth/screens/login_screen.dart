@@ -44,7 +44,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
       if (response['trial_expired'] != null &&
           response['trial_expired'].toString().toLowerCase().contains("expired")) {
-        Navigator.push(context, MaterialPageRoute(builder: (context)=>TrialExpiredPaymentScreen(planType: "planType")));
+        Navigator.push(context, MaterialPageRoute(builder: (context)=>TrialExpiredPaymentScreen()));
         return;
       }
 
