@@ -6,6 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:webview_flutter/webview_flutter.dart';
 
+import '../../../main_bottom_nav_screen.dart';
+
 class TrialExpiredPaymentScreen extends StatefulWidget {
   const TrialExpiredPaymentScreen({super.key});
 
@@ -14,14 +16,6 @@ class TrialExpiredPaymentScreen extends StatefulWidget {
 }
 
 class _TrialExpiredPaymentScreenState extends State<TrialExpiredPaymentScreen> {
-
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   // Android-specific initialization
-  //   WebView.platform = SurfaceAndroidWebView();
-  // }
-
 
   Future<void> makePayment(BuildContext context, String plan, int packageId) async {
     final url = Uri.parse(Urls.subscriptionUrl);
@@ -43,23 +37,39 @@ class _TrialExpiredPaymentScreenState extends State<TrialExpiredPaymentScreen> {
         url,
         headers: {
           "Content-Type": "application/json",
-          "Authorization": token.startsWith("Bearer ") ? token : "Bearer $token",
+          "Authorization": token.startsWith("Bearer ")
+              ? token
+              : "Bearer $token",
         },
         body: body,
       );
 
       if (response.statusCode == 200) {
         final data = jsonDecode(response.body);
-        final checkoutUrl = data['checkout_url'] as String;
-        print("Stripe CheckOut Url $checkoutUrl");
+        final checkoutUrl = data['checkout_url'] as String?;
 
-        if (checkoutUrl.isNotEmpty) {
-          Navigator.push(
+        if (checkoutUrl != null && checkoutUrl.isNotEmpty) {
+          final result = await Navigator.push(
             context,
             MaterialPageRoute(
               builder: (_) => StripeWebViewScreen(url: checkoutUrl),
             ),
           );
+
+          if (result == true) {
+            // ✅ Payment successful → Go to main screen
+            Navigator.pushAndRemoveUntil(
+              context,
+              MaterialPageRoute(
+                builder: (_) => const MainBottomNavScreen(),
+              ),
+                  (route) => false,
+            );
+          } else {
+            ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(content: Text("Payment cancelled")),
+            );
+          }
         } else {
           ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(content: Text("Stripe checkout URL missing")),
@@ -67,7 +77,9 @@ class _TrialExpiredPaymentScreenState extends State<TrialExpiredPaymentScreen> {
         }
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text("Payment failed: ${response.statusCode}")),
+          SnackBar(
+            content: Text("Payment failed: ${response.statusCode}"),
+          ),
         );
       }
     } catch (e) {
@@ -216,12 +228,12 @@ class _StripeWebViewScreenState extends State<StripeWebViewScreen> {
 
             if (url.contains("success")) {
               Navigator.pop(context, true);
-              return NavigationDecision.prevent;
+              //return NavigationDecision.prevent;
             }
 
             if (url.contains("cancel")) {
               Navigator.pop(context, false);
-              return NavigationDecision.prevent;
+              //return NavigationDecision.prevent;
             }
 
             return NavigationDecision.navigate;

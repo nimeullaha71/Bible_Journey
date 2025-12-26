@@ -25,6 +25,7 @@
 // }
 
 import 'package:bible_journey/app/routes.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:app_links/app_links.dart';
 import 'dart:async';
@@ -67,6 +68,12 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
+
+      localizationsDelegates: context.localizationDelegates,
+      supportedLocales: context.supportedLocales,
+      locale: context.locale,
+
       onGenerateRoute: AppRoutes.generateRoute,
       initialRoute: AppRoutes.splash,
     );

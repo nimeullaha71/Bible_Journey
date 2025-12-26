@@ -52,7 +52,7 @@ class CustomPersonal extends StatelessWidget {
                 Text(
                   text,
                   style: const TextStyle(
-                    fontSize: 14,
+                    fontSize: 18,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
@@ -61,7 +61,7 @@ class CustomPersonal extends StatelessWidget {
                 Text(
                   subText,
                   style: const TextStyle(
-                    fontSize: 13,
+                    fontSize: 16,
                     color: Color(0xff787878),
                     fontWeight: FontWeight.bold,
                   ),

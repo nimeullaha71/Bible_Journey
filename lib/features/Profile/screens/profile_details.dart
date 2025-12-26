@@ -118,26 +118,28 @@ class _ProfileDetailsState extends State<ProfileDetails> {
                 text: "FULL NAME",
                 subText: userData?["name"] ?? "",
               ),
+              SizedBox(height: 16,),
 
               CustomPersonal(
                 textIcon: Icons.email,
                 text: "YOUR EMAIL",
                 subText: userData?["email"] ?? "",
               ),
-              SizedBox(height: 18),
+              SizedBox(height: 16),
 
               CustomPersonal(
                 textIcon: Icons.date_range,
                 text: "DATE OF BIRTH",
-                subText: "18 May, 2001",
+                subText: userData?["date_of_birth"]??"",
               ),
 
-              SizedBox(height: 18),
+              SizedBox(height: 16),
               CustomPersonal(
                 textIcon: Icons.phone,
                 text: "PHONE",
                 subText: userData?["phone"] ?? "",
               ),
+              SizedBox(height: 16,),
 
               CustomPersonal(
                 textIcon: Icons.accessibility,
@@ -145,7 +147,7 @@ class _ProfileDetailsState extends State<ProfileDetails> {
                 subText: userData?["gender"] ?? "",
               ),
 
-              SizedBox(height: 125),
+              SizedBox(height: 100),
               CustomButton(
                 text: "Edit",
                 onTap: () {

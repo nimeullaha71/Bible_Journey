@@ -1,5 +1,4 @@
 import 'dart:io';
-import 'package:bible_journey/app/constants.dart';
 import 'package:bible_journey/core/services/api_service.dart';
 import 'package:bible_journey/features/Profile/screens/profile_details.dart';
 import 'package:bible_journey/features/Profile/screens/profile_screen.dart';
@@ -11,7 +10,6 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import '../../../widgets/custom_nav_bar.dart';
-import '../widgets/custom_profile.dart';
 
 class EditProfileScreen extends StatefulWidget {
   const EditProfileScreen({super.key});
@@ -106,7 +104,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
               /// HEADER
               Container(
                 height: 173,
-                width: 380,
+                width: double.infinity,
                 decoration: BoxDecoration(
                   color: const Color(0xffE3E9E3),
                   borderRadius: BorderRadius.circular(11),
@@ -114,7 +112,6 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                 child: Column(
                   children: [
                     const SizedBox(height: 15),
-
                     /// IMAGE + ICON
                     Stack(
                       children: [
@@ -163,10 +160,8 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                         ),
                       ],
                     ),
-
                     const SizedBox(height: 8),
-
-                    /// USER NAME (API)
+                    /// USER NAME
                     Text(
                       nameController.text,
                       style: const TextStyle(
@@ -181,20 +176,111 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
 
               const SizedBox(height: 20),
 
-              /// FORM
-              CustomProfile(title: "name".tr(), controller: nameController),
-              CustomProfile(
-                title: "your_email".tr(),
-                controller: emailController,
-                enabled: false, // 👈 READ ONLY
+              /// NAME FIELD
+              TextField(
+                controller: nameController,
+                decoration: const InputDecoration(
+                  labelText: "Full Name",
+                  border: OutlineInputBorder(),
+                  filled: true,
+                  fillColor: Colors.white,
+                ),
               ),
-              CustomProfile(
-                  title: "date_of_birth".tr(),
-                  controller: dobController),
-              CustomProfile(
-                  title: "phone".tr(), controller: phoneController),
-              CustomProfile(
-                  title: "gender".tr(), controller: genderController),
+              const SizedBox(height: 12),
+
+              /// EMAIL FIELD (READ ONLY)
+              TextField(
+                controller: emailController,
+                enabled: false,
+                decoration: const InputDecoration(
+                  labelText: "Email",
+                  border: OutlineInputBorder(),
+                  filled: true,
+                  fillColor: Colors.white,
+                ),
+              ),
+              const SizedBox(height: 12),
+
+              /// DOB FIELD WITH CALENDAR PICKER
+              GestureDetector(
+                onTap: () async {
+                  DateTime initialDate = DateTime.now();
+                  if (dobController.text.isNotEmpty) {
+                    initialDate =
+                        DateTime.tryParse(dobController.text) ??
+                            DateTime.now();
+                  }
+
+                  final DateTime? pickedDate = await showDatePicker(
+                    context: context,
+                    initialDate: initialDate,
+                    firstDate: DateTime(1900),
+                    lastDate: DateTime.now(),
+                  );
+
+                  if (pickedDate != null) {
+                    setState(() {
+                      dobController.text =
+                      "${pickedDate.year.toString().padLeft(4, '0')}-${pickedDate.month.toString().padLeft(2, '0')}-${pickedDate.day.toString().padLeft(2, '0')}";
+                    });
+                  }
+                },
+                child: AbsorbPointer(
+                  child: TextField(
+                    controller: dobController,
+                    decoration: const InputDecoration(
+                      labelText: "Date of Birth",
+                      border: OutlineInputBorder(),
+                      filled: true,
+                      fillColor: Colors.white,
+                      suffixIcon: Icon(Icons.calendar_today),
+                    ),
+                  ),
+                ),
+              ),
+              const SizedBox(height: 12),
+
+              /// PHONE FIELD
+              TextField(
+                controller: phoneController,
+                decoration: const InputDecoration(
+                  labelText: "Phone",
+                  border: OutlineInputBorder(),
+                  filled: true,
+                  fillColor: Colors.white,
+                ),
+              ),
+              const SizedBox(height: 12),
+
+              /// GENDER DROPDOWN
+              InputDecorator(
+                decoration: const InputDecoration(
+                  labelText: "Gender",
+                  border: OutlineInputBorder(),
+                  filled: true,
+                  fillColor: Colors.white,
+                ),
+                child: DropdownButtonHideUnderline(
+                  child: DropdownButton<String>(
+                    isExpanded: true,
+                    value: genderController.text.isNotEmpty
+                        ? genderController.text
+                        : null,
+                    hint: const Text("Select Gender"),
+                    items: const [
+                      DropdownMenuItem(
+                          value: "male", child: Text("Male")),
+                      DropdownMenuItem(
+                          value: "female", child: Text("Female")),
+                    ],
+                    onChanged: (value) {
+                      setState(() {
+                        genderController.text = value ?? "";
+                      });
+                    },
+                  ),
+                ),
+              ),
 
               const SizedBox(height: 20),
 

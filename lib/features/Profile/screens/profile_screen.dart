@@ -9,7 +9,6 @@ import 'package:bible_journey/features/Profile/screens/profile_details.dart';
 import 'package:bible_journey/features/Profile/screens/terms_service_screen.dart';
 import 'package:bible_journey/features/auth/screens/login_screen.dart';
 import 'package:bible_journey/features/auth/screens/trial_expired_payment_screen.dart';
-import 'package:bible_journey/features/payment/payment_screen.dart';
 import 'package:bible_journey/main_bottom_nav_screen.dart';
 import 'package:bible_journey/widgets/appbars/custom_appbar.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -45,7 +44,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   child: Text(
                     "account".tr(),
                     style: TextStyle(
-                      fontSize: 16,
+                      fontSize: 18,
                       fontWeight: FontWeight.bold,
                     ),
                   ),

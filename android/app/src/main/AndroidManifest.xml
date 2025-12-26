@@ -80,11 +80,13 @@
                 <action android:name="android.intent.action.VIEW"/>
                 <category android:name="android.intent.category.DEFAULT"/>
                 <category android:name="android.intent.category.BROWSABLE"/>
+
                 <data
                     android:scheme="https"
-                    android:host="www.bible_journey.com"
+                    android:host="www.biblejourney.com"
                     android:pathPrefix="/payment-success"/>
             </intent-filter>
+
 
         </activity>
 

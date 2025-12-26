@@ -41,24 +41,28 @@ class AuthService {
     final url = Uri.parse(Urls.signInUrl);
     final body = jsonEncode({"login_id": login_id, "password": password});
 
-    final response = await http.post(
-      url,
-      headers: {"Content-Type": "application/json"},
-      body: body,
-    );
+    try {
+      final response = await http.post(
+        url,
+        headers: {"Content-Type": "application/json"},
+        body: body,
+      );
 
-    final data = jsonDecode(response.body);
+      final data = jsonDecode(response.body);
 
-    if (response.statusCode == 200 && data['status'] == 'success') {
-      // Save token
-      await LocalStorage.saveToken(data['token']);
+      if (response.statusCode == 200 && data['status'] == 'success') {
+        await LocalStorage.saveToken(data['token']);
+        await LocalStorage.saveEmail(login_id);
 
-      // Save email from login_id (যদি API থেকে email না আসে)
-      await LocalStorage.saveEmail(login_id);
-
-      return data;
-    } else {
-      throw Exception(data['message'] ?? "Email or Password is incorrect");
+        return {...data, "statusCode": 200};
+      } else {
+        return {
+          "statusCode": response.statusCode,
+          "error": data['error'] ?? data['message'] ?? "Login failed"
+        };
+      }
+    } catch (e) {
+      return {"statusCode": 500, "error": e.toString()};
     }
   }
 
@@ -109,7 +113,7 @@ class AuthService {
       headers: {"Content-Type": "application/json"},
       body: jsonEncode({
         "email": email,
-        "otp": int.parse(otp), // 🔥 OTP number হিসেবে পাঠাও
+        "otp": int.parse(otp),
       }),
     );
 
