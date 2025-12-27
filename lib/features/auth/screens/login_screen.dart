@@ -22,51 +22,6 @@ class _LoginScreenState extends State<LoginScreen> {
   bool rememberMe = false;
   bool _isLoading = false;
 
-  // void login() async {
-  //   if (!_formKey.currentState!.validate()) return;
-  //
-  //   setState(() {
-  //     _isLoading = true;
-  //   });
-  //
-  //   try {
-  //     final response = await AuthService().login(
-  //       login_id: emailController.text.trim(),
-  //       password: passwordController.text.trim(),
-  //     );
-  //
-  //     await LocalStorage.saveToken(response['token']);
-  //     await LocalStorage.saveEmail(emailController.text.trim());
-  //
-  //     ScaffoldMessenger.of(context).showSnackBar(
-  //       SnackBar(content: Text(response['message'] ?? "Login successful")),
-  //     );
-  //
-  //     if (response['trial_expired'] != null &&
-  //         response['trial_expired'].toString().toLowerCase().contains("expired")) {
-  //       Navigator.push(context, MaterialPageRoute(builder: (context)=>TrialExpiredPaymentScreen()));
-  //       return;
-  //     }
-  //
-  //     if (response['category'] == null || response['category'].toString().isEmpty) {
-  //       Navigator.pushReplacementNamed(context, AppRoutes.quizIntroScreen);
-  //     } else {
-  //       Navigator.pushReplacementNamed(context, AppRoutes.mainBottomNavScreen);
-  //     }
-  //     if(response['error']!= null && response['error'].toString().contains("Account disabled")){
-  //       ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Your Account Is Deactivated")));
-  //     }
-  //
-  //   } catch (e) {
-  //     ScaffoldMessenger.of(context).showSnackBar(
-  //       SnackBar(content: Text("Email or Password is incorrect")),
-  //     );
-  //   } finally {
-  //     setState(() {
-  //       _isLoading = false;
-  //     });
-  //   }
-  // }
   void login() async {
     if (!_formKey.currentState!.validate()) return;
 

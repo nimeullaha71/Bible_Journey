@@ -34,7 +34,7 @@ class HomeBox extends StatelessWidget {
             Text(
               title,
               style: TextStyle(
-                fontSize: width * 0.045,
+                fontSize: width * 0.040,
                 fontWeight: FontWeight.w600,
               ),
               maxLines: 3,

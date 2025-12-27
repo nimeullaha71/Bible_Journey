@@ -1,7 +1,6 @@
 import 'package:bible_journey/features/auth/screens/verify_otp_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:bible_journey/app/constants.dart';
-import 'package:bible_journey/app/routes.dart';
 import 'package:bible_journey/widgets/buttons/auth_flow_custom_button.dart';
 import 'package:bible_journey/widgets/textField/custom_text_field.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -65,60 +64,78 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
     final height = MediaQuery.of(context).size.height;
 
     return Scaffold(
-      body: Stack(
-        children: [
-          Positioned(child: Image.asset(AppImages.splashBg, fit: BoxFit.cover)),
-          SafeArea(
-            child: SingleChildScrollView(
-              padding: const EdgeInsets.symmetric(horizontal: 18.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Align(
-                    alignment: Alignment.centerLeft,
-                    child: IconButton(
-                      onPressed: () => Navigator.pop(context),
-                      icon: const Icon(Icons.arrow_back),
-                    ),
+      body: Container(
+        width: double.infinity,
+        height: double.infinity,
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage(AppImages.splashBg),
+            fit: BoxFit.cover,
+          ),
+        ),
+        child: SafeArea(
+          child: SingleChildScrollView(
+            padding: const EdgeInsets.symmetric(horizontal: 18.0, vertical: 18.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Align(
+                  alignment: Alignment.centerLeft,
+                  child: IconButton(
+                    onPressed: () => Navigator.pop(context),
+                    icon: const Icon(Icons.arrow_back, color: Colors.black),
                   ),
-                  SizedBox(height: height * 0.01),
-                  Image.asset(AppImages.appLogo, height: height * 0.13),
-                  SizedBox(height: height * 0.02),
-                  Text("forgot_password.title".tr(),
-                      textAlign: TextAlign.center,
+                ),
+                SizedBox(height: height * 0.02),
+                Image.asset(AppImages.appLogo, height: height * 0.13),
+                SizedBox(height: height * 0.018),
+                Text(
+                  "forgot_password.title".tr(),
+                  style: const TextStyle(
+                    fontSize: 28,
+                    color: Color(0xFF005493),
+                    fontWeight: FontWeight.w700,
+                  ),
+                ),
+                const SizedBox(height: 5),
+                Text(
+                  "forgot_password.subtitle".tr(),
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 16,
+                    color: Colors.black.withOpacity(0.7),
+                  ),
+                ),
+                SizedBox(height: height * 0.03),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      "sign_up.email".tr(),
                       style: const TextStyle(
-                          fontSize: 22, color: Color.fromRGBO(51, 51, 51, 1))),
-                  SizedBox(height: height * 0.01),
-                  Text("forgot_password.subtitle".tr(),
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                          fontSize: 16, color: Colors.black.withOpacity(0.7))),
-                  const SizedBox(height: 20),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text("sign_up.email".tr(),
-                          style: const TextStyle(
-                              color: Color.fromRGBO(73, 76, 79, 1),
-                              fontSize: 16,
-                              fontWeight: FontWeight.w600)),
-                      const SizedBox(height: 8),
-                      CustomTextField(
-                          label: "forgot_password.email_hint".tr(),
-                          controller: emailController),
-                    ],
-                  ),
-                  SizedBox(height: height * 0.03),
-                  AuthCustomButton(
-                      text: "forgot_password.send_code".tr(),
-                      height: height * 0.06,
-                      isLoading: isLoading,
-                      onTap: _sendOtp),
-                ],
-              ),
+                        color: Color.fromRGBO(73, 76, 79, 1),
+                        fontSize: 16,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                    const SizedBox(height: 8),
+                    CustomTextField(
+                      label: "forgot_password.email_hint".tr(),
+                      controller: emailController,
+                    ),
+                  ],
+                ),
+                SizedBox(height: height * 0.03),
+                AuthCustomButton(
+                  text: "forgot_password.send_code".tr(),
+                  height: height * 0.055,
+                  isLoading: isLoading,
+                  onTap: _sendOtp,
+                ),
+              ],
             ),
           ),
-        ],
+        ),
       ),
     );
   }

@@ -63,7 +63,7 @@ class _TodayActionScreenState extends State<TodayActionScreen> {
     } catch (e) {
       setState(() => isLoading = false);
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text("Network error: $e")),
+        SnackBar(content: Text("Network error:$e")),
       );
     }
   }

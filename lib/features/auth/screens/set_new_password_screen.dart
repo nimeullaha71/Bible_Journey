@@ -1,12 +1,10 @@
-import 'package:bible_journey/features/auth/screens/login_screen.dart';
-import 'package:bible_journey/features/auth/screens/reset_successful_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:bible_journey/app/constants.dart';
-import 'package:bible_journey/app/routes.dart';
 import 'package:bible_journey/widgets/buttons/auth_flow_custom_button.dart';
+import 'package:bible_journey/widgets/textField/custom_text_field.dart';
 import 'package:easy_localization/easy_localization.dart';
 import '../../../core/services/auth_service.dart';
-import '../../../widgets/textField/custom_text_field.dart';
+import 'reset_successful_screen.dart';
 
 class SetNewPasswordScreen extends StatefulWidget {
   const SetNewPasswordScreen({super.key});
@@ -57,7 +55,6 @@ class _SetNewPasswordScreenState extends State<SetNewPasswordScreen> {
         new_password: pass,
       );
 
-      // ⚠️ Backend message check should match exactly
       if (result['message'] == "Password reset successfully.") {
         ScaffoldMessenger.of(context)
             .showSnackBar(
@@ -66,7 +63,6 @@ class _SetNewPasswordScreenState extends State<SetNewPasswordScreen> {
             .closed
             .then((_) {
           if (!mounted) return;
-          // ✅ Navigate to ResetSuccessfulScreen
           Navigator.pushReplacement(
             context,
             MaterialPageRoute(
@@ -85,7 +81,6 @@ class _SetNewPasswordScreenState extends State<SetNewPasswordScreen> {
     setState(() => isLoading = false);
   }
 
-
   void _showMessage(String msg) {
     ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(msg)));
   }
@@ -93,80 +88,107 @@ class _SetNewPasswordScreenState extends State<SetNewPasswordScreen> {
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
+
     return Scaffold(
-      body: Stack(
-        children: [
-          Positioned(child: Image.asset(AppImages.splashBg, fit: BoxFit.cover)),
-          SafeArea(
-            child: SingleChildScrollView(
-              padding: const EdgeInsets.symmetric(horizontal: 18.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Align(
-                    alignment: Alignment.centerLeft,
-                    child: IconButton(
-                      onPressed: () => Navigator.pop(context),
-                      icon: const Icon(Icons.arrow_back),
-                    ),
+      body: Container(
+        width: double.infinity,
+        height: double.infinity,
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage(AppImages.splashBg),
+            fit: BoxFit.cover,
+          ),
+        ),
+        child: SafeArea(
+          child: SingleChildScrollView(
+            padding: const EdgeInsets.symmetric(horizontal: 18.0, vertical: 18.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Align(
+                  alignment: Alignment.centerLeft,
+                  child: IconButton(
+                    onPressed: () => Navigator.pop(context),
+                    icon: const Icon(Icons.arrow_back, color: Colors.black),
                   ),
-                  Image.asset(AppImages.appLogo, height: height * 0.13),
-                  SizedBox(height: height * 0.01),
-                  Text("set_password_button.title".tr(),
-                      textAlign: TextAlign.center,
+                ),
+                SizedBox(height: height * 0.02),
+                Image.asset(AppImages.appLogo, height: height * 0.13),
+                SizedBox(height: height * 0.018),
+                Text(
+                  "set_password_button.title".tr(),
+                  textAlign: TextAlign.center,
+                  style: const TextStyle(
+                    fontSize: 28,
+                    color: Color(0xFF005493),
+                    fontWeight: FontWeight.w700,
+                  ),
+                ),
+                const SizedBox(height: 5),
+                Text(
+                  "set_new_password.subtitle".tr(),
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 16,
+                    color: Colors.black.withOpacity(0.7),
+                  ),
+                ),
+                SizedBox(height: height * 0.05),
+
+                // New Password
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      "set_new_password.new_password".tr(),
                       style: const TextStyle(
-                          fontSize: 22, color: Color.fromRGBO(51, 51, 51, 1))),
-                  SizedBox(height: height * 0.01),
-                  Text("set_new_password.subtitle".tr(),
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                          fontSize: 16, color: Colors.black.withOpacity(0.7))),
-                  SizedBox(height: height * 0.05),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text("set_new_password.new_password".tr(),
-                          style: const TextStyle(
-                              color: Color.fromRGBO(73, 76, 79, 1),
-                              fontSize: 16,
-                              fontWeight: FontWeight.w600)),
-                      const SizedBox(height: 8),
-                      CustomTextField(
-                        label: "set_new_password.password_hint".tr(),
-                        controller: passwordController,
-                        obscureText: true,
+                        color: Color.fromRGBO(73, 76, 79, 1),
+                        fontSize: 16,
+                        fontWeight: FontWeight.w600,
                       ),
-                    ],
-                  ),
-                  const SizedBox(height: 20),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text("set_new_password.confirm_password".tr(),
-                          style: const TextStyle(
-                              color: Color.fromRGBO(73, 76, 79, 1),
-                              fontSize: 16,
-                              fontWeight: FontWeight.w600)),
-                      const SizedBox(height: 8),
-                      CustomTextField(
-                        label: "set_new_password.password_hint".tr(),
-                        controller: confirmPasswordController,
-                        obscureText: true,
+                    ),
+                    const SizedBox(height: 8),
+                    CustomTextField(
+                      label: "set_new_password.password_hint".tr(),
+                      controller: passwordController,
+                      obscureText: true,
+                    ),
+                  ],
+                ),
+                SizedBox(height: height * 0.025),
+
+                // Confirm Password
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      "set_new_password.confirm_password".tr(),
+                      style: const TextStyle(
+                        color: Color.fromRGBO(73, 76, 79, 1),
+                        fontSize: 16,
+                        fontWeight: FontWeight.w600,
                       ),
-                    ],
-                  ),
-                  const SizedBox(height: 30),
-                  AuthCustomButton(
-                    text: "set_new_password.set_password_button".tr(),
-                    height: height * 0.06,
-                    isLoading: isLoading,
-                    onTap: _resetPassword,
-                  ),
-                ],
-              ),
+                    ),
+                    const SizedBox(height: 8),
+                    CustomTextField(
+                      label: "set_new_password.password_hint".tr(),
+                      controller: confirmPasswordController,
+                      obscureText: true,
+                    ),
+                  ],
+                ),
+                SizedBox(height: height * 0.04),
+
+                AuthCustomButton(
+                  text: "set_new_password.set_password_button".tr(),
+                  height: height * 0.06,
+                  isLoading: isLoading,
+                  onTap: _resetPassword,
+                ),
+              ],
             ),
           ),
-        ],
+        ),
       ),
     );
   }
