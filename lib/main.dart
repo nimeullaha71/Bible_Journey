@@ -1,30 +1,3 @@
-// import 'package:easy_localization/easy_localization.dart';
-// import 'package:flutter/material.dart';
-// import 'package:flutter/widgets.dart';
-//
-// import 'app/app.dart';
-//
-// void main() async {
-//   WidgetsFlutterBinding.ensureInitialized();
-//   await EasyLocalization.ensureInitialized();
-//
-//   runApp(
-//     EasyLocalization(
-//       supportedLocales: const [
-//         Locale('en'),
-//         Locale('fr'),
-//         Locale('de'),
-//         Locale('it'),
-//         Locale('pt'),
-//         Locale('es'),
-//       ],
-//       path: 'lib/localization',
-//       fallbackLocale: const Locale('en'),
-//       child: const MyApp(),
-//     ),
-//   );
-// }
-
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 

@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:bible_journey/app/constants.dart';
 import 'package:bible_journey/app/routes.dart';
 import 'package:bible_journey/features/devotions/screens/daily_devotion_screen.dart';
@@ -31,15 +30,17 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Map<String, dynamic>? todayPrayer;
   bool isPrayerLoading = true;
+  int unreadCount = 0;
+  bool isNotificationLoading = true;
 
   @override
   void initState() {
     super.initState();
     loadUser();
     loadTodayPrayer();
+    loadUnreadNotifications();
   }
 
-  // User fetch
   Future<void> loadUser() async {
     try {
       final data = await ApiServices.getProfile();
@@ -55,7 +56,6 @@ class _HomeScreenState extends State<HomeScreen> {
     }
   }
 
-  // Today Prayer fetch
   Future<void> loadTodayPrayer() async {
     try {
       final token = await LocalStorage.getToken();
@@ -86,6 +86,32 @@ class _HomeScreenState extends State<HomeScreen> {
     }
   }
 
+  Future<void> loadUnreadNotifications() async {
+    try {
+      final token = await LocalStorage.getToken();
+
+      final response = await http.get(
+        Uri.parse('${Urls.baseUrl}/notifications/'),
+        headers: {
+          'Authorization': 'Bearer $token',
+          'Content-Type': 'application/json',
+        },
+      );
+
+      if (response.statusCode == 200) {
+        final data = jsonDecode(response.body);
+        setState(() {
+          unreadCount = data['unread_message'] ?? 0;
+          isNotificationLoading = false;
+        });
+      }
+    } catch (e) {
+      print("Notification count error: $e");
+      isNotificationLoading = false;
+    }
+  }
+
+
   @override
   Widget build(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
@@ -99,7 +125,6 @@ class _HomeScreenState extends State<HomeScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              /// User Row
               Row(
                 children: [
                   CircleAvatar(
@@ -127,18 +152,53 @@ class _HomeScreenState extends State<HomeScreen> {
                       overflow: TextOverflow.ellipsis,
                     ),
                   ),
-                  IconButton(
-                    onPressed: () {
-                      Navigator.push(context, MaterialPageRoute(builder: (_) => NotificationScreen()));
-                    },
-                    icon: Icon(Icons.notifications_none),
+                  Stack(
+                    children: [
+                      IconButton(
+                        onPressed: () async {
+                          await Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (_) => NotificationScreen()),
+                          );
+
+                          loadUnreadNotifications();
+                        },
+                        icon: const Icon(Icons.notifications_none),
+                      ),
+
+                      if (unreadCount > 0)
+                        Positioned(
+                          right: 6,
+                          top: 6,
+                          child: Container(
+                            padding: const EdgeInsets.all(4),
+                            decoration: BoxDecoration(
+                              color: Colors.white12,
+                              borderRadius: BorderRadius.circular(12),
+                            ),
+                            constraints: const BoxConstraints(
+                              minWidth: 18,
+                              minHeight: 18,
+                            ),
+                            child: Text(
+                              unreadCount > 99 ? '99+' : unreadCount.toString(),
+                              style: const TextStyle(
+                                color: Colors.black,
+                                fontSize: 13,
+                                fontWeight: FontWeight.bold,
+                              ),
+                              textAlign: TextAlign.center,
+                            ),
+                          ),
+                        ),
+                    ],
                   ),
+
                 ],
               ),
 
               SizedBox(height: height * 0.02),
 
-              /// Grid items
               GridView.count(
                 shrinkWrap: true,
                 physics: const NeverScrollableScrollPhysics(),
@@ -147,7 +207,6 @@ class _HomeScreenState extends State<HomeScreen> {
                 mainAxisSpacing: height * 0.015,
                 childAspectRatio: width < 360 ? 0.95 : 1.2,
                 children: [
-                  // Daily Prayer
                   HomeBox(
                     icon: SvgPicture.asset(
                       "assets/images/Vector (3).svg",
@@ -180,7 +239,6 @@ class _HomeScreenState extends State<HomeScreen> {
                     },
                   ),
 
-                  // Daily Devotion
                   HomeBox(
                     icon: SvgPicture.asset(
                       "assets/images/Vector (1).svg",
@@ -208,7 +266,6 @@ class _HomeScreenState extends State<HomeScreen> {
                     },
                   ),
 
-                  // Today's Actions
                   HomeBox(
                     icon: SvgPicture.asset(
                       "assets/images/Vector (4).svg",
@@ -228,7 +285,6 @@ class _HomeScreenState extends State<HomeScreen> {
                     },
                   ),
 
-                  // Begin a Journey
                   HomeBox(
                     icon: SvgPicture.asset(
                       "assets/images/Vector (3).svg",
@@ -250,7 +306,6 @@ class _HomeScreenState extends State<HomeScreen> {
 
               SizedBox(height: height * 0.02),
 
-              /// Journey Card
               Container(
                 width: double.infinity,
                 decoration: BoxDecoration(
