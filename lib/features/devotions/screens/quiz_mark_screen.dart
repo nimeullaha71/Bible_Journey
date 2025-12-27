@@ -77,9 +77,12 @@ class _QuizMarkScreenState extends State<QuizMarkScreen> {
                 const SizedBox(height: 50),
                 CustomButton(
                   text: "continue.continue".tr(),
-                  onTap: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => TodayActionScreen()));
-                  },
+                  // onTap: () {
+                  //   Navigator.push(context, MaterialPageRoute(builder: (context) => TodayActionScreen(dayId: ,)));
+                  // },
+                  onTap: (){
+                    Navigator.pop(context);
+                  }
                 ),
                 const SizedBox(height: 10),
                 CustomButton(text: "continue.retry".tr(), onTap: () {}),

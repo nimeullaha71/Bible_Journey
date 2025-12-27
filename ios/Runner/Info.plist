@@ -45,11 +45,19 @@
     <key>UIApplicationSupportsIndirectInputEvents</key>
     <true/>
 
-    <!-- ✅ Universal Link setup -->
-    <key>com.apple.developer.associated-domains</key>
+    <!-- ✅ Deep Link (Android + iOS) -->
+    <key>CFBundleURLTypes</key>
     <array>
-        <string>applinks:www.bible_journey.com</string>
+        <dict>
+            <key>CFBundleTypeRole</key>
+            <string>Editor</string>
+            <key>CFBundleURLSchemes</key>
+            <array>
+                <string>biblejourney</string>
+            </array>
+        </dict>
     </array>
+
 
 </dict>
 </plist>

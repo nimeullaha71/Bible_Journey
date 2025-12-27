@@ -219,9 +219,11 @@ class _HomeScreenState extends State<HomeScreen> {
                     title: "Today's Actions",
                     subtitle: "Small tasks to grow faith.",
                     onTap: () {
+                      final dayId = todayPrayer!["day"]["id"];
+                      final journeyId = todayPrayer!["journey"]["id"];
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (_) => TodayActionScreen()),
+                        MaterialPageRoute(builder: (_) => TodayActionScreen(dayId: dayId, journeyId: journeyId,)),
                       );
                     },
                   ),

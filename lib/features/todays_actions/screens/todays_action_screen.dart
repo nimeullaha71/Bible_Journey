@@ -9,7 +9,9 @@ import '../../../widgets/buttons/custom_button.dart';
 import '../../reflection/screens/daily_reflection_screen.dart';
 
 class TodayActionScreen extends StatefulWidget {
-  const TodayActionScreen({super.key});
+  final int dayId;
+  final int journeyId;
+  const TodayActionScreen({super.key,required this.dayId, required this.journeyId,});
 
   @override
   State<TodayActionScreen> createState() => _TodayActionScreenState();
@@ -17,6 +19,7 @@ class TodayActionScreen extends StatefulWidget {
 
 class _TodayActionScreenState extends State<TodayActionScreen> {
   bool isLoading = true;
+  bool isCompleting = false;
   String actionText = "";
   int actionId = 0;
 
@@ -28,39 +31,79 @@ class _TodayActionScreenState extends State<TodayActionScreen> {
 
   Future<void> fetchTodayAction() async {
     final token = await LocalStorage.getToken();
-    final response = await http.get(
-      Uri.parse('${Urls.baseUrl}/progress/today/action'),
-      headers: {'Authorization': 'Bearer $token'},
-    );
-
-    if (response.statusCode == 200) {
-      final data = jsonDecode(response.body);
-      setState(() {
-        actionText = data['data']['action'];
-        actionId = data['data']['id'];
-        isLoading = false;
-      });
-    } else {
+    if (token == null || token.isEmpty) {
       setState(() => isLoading = false);
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text("User not logged in or token missing")),
+      );
+      return;
+    }
+
+    try {
+      final response = await http.get(
+        Uri.parse('${Urls.baseUrl}/progress/today/action'),
+        headers: {'Authorization': 'Bearer $token'},
+      );
+
+      print("Fetch Action Response: ${response.statusCode}, ${response.body}");
+
+      if (response.statusCode == 200) {
+        final data = jsonDecode(response.body);
+        setState(() {
+          actionText = data['data']['action'];
+          actionId = data['data']['id'];
+          isLoading = false;
+        });
+      } else {
+        setState(() => isLoading = false);
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text("Failed to fetch action: ${response.statusCode}")),
+        );
+      }
+    } catch (e) {
+      setState(() => isLoading = false);
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text("Network error: $e")),
+      );
     }
   }
 
   Future<void> markAsDone() async {
-    final token = await LocalStorage.getToken();
 
-    await http.post(
-      Uri.parse('${Urls.baseUrl}/progress/today/action'),
-      headers: {
-        'Authorization': 'Bearer $token',
-        'Content-Type': 'application/json'
-      },
-      body: jsonEncode({"action_id": actionId}),
-    );
+    try {
+      final token = await LocalStorage.getToken();
+      final response = await http.post(
+        Uri.parse("${Urls.baseUrl}/progress/stepcopmplete/"),
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": "Bearer $token",
+        },
+        body: jsonEncode({
+          "day_id": widget.dayId,
+          "item_type": "action",
+        }),
+      );
 
-    // Navigator.push(
-    //   //context,
-    //   //MaterialPageRoute(builder: (_) => const DailyReflectionScreen()),
-    // );
+      final data = jsonDecode(response.body);
+
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        print("Step completed: ${data['completed']}");
+
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text(data["message"])),
+        );
+
+        Navigator.push(context, MaterialPageRoute(builder: (context)=>DailyReflectionScreen(journeyId: widget.journeyId, dayId: widget.journeyId,)));
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text(data["message"] ?? "Failed to complete step")),
+        );
+      }
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text("Network error")),
+      );
+    }
   }
 
   @override
@@ -91,17 +134,14 @@ class _TodayActionScreenState extends State<TodayActionScreen> {
             ),
             const Spacer(),
             CustomButton(
-                text: "mark_as_done".tr(),
-                onTap: (){
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => DailyReflectionScreen()),
-                  );
-                }
-            )
+              text: isCompleting ? "Processing..." : "mark_as_done".tr(),
+              onTap: markAsDone,
+            ),
           ],
         ),
       ),
     );
   }
 }
+
+

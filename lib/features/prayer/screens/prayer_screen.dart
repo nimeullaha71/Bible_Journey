@@ -39,7 +39,7 @@ class _PrayerScreenState extends State<PrayerScreen> {
   Future<void> completePrayerStep() async {
 
     try {
-      final token = LocalStorage.getToken();
+      final token = await LocalStorage.getToken();
       final response = await http.post(
         Uri.parse("${Urls.baseUrl}/progress/stepcopmplete/"),
         headers: {

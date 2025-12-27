@@ -92,6 +92,8 @@ class _DailyDevotionQuizScreenState extends State<DailyDevotionQuizScreen> {
     }
   }
 
+
+
   void goPrevious() {
     if (currentQuestionIndex > 0) {
       setState(() { currentQuestionIndex--; });

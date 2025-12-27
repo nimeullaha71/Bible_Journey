@@ -137,7 +137,7 @@ class _JourneyDetails1State extends State<JourneyDetails1> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (_) => TodayActionScreen(),
+                                builder: (_) => TodayActionScreen(dayId: widget.dayId, journeyId: widget.journeyId,),
                               ),
                             );
                             break;
@@ -145,7 +145,7 @@ class _JourneyDetails1State extends State<JourneyDetails1> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (_) => DailyReflectionScreen(),
+                                builder: (_) => DailyReflectionScreen(journeyId: widget.journeyId, dayId: widget.dayId,),
                               ),
                             );
                             break;

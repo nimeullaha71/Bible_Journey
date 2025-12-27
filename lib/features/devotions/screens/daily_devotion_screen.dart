@@ -186,9 +186,14 @@
 // }
 
 
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:http/http.dart' as http;
+import '../../../app/Urls.dart';
 import '../../../app/constants.dart';
+import '../../../core/services/local_storage_service.dart';
 import '../../../widgets/appbars/custom_appbar.dart';
 import '../../../widgets/buttons/custom_button.dart';
 import '../../../widgets/custom_nav_bar.dart';
@@ -198,6 +203,7 @@ import '../../home/screen/home_screen.dart';
 import '../../journeys/screens/journey_screen.dart';
 import '../models/devotion_model.dart';
 import '../services/daily_devotion_api.dart';
+import 'daily_devotion_quiz_screen.dart';
 import 'devotion_detail_screen.dart';
 
 class DailyDevotionScreen extends StatefulWidget {
@@ -224,6 +230,47 @@ class _DailyDevotionScreenState extends State<DailyDevotionScreen> {
     super.initState();
     devotionFuture = DevotionApi.getTodayDevotion(widget.journeyId, widget.dayId);
   }
+
+  bool _isCompleting = false;
+
+  Future<void> completeDevotionStep() async {
+
+    try {
+      final token = await LocalStorage.getToken();
+      final response = await http.post(
+        Uri.parse("${Urls.baseUrl}/progress/stepcopmplete/"),
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": "Bearer $token",
+        },
+        body: jsonEncode({
+          "day_id": widget.dayId,
+          "item_type": "devotion",
+        }),
+      );
+
+      final data = jsonDecode(response.body);
+
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        print("Step completed: ${data['completed']}");
+
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text(data["message"])),
+        );
+
+        Navigator.push(context, MaterialPageRoute(builder: (context)=>DailyDevotionQuizScreen()));
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text(data["message"] ?? "Failed to complete step")),
+        );
+      }
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text("Network error")),
+      );
+    }
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -279,19 +326,22 @@ class _DailyDevotionScreenState extends State<DailyDevotionScreen> {
                     content: devotion.reflection,
                   ),
                   const SizedBox(height: 30),
+                  // CustomButton(
+                  //   text: "devotion.completed".tr(),
+                  //   onTap: () {
+                  //     Navigator.push(
+                  //       context,
+                  //       MaterialPageRoute(
+                  //         builder: (context) => DevotionDetailScreen(),
+                  //       ),
+                  //     );
+                  //   },
+                  // ),
                   CustomButton(
                     text: "devotion.completed".tr(),
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => DevotionDetailScreen(
-                            //response: snapshot.data!, // full devotion response
-                          ),
-                        ),
-                      );
-                    },
+                    onTap: completeDevotionStep,
                   ),
+
                 ],
               ),
             ),
