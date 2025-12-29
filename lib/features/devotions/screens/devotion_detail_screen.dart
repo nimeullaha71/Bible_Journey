@@ -13,9 +13,11 @@ import '../../journeys/screens/journey_screen.dart';
 
 class DevotionDetailScreen extends StatefulWidget {
   //final JourneyContentResponse response;
+  final int journeyId;
+  final int dayId;
 
   const DevotionDetailScreen({
-    super.key,
+    super.key, required this.journeyId, required this.dayId,
     //required this.response,
   });
 
@@ -189,8 +191,10 @@ class _DevotionDetailScreenState extends State<DevotionDetailScreen> {
                     context,
                     MaterialPageRoute(
                       builder: (context) => DailyDevotionQuizScreen(
-                        //quizzes: widget.response.quiz, // <-- এখান থেকে পাঠাচ্ছি
-                      ),
+                        journeyId: widget.journeyId,
+                        dayId: widget.dayId,
+                      )
+
                     ),
                   );
                 },

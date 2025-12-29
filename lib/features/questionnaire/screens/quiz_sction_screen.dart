@@ -261,8 +261,8 @@ class _QuizQuestionScreenState extends State<QuizQuestionScreen> {
                 },
                 child: Text(
                   currentQuestionIndex == quizData.length - 1
-                      ? "buttons.finish".tr()
-                      : "buttons.next".tr(),
+                      ? "Finish"//"buttons.finish".tr()
+                      : "Next",//"buttons.next".tr(),
                   style: const TextStyle(
                       color: Colors.white, fontSize: 18),
                 ),

@@ -11,7 +11,7 @@ class AppColors {
 class AppImages{
     static const splashBg = "assets/images/Rectangle.jpg";
     static const signUpBg = "assets/images/registrationBg.jpg";
-    static const appLogo = "assets/images/image 2.png";
+    static const appLogo = "assets/images/image2.png";
     static const maleImg = "assets/images/Male.png";
     static const femaleImg = "assets/images/Female.png";
 }

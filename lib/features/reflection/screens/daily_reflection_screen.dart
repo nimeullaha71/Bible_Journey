@@ -264,7 +264,7 @@ class _DailyReflectionScreenState extends State<DailyReflectionScreen> {
         );
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text(data["message"] ?? "Failed to complete day")),
+          SnackBar(content: Text(data["message"] ?? "You Must Complete Prayer ,Devotion & Action First")),
         );
       }
     } catch (e) {

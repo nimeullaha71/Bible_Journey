@@ -12,11 +12,13 @@ import '../../journeys/screens/journey_screen.dart';
 class QuizMarkScreen extends StatefulWidget {
   final int correctAnswers;
   final int totalQuestions;
+  final int journeyId;
+  final int dayId;
 
   const QuizMarkScreen({
     super.key,
     required this.correctAnswers,
-    required this.totalQuestions,
+    required this.totalQuestions, required this.journeyId, required this.dayId,
   });
 
   @override
@@ -76,16 +78,15 @@ class _QuizMarkScreenState extends State<QuizMarkScreen> {
                 ),
                 const SizedBox(height: 50),
                 CustomButton(
-                  text: "continue.continue".tr(),
-                  // onTap: () {
-                  //   Navigator.push(context, MaterialPageRoute(builder: (context) => TodayActionScreen(dayId: ,)));
-                  // },
-                  onTap: (){
-                    Navigator.pop(context);
-                  }
+                  //text: "continue.continue".tr(),
+                  text: "Continue",
+                  onTap: () {
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => TodayActionScreen(dayId: widget.dayId, journeyId: widget.journeyId,)));
+                  },
                 ),
                 const SizedBox(height: 10),
-                CustomButton(text: "continue.retry".tr(), onTap: () {}),
+               // CustomButton(text: "continue.retry".tr(), onTap: () {}),
+                CustomButton(text: "Retry", onTap: () {}),
               ],
             ),
           ),
