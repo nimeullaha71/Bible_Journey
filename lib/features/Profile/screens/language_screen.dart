@@ -2,7 +2,6 @@ import 'package:bible_journey/features/Profile/screens/profile_screen.dart';
 import 'package:bible_journey/features/bible/screens/bible_screen.dart';
 import 'package:bible_journey/features/journeys/screens/journey_screen.dart';
 import 'package:bible_journey/main_bottom_nav_screen.dart';
-import 'package:bible_journey/widgets/buttons/custom_button.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -67,7 +66,8 @@ class _LanguageScreenState extends State<LanguageScreen> {
 
             // English (US)
             CustomLanguage(
-              svgAssetPath: "assets/images/US.svg",
+              imagePath: "assets/images/US.svg",
+              isSvg: true,
               title: "English (US)",
               isSelected: selectedLocale == const Locale('en'),
               onTap: () => changeLanguage(const Locale('en')),
@@ -76,7 +76,8 @@ class _LanguageScreenState extends State<LanguageScreen> {
 
             // Spanish
             CustomLanguage(
-              svgAssetPath: "assets/images/Spain.svg",
+              imagePath: "assets/images/spanish.png",
+              //isSvg: true,
               title: "Spanish",
               isSelected: selectedLocale == const Locale('es'),
               onTap: () => changeLanguage(const Locale('es')),
@@ -85,7 +86,8 @@ class _LanguageScreenState extends State<LanguageScreen> {
 
             // Italian
             CustomLanguage(
-              svgAssetPath: "assets/images/Italy.svg",
+              imagePath: "assets/images/Italian.png",
+              //isSvg: true,
               title: "Italian",
               isSelected: selectedLocale == const Locale('it'),
               onTap: () => changeLanguage(const Locale('it')),
@@ -94,7 +96,8 @@ class _LanguageScreenState extends State<LanguageScreen> {
 
             // German
             CustomLanguage(
-              svgAssetPath: "assets/images/German.svg",
+              //svgAssetPath: "assets/images/germanyflagsvg.svg",
+              imagePath: "assets/images/germany flag svg.png",
               title: "German",
               isSelected: selectedLocale == const Locale('de'),
               onTap: () => changeLanguage(const Locale('de')),
@@ -103,7 +106,8 @@ class _LanguageScreenState extends State<LanguageScreen> {
 
             // French
             CustomLanguage(
-              svgAssetPath: "assets/images/France.svg",
+              imagePath: "assets/images/French.png",
+              //isSvg: true,
               title: "French",
               isSelected: selectedLocale == const Locale('fr'),
               onTap: () => changeLanguage(const Locale('fr')),
@@ -112,7 +116,8 @@ class _LanguageScreenState extends State<LanguageScreen> {
 
             // Portuguese
             CustomLanguage(
-              svgAssetPath: "assets/images/Portugal.svg",
+              //svgAssetPath: "assets/images/portugueseflag.svg",
+              imagePath: "assets/images/portuguese flag.png",
               title: "Portuguese",
               isSelected: selectedLocale == const Locale('pt'),
               onTap: () => changeLanguage(const Locale('pt')),
@@ -120,15 +125,15 @@ class _LanguageScreenState extends State<LanguageScreen> {
             const SizedBox(height: 115),
 
             // Done button
-            Padding(
-              padding: const EdgeInsets.only(left: 20),
-              child: CustomButton(
-                text: "Done",
-                onTap: () {
-                  Navigator.pop(context); // back to previous screen
-                },
-              ),
-            ),
+            // Padding(
+            //   padding: const EdgeInsets.all(20),
+            //   child: CustomButton(
+            //     text: "Done",
+            //     onTap: () {
+            //       Navigator.pop(context); // back to previous screen
+            //     },
+            //   ),
+            // ),
           ],
         ),
       ),

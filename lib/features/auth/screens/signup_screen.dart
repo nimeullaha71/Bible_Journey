@@ -213,7 +213,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     SizedBox(height: height * 0.015),
 
                     AuthCustomButton(
-                      text: "sign_up.login_button".tr(),
+                      text: "login.sign_up".tr(),
                       height: height * 0.055,
                       onTap: signup,
                       isLoading: _isLoading,

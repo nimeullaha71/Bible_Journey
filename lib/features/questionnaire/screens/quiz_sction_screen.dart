@@ -319,6 +319,13 @@ class _QuizQuestionScreenState extends State<QuizQuestionScreen> {
   }
 
   void goToNext() {
+    if (selectedAnswers[currentQuestionIndex].isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text("Please select at least one option.")),
+      );
+      return;
+    }
+
     if (currentQuestionIndex < quizData.length - 1) {
       setState(() {
         currentQuestionIndex++;
@@ -329,4 +336,5 @@ class _QuizQuestionScreenState extends State<QuizQuestionScreen> {
       print(buildQAPairs);
     }
   }
+
 }
