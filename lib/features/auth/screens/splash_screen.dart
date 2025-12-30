@@ -5,8 +5,36 @@ import 'package:bible_journey/widgets/buttons/auth_flow_custom_button.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
-class SplashScreen extends StatelessWidget {
+import '../../../core/services/local_storage_service.dart';
+
+class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
+
+  @override
+  State<SplashScreen> createState() => _SplashScreenState();
+}
+
+class _SplashScreenState extends State<SplashScreen> {
+  @override
+  void initState() {
+    super.initState();
+    _checkLoginStatus();
+  }
+
+  void _checkLoginStatus() async {
+    final token = await LocalStorage.getToken();
+
+    if (token != null && token.isNotEmpty) {
+      // Token thakle user already login, direct main screen
+      Future.microtask(() {
+        Navigator.pushReplacementNamed(
+          context,
+          AppRoutes.mainBottomNavScreen,
+        );
+      });
+    }
+    // Token na thakle splash screen normal flow e thakbe
+  }
 
   @override
   Widget build(BuildContext context) {

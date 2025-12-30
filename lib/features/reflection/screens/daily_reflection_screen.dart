@@ -127,7 +127,7 @@ class _DailyReflectionScreenState extends State<DailyReflectionScreen> {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
               content: Text(data["message"] ??
-                  "You Must Complete Prayer, Devotion & Action First")),
+                  "One day at a time! Come back tomorrow to complete the next day.")),
         );
       }
     } catch (e) {

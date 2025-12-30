@@ -1,77 +1,480 @@
-import 'package:bible_journey/features/Profile/screens/profile_screen.dart';
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import '../../../main_bottom_nav_screen.dart';
-import '../../../widgets/custom_nav_bar.dart';
-import '../../bible/screens/bible_screen.dart';
-import '../../journeys/screens/journey_screen.dart';
+import '../../../app/app_string.dart';
+import '../widgets/app_logo_widget.dart';
+import '../widgets/for_bold_text_widget.dart';
+import '../widgets/reuseable_span_widget.dart';
+import '../widgets/title_text_widget.dart';
 
-class PrivacyPolicyScreen extends StatefulWidget {
+class PrivacyPolicyScreen extends StatelessWidget {
   const PrivacyPolicyScreen({super.key});
 
   @override
-  State<PrivacyPolicyScreen> createState() => _PrivacyPolicyScreenState();
-}
-
-class _PrivacyPolicyScreenState extends State<PrivacyPolicyScreen> {
-  int _selectedIndex = 3;
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFFF8F5F2),
-      appBar: AppBar(
-        backgroundColor: const Color(0xFFF8F5F2),
-        title: Text("privacy_policy".tr()),
-        centerTitle: true,
-        elevation: 0,
-      ),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16.0),
+      body: SafeArea(
         child: SingleChildScrollView(
-          child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
+          child: Padding(
+            padding: EdgeInsets.symmetric(horizontal: 25),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const SizedBox(height: 18),
-                Text("By using Bible, you agree to comply with and be bound by these Terms of Service. If you do not agree to these terms, you must immediately stop using the Service. We reserve the right to update, modify, or change these terms at any time, and the updated version will be posted on this page. As a user, you agree to use the Service in compliance with all applicable laws and regulations, and not engage in any activity that could harm the app or other users. You agree not to reproduce, copy, or distribute any part of the Service without prior permission. Your privacy is important to us, and we encourage you to review our Privacy Policy to understand how we collect, use, and protect your personal information. By using the Service, you consent to the collection and use of your data as described in our Privacy Policy. The app provides access to Bible verses, passages, and related content for personal, non-commercial use only. All Bible content and related resources are protected by copyright, and you may not use or distribute any content for commercial purposes without written consent. All intellectual property rights to the Service, including the design, layout, and content, are owned by [Your Bible App Name] or its licensors. These Terms of Service do not grant you any rights to the intellectual property of the Service.",
-
-                  style: TextStyle(
-                    fontSize: 16,
-                    color: Colors.black,
-                    height: 1.5,
-
-                  ),
+                AppLogoWidget(),
+                SizedBox(height: 15),
+                TitleTextWidget(
+                  titleText: AppString.privacyPolicyText,
+                  type: PageTitleType.large,
                 ),
-              ]
+                SizedBox(height: 5),
+        
+                _importantPrivacyInformation(),
+                _titleAndDescription(
+                  titleText: AppString.tableOfContentsTextTitle,
+                  titleType: PageTitleType.large,
+                  beforeText: AppString.tableOfContentsTextBody,
+                  mailOrWebLink: '',
+                  afterText: '',
+                ),
+                _titleAndDescription(
+                  titleText: AppString.personalDataControllerTitle,
+                  titleType: PageTitleType.large,
+                  beforeText: AppString.personalDataControllerBody,
+                  mailOrWebLink: '',
+                  afterText: '',
+                ),
+                _personalDataCollectSection(),
+                _weProcessPersonalDataSection(),
+                _policyFourSection(),
+                _policyFiveSection(),
+                _titleAndDescription(
+                  titleText: AppString.exerciseYourPrivacyRightsTextTitle,
+                  titleType: PageTitleType.medium,
+                  beforeText: AppString.exerciseYourPrivacyRightsTextBody,
+                  mailOrWebLink: '',
+                  afterText: '',
+                ),
+                _titleAndDescription(
+                  titleText: AppString.additionalInformationTextTitle,
+                  titleType: PageTitleType.medium,
+                  beforeText: AppString.additionalInformationTextBody,
+                  mailOrWebLink: AppString.additionalInformationTextEmail,
+                  afterText: '',
+                ),
+        
+                _titleAndDescription(
+                  titleText: AppString.ageLimitationTextTitle,
+                  titleType: PageTitleType.medium,
+                  beforeText: AppString.ageLimitationTextBody,
+                  mailOrWebLink: "",
+                  afterText: '',
+                ),
+                _titleAndDescription(
+                  titleText: AppString.internationalDataTransfersTextTitle,
+                  titleType: PageTitleType.medium,
+                  beforeText: AppString.internationalDataTransfersTextBody,
+                  mailOrWebLink: '',
+                  afterText: '',
+                ),
+                _titleAndDescription(
+                  titleText: AppString.changesToThisPolicyTextTitle,
+                  titleType: PageTitleType.medium,
+                  beforeText: AppString.changesToThisPolicyTextBody,
+                  mailOrWebLink: '',
+                  afterText: '',
+                ),
+        
+                _titleAndDescription(
+                  titleText: AppString.californiaPrivacyRightsTextTitle,
+                  titleType: PageTitleType.medium,
+                  beforeText: AppString.californiaPrivacyRightsBeforeTextBody,
+                  mailOrWebLink: AppString.californiaPrivacyRightsEmail,
+                  afterText: AppString.californiaPrivacyRightsAfterText,
+                ),
+        
+                _titleAndDescription(
+                  titleText: AppString.dataRetentionTextTitle,
+                  titleType: PageTitleType.medium,
+                  beforeText: AppString.dataRetentionTextBody,
+                  mailOrWebLink: '',
+                  afterText: '',
+                ),
+                _titleAndDescription(
+                  titleText: AppString.requestsAreHandledTextTitle,
+                  titleType: PageTitleType.medium,
+                  beforeText: AppString.requestsAreHandledTextBody,
+                  mailOrWebLink: '',
+                  afterText: '',
+                ),
+                _titleAndDescription(
+                  titleText: AppString.contactUsTextTitle,
+                  titleType: PageTitleType.medium,
+                  beforeText: AppString.contactUsBeforeText,
+                  mailOrWebLink: AppString.contactUsEmail,
+                  afterText: '',
+                ),
+                SizedBox(height: 100),
+              ],
+            ),
           ),
         ),
       ),
-      bottomNavigationBar: CustomNavbar(
-        currentIndex: _selectedIndex,
-        onItemPressed: (index) {
-          setState(() {
-            _selectedIndex = index;
-          });
+    );
+  }
 
-          switch (index) {
-            case 0:
-              Navigator.push(
-                  context, MaterialPageRoute(builder: (_) => const MainBottomNavScreen()));
-              break;
-            case 1:
-              Navigator.push(
-                  context, MaterialPageRoute(builder: (_) => const BibleScreen()));
-              break;
-            case 2:
-              Navigator.push(
-                  context, MaterialPageRoute(builder: (_) => const JourneyScreen()));
-              break;
-            case 3:
-              Navigator.push(
-                  context, MaterialPageRoute(builder: (_) => const ProfileScreen()));
-              break;
-          }
-        },
-      ),
+  Widget _policyFiveSection() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        _titleAndDescription(
+          titleText: AppString.shareYourPersonalDataTextTitle,
+          titleType: PageTitleType.large,
+          beforeText: AppString.shareYourPersonalDataTextBody,
+          mailOrWebLink: '',
+          afterText: '',
+        ),
+        _titleAndDescription(
+          titleText: AppString.serviceProvidersTextTitle,
+          titleType: PageTitleType.medium,
+          beforeText: AppString.serviceProvidersTextBody,
+          mailOrWebLink: '',
+          afterText: '',
+        ),
+        _titleAndDescription(
+          titleText: AppString.otherPublicAuthoritiesTextTitle,
+          titleType: PageTitleType.medium,
+          beforeText: AppString.otherPublicAuthoritiesTextBody,
+          mailOrWebLink: '',
+          afterText: '',
+        ),
+        _titleAndDescription(
+          titleText: AppString.partOfMergerOrAcquisitionTextTitle,
+          titleType: PageTitleType.medium,
+          beforeText: AppString.partOfMergerOrAcquisitionTextBody,
+          mailOrWebLink: '',
+          afterText: '',
+        ),
+      ],
+    );
+  }
+
+  Widget _policyFourSection() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        _titleAndDescription(
+          titleText: AppString.underWeProcessYourPersonalDataTextTitle,
+          titleType: PageTitleType.large,
+          beforeText: AppString.underWeProcessYourPersonalDataTextBody,
+          mailOrWebLink: '',
+          afterText: '',
+        ),
+        _titleAndDescription(
+          titleText: AppString.performOurContractWithYouTextTitle,
+          titleType: PageTitleType.medium,
+          beforeText: AppString.performOurContractWithYouTextBody,
+          mailOrWebLink: '',
+          afterText: '',
+        ),
+        _titleAndDescription(
+          titleText: AppString.legitimateInterestsTextTitle,
+          titleType: PageTitleType.medium,
+          beforeText: AppString.legitimateInterestsTextBody,
+          mailOrWebLink: '',
+          afterText: '',
+        ),
+        _boldText(),
+      ],
+    );
+  }
+
+  Widget _weProcessPersonalDataSection() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        _titleAndDescription(
+          titleText: AppString.weProcessPersonalDataTextTitle,
+          titleType: PageTitleType.large,
+          beforeText: AppString.weProcessPersonalDataTextBody,
+          mailOrWebLink: '',
+          afterText: '',
+        ),
+        _titleAndDescription(
+          titleText: AppString.provideOurServiceTextTitle,
+          titleType: PageTitleType.medium,
+          beforeText: AppString.provideOurServiceTextBody,
+          mailOrWebLink: '',
+          afterText: '',
+        ),
+        _titleAndDescription(
+          titleText: AppString.customizeYourExperienceTextTitle,
+          titleType: PageTitleType.medium,
+          beforeText: AppString.customizeYourExperienceTextBody,
+          mailOrWebLink: '',
+          afterText: '',
+        ),
+        _titleAndDescription(
+          titleText: AppString.customerSupportTextTitle,
+          titleType: PageTitleType.medium,
+          beforeText: AppString.customerSupportTextBody,
+          mailOrWebLink: '',
+          afterText: '',
+        ),
+        _titleAndDescription(
+          titleText: AppString.communicateOurServiceTextTitle,
+          titleType: PageTitleType.medium,
+          beforeText: AppString.communicateOurServiceTextBody,
+          mailOrWebLink: '',
+          afterText: '',
+        ),
+        _titleAndDescription(
+          titleText: AppString.researchAndAnalyzeTextTitle,
+          titleType: PageTitleType.medium,
+          beforeText: AppString.researchAndAnalyzeTextBody,
+          mailOrWebLink: '',
+          afterText: '',
+        ),
+
+        _titleAndDescription(
+          titleText: AppString.marketingCommunicationsTextTitle,
+          titleType: PageTitleType.medium,
+          beforeText: AppString.marketingCommunicationsTextBody,
+          mailOrWebLink: '',
+          afterText: '',
+        ),
+        _titleAndDescription(
+          titleText: AppString.personalizeOurAdsTextTitle,
+          titleType: PageTitleType.medium,
+          beforeText: AppString.personalizeOurAdsTextBody,
+          mailOrWebLink: '',
+          afterText: '',
+        ),
+        SizedBox(height: 10),
+        TitleTextWidget(
+          titleText: AppString.influencePersonalizedAdvertisingTextTitle,
+          type: PageTitleType.medium,
+        ),
+        SizedBox(height: 10),
+        BoldText(
+          normalText: AppString.influencePersonalizedAdvertisingTextIos,
+          boldText: 'iOS: ',
+        ),
+        BoldText(
+          normalText: AppString.influencePersonalizedAdvertisingTextAndroid,
+          boldText: 'Android: ',
+        ),
+        BoldText(
+          normalText: AppString.influencePersonalizedAdvertisingTextMacOS,
+          boldText: 'macOS: ',
+        ),
+        BoldText(
+          normalText: AppString.influencePersonalizedAdvertisingTextWindows,
+          boldText: 'Windows: ',
+        ),
+        SizedBox(height: 15),
+        ReuseableSpanWidget(
+          textBefore: AppString.oneBeforeText,
+          link: AppString.oneBeforeLink,
+          textAfter: "",
+        ),
+        ReuseableSpanWidget(
+          textBefore: AppString.twoBeforeText,
+          link: AppString.twoBeforeLink,
+          textAfter: "",
+        ),
+        ReuseableSpanWidget(
+          textBefore: AppString.threeBeforeText,
+          link: AppString.threeBeforeLink,
+          textAfter: "",
+        ),
+        ReuseableSpanWidget(
+          textBefore: AppString.fourBeforeText,
+          link: AppString.fourBeforeLink,
+          textAfter: "",
+        ),
+        ReuseableSpanWidget(
+          textBefore: AppString.fiveBeforeText,
+          link: AppString.fiveBeforeLink,
+          textAfter: "",
+        ),
+        SizedBox(height: 15),
+        BoldText(
+          normalText: AppString.influencePersonalizedAdvertisingTextBrowsers,
+          boldText: 'Browsers: ',
+        ),
+
+        _titleAndDescription(
+          //influencePersonalizedAdvertisingTextTitle
+          titleText: AppString.processYourPaymentsTextTitle,
+          titleType: PageTitleType.large,
+          beforeText: AppString.processYourPaymentsTextBody,
+          mailOrWebLink: '',
+          afterText: '',
+        ),
+        _titleAndDescription(
+          titleText: AppString.preventAndCombatFraudTextTitle,
+          titleType: PageTitleType.medium,
+          beforeText: AppString.preventAndCombatFraudTextBody,
+          mailOrWebLink: '',
+          afterText: '',
+        ),
+        _titleAndDescription(
+          titleText: AppString.complyWithLegalObligationsTextTitle,
+          titleType: PageTitleType.medium,
+          beforeText: AppString.complyWithLegalObligationsTextBody,
+          mailOrWebLink: '',
+          afterText: '',
+        ),
+      ],
+    );
+  }
+
+  Widget _personalDataCollectSection() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        _titleAndDescription(
+          titleText: AppString.personalDataCollectTextTitle,
+          titleType: PageTitleType.large,
+          beforeText: AppString.personalDataCollectTextBody,
+          mailOrWebLink: '',
+          afterText: '',
+        ),
+        _titleAndDescription(
+          titleText: AppString.dataYouGiveUsTextTitle,
+          titleType: PageTitleType.large,
+          beforeText: AppString.dataYouGiveUsTextBody,
+          mailOrWebLink: '',
+          afterText: '',
+        ),
+        SizedBox(height: 10),
+        TitleTextWidget(
+          titleText: AppString.dataWeCollectAutoTextTitle,
+          type: PageTitleType.medium,
+        ),
+        _titleAndDescription(
+          titleText: AppString.dataAboutFoundTextTitle,
+          titleType: PageTitleType.small,
+          beforeText: AppString.dataAboutFoundTextBody,
+          mailOrWebLink: '',
+          afterText: '',
+        ),
+        _titleAndDescription(
+          titleText: AppString.deviceAndLocationDataTextTitle,
+          titleType: PageTitleType.small,
+          beforeText: AppString.deviceAndLocationDataTextBody,
+          mailOrWebLink: '',
+          afterText: '',
+        ),
+        _titleAndDescription(
+          titleText: AppString.usageDataTextTitle,
+          titleType: PageTitleType.small,
+          beforeText: AppString.usageDataTextBody,
+          mailOrWebLink: '',
+          afterText: '',
+        ),
+        _titleAndDescription(
+          titleText: AppString.advertisingIdsTextTitle,
+          titleType: PageTitleType.small,
+          beforeText: AppString.advertisingIdsTextBody,
+          mailOrWebLink: '',
+          afterText: '',
+        ),
+        _titleAndDescription(
+          titleText: AppString.transactionDataTextTitle,
+          titleType: PageTitleType.small,
+          beforeText: AppString.transactionDataTextBody,
+          mailOrWebLink: '',
+          afterText: '',
+        ),
+        _titleAndDescription(
+          titleText: AppString.cookiesTextTitle,
+          titleType: PageTitleType.small,
+          beforeText: AppString.cookiesTextBody,
+          mailOrWebLink: '',
+          afterText: '',
+        ),
+      ],
+    );
+  }
+
+  Widget _importantPrivacyInformation() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        TitleTextWidget(
+          titleText: AppString.policyInformationText,
+          type: PageTitleType.large,
+        ),
+        SizedBox(height: 10),
+        ReuseableSpanWidget(
+          textBefore: AppString.policyInformationTextPartOne,
+          link: AppString.policyInformationTextPartOneEmail,
+          textAfter: ".",
+          subject: 'Privacy Policy Question',
+        ),
+        SizedBox(height: 10),
+        Divider(height: 1),
+        SizedBox(height: 10),
+        ReuseableSpanWidget(
+          textBefore: AppString.policyInformationTextPartTwoBeforeText,
+          link: AppString.policyInformationTextPartTwoLink,
+          textAfter: AppString.policyInformationTextPartTwoAfterText,
+        ),
+      ],
+    );
+  }
+
+  Widget _boldText() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        BoldText(
+          normalText: AppString.legitimateInterestsTextBodyOne,
+          boldText: AppString.legitimateInterestsTextTitleOne,
+        ),
+        BoldText(
+          normalText: AppString.legitimateInterestsTextBodyTwo,
+          boldText: AppString.legitimateInterestsTextTitleTwo,
+        ),
+        BoldText(
+          normalText: AppString.legitimateInterestsTextBodyThree,
+          boldText: AppString.legitimateInterestsTextTitleThree,
+        ),
+        BoldText(
+          normalText: AppString.legitimateInterestsTextBodyFour,
+          boldText: AppString.legitimateInterestsTextTitleFour,
+        ),
+        BoldText(
+          normalText: AppString.legitimateInterestsTextBodyFive,
+          boldText: AppString.legitimateInterestsTextTitleFive,
+        ),
+        TitleTextWidget(
+          titleText: AppString.complyWithObligationsTextTitle,
+          type: PageTitleType.medium,
+        ),
+      ],
+    );
+  }
+
+  Widget _titleAndDescription({
+    required String titleText,
+    required PageTitleType titleType,
+    required String beforeText,
+    required String mailOrWebLink,
+    required String afterText,
+  }) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const SizedBox(height: 10),
+        TitleTextWidget(titleText: titleText, type: titleType),
+        const SizedBox(height: 10),
+        ReuseableSpanWidget(
+          textBefore: beforeText,
+          link: mailOrWebLink,
+          textAfter: afterText,
+        ),
+        const SizedBox(height: 10),
+      ],
     );
   }
 }

@@ -4,8 +4,10 @@ import 'package:bible_journey/features/Profile/screens/change_password_screen.da
 import 'package:bible_journey/features/Profile/screens/deactivated_pop_up.dart';
 import 'package:bible_journey/features/Profile/screens/help_support_screen.dart';
 import 'package:bible_journey/features/Profile/screens/language_screen.dart';
+import 'package:bible_journey/features/Profile/screens/money_back_policy_screen.dart';
 import 'package:bible_journey/features/Profile/screens/privacy_policy_screen.dart';
 import 'package:bible_journey/features/Profile/screens/profile_details.dart';
+import 'package:bible_journey/features/Profile/screens/subscription_terms_screen.dart';
 import 'package:bible_journey/features/Profile/screens/terms_service_screen.dart';
 import 'package:bible_journey/features/auth/screens/login_screen.dart';
 import 'package:bible_journey/features/auth/screens/trial_expired_payment_screen.dart';
@@ -143,7 +145,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 23),
                 margin: const EdgeInsets.symmetric(vertical: 5, horizontal: 12),
-                height: 200,
+                height: 150,
                 decoration: BoxDecoration(
                   color: const Color(0xffFCFAF9),
                   borderRadius: BorderRadius.circular(24),
@@ -167,16 +169,16 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
                     const SizedBox(height: 10),
 
-                    CustomText(
-                        textIconPath: 'assets/images/Bell.svg',
-                        text: "notifications".tr(),
-                        trailingIcon: Icons.arrow_forward_ios,
-                        onTap: (){
-                          //Navigator.push(
-                              //context, MaterialPageRoute(builder: (_) => const NotificationScreen()));
-                        }),
+                    // CustomText(
+                    //     textIconPath: 'assets/images/Bell.svg',
+                    //     text: "notifications".tr(),
+                    //     trailingIcon: Icons.arrow_forward_ios,
+                    //     onTap: (){
+                    //       //Navigator.push(
+                    //           //context, MaterialPageRoute(builder: (_) => const NotificationScreen()));
+                    //     }),
 
-                    const SizedBox(height: 10),
+                    // const SizedBox(height: 10),
 
                     CustomText(
                         textIconPath: 'assets/images/LockOpen.svg',
@@ -250,7 +252,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 23),
                 margin: const EdgeInsets.symmetric(vertical: 5, horizontal: 12),
-                height: 160,
+                height: 200,
                 decoration: BoxDecoration(
                   color: const Color(0xffFCFAF9),
                   borderRadius: BorderRadius.circular(24),
@@ -265,11 +267,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     const SizedBox(height: 10),
 
                     CustomText(
-                        textIconPath: 'assets/images/Headset.svg',
-                        text:  "help_support".tr(),
+                        textIconPath: 'assets/images/money_back.svg',
+                        //text:  "help_support".tr(),
+                      text: "Money Back Policy",
                         trailingIcon: Icons.arrow_forward_ios,
                         onTap: (){
-                          Navigator.push(context, MaterialPageRoute(builder: (context)=>HelpSupportScreen()));
+                          Navigator.push(context, MaterialPageRoute(builder: (context)=>MoneyBackPolicyScreen()));
                         },
                     ),
 
@@ -281,7 +284,18 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         trailingIcon:  Icons.arrow_forward_ios,
                         onTap: (){
                           Navigator.push(
-                              context, MaterialPageRoute(builder: (_) => const TermsServiceScreen()));
+                              context, MaterialPageRoute(builder: (_) => const TermsAndConditionsOfUseScreen()));
+                        }),
+
+                    const SizedBox(height: 10),
+                    CustomText(
+                        //text: "terms_of_service".tr(),
+                      text: "Subscription Terms ",
+                        textIconPath: 'assets/images/subscription.svg',
+                        trailingIcon:  Icons.arrow_forward_ios,
+                        onTap: (){
+                          Navigator.push(
+                              context, MaterialPageRoute(builder: (_) => const SubscriptionTermsScreen()));
                         }),
 
                     const SizedBox(height: 10),
