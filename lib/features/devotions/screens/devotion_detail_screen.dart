@@ -12,13 +12,11 @@ import '../../journeys/screens/journey_screen.dart';
 
 
 class DevotionDetailScreen extends StatefulWidget {
-  //final JourneyContentResponse response;
   final int journeyId;
   final int dayId;
 
   const DevotionDetailScreen({
     super.key, required this.journeyId, required this.dayId,
-    //required this.response,
   });
 
   @override
@@ -93,47 +91,15 @@ class _DevotionDetailScreenState extends State<DevotionDetailScreen> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: const [
                           Text(
-                            "3 Questions",
-                            style: TextStyle(
-                              color: Colors.black,
-                              fontSize: 14,
-                            ),
-                          ),
-                          SizedBox(height: 4),
-                          Text(
                             "Total questions",
                             style: TextStyle(
-                              color: Colors.black54,
-                              fontSize: 12,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-
-
-                  Container(
-                    height: 130,
-                    width: 180,
-                    decoration: BoxDecoration(
-                      color: Color(0xFFE3E9E3),
-                      borderRadius: BorderRadius.circular(14),
-                    ),
-                    child: Center(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: const [
-                          Text(
-                            "1 minutes",
-                            style: TextStyle(
                               color: Colors.black,
                               fontSize: 14,
                             ),
                           ),
                           SizedBox(height: 4),
                           Text(
-                            "Estimated time",
+                            "3 Questions",
                             style: TextStyle(
                               color: Colors.black54,
                               fontSize: 12,
@@ -143,6 +109,38 @@ class _DevotionDetailScreenState extends State<DevotionDetailScreen> {
                       ),
                     ),
                   ),
+
+
+                  // Container(
+                  //   height: 130,
+                  //   width: 180,
+                  //   decoration: BoxDecoration(
+                  //     color: Color(0xFFE3E9E3),
+                  //     borderRadius: BorderRadius.circular(14),
+                  //   ),
+                  //   child: Center(
+                  //     child: Column(
+                  //       mainAxisAlignment: MainAxisAlignment.center,
+                  //       children: const [
+                  //         Text(
+                  //           "1 minutes",
+                  //           style: TextStyle(
+                  //             color: Colors.black,
+                  //             fontSize: 14,
+                  //           ),
+                  //         ),
+                  //         SizedBox(height: 4),
+                  //         Text(
+                  //           "Estimated time",
+                  //           style: TextStyle(
+                  //             color: Colors.black54,
+                  //             fontSize: 12,
+                  //           ),
+                  //         ),
+                  //       ],
+                  //     ),
+                  //   ),
+                  // ),
 
                 ],
               ),
@@ -185,7 +183,8 @@ class _DevotionDetailScreenState extends State<DevotionDetailScreen> {
               const SizedBox(height: 35),
 
               CustomButton(
-                text: "buttons.start_quiz".tr(),
+                //text: "buttons.start_quiz".tr(),
+                text: "Start Quiz",
                 onTap: () {
                   Navigator.push(
                     context,

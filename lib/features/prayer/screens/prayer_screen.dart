@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:bible_journey/app/Urls.dart';
 import 'package:bible_journey/core/services/local_storage_service.dart';
+import 'package:bible_journey/features/devotions/screens/daily_devotion_screen.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -36,8 +37,59 @@ class _PrayerScreenState extends State<PrayerScreen> {
     prayerFuture = PrayerApi.getTodayPrayer(widget.journeyId, widget.dayId);
   }
 
-  Future<void> completePrayerStep() async {
+  // Future<void> completePrayerStep() async {
+  //
+  //   try {
+  //     final token = await LocalStorage.getToken();
+  //     final response = await http.post(
+  //       Uri.parse("${Urls.baseUrl}/progress/stepcopmplete/"),
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //         "Authorization": "Bearer $token",
+  //       },
+  //       body: jsonEncode({
+  //         "day_id": widget.dayId,
+  //         "item_type": "prayer",
+  //       }),
+  //     );
+  //
+  //     final data = jsonDecode(response.body);
+  //
+  //     if (response.statusCode == 200 || response.statusCode == 201) {
+  //       print("Step completed: ${data['completed']}");
+  //
+  //       ScaffoldMessenger.of(context).showSnackBar(
+  //         SnackBar(content: Text(data["message"])),
+  //       );
+  //
+  //       Navigator.push(context, MaterialPageRoute(builder: (context)=>DailyDevotionScreen(journeyId: widget.journeyId, dayId: widget.dayId)));
+  //     } else {
+  //       ScaffoldMessenger.of(context).showSnackBar(
+  //         SnackBar(content: Text(data["message"] ?? "Failed to complete step")),
+  //       );
+  //     }
+  //   } catch (e) {
+  //     ScaffoldMessenger.of(context).showSnackBar(
+  //       const SnackBar(content: Text("Network error")),
+  //     );
+  //   }
+  // }
+  Future<void> completePrayerStep(bool isCompleted) async {
+    if (isCompleted) {
+      // Step already completed → navigate directly
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => DailyDevotionScreen(
+            journeyId: widget.journeyId,
+            dayId: widget.dayId,
+          ),
+        ),
+      );
+      return;
+    }
 
+    // Step not completed → call API
     try {
       final token = await LocalStorage.getToken();
       final response = await http.post(
@@ -56,12 +108,19 @@ class _PrayerScreenState extends State<PrayerScreen> {
 
       if (response.statusCode == 200 || response.statusCode == 201) {
         print("Step completed: ${data['completed']}");
-
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(content: Text(data["message"])),
         );
 
-        Navigator.pop(context, true);
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => DailyDevotionScreen(
+              journeyId: widget.journeyId,
+              dayId: widget.dayId,
+            ),
+          ),
+        );
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(content: Text(data["message"] ?? "Failed to complete step")),
@@ -131,9 +190,9 @@ class _PrayerScreenState extends State<PrayerScreen> {
                   const SizedBox(height: 32),
                   CustomButton(
                     text: "Next",
-                    //onTap: () => Navigator.pop(context, true),
-                    onTap: completePrayerStep,
+                    onTap: () => completePrayerStep(snapshot.data!.isCompleted),
                   ),
+
                 ],
               ),
             ),

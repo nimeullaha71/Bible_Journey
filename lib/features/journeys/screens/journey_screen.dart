@@ -8,9 +8,8 @@ import 'package:flutter/material.dart';
 import '../models/journey_model.dart';
 import '../services/journey_api.dart';
 
-
 class JourneyScreen extends StatefulWidget {
-  const JourneyScreen({super.key});
+  const JourneyScreen({super.key,});
 
   @override
   State<JourneyScreen> createState() => _JourneyScreenState();
@@ -66,42 +65,50 @@ class _JourneyScreenState extends State<JourneyScreen> {
                 itemBuilder: (context, index) {
                   final journey = journeys[index];
 
-                  return HomeBox(
-                    icon: journey.journeyIcon.isNotEmpty
-                        ? Image.network(
+                  Widget iconWidget;
+                  if (journey.journeyIcon.isNotEmpty) {
+                    iconWidget = Image.network(
                       journey.journeyIcon,
                       width: 32,
                       height: 32,
-                      color: journey.status == "locked"
-                          ? Colors.grey
-                          : null,
-                    )
-                        : Icon(
+                    );
+                  } else {
+                    iconWidget = Icon(
                       Icons.explore,
                       size: 28,
-                      color: journey.status == "current"
+                      color: journey.status == "locked"
+                          ? Colors.grey.withOpacity(0.5)
+                          : journey.status == "current"
                           ? Colors.green
-                          : Colors.grey,
-                    ),
+                          : Colors.blue,
+                    );
+                  }
+
+                  return HomeBox(
+                    icon: iconWidget,
                     title: journey.name,
                     subtitle: "Completed days: ${journey.completedDays}",
-                    onTap: journey.status == "locked"
-                        ? null
-                        : () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (_) => JourneyDetailScreen(
-                            journeyId: journey.id,
+                    onTap: () {
+                      if (journey.status == "locked") {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text(
+                              "You first complete your current Journey then Unlock the Other Journey",
+                            ),
                           ),
-                        ),
-                      );
+                        );
+                      } else {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (_) => JourneyDetailScreen(journeyId: journey.id),
+                          ),
+                        );
+                      }
                     },
                   );
-
                 },
               );
-
             },
           ),
         ),
