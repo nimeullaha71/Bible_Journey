@@ -44,56 +44,13 @@ class _DailyDevotionScreenState extends State<DailyDevotionScreen> {
   }
 
   bool _isCompleting = false;
-  //
-  // Future<void> completeDevotionStep() async {
-  //
-  //   try {
-  //     final token = await LocalStorage.getToken();
-  //     final response = await http.post(
-  //       Uri.parse("${Urls.baseUrl}/progress/stepcopmplete/"),
-  //       headers: {
-  //         "Content-Type": "application/json",
-  //         "Authorization": "Bearer $token",
-  //       },
-  //       body: jsonEncode({
-  //         "day_id": widget.dayId,
-  //         "item_type": "devotion",
-  //       }),
-  //     );
-  //
-  //     final data = jsonDecode(response.body);
-  //
-  //     if (response.statusCode == 200 || response.statusCode == 201) {
-  //       print("Step completed: ${data['completed']}");
-  //
-  //       ScaffoldMessenger.of(context).showSnackBar(
-  //         SnackBar(content: Text(data["message"])),
-  //       );
-  //
-  //       Navigator.push(context, MaterialPageRoute(builder: (context)=> DevotionDetailScreen(journeyId: widget.journeyId, dayId: widget.dayId)
-  //       //     DailyDevotionQuizScreen(
-  //       //   journeyId: widget.journeyId,
-  //       //   dayId: widget.dayId,
-  //       // )
-  //       ));
-  //     } else {
-  //       ScaffoldMessenger.of(context).showSnackBar(
-  //         SnackBar(content: Text(data["message"] ?? "You must complete Prayer first")),
-  //       );
-  //     }
-  //   } catch (e) {
-  //     ScaffoldMessenger.of(context).showSnackBar(
-  //       const SnackBar(content: Text("Network error")),
-  //     );
-  //   }
-  // }
 
   Future<void> completeDevotionStep(bool isCompleted) async {
     if (isCompleted) {
       Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) => DevotionDetailScreen(journeyId: widget.journeyId, dayId: widget.dayId),
+          builder: (context) => DailyDevotionQuizScreen(journeyId: widget.journeyId, dayId: widget.dayId),
         ),
       );
       return;
@@ -123,7 +80,7 @@ class _DailyDevotionScreenState extends State<DailyDevotionScreen> {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => DevotionDetailScreen(journeyId: widget.journeyId, dayId: widget.dayId),
+            builder: (context) => DailyDevotionQuizScreen(journeyId: widget.journeyId, dayId: widget.dayId),
           ),
         );
       } else {

@@ -240,17 +240,17 @@ class _LoginScreenState extends State<LoginScreen> {
 
                     SizedBox(height: height * 0.02),
 
-                    _socialButton(
-                      icon: Icons.g_mobiledata,
-                      text: "login.sign_in_google".tr(),
-                    ),
-
-                    SizedBox(height: 12),
-
-                    _socialButton(
-                      icon: Icons.apple,
-                      text: "login.sign_in_apple".tr(),
-                    ),
+                    // _socialButton(
+                    //   icon: Icons.g_mobiledata,
+                    //   text: "login.sign_in_google".tr(),
+                    // ),
+                    //
+                    // SizedBox(height: 12),
+                    //
+                    // _socialButton(
+                    //   icon: Icons.apple,
+                    //   text: "login.sign_in_apple".tr(),
+                    // ),
 
                     SizedBox(height: 15),
 
@@ -275,7 +275,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                     ),
 
-                    SizedBox(height: 80),
+                    SizedBox(height: 140),
                   ],
                 ),
               ),
@@ -286,29 +286,29 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
-  Widget _socialButton({required IconData icon, required String text}) {
-    return Container(
-      height: 55,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(40),
-        border: Border.all(color: Colors.white),
-        color: Colors.white.withOpacity(0.15),
-      ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Icon(icon, color: Colors.black, size: 28),
-          const SizedBox(width: 10),
-          Text(
-            text,
-            style: const TextStyle(
-              color: Colors.black,
-              fontSize: 16,
-              fontWeight: FontWeight.w600,
-            ),
-          ),
-        ],
-      ),
-    );
-  }
+  // Widget _socialButton({required IconData icon, required String text}) {
+  //   return Container(
+  //     height: 55,
+  //     decoration: BoxDecoration(
+  //       borderRadius: BorderRadius.circular(40),
+  //       border: Border.all(color: Colors.white),
+  //       color: Colors.white.withOpacity(0.15),
+  //     ),
+  //     child: Row(
+  //       mainAxisAlignment: MainAxisAlignment.center,
+  //       children: [
+  //         Icon(icon, color: Colors.black, size: 28),
+  //         const SizedBox(width: 10),
+  //         Text(
+  //           text,
+  //           style: const TextStyle(
+  //             color: Colors.black,
+  //             fontSize: 16,
+  //             fontWeight: FontWeight.w600,
+  //           ),
+  //         ),
+  //       ],
+  //     ),
+  //   );
+  // }
 }

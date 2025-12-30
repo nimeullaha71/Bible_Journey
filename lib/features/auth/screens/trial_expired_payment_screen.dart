@@ -92,9 +92,9 @@ class _TrialExpiredPaymentScreenState extends State<TrialExpiredPaymentScreen> {
   @override
   Widget build(BuildContext context) {
     final packages = [
-      {"name": "Weekly", "price": 4.99, "plan": "weekly", "packageId": 2},
-      {"name": "Monthly", "price": 9.99, "plan": "monthly", "packageId": 2},
-      {"name": "Yearly", "price": 99.99, "plan": "yearly", "packageId": 2},
+      {"name": "Weekly", "price": 6.99, "plan": "weekly", "packageId": 2},
+      {"name": "Monthly", "price": 19.99, "plan": "monthly", "packageId": 2},
+      {"name": "Yearly", "price": 39.99, "plan": "yearly", "packageId": 2},
     ];
 
     return Scaffold(
@@ -113,7 +113,7 @@ class _TrialExpiredPaymentScreenState extends State<TrialExpiredPaymentScreen> {
             ),
             const SizedBox(height: 20),
             const Text(
-              "Complete your subscription to unlock all features",
+              "Complete your subscription to unlock The App.",
               textAlign: TextAlign.center,
               style: TextStyle(fontSize: 16),
             ),
@@ -177,10 +177,11 @@ class PackageCard extends StatelessWidget {
               style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
             ),
             const SizedBox(height: 8),
-            const Text(
-              "• Access all premium content\n• Unlimited quizzes\n• Daily devotionals",
-              style: TextStyle(fontSize: 14, color: Colors.black54),
+            Text(
+              getPlanDescription(plan),
+              style: const TextStyle(fontSize: 14, color: Colors.black54),
             ),
+
             const SizedBox(height: 12),
             SizedBox(
               width: double.infinity,
@@ -260,5 +261,17 @@ class _StripeWebViewScreenState extends State<StripeWebViewScreen> {
       ),
       body: WebViewWidget(controller: _controller),
     );
+  }
+}
+String getPlanDescription(String plan) {
+  switch (plan.toLowerCase()) {
+    case 'weekly':
+      return "Get full access to the app for 1 week with weekly payment.";
+    case 'monthly':
+      return "Get full access to the app for the entire month with monthly payment.";
+    case 'yearly':
+      return "Get full access to the app for 1 year with yearly payment.";
+    default:
+      return "";
   }
 }
