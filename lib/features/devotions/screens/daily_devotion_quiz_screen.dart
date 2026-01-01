@@ -53,6 +53,16 @@ class _DailyDevotionQuizScreenState extends State<DailyDevotionQuizScreen> {
   }
 
   void goNext() async {
+    if (selectedAnswers[currentQuestionIndex] == -1) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text("Please select an option to continue"),
+          duration: Duration(seconds: 1),
+        ),
+      );
+      return;
+    }
+
     if (currentQuestionIndex < quizzes.length - 1) {
       setState(() => currentQuestionIndex++);
     } else {
@@ -64,13 +74,11 @@ class _DailyDevotionQuizScreenState extends State<DailyDevotionQuizScreen> {
     final List<Map<String, dynamic>> answers = [];
 
     for (int i = 0; i < quizzes.length; i++) {
-      if (selectedAnswers[i] != -1) {
-        answers.add({
-          "daily_quiz_id": quizzes[i].id,
-          "quiz_answer_option_id":
-          quizzes[i].options[selectedAnswers[i]].id,
-        });
-      }
+      answers.add({
+        "daily_quiz_id": quizzes[i].id,
+        "quiz_answer_option_id":
+        quizzes[i].options[selectedAnswers[i]].id,
+      });
     }
 
     final score = await QuizApi.submitQuiz(answers);
@@ -80,7 +88,9 @@ class _DailyDevotionQuizScreenState extends State<DailyDevotionQuizScreen> {
       MaterialPageRoute(
         builder: (_) => QuizMarkScreen(
           correctAnswers: score,
-          totalQuestions: quizzes.length, journeyId: widget.journeyId, dayId: widget.dayId,
+          totalQuestions: quizzes.length,
+          journeyId: widget.journeyId,
+          dayId: widget.dayId,
         ),
       ),
     );
@@ -102,16 +112,18 @@ class _DailyDevotionQuizScreenState extends State<DailyDevotionQuizScreen> {
           }
 
           if (snapshot.hasError) {
-            print("QUIZ ERROR => ${snapshot.error}");
+            debugPrint("QUIZ ERROR => ${snapshot.error}");
             return const Center(child: Text("Failed to load quiz"));
           }
 
           if (!snapshot.hasData || snapshot.data!.isEmpty) {
-            return const Center(child: Text("No quiz available for this day"));
+            return const Center(child: Text("No quiz available"));
           }
 
           quizzes = snapshot.data!;
           final quiz = quizzes[currentQuestionIndex];
+          final bool hasSelected =
+              selectedAnswers[currentQuestionIndex] != -1;
 
           return Padding(
             padding: const EdgeInsets.all(20),
@@ -124,6 +136,7 @@ class _DailyDevotionQuizScreenState extends State<DailyDevotionQuizScreen> {
                   const TextStyle(color: Colors.black54, fontSize: 14),
                 ),
                 const SizedBox(height: 6),
+
                 LinearProgressIndicator(
                   value: (currentQuestionIndex + 1) / quizzes.length,
                   backgroundColor: Colors.grey.shade300,
@@ -131,7 +144,9 @@ class _DailyDevotionQuizScreenState extends State<DailyDevotionQuizScreen> {
                   minHeight: 6,
                   borderRadius: BorderRadius.circular(12),
                 ),
+
                 const SizedBox(height: 30),
+
                 Text(
                   quiz.question,
                   style: const TextStyle(
@@ -139,12 +154,14 @@ class _DailyDevotionQuizScreenState extends State<DailyDevotionQuizScreen> {
                     fontWeight: FontWeight.w500,
                   ),
                 ),
+
                 const SizedBox(height: 20),
+
                 Expanded(
                   child: ListView.builder(
                     itemCount: quiz.options.length,
                     itemBuilder: (context, index) {
-                      final isActive =
+                      final bool isActive =
                           selectedAnswers[currentQuestionIndex] == index;
 
                       return GestureDetector(
@@ -153,7 +170,8 @@ class _DailyDevotionQuizScreenState extends State<DailyDevotionQuizScreen> {
                             selectedAnswers[currentQuestionIndex] = index;
                           });
                         },
-                        child: Container(
+                        child: AnimatedContainer(
+                          duration: const Duration(milliseconds: 200),
                           margin: const EdgeInsets.only(bottom: 12),
                           padding: const EdgeInsets.symmetric(
                               horizontal: 12, vertical: 14),
@@ -192,12 +210,14 @@ class _DailyDevotionQuizScreenState extends State<DailyDevotionQuizScreen> {
                     },
                   ),
                 ),
-                const SizedBox(height: 10),
+
                 SizedBox(
                   width: double.infinity,
                   child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: AppColors.primary,
+                      backgroundColor: hasSelected
+                          ? AppColors.primary
+                          : Colors.grey,
                       padding:
                       const EdgeInsets.symmetric(vertical: 14),
                       shape: RoundedRectangleBorder(
