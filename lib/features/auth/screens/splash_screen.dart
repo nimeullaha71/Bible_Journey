@@ -42,14 +42,15 @@ class _SplashScreenState extends State<SplashScreen> {
     final width = size.width;
 
     return Scaffold(
+      backgroundColor: Color.fromRGBO(255, 251, 231, 1),
       body: Stack(
         children: [
-          Positioned.fill(
-            child: Image.asset(
-              AppImages.splashBg,
-              fit: BoxFit.cover,
-            ),
-          ),
+          // Positioned.fill(
+          //   child: Image.asset(
+          //     AppImages.splashBg,
+          //     fit: BoxFit.cover,
+          //   ),
+          // ),
 
           SafeArea(
             child: Align(
@@ -85,10 +86,11 @@ class _SplashScreenState extends State<SplashScreen> {
                       padding: EdgeInsets.symmetric(horizontal: width * 0.10),
                       child: Text(
                         "splash.subtitle".tr(),
-                        style: AppTextStyles.heading.copyWith(
-                          fontSize: height * 0.022,
-                        ),
+                        // style: AppTextStyles.heading.copyWith(
+                        //   fontSize: height * 0.022,
+                        // ),
                         textAlign: TextAlign.center,
+                        style: TextStyle(color: Color.fromRGBO(92, 92, 92, 1),fontSize: 20),
                       ),
                     ),
                   ],
@@ -126,9 +128,10 @@ class _SplashScreenState extends State<SplashScreen> {
                   child: Text.rich(
                     TextSpan(
                       text: "already_account".tr(),
-                      style: AppTextStyles.normal.copyWith(
-                        fontSize: height * 0.022,
-                      ),
+                      style:TextStyle(color: Color.fromRGBO(92, 92, 92, 1),fontSize: 20),
+                      // AppTextStyles.normal.copyWith(
+                      //   fontSize: height * 0.022,
+                      // ),
                       children: [
                         TextSpan(
                           text: "log_in".tr(),

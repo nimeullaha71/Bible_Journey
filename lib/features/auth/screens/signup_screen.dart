@@ -84,16 +84,17 @@ class _SignUpScreenState extends State<SignUpScreen> {
     final keyboardHeight = MediaQuery.of(context).viewInsets.bottom;
 
     return Scaffold(
+      backgroundColor: Color.fromRGBO(255, 251, 231, 1),
       resizeToAvoidBottomInset: false,
       body: Stack(
         children: [
           // 🔒 Fixed background
-          Positioned.fill(
-            child: Image.asset(
-              AppImages.signUpBg,
-              fit: BoxFit.cover,
-            ),
-          ),
+          // Positioned.fill(
+          //   child: Image.asset(
+          //     AppImages.signUpBg,
+          //     fit: BoxFit.cover,
+          //   ),
+          // ),
 
           SafeArea(
             child: Column(

@@ -90,15 +90,16 @@ class _SetNewPasswordScreenState extends State<SetNewPasswordScreen> {
     final height = MediaQuery.of(context).size.height;
 
     return Scaffold(
+      backgroundColor: Color.fromRGBO(255, 251, 231, 1),
       body: Container(
         width: double.infinity,
         height: double.infinity,
-        decoration: BoxDecoration(
-          image: DecorationImage(
-            image: AssetImage(AppImages.splashBg),
-            fit: BoxFit.cover,
-          ),
-        ),
+        // decoration: BoxDecoration(
+        //   image: DecorationImage(
+        //     image: AssetImage(AppImages.splashBg),
+        //     fit: BoxFit.cover,
+        //   ),
+        // ),
         child: SafeArea(
           child: SingleChildScrollView(
             padding: const EdgeInsets.symmetric(horizontal: 18.0, vertical: 18.0),

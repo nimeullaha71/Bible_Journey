@@ -17,18 +17,19 @@ class _ResetSuccessfulScreenState extends State<ResetSuccessfulScreen> {
     final size = MediaQuery.of(context).size;
 
     return Scaffold(
+      backgroundColor: Color.fromRGBO(255, 251, 231, 1),
       body: Stack(
         children: [
           // 🌎 Full screen background image
           Container(
             width: double.infinity,
             height: double.infinity,
-            decoration: BoxDecoration(
-              image: DecorationImage(
-                image: AssetImage(AppImages.splashBg),
-                fit: BoxFit.cover,
-              ),
-            ),
+            // decoration: BoxDecoration(
+            //   image: DecorationImage(
+            //     image: AssetImage(AppImages.splashBg),
+            //     fit: BoxFit.cover,
+            //   ),
+            // ),
           ),
 
           // 🟦 Top container
@@ -46,7 +47,7 @@ class _ResetSuccessfulScreenState extends State<ResetSuccessfulScreen> {
                     Align(
                       alignment: Alignment.topLeft,
                       child: IconButton(
-                        icon: const Icon(Icons.arrow_back, color: Colors.white),
+                        icon: const Icon(Icons.arrow_back, color: Color.fromRGBO(92, 92, 92, 1),),
                         onPressed: () => Navigator.pop(context),
                       ),
                     ),
@@ -69,7 +70,7 @@ class _ResetSuccessfulScreenState extends State<ResetSuccessfulScreen> {
                       style: TextStyle(
                         fontSize: 24,
                         fontWeight: FontWeight.w600,
-                        color: Colors.white,
+                        color: Color.fromRGBO(92, 92, 92, 1),
                       ),
                     ),
 
@@ -82,7 +83,7 @@ class _ResetSuccessfulScreenState extends State<ResetSuccessfulScreen> {
                       style: TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.w400,
-                        color: Colors.white70,
+                        color: Color.fromRGBO(92, 92, 92, 1),
                       ),
                     ),
 
