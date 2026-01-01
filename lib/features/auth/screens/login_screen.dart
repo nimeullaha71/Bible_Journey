@@ -81,13 +81,14 @@ class _LoginScreenState extends State<LoginScreen> {
     final keyboardHeight = MediaQuery.of(context).viewInsets.bottom;
 
     return Scaffold(
+      backgroundColor: Color.fromRGBO(255, 251, 231, 1),
       resizeToAvoidBottomInset: false,
       body: Stack(
         children: [
           /// 🔥 Background
-          Positioned.fill(
-            child: Image.asset(AppImages.splashBg, fit: BoxFit.cover),
-          ),
+          // Positioned.fill(
+          //   child: Image.asset(AppImages.splashBg, fit: BoxFit.cover),
+          // ),
 
           SafeArea(
             child: Column(
@@ -180,7 +181,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               ),
                               Text(
                                 "login.remember_me".tr(),
-                                style: const TextStyle(color: Colors.white),
+                                style: const TextStyle(color: Color.fromRGBO(73, 76, 79, 1)),
                               ),
                               const Spacer(),
                               GestureDetector(
@@ -189,7 +190,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                 },
                                 child: Text(
                                   "login.forgot_password".tr(),
-                                  style: const TextStyle(color: Colors.white),
+                                  style: const TextStyle(color: Color.fromRGBO(73, 76, 79, 1)),
                                 ),
                               ),
                             ],
@@ -210,7 +211,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             child: RichText(
                               text: TextSpan(
                                 text: "login.no_account".tr(),
-                                style: const TextStyle(color: Colors.white),
+                                style: const TextStyle(color: Color.fromRGBO(73, 76, 79, 1)),
                                 children: [
                                   TextSpan(
                                     text: "login.sign_up".tr(),
