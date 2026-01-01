@@ -96,7 +96,6 @@ class MoneyBackPolicyScreen extends StatelessWidget {
 class SubscriptionTextWidget extends StatelessWidget {
   const SubscriptionTextWidget({super.key});
 
-  // Helper function to launch URLs
   Future<void> _launchURL(String url) async {
     final Uri uri = Uri.parse(url);
     if (!await launchUrl(uri)) {
@@ -130,7 +129,6 @@ class SubscriptionTextWidget extends StatelessWidget {
 
           const TextSpan(text: " , "),
 
-          // Clickable Google Play Link
           TextSpan(
             text: AppString.googlePlayHelpText,
             style: const TextStyle(
@@ -152,15 +150,15 @@ class SubscriptionTextWidget extends StatelessWidget {
 class LinkedTextBlock extends StatelessWidget {
   final String? boldPrefix;
   final String? bodyText;
-  final String? linkText; // Made nullable
-  final String? url; // Made nullable
+  final String? linkText;
+  final String? url;
 
   const LinkedTextBlock({
     super.key,
     this.boldPrefix,
     this.bodyText,
-    this.linkText, // Optional
-    this.url, // Optional
+    this.linkText,
+    this.url,
   });
 
   Future<void> _handleLaunchUrl() async {
@@ -181,16 +179,13 @@ class LinkedTextBlock extends StatelessWidget {
           height: 1.4,
         ),
         children: [
-          // 1. Bold Prefix
           TextSpan(
             text: "$boldPrefix: ",
             style: const TextStyle(fontWeight: FontWeight.bold),
           ),
 
-          // 2. Main Body
           TextSpan(text: bodyText),
 
-          // 3. Conditional Link Section
           if (linkText != null && url != null)
             TextSpan(
               text: " $linkText",

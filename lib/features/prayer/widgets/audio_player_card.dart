@@ -6,6 +6,8 @@ class AudioPlayerCard extends StatefulWidget {
   final String title;
   final String subtitle;
   final Widget thumbnail;
+  final VoidCallback? onStop;
+  final Function(AudioPlayer)? playerControllerSetter;
 
   const AudioPlayerCard({
     super.key,
@@ -13,6 +15,8 @@ class AudioPlayerCard extends StatefulWidget {
     required this.title,
     required this.subtitle,
     required this.thumbnail,
+    this.onStop,
+    this.playerControllerSetter,
   });
 
   @override
@@ -29,6 +33,9 @@ class _AudioPlayerCardState extends State<AudioPlayerCard> {
   void initState() {
     super.initState();
 
+    // Pass AudioPlayer to parent
+    widget.playerControllerSetter?.call(_player);
+
     _loadAudio();
   }
 
@@ -36,9 +43,7 @@ class _AudioPlayerCardState extends State<AudioPlayerCard> {
     await _player.setUrl(widget.url);
 
     _player.durationStream.listen((d) {
-      if (d != null) {
-        setState(() => _duration = d);
-      }
+      if (d != null) setState(() => _duration = d);
     });
 
     _player.positionStream.listen((p) {
@@ -46,16 +51,24 @@ class _AudioPlayerCardState extends State<AudioPlayerCard> {
     });
   }
 
-  @override
-  void dispose() {
-    _player.dispose();
-    super.dispose();
+  void stopAudio() {
+    if (_player.playing) {
+      _player.stop();
+      widget.onStop?.call();
+    }
   }
 
   String _format(Duration d) {
     final minutes = d.inMinutes.toString();
     final seconds = (d.inSeconds % 60).toString().padLeft(2, '0');
     return "$minutes:$seconds";
+  }
+
+  @override
+  void dispose() {
+    _player.stop();
+    _player.dispose();
+    super.dispose();
   }
 
   @override
@@ -76,8 +89,6 @@ class _AudioPlayerCardState extends State<AudioPlayerCard> {
                 child: SizedBox(height: 60, width: 60, child: widget.thumbnail),
               ),
               const SizedBox(width: 15),
-
-              // 🔥 FIX – Expanded যোগ করা হল
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -103,11 +114,7 @@ class _AudioPlayerCardState extends State<AudioPlayerCard> {
               ),
             ],
           ),
-
-
           const SizedBox(height: 25),
-
-          // Slider
           SliderTheme(
             data: SliderTheme.of(context).copyWith(
               activeTrackColor: const Color(0xff7ab279),
@@ -119,28 +126,20 @@ class _AudioPlayerCardState extends State<AudioPlayerCard> {
             child: Slider(
               min: 0,
               max: _duration.inSeconds.toDouble(),
-              value: _position.inSeconds
-                  .clamp(0, _duration.inSeconds)
-                  .toDouble(),
+              value: _position.inSeconds.clamp(0, _duration.inSeconds).toDouble(),
               onChanged: (value) {
                 _player.seek(Duration(seconds: value.toInt()));
               },
             ),
           ),
-
-          // Time labels
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(
-                _format(_position),
-                style: TextStyle(color: Colors.grey.shade700),
-              ),
+              Text(_format(_position), style: TextStyle(color: Colors.grey.shade700)),
               StreamBuilder<PlayerState>(
                 stream: _player.playerStateStream,
                 builder: (context, snapshot) {
                   final playing = snapshot.data?.playing ?? false;
-
                   return GestureDetector(
                     onTap: () {
                       playing ? _player.pause() : _player.play();
@@ -149,10 +148,7 @@ class _AudioPlayerCardState extends State<AudioPlayerCard> {
                       padding: const EdgeInsets.all(12),
                       decoration: BoxDecoration(
                         shape: BoxShape.circle,
-                        border: Border.all(
-                          color: const Color(0xff7ab279),
-                          width: 2,
-                        ),
+                        border: Border.all(color: const Color(0xff7ab279), width: 2),
                       ),
                       child: Icon(
                         playing ? Icons.pause : Icons.play_arrow,
@@ -163,10 +159,7 @@ class _AudioPlayerCardState extends State<AudioPlayerCard> {
                   );
                 },
               ),
-              Text(
-                _format(_duration),
-                style: TextStyle(color: Colors.grey.shade700),
-              ),
+              Text(_format(_duration), style: TextStyle(color: Colors.grey.shade700)),
             ],
           ),
         ],

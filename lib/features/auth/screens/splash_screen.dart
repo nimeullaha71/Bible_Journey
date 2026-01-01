@@ -1,11 +1,9 @@
 import 'package:bible_journey/app/constants.dart';
 import 'package:bible_journey/app/routes.dart';
-import 'package:bible_journey/features/auth/screens/login_screen.dart';
-import 'package:bible_journey/features/auth/screens/reset_successful_screen.dart';
+import 'package:bible_journey/features/Profile/screens/profile_details.dart';
 import 'package:bible_journey/widgets/buttons/auth_flow_custom_button.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-
 import '../../../core/services/local_storage_service.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -113,7 +111,7 @@ class _SplashScreenState extends State<SplashScreen> {
                     text: "get_started".tr(),
                     onTap: () {
                       //Navigator.pushNamed(context, AppRoutes.mainBottomNavScreen);
-                      Navigator.push(context, MaterialPageRoute(builder: (context)=>LoginScreen()));
+                      Navigator.push(context, MaterialPageRoute(builder: (context)=>ProfileDetails()));
                     },
                     height: height * 0.055,
                   ),

@@ -57,59 +57,59 @@ class _ProfileDetailsState extends State<ProfileDetails> {
                 margin: const EdgeInsets.symmetric(vertical: 5, horizontal: 12),
                 height: 173,
                 width: 380,
-                decoration: BoxDecoration(
-                  color: const Color(0xffE3E9E3),
-                  borderRadius: BorderRadius.circular(11),
-                ),
-                child: Stack(
-                  children: [
-                    Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        const SizedBox(height: 15),
-                        Center(
-                          child: ClipOval(
-                            child: isLoading ? const SizedBox(
-                              width: 78,
-                              height: 78,
-                              child: CircularProgressIndicator(),
-                            ): Image.network(userData?["avatar"] ?? "",
-                            width: 78,
-                              height: 78,
-                              fit: BoxFit.cover,
-                              errorBuilder: (context,error,stackTrace){
-                              return Image.asset('assets/images/User.png',width: 78,height: 78,fit: BoxFit.cover,);
-                              },
-                            ),
-                          ),
-                        ),
-                        const SizedBox(height: 1),
-                        isLoading
-                            ? const Center(child: CircularProgressIndicator())
-                            : Column(
-                                children: [
-                                  Text(
-                                    userData?["name"] ?? "No Name",
-                                    style: const TextStyle(
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.bold,
-                                      color: Color(0xff83BF8B),
-                                    ),
-                                  ),
-                                  Text(
-                                    userData?["role"] ?? "User",
-                                    style: const TextStyle(
-                                      fontSize: 14,
-                                      color: Color(0xffABABAB),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                      ],
-                    ),
-                  ],
-                ),
+                // decoration: BoxDecoration(
+                //   color: const Color(0xffE3E9E3),
+                //   borderRadius: BorderRadius.circular(11),
+                // ),
+                // child: Stack(
+                //   children: [
+                //     // Column(
+                //     //   mainAxisAlignment: MainAxisAlignment.start,
+                //     //   crossAxisAlignment: CrossAxisAlignment.center,
+                //     //   children: [
+                //     //     const SizedBox(height: 15),
+                //     //     Center(
+                //     //       child: ClipOval(
+                //     //         child: isLoading ? const SizedBox(
+                //     //           width: 78,
+                //     //           height: 78,
+                //     //           child: CircularProgressIndicator(),
+                //     //         ): Image.network(userData?["avatar"] ?? "",
+                //     //         width: 78,
+                //     //           height: 78,
+                //     //           fit: BoxFit.cover,
+                //     //           errorBuilder: (context,error,stackTrace){
+                //     //           return Image.asset('assets/images/User.png',width: 78,height: 78,fit: BoxFit.cover,);
+                //     //           },
+                //     //         ),
+                //     //       ),
+                //     //     ),
+                //     //     const SizedBox(height: 1),
+                //     //     isLoading
+                //     //         ? const Center(child: CircularProgressIndicator())
+                //     //         : Column(
+                //     //             children: [
+                //     //               Text(
+                //     //                 userData?["name"] ?? "No Name",
+                //     //                 style: const TextStyle(
+                //     //                   fontSize: 18,
+                //     //                   fontWeight: FontWeight.bold,
+                //     //                   color: Color(0xff83BF8B),
+                //     //                 ),
+                //     //               ),
+                //     //               Text(
+                //     //                 userData?["role"] ?? "User",
+                //     //                 style: const TextStyle(
+                //     //                   fontSize: 14,
+                //     //                   color: Color(0xffABABAB),
+                //     //                 ),
+                //     //               ),
+                //     //             ],
+                //     //           ),
+                //     //   ],
+                //     // ),
+                //   ],
+                // ),
               ),
               SizedBox(height: 25),
 

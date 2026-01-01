@@ -18,7 +18,7 @@ class LanguageScreen extends StatefulWidget {
 
 class _LanguageScreenState extends State<LanguageScreen> {
   int _selectedIndex = 3;
-  Locale selectedLocale = const Locale('en'); // default English
+  Locale selectedLocale = const Locale('en');
 
   @override
   void initState() {

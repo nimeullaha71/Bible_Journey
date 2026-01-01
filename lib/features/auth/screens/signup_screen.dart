@@ -17,27 +17,26 @@ class SignUpScreen extends StatefulWidget {
 class _SignUpScreenState extends State<SignUpScreen> {
   final _formKey = GlobalKey<FormState>();
 
-  final TextEditingController nameController = TextEditingController();
-  final TextEditingController emailController = TextEditingController();
-  final TextEditingController phoneController = TextEditingController();
-  final TextEditingController passwordController = TextEditingController();
-  final TextEditingController confirmPasswordController = TextEditingController();
+  final nameController = TextEditingController();
+  final emailController = TextEditingController();
+  final phoneController = TextEditingController();
+  final passwordController = TextEditingController();
+  final confirmPasswordController = TextEditingController();
+
   bool _isLoading = false;
 
   void signup() async {
     if (!_formKey.currentState!.validate()) return;
 
-    setState(() {
-      _isLoading = true;
-    });
+    setState(() => _isLoading = true);
 
     try {
       final response = await AuthService().signup(
-        fullName: nameController.text,
-        email: emailController.text,
-        phone: phoneController.text,
-        password: passwordController.text,
-        confirmPassword: confirmPasswordController.text,
+        fullName: nameController.text.trim(),
+        email: emailController.text.trim(),
+        phone: phoneController.text.trim(),
+        password: passwordController.text.trim(),
+        confirmPassword: confirmPasswordController.text.trim(),
       );
 
       if (response['token'] != null && response['token'].toString().isNotEmpty) {
@@ -59,20 +58,36 @@ class _SignUpScreenState extends State<SignUpScreen> {
         SnackBar(content: Text("Signup failed: ${e.toString()}")),
       );
     } finally {
-      setState(() {
-        _isLoading = false;
-      });
+      setState(() => _isLoading = false);
     }
+  }
+
+  Widget _label(String text) {
+    return Align(
+      alignment: Alignment.centerLeft,
+      child: Padding(
+        padding: const EdgeInsets.only(bottom: 6),
+        child: Text(
+          text,
+          style: const TextStyle(
+            fontSize: 15,
+            fontWeight: FontWeight.w600,
+            color: Color(0xFF494C4F),
+          ),
+        ),
+      ),
+    );
   }
 
   @override
   Widget build(BuildContext context) {
-    final height = MediaQuery.of(context).size.height;
+    final keyboardHeight = MediaQuery.of(context).viewInsets.bottom;
 
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       body: Stack(
         children: [
-
+          // 🔒 Fixed background
           Positioned.fill(
             child: Image.asset(
               AppImages.signUpBg,
@@ -81,172 +96,150 @@ class _SignUpScreenState extends State<SignUpScreen> {
           ),
 
           SafeArea(
-            child: SingleChildScrollView(
-              padding: const EdgeInsets.symmetric(horizontal: 18.0),
-              child: Form(
-                key: _formKey,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
+            child: Column(
+              children: [
+                // 🔙 Back button
+                Align(
+                  alignment: Alignment.centerLeft,
+                  child: IconButton(
+                    icon: const Icon(Icons.arrow_back),
+                    onPressed: () => Navigator.pop(context),
+                  ),
+                ),
 
-                    Align(
-                      alignment: Alignment.centerLeft,
-                      child: IconButton(
-                        onPressed: () {
-                          Navigator.pop(context);
-                        },
-                        icon: const Icon(Icons.arrow_back, color: Colors.black),
-                      ),
+                Expanded(
+                  child: SingleChildScrollView(
+                    physics: const BouncingScrollPhysics(),
+                    padding: EdgeInsets.fromLTRB(
+                      18,
+                      20,
+                      18,
+                      keyboardHeight > 0 ? keyboardHeight + 20 : 40,
                     ),
+                    child: Form(
+                      key: _formKey,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Image.asset(AppImages.appLogo, height: 90),
+                          const SizedBox(height: 12),
 
-                    SizedBox(height: height * 0.001),
-
-                    Image.asset(AppImages.appLogo, height: height * 0.13),
-
-                    SizedBox(height: height * 0.015),
-
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          "sign_up.full_name".tr(),
-                          style: const TextStyle(
-                            color: Color.fromRGBO(73, 76, 79, 1),
-                            fontSize: 16,
-                            fontWeight: FontWeight.w600,
+                          // Name
+                          _label("sign_up.full_name".tr()),
+                          CustomTextField(
+                            label: "sign_up.full_name".tr(),
+                            controller: nameController,
+                            validator: (value) {
+                              if (value == null || value.trim().isEmpty) {
+                                return "Full name is required";
+                              }
+                              return null;
+                            },
                           ),
-                        ),
-                        const SizedBox(height: 8),
-                        CustomTextField(
-                          label: "sign_up.full_name".tr(),
-                          controller: nameController,
-                        ),
-                      ],
-                    ),
+                          const SizedBox(height: 12),
 
-                    SizedBox(height: height * 0.01),
-
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          "sign_up.email".tr(),
-                          style: const TextStyle(
-                            color: Color.fromRGBO(73, 76, 79, 1),
-                            fontSize: 16,
-                            fontWeight: FontWeight.w600,
+                          // Email
+                          _label("sign_up.email".tr()),
+                          CustomTextField(
+                            label: "sign_up.email".tr(),
+                            controller: emailController,
+                            validator: (value) {
+                              if (value == null || value.trim().isEmpty) {
+                                return "Email is required";
+                              }
+                              if (!RegExp(r'\S+@\S+\.\S+').hasMatch(value.trim())) {
+                                return "Enter a valid email";
+                              }
+                              return null;
+                            },
                           ),
-                        ),
-                        const SizedBox(height: 8),
-                        CustomTextField(
-                          label: "sign_up.email".tr(),
-                          controller: emailController,
-                        ),
-                      ],
-                    ),
+                          const SizedBox(height: 12),
 
-                    SizedBox(height: height * 0.01),
-
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          "sign_up.phone".tr(),
-                          style: const TextStyle(
-                            color: Color.fromRGBO(73, 76, 79, 1),
-                            fontSize: 16,
-                            fontWeight: FontWeight.w600,
+                          // Phone
+                          _label("sign_up.phone".tr()),
+                          CustomTextField(
+                            label: "sign_up.phone".tr(),
+                            controller: phoneController,
+                            validator: (value) {
+                              if (value == null || value.trim().isEmpty) {
+                                return "Phone number is required";
+                              }
+                              return null;
+                            },
                           ),
-                        ),
-                        const SizedBox(height: 8),
-                        CustomTextField(
-                          label: "sign_up.phone".tr(),
-                          controller: phoneController,
-                        ),
-                      ],
-                    ),
+                          const SizedBox(height: 12),
 
-                    SizedBox(height: height * 0.01),
-
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          "sign_up.password".tr(),
-                          style: const TextStyle(
-                            color: Color.fromRGBO(73, 76, 79, 1),
-                            fontSize: 16,
-                            fontWeight: FontWeight.w600,
+                          // Password
+                          _label("sign_up.password".tr()),
+                          CustomTextField(
+                            label: "sign_up.password".tr(),
+                            controller: passwordController,
+                            obscureText: true,
+                            validator: (value) {
+                              if (value == null || value.trim().isEmpty) {
+                                return "Password is required";
+                              }
+                              if (value.trim().length < 6) {
+                                return "Password must be at least 6 characters";
+                              }
+                              return null;
+                            },
                           ),
-                        ),
-                        const SizedBox(height: 8),
-                        CustomTextField(
-                          label: "sign_up.password".tr(),
-                          controller: passwordController,
-                          obscureText: true,
-                        ),
-                      ],
-                    ),
+                          const SizedBox(height: 12),
 
-                    SizedBox(height: height * 0.01),
-
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          "sign_up.confirm_password".tr(),
-                          style: const TextStyle(
-                            color: Color.fromRGBO(73, 76, 79, 1),
-                            fontSize: 16,
-                            fontWeight: FontWeight.w600,
+                          // Confirm Password
+                          _label("sign_up.confirm_password".tr()),
+                          CustomTextField(
+                            label: "sign_up.confirm_password".tr(),
+                            controller: confirmPasswordController,
+                            obscureText: true,
+                            validator: (value) {
+                              if (value == null || value.trim().isEmpty) {
+                                return "Confirm password is required";
+                              }
+                              if (value != passwordController.text) {
+                                return "Passwords do not match";
+                              }
+                              return null;
+                            },
                           ),
-                        ),
-                        const SizedBox(height: 8),
-                        CustomTextField(
-                          label: "sign_up.confirm_password".tr(),
-                          controller: confirmPasswordController,
-                          obscureText: true,
-                        ),
-                      ],
-                    ),
+                          const SizedBox(height: 20),
 
-                    SizedBox(height: height * 0.015),
+                          AuthCustomButton(
+                            text: _isLoading ? "Loading..." : "login.sign_up".tr(),
+                            height: 48,
+                            onTap: _isLoading ? () {} : signup,
+                          ),
+                          const SizedBox(height: 18),
 
-                    AuthCustomButton(
-                      text: "login.sign_up".tr(),
-                      height: height * 0.055,
-                      onTap: signup,
-                      isLoading: _isLoading,
-                    ),
-
-
-                    const SizedBox(height: 15),
-
-                    GestureDetector(
-                      onTap: (){
-                        Navigator.pushNamed(context, AppRoutes.logIn);
-                      },
-                      child: RichText(
-                        text:  TextSpan(
-                          text: "sign_up.already_account".tr(),
-                          style: const TextStyle(color: Colors.white),
-                          children: [
-                            TextSpan(
-                              text: "sign_up.sign_in".tr(),
-                              style: const TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.w700,
+                          GestureDetector(
+                            onTap: () {
+                              Navigator.pushNamed(context, AppRoutes.logIn);
+                            },
+                            child: RichText(
+                              text: TextSpan(
+                                text: "sign_up.already_account".tr(),
+                                style: const TextStyle(color: Colors.white),
+                                children: [
+                                  TextSpan(
+                                    text: "sign_up.sign_in".tr(),
+                                    style: const TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.w700,
+                                    ),
+                                  ),
+                                ],
                               ),
                             ),
-                          ],
-                        ),
+                          ),
+
+                          const SizedBox(height: 40),
+                        ],
                       ),
                     ),
-
-                    const SizedBox(height: 220),
-                  ],
+                  ),
                 ),
-              ),
+              ],
             ),
           ),
         ],

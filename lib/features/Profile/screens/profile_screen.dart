@@ -3,6 +3,7 @@ import 'package:bible_journey/core/services/auth_service.dart';
 import 'package:bible_journey/features/Profile/screens/change_password_screen.dart';
 import 'package:bible_journey/features/Profile/screens/deactivated_pop_up.dart';
 import 'package:bible_journey/features/Profile/screens/help_support_screen.dart';
+import 'package:bible_journey/features/Profile/screens/invoice_screen.dart';
 import 'package:bible_journey/features/Profile/screens/language_screen.dart';
 import 'package:bible_journey/features/Profile/screens/money_back_policy_screen.dart';
 import 'package:bible_journey/features/Profile/screens/privacy_policy_screen.dart';
@@ -30,7 +31,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final authService = AuthService();
     return Scaffold(
       backgroundColor: AppColors.bgColor,
       appBar: CustomAppBar(title: "Profile", onTap: (){
@@ -57,7 +57,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 23),
                 margin: const EdgeInsets.symmetric(vertical: 5, horizontal: 12),
-                height: 145,
+                height: 170,
                 decoration: BoxDecoration(
                   color: const Color(0xffFCFAF9),
                   borderRadius: BorderRadius.circular(24),
@@ -77,7 +77,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
 
-                            const SizedBox(height: 5),
                             CustomText(
                                 textIconPath: 'assets/images/User.svg',
                                 text: "profile_details".tr(),
@@ -119,7 +118,16 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 ),
                               ),
                             ),
-                            const SizedBox(height: 10),
+                            const SizedBox(height: 5),
+
+                            CustomText(
+                                textIconPath: 'assets/images/Globe.svg',
+                                text: "Invoice",
+                                trailingIcon: Icons.arrow_forward_ios,
+                                onTap: (){
+                                  Navigator.push(
+                                      context, MaterialPageRoute(builder: (_) => const InvoiceScreen()));
+                                }),
                           ],
                         ),
                       ),
@@ -168,17 +176,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         }),
 
                     const SizedBox(height: 10),
-
-                    // CustomText(
-                    //     textIconPath: 'assets/images/Bell.svg',
-                    //     text: "notifications".tr(),
-                    //     trailingIcon: Icons.arrow_forward_ios,
-                    //     onTap: (){
-                    //       //Navigator.push(
-                    //           //context, MaterialPageRoute(builder: (_) => const NotificationScreen()));
-                    //     }),
-
-                    // const SizedBox(height: 10),
 
                     CustomText(
                         textIconPath: 'assets/images/LockOpen.svg',
@@ -337,11 +334,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       child: GestureDetector(
                         onTap: () async {
                           try {
-                            final email = await LocalStorage.getEmail(); // এখানে login_id / email পাবে
+                            final email = await LocalStorage.getEmail();
                             final token = await LocalStorage.getToken();
 
                             if (email != null && token != null) {
-                              await AuthService().logOut(email: email); // email ঠিকভাবে পাঠাচ্ছে
+                              await AuthService().logOut(email: email);
                               await LocalStorage.clearAll();
 
                               Navigator.pushReplacement(

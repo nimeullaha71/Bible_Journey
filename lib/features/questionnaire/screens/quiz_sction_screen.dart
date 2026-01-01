@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:bible_journey/app/Urls.dart';
 import 'package:bible_journey/app/routes.dart';
 import 'package:bible_journey/features/questionnaire/widget/custom_quiz_app_bar.dart';
@@ -7,7 +6,6 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:bible_journey/app/constants.dart';
 import 'package:http/http.dart' as http;
-
 import '../../../core/services/local_storage_service.dart';
 
 class QuizQuestionScreen extends StatefulWidget {
@@ -20,7 +18,7 @@ class QuizQuestionScreen extends StatefulWidget {
 class _QuizQuestionScreenState extends State<QuizQuestionScreen> {
   int currentQuestionIndex = 0;
 
-  /// 🔥 10 Question List
+  /// 🔥 Question List
   List<Map<String, dynamic>> quizData = [
     {
       "question": "How would you describe your Bible study experience so far?",
@@ -59,7 +57,7 @@ class _QuizQuestionScreenState extends State<QuizQuestionScreen> {
       ]
     },
     {
-      "question": "Which struggles feel most present in your life right now? ",
+      "question": "Which struggles feel most present in your life right now?",
       "options": [
         "Stress or anxiety",
         "Searching for inner peace",
@@ -68,7 +66,6 @@ class _QuizQuestionScreenState extends State<QuizQuestionScreen> {
         "Lack of purpose",
         "Not sure",
         "Overthinking and guilt",
-        "Lack of purpose",
       ]
     },
     {
@@ -92,10 +89,9 @@ class _QuizQuestionScreenState extends State<QuizQuestionScreen> {
       ]
     },
     {
-      "question": "Have you noticed anything that creates distance between you and God? ",
+      "question": "Have you noticed anything that creates distance between you and God?",
       "options": [
         "Not hearing from Him",
-        "Distraction and busyness",
         "Distraction and busyness",
         "Emotional exhaustion",
         "Feeling unworthy",
@@ -104,7 +100,7 @@ class _QuizQuestionScreenState extends State<QuizQuestionScreen> {
       ]
     },
     {
-      "question": "What can help you stay motivated to study the Bible? ",
+      "question": "What can help you stay motivated to study the Bible?",
       "options": [
         "A clear plan",
         "Encouraging truth",
@@ -113,55 +109,49 @@ class _QuizQuestionScreenState extends State<QuizQuestionScreen> {
       ]
     },
     {
-      "question": "Which type of Bible content feels most helpful for you? ",
+      "question": "Which type of Bible content feels most helpful for you?",
       "options": [
         "Short and simple",
         "In-depth",
         "Not sure",
       ]
     },
-
   ];
 
+  /// 🔐 SINGLE selection (−1 = nothing selected)
+  List<int> selectedAnswers = List.generate(10, (index) => -1);
 
   void goPrevious() {
     if (currentQuestionIndex > 0) {
-      setState(() {
-        currentQuestionIndex--;
-      });
+      setState(() => currentQuestionIndex--);
     } else {
       Navigator.pop(context);
     }
   }
 
-
-  List<List<int>> selectedAnswers = List.generate(10, (index) => []);
-
+  /// 🔁 Build API payload (same format)
   List<Map<String, String>> buildQAPairs() {
     List<Map<String, String>> qaPairs = [];
 
     for (int i = 0; i < quizData.length; i++) {
-      List<int> selectedIndexes = selectedAnswers[i];
-      for (var idx in selectedIndexes) {
+      int selectedIndex = selectedAnswers[i];
+      if (selectedIndex != -1) {
         qaPairs.add({
           "question": quizData[i]["question"],
-          "answer": quizData[i]["options"][idx]
+          "answer": quizData[i]["options"][selectedIndex],
         });
       }
     }
-
     return qaPairs;
   }
 
   Future<void> submitQuiz() async {
-
     String? token = await LocalStorage.getToken();
     final url = Uri.parse(Urls.categoryQuestionUrl);
 
     final body = jsonEncode({
       "qa_pairs": buildQAPairs(),
     });
-
 
     try {
       final response = await http.post(
@@ -174,21 +164,29 @@ class _QuizQuestionScreenState extends State<QuizQuestionScreen> {
       );
 
       if (response.statusCode == 200) {
-        final data = jsonDecode(response.body);
-        print("Response: $data");
-        final decoded = jsonDecode(response.body);
-
-        print("📢 Message: ${decoded['message']}");
-        print("📌 Category: ${decoded['category']}");
-
-      } else {
-        print("Failed: ${response.statusCode}");
+        Navigator.pushNamed(context, AppRoutes.mainBottomNavScreen);
       }
     } catch (e) {
-      print("Error: $e");
+      debugPrint("Error: $e");
     }
   }
 
+  void goToNext() {
+    if (selectedAnswers[currentQuestionIndex] == -1) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text("Please select one option."),
+        ),
+      );
+      return;
+    }
+
+    if (currentQuestionIndex < quizData.length - 1) {
+      setState(() => currentQuestionIndex++);
+    } else {
+      submitQuiz();
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -199,10 +197,8 @@ class _QuizQuestionScreenState extends State<QuizQuestionScreen> {
       backgroundColor: AppColors.bgColor,
       appBar: CustomQuizAppBar(
         title: "bible_journey".tr(),
-        onBack: () => goPrevious(),
+        onBack: goPrevious,
       ),
-
-
       body: Padding(
         padding: const EdgeInsets.all(20),
         child: Column(
@@ -210,11 +206,9 @@ class _QuizQuestionScreenState extends State<QuizQuestionScreen> {
           children: [
             Text(
               "Question ${currentQuestionIndex + 1} of ${quizData.length}",
-              style: const TextStyle(color: Colors.black54, fontSize: 14),
+              style: const TextStyle(color: Colors.black54),
             ),
-
             const SizedBox(height: 6),
-
             LinearProgressIndicator(
               value: (currentQuestionIndex + 1) / quizData.length,
               backgroundColor: Colors.grey.shade300,
@@ -222,31 +216,23 @@ class _QuizQuestionScreenState extends State<QuizQuestionScreen> {
               minHeight: 6,
               borderRadius: BorderRadius.circular(12),
             ),
-
             const SizedBox(height: 30),
-
             Text(
               question,
               style: const TextStyle(
-                  fontSize: 18, fontWeight: FontWeight.w500),
+                fontSize: 18,
+                fontWeight: FontWeight.w500,
+              ),
             ),
-
             const SizedBox(height: 20),
-
             Expanded(
               child: ListView.builder(
                 itemCount: options.length,
                 itemBuilder: (context, index) {
-                  return optionTile(
-                    index,
-                    options[index],
-                  );
+                  return optionTile(index, options[index]);
                 },
               ),
             ),
-
-            const SizedBox(height: 10),
-
             SizedBox(
               width: double.infinity,
               child: ElevatedButton(
@@ -254,20 +240,21 @@ class _QuizQuestionScreenState extends State<QuizQuestionScreen> {
                   backgroundColor: AppColors.primary,
                   padding: const EdgeInsets.symmetric(vertical: 14),
                   shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12)),
+                    borderRadius: BorderRadius.circular(12),
+                  ),
                 ),
-                onPressed: () {
-                  goToNext();
-                },
+                onPressed: goToNext,
                 child: Text(
                   currentQuestionIndex == quizData.length - 1
-                      ? "Finish"//"buttons.finish".tr()
-                      : "Next",//"buttons.next".tr(),
+                      ? "Finish"
+                      : "Next",
                   style: const TextStyle(
-                      color: Colors.white, fontSize: 18),
+                    color: Colors.white,
+                    fontSize: 18,
+                  ),
                 ),
               ),
-            )
+            ),
           ],
         ),
       ),
@@ -275,17 +262,12 @@ class _QuizQuestionScreenState extends State<QuizQuestionScreen> {
   }
 
   Widget optionTile(int index, String optionText) {
-    bool isActive =
-    selectedAnswers[currentQuestionIndex].contains(index);
+    bool isActive = selectedAnswers[currentQuestionIndex] == index;
 
     return GestureDetector(
       onTap: () {
         setState(() {
-          if (isActive) {
-            selectedAnswers[currentQuestionIndex].remove(index);
-          } else {
-            selectedAnswers[currentQuestionIndex].add(index);
-          }
+          selectedAnswers[currentQuestionIndex] = index;
         });
       },
       child: Container(
@@ -302,7 +284,9 @@ class _QuizQuestionScreenState extends State<QuizQuestionScreen> {
         child: Row(
           children: [
             Icon(
-              isActive ? Icons.check_circle : Icons.circle_outlined,
+              isActive
+                  ? Icons.radio_button_checked
+                  : Icons.radio_button_off,
               color: isActive ? AppColors.primary : Colors.grey,
             ),
             const SizedBox(width: 12),
@@ -311,30 +295,10 @@ class _QuizQuestionScreenState extends State<QuizQuestionScreen> {
                 optionText,
                 style: const TextStyle(fontSize: 16),
               ),
-            )
+            ),
           ],
         ),
       ),
     );
   }
-
-  void goToNext() {
-    if (selectedAnswers[currentQuestionIndex].isEmpty) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text("Please select at least one option.")),
-      );
-      return;
-    }
-
-    if (currentQuestionIndex < quizData.length - 1) {
-      setState(() {
-        currentQuestionIndex++;
-      });
-    } else {
-      submitQuiz();
-      Navigator.pushNamed(context, AppRoutes.mainBottomNavScreen);
-      print(buildQAPairs);
-    }
-  }
-
 }

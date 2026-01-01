@@ -1,12 +1,12 @@
+import 'package:flutter/material.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:bible_journey/app/constants.dart';
 import 'package:bible_journey/app/routes.dart';
-import 'package:bible_journey/features/auth/screens/trial_expired_payment_screen.dart';
 import 'package:bible_journey/widgets/buttons/auth_flow_custom_button.dart';
-import 'package:easy_localization/easy_localization.dart';
-import 'package:flutter/material.dart';
+import '../../../widgets/textField/custom_text_field.dart';
 import '../../../core/services/auth_service.dart';
 import '../../../core/services/local_storage_service.dart';
-import '../../../widgets/textField/custom_text_field.dart';
+import 'package:bible_journey/features/auth/screens/trial_expired_payment_screen.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -17,17 +17,15 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   final _formKey = GlobalKey<FormState>();
-  final TextEditingController emailController = TextEditingController();
-  final TextEditingController passwordController = TextEditingController();
+  final emailController = TextEditingController();
+  final passwordController = TextEditingController();
   bool rememberMe = false;
   bool _isLoading = false;
 
   void login() async {
     if (!_formKey.currentState!.validate()) return;
 
-    setState(() {
-      _isLoading = true;
-    });
+    setState(() => _isLoading = true);
 
     try {
       final response = await AuthService().login(
@@ -35,13 +33,14 @@ class _LoginScreenState extends State<LoginScreen> {
         password: passwordController.text.trim(),
       );
 
-      // First check if account is disabled
+      // Check if account is disabled
       if (response['statusCode'] == 403 ||
-          (response['error'] != null && response['error'].toString().contains("Account disabled"))) {
+          (response['error'] != null &&
+              response['error'].toString().contains("Account disabled"))) {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(content: Text("Your account is deactivated")),
         );
-        return; // Stop further flow
+        return;
       }
 
       // Save token and email
@@ -65,220 +64,168 @@ class _LoginScreenState extends State<LoginScreen> {
         Navigator.pushReplacementNamed(context, AppRoutes.mainBottomNavScreen);
       }
 
-      // Optionally show success message
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text(response['message'] ?? "Login successful")),
       );
-
     } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text("Email or Password is incorrect")),
       );
     } finally {
-      setState(() {
-        _isLoading = false;
-      });
+      setState(() => _isLoading = false);
     }
   }
 
-
-
   @override
   Widget build(BuildContext context) {
-    final height = MediaQuery.of(context).size.height;
+    final keyboardHeight = MediaQuery.of(context).viewInsets.bottom;
 
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       body: Stack(
         children: [
+          /// 🔥 Background
           Positioned.fill(
             child: Image.asset(AppImages.splashBg, fit: BoxFit.cover),
           ),
+
           SafeArea(
-            child: SingleChildScrollView(
-              padding: const EdgeInsets.symmetric(horizontal: 18.0),
-              child: Form(
-                key: _formKey,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Align(
-                      alignment: Alignment.centerLeft,
-                      child: IconButton(
-                        onPressed: () {
-                          Navigator.pop(context);
-                        },
-                        icon: const Icon(Icons.arrow_back, color: Colors.black),
-                      ),
+            child: Column(
+              children: [
+                /// Back button
+                Align(
+                  alignment: Alignment.centerLeft,
+                  child: IconButton(
+                    icon: const Icon(Icons.arrow_back),
+                    onPressed: () => Navigator.pop(context),
+                  ),
+                ),
+
+                Expanded(
+                  child: SingleChildScrollView(
+                    physics: const BouncingScrollPhysics(),
+                    padding: EdgeInsets.fromLTRB(
+                      18,
+                      20,
+                      18,
+                      keyboardHeight > 0 ? keyboardHeight + 20 : 40,
                     ),
-                    SizedBox(height: height * 0.02),
+                    child: Form(
+                      key: _formKey,
+                      child: Column(
+                        children: [
+                          Image.asset(AppImages.appLogo, height: 90),
+                          const SizedBox(height: 12),
 
-                    Image.asset(AppImages.appLogo, height: height * 0.13),
-                    SizedBox(height: height * 0.018),
-
-                    Text(
-                      "login.begin_journey".tr(),
-                      style: const TextStyle(
-                        fontSize: 28,
-                        color: Color(0xFF005493),
-                        fontWeight: FontWeight.w700,
-                      ),
-                    ),
-                    const SizedBox(height: 5),
-
-                    Text(
-                      "login.subtitle".tr(),
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        fontSize: 16,
-                        color: Colors.black.withOpacity(0.7),
-                      ),
-                    ),
-                    SizedBox(height: height * 0.03),
-
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          "login.email".tr(),
-                          style: TextStyle(
-                            color: Color.fromRGBO(73, 76, 79, 1),
-                            fontSize: 16,
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
-                        SizedBox(height: 8),
-                        CustomTextField(
-                          label: "login.email".tr(),
-                          controller: emailController,
-                          validator: (value) {
-                            if (value == null || value.trim().isEmpty) {
-                              return "Email is required";
-                            }
-                            if (!RegExp(
-                              r'\S+@\S+\.\S+',
-                            ).hasMatch(value.trim())) {
-                              return "Enter a valid email";
-                            }
-                            return null;
-                          },
-                        ),
-                      ],
-                    ),
-                    SizedBox(height: height * 0.02),
-
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          "login.password".tr(),
-                          style: TextStyle(
-                            color: Color.fromRGBO(73, 76, 79, 1),
-                            fontSize: 16,
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
-                        SizedBox(height: 8),
-                        CustomTextField(
-                          label: "login.password".tr(),
-                          controller: passwordController,
-                          obscureText: true,
-                          validator: (value) {
-                            if (value == null || value.trim().isEmpty) {
-                              return "Password is required";
-                            }
-                            if (value.trim().length < 6) {
-                              return "Password must be at least 6 characters";
-                            }
-                            return null;
-                          },
-                        ),
-                      ],
-                    ),
-                    SizedBox(height: height * 0.015),
-
-                    Row(
-                      children: [
-                        Row(
-                          children: [
-                            Checkbox(
-                              checkColor: Colors.green,
-                              value: rememberMe,
-                              onChanged: (val) {
-                                setState(() {
-                                  rememberMe = val ?? false;
-                                });
-                              },
+                          Text(
+                            "login.begin_journey".tr(),
+                            style: const TextStyle(
+                              fontSize: 28,
+                              fontWeight: FontWeight.w700,
+                              color: Color(0xFF005493),
                             ),
-                            Text(
-                              "login.remember_me".tr(),
-                              style: TextStyle(color: Colors.white),
-                            ),
-                          ],
-                        ),
-                        const Spacer(),
-                        GestureDetector(
-                          onTap: () {
-                            Navigator.pushNamed(
-                              context,
-                              AppRoutes.forgotPassword,
-                            );
-                          },
-                          child: Text(
-                            "login.forgot_password".tr(),
-                            style: TextStyle(color: Colors.white),
                           ),
-                        ),
-                      ],
-                    ),
-                    SizedBox(height: height * 0.025),
+                          const SizedBox(height: 6),
 
-                    AuthCustomButton(
-                      text: _isLoading ? "Loading..." : "log_in".tr(),
-                      height: height * 0.055,
-                      onTap: _isLoading ? () {} : login,
-                    ),
+                          Text(
+                            "login.subtitle".tr(),
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              fontSize: 15,
+                              color: Colors.black.withOpacity(0.7),
+                            ),
+                          ),
+                          const SizedBox(height: 30),
 
-                    SizedBox(height: height * 0.02),
+                          _label("login.email".tr()),
+                          CustomTextField(
+                            label: "login.email".tr(),
+                            controller: emailController,
+                            validator: (value) {
+                              if (value == null || value.trim().isEmpty) {
+                                return "Email is required";
+                              }
+                              if (!RegExp(r'\S+@\S+\.\S+').hasMatch(value.trim())) {
+                                return "Enter a valid email";
+                              }
+                              return null;
+                            },
+                          ),
+                          const SizedBox(height: 18),
 
-                    // _socialButton(
-                    //   icon: Icons.g_mobiledata,
-                    //   text: "login.sign_in_google".tr(),
-                    // ),
-                    //
-                    // SizedBox(height: 12),
-                    //
-                    // _socialButton(
-                    //   icon: Icons.apple,
-                    //   text: "login.sign_in_apple".tr(),
-                    // ),
+                          _label("login.password".tr()),
+                          CustomTextField(
+                            label: "login.password".tr(),
+                            controller: passwordController,
+                            obscureText: true,
+                            validator: (value) {
+                              if (value == null || value.trim().isEmpty) {
+                                return "Password is required";
+                              }
+                              if (value.trim().length < 6) {
+                                return "Password must be at least 6 characters";
+                              }
+                              return null;
+                            },
+                          ),
+                          const SizedBox(height: 14),
 
-                    SizedBox(height: 15),
+                          Row(
+                            children: [
+                              Checkbox(
+                                value: rememberMe,
+                                onChanged: (v) {
+                                  setState(() => rememberMe = v ?? false);
+                                },
+                              ),
+                              Text(
+                                "login.remember_me".tr(),
+                                style: const TextStyle(color: Colors.white),
+                              ),
+                              const Spacer(),
+                              GestureDetector(
+                                onTap: () {
+                                  Navigator.pushNamed(context, AppRoutes.forgotPassword);
+                                },
+                                child: Text(
+                                  "login.forgot_password".tr(),
+                                  style: const TextStyle(color: Colors.white),
+                                ),
+                              ),
+                            ],
+                          ),
+                          const SizedBox(height: 24),
 
-                    GestureDetector(
-                      onTap: () {
-                        Navigator.pushNamed(context, AppRoutes.signUp);
-                      },
-                      child: RichText(
-                        text: TextSpan(
-                          text: "login.no_account".tr(),
-                          style: TextStyle(color: Colors.white),
-                          children: [
-                            TextSpan(
-                              text: "login.sign_up".tr(),
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.w700,
+                          AuthCustomButton(
+                            text: _isLoading ? "Loading..." : "log_in".tr(),
+                            height: 48,
+                            onTap: _isLoading ? () {} : login,
+                          ),
+                          const SizedBox(height: 18),
+
+                          GestureDetector(
+                            onTap: () {
+                              Navigator.pushNamed(context, AppRoutes.signUp);
+                            },
+                            child: RichText(
+                              text: TextSpan(
+                                text: "login.no_account".tr(),
+                                style: const TextStyle(color: Colors.white),
+                                children: [
+                                  TextSpan(
+                                    text: "login.sign_up".tr(),
+                                    style: const TextStyle(fontWeight: FontWeight.w700),
+                                  ),
+                                ],
                               ),
                             ),
-                          ],
-                        ),
+                          ),
+                        ],
                       ),
                     ),
-
-                    SizedBox(height: 140),
-                  ],
+                  ),
                 ),
-              ),
+              ],
             ),
           ),
         ],
@@ -286,29 +233,21 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
-  // Widget _socialButton({required IconData icon, required String text}) {
-  //   return Container(
-  //     height: 55,
-  //     decoration: BoxDecoration(
-  //       borderRadius: BorderRadius.circular(40),
-  //       border: Border.all(color: Colors.white),
-  //       color: Colors.white.withOpacity(0.15),
-  //     ),
-  //     child: Row(
-  //       mainAxisAlignment: MainAxisAlignment.center,
-  //       children: [
-  //         Icon(icon, color: Colors.black, size: 28),
-  //         const SizedBox(width: 10),
-  //         Text(
-  //           text,
-  //           style: const TextStyle(
-  //             color: Colors.black,
-  //             fontSize: 16,
-  //             fontWeight: FontWeight.w600,
-  //           ),
-  //         ),
-  //       ],
-  //     ),
-  //   );
-  // }
+  Widget _label(String text) {
+    return Align(
+      alignment: Alignment.centerLeft,
+      child: Padding(
+        padding: const EdgeInsets.only(bottom: 6),
+        child: Text(
+          text,
+          style: const TextStyle(
+            fontSize: 15,
+            fontWeight: FontWeight.w600,
+            color: Color(0xFF494C4F),
+          ),
+        ),
+      ),
+    );
+  }
 }
+

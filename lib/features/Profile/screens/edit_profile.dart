@@ -102,79 +102,79 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
           child: Column(
             children: [
               /// HEADER
-              Container(
-                height: 173,
-                width: double.infinity,
-                decoration: BoxDecoration(
-                  color: const Color(0xffE3E9E3),
-                  borderRadius: BorderRadius.circular(11),
-                ),
-                child: Column(
-                  children: [
-                    const SizedBox(height: 15),
-                    /// IMAGE + ICON
-                    Stack(
-                      children: [
-                        ClipOval(
-                          child: selectedImage != null
-                              ? Image.file(
-                            selectedImage!,
-                            width: 78,
-                            height: 78,
-                            fit: BoxFit.cover,
-                          )
-                              : (userData?["avatar"] != null &&
-                              userData!["avatar"]
-                                  .toString()
-                                  .isNotEmpty)
-                              ? Image.network(
-                            userData!["avatar"],
-                            width: 78,
-                            height: 78,
-                            fit: BoxFit.cover,
-                          )
-                              : Image.asset(
-                            'assets/images/User.png',
-                            width: 78,
-                            height: 78,
-                          ),
-                        ),
-                        Positioned(
-                          bottom: 0,
-                          right: 0,
-                          child: GestureDetector(
-                            onTap: pickImage,
-                            child: Container(
-                              padding: const EdgeInsets.all(6),
-                              decoration: const BoxDecoration(
-                                color: Colors.green,
-                                shape: BoxShape.circle,
-                              ),
-                              child: const Icon(
-                                Icons.camera_alt,
-                                size: 16,
-                                color: Colors.white,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                    const SizedBox(height: 8),
-                    /// USER NAME
-                    Text(
-                      nameController.text,
-                      style: const TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                        color: Color(0xff83BF8B),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
+              // Container(
+              //   height: 173,
+              //   width: double.infinity,
+              //   decoration: BoxDecoration(
+              //     color: const Color(0xffE3E9E3),
+              //     borderRadius: BorderRadius.circular(11),
+              //   ),
+              //   child: Column(
+              //     children: [
+              //       const SizedBox(height: 15),
+              //       /// IMAGE + ICON
+              //       Stack(
+              //         children: [
+              //           ClipOval(
+              //             child: selectedImage != null
+              //                 ? Image.file(
+              //               selectedImage!,
+              //               width: 78,
+              //               height: 78,
+              //               fit: BoxFit.cover,
+              //             )
+              //                 : (userData?["avatar"] != null &&
+              //                 userData!["avatar"]
+              //                     .toString()
+              //                     .isNotEmpty)
+              //                 ? Image.network(
+              //               userData!["avatar"],
+              //               width: 78,
+              //               height: 78,
+              //               fit: BoxFit.cover,
+              //             )
+              //                 : Image.asset(
+              //               'assets/images/User.png',
+              //               width: 78,
+              //               height: 78,
+              //             ),
+              //           ),
+              //           Positioned(
+              //             bottom: 0,
+              //             right: 0,
+              //             child: GestureDetector(
+              //               onTap: pickImage,
+              //               child: Container(
+              //                 padding: const EdgeInsets.all(6),
+              //                 decoration: const BoxDecoration(
+              //                   color: Colors.green,
+              //                   shape: BoxShape.circle,
+              //                 ),
+              //                 child: const Icon(
+              //                   Icons.camera_alt,
+              //                   size: 16,
+              //                   color: Colors.white,
+              //                 ),
+              //               ),
+              //             ),
+              //           ),
+              //         ],
+              //       ),
+              //       const SizedBox(height: 8),
+              //       /// USER NAME
+              //       Text(
+              //         nameController.text,
+              //         style: const TextStyle(
+              //           fontSize: 18,
+              //           fontWeight: FontWeight.bold,
+              //           color: Color(0xff83BF8B),
+              //         ),
+              //       ),
+              //     ],
+              //   ),
+              // ),
 
-              const SizedBox(height: 20),
+              const SizedBox(height: 60),
 
               /// NAME FIELD
               TextField(

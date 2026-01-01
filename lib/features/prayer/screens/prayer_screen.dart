@@ -5,17 +5,18 @@ import 'package:bible_journey/features/devotions/screens/daily_devotion_screen.d
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:just_audio/just_audio.dart';
 import '../../../app/constants.dart';
 import '../../../widgets/appbars/custom_appbar.dart';
 import '../../../widgets/buttons/custom_button.dart';
-import '../models/prayer_model.dart';
-import '../services/prayer_api.dart';
 import '../../journeys/screens/journey_screen.dart';
 import '../../Profile/screens/profile_screen.dart';
 import '../../bible/screens/bible_screen.dart';
 import '../../home/screen/home_screen.dart';
 import '../../../widgets/custom_nav_bar.dart';
 import '../widgets/audio_player_card.dart';
+import '../models/prayer_model.dart';
+import '../services/prayer_api.dart';
 
 class PrayerScreen extends StatefulWidget {
   final int journeyId;
@@ -30,6 +31,7 @@ class PrayerScreen extends StatefulWidget {
 class _PrayerScreenState extends State<PrayerScreen> {
   int _selectedIndex = 2;
   late Future<PrayerResponse> prayerFuture;
+  AudioPlayer? _audioPlayer; // Keep alive
 
   @override
   void initState() {
@@ -37,9 +39,14 @@ class _PrayerScreenState extends State<PrayerScreen> {
     prayerFuture = PrayerApi.getTodayPrayer(widget.journeyId, widget.dayId);
   }
 
+  void stopAudio() {
+    _audioPlayer?.stop();
+  }
+
   Future<void> completePrayerStep(bool isCompleted) async {
+    stopAudio(); // Stop before navigation
+
     if (isCompleted) {
-      // Step already completed → navigate directly
       Navigator.push(
         context,
         MaterialPageRoute(
@@ -52,7 +59,6 @@ class _PrayerScreenState extends State<PrayerScreen> {
       return;
     }
 
-    // Step not completed → call API
     try {
       final token = await LocalStorage.getToken();
       final response = await http.post(
@@ -70,9 +76,8 @@ class _PrayerScreenState extends State<PrayerScreen> {
       final data = jsonDecode(response.body);
 
       if (response.statusCode == 200 || response.statusCode == 201) {
-        print("Step completed: ${data['completed']}");
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text(data["message"])),
+          SnackBar(content: Text(data["message"] ?? "Step Completed")),
         );
 
         Navigator.push(
@@ -96,6 +101,12 @@ class _PrayerScreenState extends State<PrayerScreen> {
     }
   }
 
+  @override
+  void dispose() {
+    _audioPlayer?.stop();
+    _audioPlayer?.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -111,14 +122,11 @@ class _PrayerScreenState extends State<PrayerScreen> {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(child: CircularProgressIndicator());
           }
-
           if (snapshot.hasError) {
-            print("Prayer API Error: ${snapshot.error}");
-            return Center(child: Text("Something went wrong"));
+            return const Center(child: Text("Something went wrong"));
           }
-
           if (!snapshot.hasData || snapshot.data == null) {
-            return Center(child: Text("No prayer data found"));
+            return const Center(child: Text("No prayer data found"));
           }
 
           final prayer = snapshot.data!.data;
@@ -149,13 +157,20 @@ class _PrayerScreenState extends State<PrayerScreen> {
                     title: "Prayer Audio",
                     subtitle: "Read by Daily Devotions",
                     thumbnail: Container(color: Colors.redAccent.shade100),
+                    playerControllerSetter: (player) {
+                      _audioPlayer = player;
+                    },
+                    onStop: () {
+                      debugPrint("Audio stopped manually");
+                    },
                   ),
                   const SizedBox(height: 32),
                   CustomButton(
                     text: "Next",
-                    onTap: () => completePrayerStep(snapshot.data!.isCompleted),
+                    onTap: () {
+                      completePrayerStep(snapshot.data!.isCompleted);
+                    },
                   ),
-
                 ],
               ),
             ),
@@ -165,19 +180,25 @@ class _PrayerScreenState extends State<PrayerScreen> {
       bottomNavigationBar: CustomNavbar(
         currentIndex: _selectedIndex,
         onItemPressed: (index) {
+          stopAudio();
           setState(() => _selectedIndex = index);
+
           switch (index) {
             case 0:
-              Navigator.push(context, MaterialPageRoute(builder: (_) => const HomeScreen()));
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (_) => const HomeScreen()));
               break;
             case 1:
-              Navigator.push(context, MaterialPageRoute(builder: (_) => const BibleScreen()));
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (_) => const BibleScreen()));
               break;
             case 2:
-              Navigator.push(context, MaterialPageRoute(builder: (_) => const JourneyScreen()));
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (_) => const JourneyScreen()));
               break;
             case 3:
-              Navigator.push(context, MaterialPageRoute(builder: (_) => const ProfileScreen()));
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (_) => const ProfileScreen()));
               break;
           }
         },
@@ -185,4 +206,3 @@ class _PrayerScreenState extends State<PrayerScreen> {
     );
   }
 }
-
