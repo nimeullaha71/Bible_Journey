@@ -34,6 +34,7 @@ class InvoiceResponse {
 class InvoiceModel {
   final String transactionId;
   final String amount;
+  final String plan;
   final DateTime startDate;
   final DateTime endDate;
   final DateTime paymentDate;
@@ -44,6 +45,7 @@ class InvoiceModel {
     required this.startDate,
     required this.endDate,
     required this.paymentDate,
+    required this.plan,
   });
 
   factory InvoiceModel.fromJson(Map<String, dynamic> json) {
@@ -53,6 +55,7 @@ class InvoiceModel {
       startDate: DateTime.parse(json['start_date']),
       endDate: DateTime.parse(json['end_date']),
       paymentDate: DateTime.parse(json['payment_date']),
+      plan: json['plan'],
     );
   }
 }

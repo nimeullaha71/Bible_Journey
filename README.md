@@ -617,7 +617,7 @@ For sensitive data (API keys, etc.), consider using:
 
 ## 👥 Team & Support
 
-For support, questions, or contributions, please contact the development team.
+For support, questions, or contributions, please contact the development team.shanto8@gmail.com
 
 **Built with using Flutter**
 

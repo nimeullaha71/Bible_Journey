@@ -23,7 +23,7 @@ class _InvoiceScreenState extends State<InvoiceScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      //backgroundColor: AppColors.bgColor,
+      backgroundColor: AppColors.bgColor,
       appBar: CustomAppBar(
         title: "Invoice",
         onTap: () => Navigator.pop(context),
@@ -116,7 +116,7 @@ class _InvoiceScreenState extends State<InvoiceScreen> {
                 const SizedBox(height: 8),
                 Text(
                   sub.expiredAt != null
-                      ? "Renew On ${_formatDate(sub.expiredAt!)}"
+                      ? "Renew On ${_formatDate(sub.createdAt!)}"
                       : "No renewal date",
                   style: const TextStyle(fontSize: 14),
                 ),
@@ -156,8 +156,9 @@ class _InvoiceScreenState extends State<InvoiceScreen> {
                       style: const TextStyle(fontSize: 13),
                     ),
                     const SizedBox(height: 4),
-                    const Text(
-                      "Yearly Subscription",
+                     Text(
+                      "Plan: ${i.plan}",
+
                       style: TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.w600,
