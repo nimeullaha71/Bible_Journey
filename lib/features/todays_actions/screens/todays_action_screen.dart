@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:bible_journey/widgets/appbars/custom_appbar.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -104,7 +105,9 @@ class _TodayActionScreenState extends State<TodayActionScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.bgColor,
-      appBar: AppBar(title: const Text("Today's Action")),
+      appBar: CustomAppBar(title: "Today's Action", onTap: (){
+        Navigator.pop(context);
+      }),
       body: FutureBuilder<Map<String, dynamic>>(
         future: actionFuture,
         builder: (context, snapshot) {

@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:bible_journey/app/Urls.dart';
 import 'package:bible_journey/app/constants.dart';
 import 'package:bible_journey/core/services/local_storage_service.dart';
+import 'package:bible_journey/widgets/appbars/custom_appbar.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:webview_flutter/webview_flutter.dart';
@@ -98,13 +99,10 @@ class _TrialExpiredPaymentScreenState extends State<TrialExpiredPaymentScreen> {
     ];
 
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("Choose a Plan"),
-        backgroundColor: AppColors.bgColor,
-          scrolledUnderElevation: 0
-
-      ),
-      backgroundColor: Colors.blueGrey[50],
+      appBar: CustomAppBar(title: "Choose a Plan", onTap: (){
+        Navigator.pop(context);
+      }),
+      backgroundColor: AppColors.bgColor,
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(

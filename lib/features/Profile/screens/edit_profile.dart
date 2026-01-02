@@ -5,6 +5,7 @@ import 'package:bible_journey/features/Profile/screens/profile_screen.dart';
 import 'package:bible_journey/features/bible/screens/bible_screen.dart';
 import 'package:bible_journey/features/journeys/screens/journey_screen.dart';
 import 'package:bible_journey/main_bottom_nav_screen.dart';
+import 'package:bible_journey/widgets/appbars/custom_appbar.dart';
 import 'package:bible_journey/widgets/buttons/custom_button.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -88,12 +89,15 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xffF8F5F2),
-      appBar: AppBar(
-        backgroundColor: const Color(0xFFF8F5F2),
-        title: Text("profile_details".tr()),
-        centerTitle: true,
-        elevation: 0,
-      ),
+      appBar: CustomAppBar(title: "Edit Profile", onTap: (){
+        Navigator.pop(context);
+      }),
+      // AppBar(
+      //   backgroundColor: const Color(0xFFF8F5F2),
+      //   title: Text("profile_details".tr()),
+      //   centerTitle: true,
+      //   elevation: 0,
+      // ),
       body: isLoading
           ? const Center(child: CircularProgressIndicator())
           : SingleChildScrollView(
@@ -282,7 +286,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                 ),
               ),
 
-              const SizedBox(height: 20),
+              const SizedBox(height: 60),
 
               CustomButton(
                 text: "update".tr(),
