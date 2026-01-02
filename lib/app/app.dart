@@ -1,6 +1,8 @@
 import 'dart:async';
 import 'package:app_links/app_links.dart';
 import 'package:bible_journey/app/routes.dart';
+import 'package:bible_journey/features/Profile/screens/profile_screen.dart';
+import 'package:bible_journey/features/home/screen/home_screen.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import '../main.dart';
@@ -42,11 +44,7 @@ class _MyAppState extends State<MyApp> {
      // final String? orderId = uri.queryParameters['order_id'];
 
       Future.microtask(() {
-        navigatorKey.currentState?.pushNamedAndRemoveUntil(
-          AppRoutes.mainBottomNavScreen,
-              (route) => false,
-       //   arguments: orderId,
-        );
+        navigatorKey.currentState?.pushAndRemoveUntil(MaterialPageRoute(builder: (context)=>ProfileScreen()), (predicate)=>false);
       });
     }
   }

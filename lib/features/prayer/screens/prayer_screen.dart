@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:bible_journey/app/Urls.dart';
 import 'package:bible_journey/core/services/local_storage_service.dart';
 import 'package:bible_journey/features/devotions/screens/daily_devotion_screen.dart';
+import 'package:bible_journey/main_bottom_nav_screen.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -177,32 +178,32 @@ class _PrayerScreenState extends State<PrayerScreen> {
           );
         },
       ),
-      bottomNavigationBar: CustomNavbar(
-        currentIndex: _selectedIndex,
-        onItemPressed: (index) {
-          stopAudio();
-          setState(() => _selectedIndex = index);
-
-          switch (index) {
-            case 0:
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (_) => const HomeScreen()));
-              break;
-            case 1:
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (_) => const BibleScreen()));
-              break;
-            case 2:
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (_) => const JourneyScreen()));
-              break;
-            case 3:
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (_) => const ProfileScreen()));
-              break;
-          }
-        },
-      ),
+      // bottomNavigationBar: CustomNavbar(
+      //   currentIndex: _selectedIndex,
+      //   onItemPressed: (index) {
+      //     stopAudio();
+      //     setState(() => _selectedIndex = index);
+      //
+      //     switch (index) {
+      //       case 0:
+      //         Navigator.push(context,
+      //             MaterialPageRoute(builder: (_) => const MainBottomNavScreen()));
+      //         break;
+      //       case 1:
+      //         Navigator.push(context,
+      //             MaterialPageRoute(builder: (_) => const BibleScreen()));
+      //         break;
+      //       case 2:
+      //         Navigator.push(context,
+      //             MaterialPageRoute(builder: (_) => const JourneyScreen()));
+      //         break;
+      //       case 3:
+      //         Navigator.push(context,
+      //             MaterialPageRoute(builder: (_) => const ProfileScreen()));
+      //         break;
+      //     }
+      //   },
+      // ),
     );
   }
 }

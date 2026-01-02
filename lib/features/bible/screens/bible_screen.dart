@@ -1,6 +1,10 @@
 import 'package:bible_journey/app/constants.dart';
+import 'package:bible_journey/features/home/screen/home_screen.dart';
 import 'package:bible_journey/main_bottom_nav_screen.dart';
 import 'package:easy_localization/easy_localization.dart';
+import '../../../widgets/custom_nav_bar.dart';
+import '../../Profile/screens/profile_screen.dart';
+import '../../journeys/screens/journey_screen.dart';
 import '../widgets/book_section.dart';
 import '../widgets/old_new_testiment_section.dart';
 import 'package:flutter/material.dart';
@@ -15,10 +19,12 @@ class BibleScreen extends StatefulWidget {
 class _BibleScreenState extends State<BibleScreen> {
   bool isOld = true;
 
+
   final Map<String, CollapseController> controllers = {};
 
   @override
   Widget build(BuildContext context) {
+    int _selectedIndex = 1;
     final data = isOld ? oldTestamentSections : newTestamentSections;
 
     return Scaffold(
@@ -28,15 +34,17 @@ class _BibleScreenState extends State<BibleScreen> {
         scrolledUnderElevation: 0,
         title: Text(isOld ? "testaments.old".tr() : "testaments.new".tr()),
         centerTitle: true,
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back, color: Colors.black),
-          onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => const MainBottomNavScreen()),
-            );
-          },
-        ),
+        automaticallyImplyLeading: false,
+        // leading: IconButton(
+        //   icon: const Icon(Icons.arrow_back, color: Colors.black),
+        //   onPressed: () {
+        //     Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context)=>HomeScreen()), (pred)=>false);
+        //     // Navigator.push(
+        //     //   context,
+        //     //   MaterialPageRoute(builder: (context) => const HomeScreen()),
+        //     //);
+        //   },
+        // ),
         elevation: 0,
       ),
 
@@ -70,6 +78,30 @@ class _BibleScreenState extends State<BibleScreen> {
           ],
         ),
       ),
+      // bottomNavigationBar: CustomNavbar(
+      //   currentIndex: _selectedIndex,
+      //   onItemPressed: (index) {
+      //     setState(() => _selectedIndex = index);
+      //     switch (index) {
+      //       case 0:
+      //         Navigator.push(context,
+      //             MaterialPageRoute(builder: (_) => const MainBottomNavScreen()));
+      //         break;
+      //       case 1:
+      //         Navigator.push(context,
+      //             MaterialPageRoute(builder: (_) => const BibleScreen()));
+      //         break;
+      //       case 2:
+      //         Navigator.push(context,
+      //             MaterialPageRoute(builder: (_) => const JourneyScreen()));
+      //         break;
+      //       case 3:
+      //         Navigator.push(context,
+      //             MaterialPageRoute(builder: (_) => const ProfileScreen()));
+      //         break;
+      //     }
+      //   },
+      // ),
     );
   }
 

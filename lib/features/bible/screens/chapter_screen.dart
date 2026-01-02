@@ -35,6 +35,7 @@ class _ChapterScreenState extends State<ChapterScreen> {
 
       appBar: AppBar(
         backgroundColor: const Color(0xffF8F5F2),
+        scrolledUnderElevation: 0,
         elevation: 0,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back, color: Colors.black),

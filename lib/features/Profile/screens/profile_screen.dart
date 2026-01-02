@@ -35,7 +35,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
       backgroundColor: AppColors.bgColor,
       appBar: CustomAppBar(title: "Profile", onTap: (){
         Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context)=>MainBottomNavScreen()), (predicate)=>false);
-      }),
+      },
+      showBackButton: false,
+      ),
       body: SingleChildScrollView(
         child: Column(
             children: [
@@ -341,10 +343,15 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               await AuthService().logOut(email: email);
                               await LocalStorage.clearAll();
 
-                              Navigator.pushReplacement(
-                                context,
-                                MaterialPageRoute(builder: (_) => LoginScreen()),
+                              // Navigator.pushReplacement(
+                              //   context,
+                              //   MaterialPageRoute(builder: (_) => LoginScreen()),
+                              // );
+                              Navigator.of(context, rootNavigator: true).pushAndRemoveUntil(
+                                MaterialPageRoute(builder: (_) => const LoginScreen()),
+                                    (route) => false,
                               );
+
                             } else {
                               ScaffoldMessenger.of(context).showSnackBar(
                                 SnackBar(content: Text('User not logged in')),

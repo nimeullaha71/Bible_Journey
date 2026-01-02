@@ -84,12 +84,17 @@ class AppRoutes {
     //     );
 
 
+      // default:
+      //   return MaterialPageRoute(
+      //     builder: (_) => const Scaffold(
+      //       body: Center(child: Text("No Route Found")),
+      //     ),
+      //   );
       default:
         return MaterialPageRoute(
-          builder: (_) => const Scaffold(
-            body: Center(child: Text("No Route Found")),
-          ),
+          builder: (_) => const MainBottomNavScreen(), // instead of "No Route Found"
         );
+
     }
   }
 }

@@ -44,6 +44,7 @@ class _JourneyScreenState extends State<JourneyScreen> {
                 (_) => false,
           );
         },
+        showBackButton: false,
       ),
       body: SafeArea(
         child: Padding(

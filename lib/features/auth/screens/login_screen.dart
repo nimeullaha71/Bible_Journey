@@ -33,7 +33,6 @@ class _LoginScreenState extends State<LoginScreen> {
         password: passwordController.text.trim(),
       );
 
-      // Check if account is disabled
       if (response['statusCode'] == 403 ||
           (response['error'] != null &&
               response['error'].toString().contains("Account disabled"))) {
@@ -43,11 +42,9 @@ class _LoginScreenState extends State<LoginScreen> {
         return;
       }
 
-      // Save token and email
       await LocalStorage.saveToken(response['token']);
       await LocalStorage.saveEmail(emailController.text.trim());
 
-      // Check for trial expiration
       if (response['trial_expired'] != null &&
           response['trial_expired'].toString().toLowerCase().contains("expired")) {
         Navigator.push(
@@ -57,7 +54,6 @@ class _LoginScreenState extends State<LoginScreen> {
         return;
       }
 
-      // Navigate based on category
       if (response['category'] == null || response['category'].toString().isEmpty) {
         Navigator.pushReplacementNamed(context, AppRoutes.quizIntroScreen);
       } else {

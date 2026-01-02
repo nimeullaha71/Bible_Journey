@@ -2,6 +2,8 @@ import 'dart:convert';
 import 'package:bible_journey/app/Urls.dart';
 import 'package:bible_journey/app/constants.dart';
 import 'package:bible_journey/core/services/local_storage_service.dart';
+import 'package:bible_journey/features/Profile/screens/profile_screen.dart';
+import 'package:bible_journey/features/home/screen/home_screen.dart';
 import 'package:bible_journey/widgets/appbars/custom_appbar.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -62,7 +64,7 @@ class _TrialExpiredPaymentScreenState extends State<TrialExpiredPaymentScreen> {
             Navigator.pushAndRemoveUntil(
               context,
               MaterialPageRoute(
-                builder: (_) => const MainBottomNavScreen(),
+                builder: (_) => const ProfileScreen(),
               ),
                   (route) => false,
             );

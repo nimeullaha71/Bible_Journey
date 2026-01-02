@@ -110,26 +110,26 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
           ),
         ),
       ),
-      bottomNavigationBar: CustomNavbar(
-        currentIndex: _selectedIndex,
-        onItemPressed: (index) {
-          switch (index) {
-            case 0:
-              Navigator.push(context, MaterialPageRoute(builder: (_) => const MainBottomNavScreen()));
-              break;
-            case 1:
-              Navigator.push(context, MaterialPageRoute(builder: (_) => const BibleScreen()));
-              break;
-            case 2:
-              Navigator.push(context, MaterialPageRoute(builder: (_) => const JourneyScreen()));
-              break;
-            case 3:
-              Navigator.push(context, MaterialPageRoute(builder: (_) => const ProfileScreen()));
-              break;
-          }
-          setState(() => _selectedIndex = index);
-        },
-      ),
+      // bottomNavigationBar: CustomNavbar(
+      //   currentIndex: _selectedIndex,
+      //   onItemPressed: (index) {
+      //     switch (index) {
+      //       case 0:
+      //         Navigator.push(context, MaterialPageRoute(builder: (_) => const MainBottomNavScreen()));
+      //         break;
+      //       case 1:
+      //         Navigator.push(context, MaterialPageRoute(builder: (_) => const BibleScreen()));
+      //         break;
+      //       case 2:
+      //         Navigator.push(context, MaterialPageRoute(builder: (_) => const JourneyScreen()));
+      //         break;
+      //       case 3:
+      //         Navigator.push(context, MaterialPageRoute(builder: (_) => const ProfileScreen()));
+      //         break;
+      //     }
+      //     setState(() => _selectedIndex = index);
+      //   },
+      // ),
     );
   }
 }

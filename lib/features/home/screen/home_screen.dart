@@ -15,6 +15,7 @@ import '../../../app/Urls.dart';
 import '../../../core/services/api_service.dart';
 import '../../../core/services/local_storage_service.dart';
 import '../widgets/home_box.dart';
+import 'package:bible_journey/main_bottom_nav_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -110,6 +111,8 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final bottomNavState =
+    context.findAncestorStateOfType<MainBottomNavScreenState>();
     final width = MediaQuery.of(context).size.width;
     final height = MediaQuery.of(context).size.height;
 
@@ -182,6 +185,86 @@ class _HomeScreenState extends State<HomeScreen> {
                         mainAxisSpacing: height * .015,
                         childAspectRatio: 1.1,
                         children: [
+                          // HomeBox(
+                          //   icon: SvgPicture.asset(
+                          //     "assets/images/Vector (3).svg",
+                          //     color: Colors.green,
+                          //   ),
+                          //   title: "Daily Prayer",
+                          //   subtitle: "Start your day with a guided prayer.",
+                          //   onTap: () {
+                          //     if (isTodayLoading || todayPrayer == null) return;
+                          //     Navigator.push(
+                          //       context,
+                          //       MaterialPageRoute(
+                          //         builder: (_) => PrayerScreen(
+                          //           journeyId: todayPrayer!['journey']['id'],
+                          //           dayId: todayPrayer!['day']['id'],
+                          //         ),
+                          //       ),
+                          //     );
+                          //   },
+                          // ),
+                          //
+                          // HomeBox(
+                          //   icon: SvgPicture.asset(
+                          //     "assets/images/Vector (1).svg",
+                          //     color: Colors.green,
+                          //   ),
+                          //   title: "Daily Devotion",
+                          //   subtitle: "Reflect on today's scripture.",
+                          //   onTap: () {
+                          //     if (isTodayLoading || todayDevotion == null)
+                          //       return;
+                          //     Navigator.push(
+                          //       context,
+                          //       MaterialPageRoute(
+                          //         builder: (_) => DailyDevotionScreen(
+                          //           journeyId: todayDevotion!['journey']['id'],
+                          //           dayId: todayDevotion!['day']['id'],
+                          //         ),
+                          //       ),
+                          //     );
+                          //   },
+                          // ),
+                          //
+                          // HomeBox(
+                          //   icon: SvgPicture.asset(
+                          //     "assets/images/Vector (4).svg",
+                          //     color: Colors.green,
+                          //   ),
+                          //   title: "Today's Actions",
+                          //   subtitle: "Small tasks to grow faith.",
+                          //   onTap: () {
+                          //     if (isTodayLoading || todayAction == null) return;
+                          //     Navigator.push(
+                          //       context,
+                          //       MaterialPageRoute(
+                          //         builder: (_) => TodayActionScreen(
+                          //           journeyId: todayAction!['journey']['id'],
+                          //           dayId: todayAction!['day']['id'],
+                          //         ),
+                          //       ),
+                          //     );
+                          //   },
+                          // ),
+                          //
+                          // HomeBox(
+                          //   icon: SvgPicture.asset(
+                          //     "assets/images/Vector (3).svg",
+                          //     color: Colors.green,
+                          //   ),
+                          //   title: "Begin a Journey",
+                          //   subtitle: "Guided plans for growth.",
+                          //   onTap: () {
+                          //     Navigator.push(
+                          //       context,
+                          //       MaterialPageRoute(
+                          //         builder: (_) => JourneyScreen(),
+                          //       ),
+                          //     );
+                          //   },
+                          // ),
                           HomeBox(
                             icon: SvgPicture.asset(
                               "assets/images/Vector (3).svg",
@@ -191,18 +274,18 @@ class _HomeScreenState extends State<HomeScreen> {
                             subtitle: "Start your day with a guided prayer.",
                             onTap: () {
                               if (isTodayLoading || todayPrayer == null) return;
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (_) => PrayerScreen(
-                                    journeyId: todayPrayer!['journey']['id'],
-                                    dayId: todayPrayer!['day']['id'],
-                                  ),
+
+                              bottomNavState?.switchToTab(
+                                2, // Journey tab
+                                pushScreen: PrayerScreen(
+                                  journeyId: todayPrayer!['journey']['id'],
+                                  dayId: todayPrayer!['day']['id'],
                                 ),
                               );
                             },
                           ),
 
+                          /// 🔹 Daily Devotion
                           HomeBox(
                             icon: SvgPicture.asset(
                               "assets/images/Vector (1).svg",
@@ -211,20 +294,20 @@ class _HomeScreenState extends State<HomeScreen> {
                             title: "Daily Devotion",
                             subtitle: "Reflect on today's scripture.",
                             onTap: () {
-                              if (isTodayLoading || todayDevotion == null)
-                                return;
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (_) => DailyDevotionScreen(
-                                    journeyId: todayDevotion!['journey']['id'],
-                                    dayId: todayDevotion!['day']['id'],
-                                  ),
+                              if (isTodayLoading || todayDevotion == null) return;
+
+                              bottomNavState?.switchToTab(
+                                2,
+                                pushScreen: DailyDevotionScreen(
+                                  journeyId: todayDevotion!['journey']['id'],
+                                  dayId: todayDevotion!['day']['id'],
                                 ),
                               );
                             },
                           ),
 
+
+                          /// 🔹 Today Action
                           HomeBox(
                             icon: SvgPicture.asset(
                               "assets/images/Vector (4).svg",
@@ -234,32 +317,28 @@ class _HomeScreenState extends State<HomeScreen> {
                             subtitle: "Small tasks to grow faith.",
                             onTap: () {
                               if (isTodayLoading || todayAction == null) return;
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (_) => TodayActionScreen(
-                                    journeyId: todayAction!['journey']['id'],
-                                    dayId: todayAction!['day']['id'],
-                                  ),
+
+                              bottomNavState?.switchToTab(
+                                2,
+                                pushScreen: TodayActionScreen(
+                                  journeyId: todayAction!['journey']['id'],
+                                  dayId: todayAction!['day']['id'],
                                 ),
                               );
                             },
                           ),
 
+
+                          /// 🔹 Journey List
                           HomeBox(
                             icon: SvgPicture.asset(
                               "assets/images/Vector (3).svg",
                               color: Colors.green,
                             ),
                             title: "Begin a Journey",
-                            subtitle: "Guided plans for growth.",
+                            subtitle: "Explore journeys",
                             onTap: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (_) => JourneyScreen(),
-                                ),
-                              );
+                              bottomNavState?.switchToTab(2);
                             },
                           ),
                         ],
@@ -303,15 +382,24 @@ class _HomeScreenState extends State<HomeScreen> {
                               ),
                             ),
                             SizedBox(height: height * 0.02),
+                            // CustomButton(
+                            //   text: "view_all_journeys".tr(),
+                            //   onTap: () {
+                            //     Navigator.push(
+                            //       context,
+                            //       MaterialPageRoute(
+                            //         builder: (context) => JourneyScreen(),
+                            //       ),
+                            //     );
+                            //   },
+                            // ),
                             CustomButton(
                               text: "view_all_journeys".tr(),
                               onTap: () {
-                                Navigator.pushNamed(
-                                  context,
-                                  AppRoutes.journeyScreen,
-                                );
+                                bottomNavState?.switchToTab(2); // Journey tab
                               },
                             ),
+
                           ],
                         ),
                       ),

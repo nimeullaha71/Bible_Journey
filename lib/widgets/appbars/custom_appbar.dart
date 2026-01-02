@@ -4,12 +4,14 @@ import 'package:flutter/material.dart';
 class CustomAppBar extends StatelessWidget
     implements PreferredSizeWidget {
   final String title;
-  final VoidCallback onTap;
+  final VoidCallback? onTap;
+  final bool showBackButton;
 
   const CustomAppBar({
     super.key,
     required this.title,
-    required this.onTap,
+    this.onTap,
+    this.showBackButton = true,
   });
 
   @override
@@ -24,8 +26,9 @@ class CustomAppBar extends StatelessWidget
       automaticallyImplyLeading: false,
       centerTitle: true,
 
-      leading: GestureDetector(
-        onTap: onTap,
+      leading: showBackButton
+          ? GestureDetector(
+        onTap: onTap ?? () => Navigator.pop(context),
         child: const Padding(
           padding: EdgeInsets.all(12),
           child: Icon(
@@ -34,7 +37,8 @@ class CustomAppBar extends StatelessWidget
             size: 22,
           ),
         ),
-      ),
+      )
+          : null,
 
       title: Text(
         title,
