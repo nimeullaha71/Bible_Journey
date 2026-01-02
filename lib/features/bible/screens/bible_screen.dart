@@ -15,7 +15,6 @@ class BibleScreen extends StatefulWidget {
 class _BibleScreenState extends State<BibleScreen> {
   bool isOld = true;
 
-  // EACH SECTION GETS ITS OWN COLLAPSE CONTROLLER
   final Map<String, CollapseController> controllers = {};
 
   @override
@@ -25,13 +24,13 @@ class _BibleScreenState extends State<BibleScreen> {
     return Scaffold(
       backgroundColor: AppColors.bgColor,
       appBar: AppBar(
-        backgroundColor: const Color(0xffF8F5F2),
+        backgroundColor: AppColors.bgColor,
+        scrolledUnderElevation: 0,
         title: Text(isOld ? "testaments.old".tr() : "testaments.new".tr()),
         centerTitle: true,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back, color: Colors.black),
           onPressed: () {
-            // Notun page e navigate korbe
             Navigator.push(
               context,
               MaterialPageRoute(builder: (context) => const MainBottomNavScreen()),
@@ -45,10 +44,8 @@ class _BibleScreenState extends State<BibleScreen> {
         child: Column(
           children: [
 
-            // TOGGLE BUTTON (SAME AS BEFORE)
             buildTestamentToggle(),
 
-            // BUILD SECTIONS
             for (var section in data.keys)
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
@@ -60,7 +57,6 @@ class _BibleScreenState extends State<BibleScreen> {
                             fontSize: 18, fontWeight: FontWeight.w600)),
                     const SizedBox(height: 8),
 
-                    /// GIVE A SEPARATE CONTROLLER FOR EACH SECTION
                     ...data[section]!.map((book) {
                       controllers.putIfAbsent(section, () => CollapseController());
                       return BookSection(
@@ -92,7 +88,7 @@ class _BibleScreenState extends State<BibleScreen> {
             child: GestureDetector(
               onTap: () => setState(() {
                 isOld = true;
-                controllers.clear(); // reset controllers when change tab
+                controllers.clear();
               }),
               child: Container(
                 decoration: BoxDecoration(
@@ -110,7 +106,7 @@ class _BibleScreenState extends State<BibleScreen> {
             child: GestureDetector(
               onTap: () => setState(() {
                 isOld = false;
-                controllers.clear(); // reset controllers when change tab
+                controllers.clear();
               }),
               child: Container(
                 decoration: BoxDecoration(

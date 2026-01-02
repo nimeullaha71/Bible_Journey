@@ -1,3 +1,5 @@
+import 'package:bible_journey/app/constants.dart';
+import 'package:bible_journey/widgets/appbars/custom_appbar.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -13,6 +15,10 @@ class MoneyBackPolicyScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: AppColors.bgColor,
+      appBar: CustomAppBar(title: "Money Back Policy", onTap: (){
+        Navigator.pop(context);
+      }),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Padding(

@@ -6,20 +6,17 @@ import 'package:bible_journey/app/constants.dart';
 import 'package:bible_journey/app/Urls.dart';
 import '../../../core/services/local_storage_service.dart';
 import '../../../widgets/buttons/custom_button.dart';
-import '../../journeys/models/daily_journey_details_model.dart';
 import '../../reflection/screens/daily_reflection_screen.dart';
 import '../services/today_action_api.dart';
 
 class TodayActionScreen extends StatefulWidget {
   final int dayId;
   final int journeyId;
-  //final List<Day> days;
 
   const TodayActionScreen({
     super.key,
     required this.dayId,
     required this.journeyId,
-   // required this.days,
   });
 
   @override

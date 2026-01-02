@@ -1,3 +1,4 @@
+import 'package:bible_journey/app/constants.dart';
 import 'package:flutter/material.dart';
 
 class CustomAppBar extends StatelessWidget
@@ -17,7 +18,8 @@ class CustomAppBar extends StatelessWidget
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      //backgroundColor: Colors.white,
+      backgroundColor: AppColors.bgColor,
+      scrolledUnderElevation: 0,
       elevation: 0,
       automaticallyImplyLeading: false,
       centerTitle: true,

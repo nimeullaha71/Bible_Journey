@@ -2,6 +2,8 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../../../app/app_string.dart';
+import '../../../app/constants.dart';
+import '../../../widgets/appbars/custom_appbar.dart';
 import '../widgets/app_logo_widget.dart';
 import '../widgets/reuseable_span_widget.dart';
 import '../widgets/title_text_widget.dart';
@@ -12,6 +14,10 @@ class SubscriptionTermsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: AppColors.bgColor,
+      appBar: CustomAppBar(title: "Subscription Terms", onTap: (){
+        Navigator.pop(context);
+      }),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Padding(

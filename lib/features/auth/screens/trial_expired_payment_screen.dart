@@ -100,7 +100,9 @@ class _TrialExpiredPaymentScreenState extends State<TrialExpiredPaymentScreen> {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Choose a Plan"),
-        backgroundColor: Colors.blueAccent,
+        backgroundColor: AppColors.bgColor,
+          scrolledUnderElevation: 0
+
       ),
       backgroundColor: Colors.blueGrey[50],
       body: Padding(
@@ -188,7 +190,7 @@ class PackageCard extends StatelessWidget {
               child: ElevatedButton(
                 onPressed: onTap,
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.blueAccent,
+                  backgroundColor: AppColors.primary,
                   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(25)),
                 ),
                 child: Text("Pay \$$price", style: const TextStyle(fontSize: 16)),

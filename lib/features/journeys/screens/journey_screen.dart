@@ -35,6 +35,7 @@ class _JourneyScreenState extends State<JourneyScreen> {
     return Scaffold(
       backgroundColor: AppColors.bgColor,
       appBar: CustomAppBar(
+
         title: "life_area_journey".tr(),
         onTap: () {
           Navigator.pushAndRemoveUntil(

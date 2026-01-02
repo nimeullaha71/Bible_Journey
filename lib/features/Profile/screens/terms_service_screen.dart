@@ -1,6 +1,8 @@
 
 import 'package:flutter/material.dart';
 import '../../../app/app_string.dart';
+import '../../../app/constants.dart';
+import '../../../widgets/appbars/custom_appbar.dart';
 import '../widgets/app_logo_widget.dart';
 import '../widgets/reuseable_span_widget.dart';
 import '../widgets/title_text_widget.dart';
@@ -11,6 +13,10 @@ class TermsAndConditionsOfUseScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: AppColors.bgColor,
+      appBar: CustomAppBar(title: "Terms and Condition", onTap: (){
+        Navigator.pop(context);
+      }),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Padding(

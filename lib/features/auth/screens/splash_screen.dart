@@ -1,6 +1,7 @@
 import 'package:bible_journey/app/constants.dart';
 import 'package:bible_journey/app/routes.dart';
 import 'package:bible_journey/features/Profile/screens/profile_details.dart';
+import 'package:bible_journey/features/auth/screens/signup_screen.dart';
 import 'package:bible_journey/widgets/buttons/auth_flow_custom_button.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -113,7 +114,7 @@ class _SplashScreenState extends State<SplashScreen> {
                     text: "get_started".tr(),
                     onTap: () {
                       //Navigator.pushNamed(context, AppRoutes.mainBottomNavScreen);
-                      Navigator.push(context, MaterialPageRoute(builder: (context)=>ProfileDetails()));
+                      Navigator.push(context, MaterialPageRoute(builder: (context)=>SignUpScreen()));
                     },
                     height: height * 0.055,
                   ),
@@ -128,7 +129,7 @@ class _SplashScreenState extends State<SplashScreen> {
                   child: Text.rich(
                     TextSpan(
                       text: "already_account".tr(),
-                      style:TextStyle(color: Color.fromRGBO(92, 92, 92, 1),fontSize: 20),
+                      style:TextStyle(color: Color.fromRGBO(92, 92, 92, 1),fontSize: 16),
                       // AppTextStyles.normal.copyWith(
                       //   fontSize: height * 0.022,
                       // ),

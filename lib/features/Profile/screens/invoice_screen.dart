@@ -23,7 +23,7 @@ class _InvoiceScreenState extends State<InvoiceScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.bgColor,
+      //backgroundColor: AppColors.bgColor,
       appBar: CustomAppBar(
         title: "Invoice",
         onTap: () => Navigator.pop(context),

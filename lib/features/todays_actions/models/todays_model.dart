@@ -1,6 +1,6 @@
 class TodayAction {
   final int id;
-  final String action;
+  final String? action;
 
   TodayAction({required this.id, required this.action});
 
