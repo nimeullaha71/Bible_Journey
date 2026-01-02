@@ -37,7 +37,7 @@ The app provides a structured approach to spiritual growth with features like da
 
 ### 🔐 Authentication & Security
 - **User Registration**: Sign up with full name, email, phone, and password
-- **Login System**: Secure authentication with email/phone and password
+- **Login System**: Secure authentication with email and password
 - **Password Recovery**: Forgot password flow with OTP verification
 - **OTP Verification**: Email-based OTP for password reset
 - **Session Management**: Token-based authentication with secure storage
@@ -76,7 +76,6 @@ The app provides a structured approach to spiritual growth with features like da
 - **Daily Quizzes**: Quiz questions related to devotions
 - **Questionnaire System**: Initial assessment for personalization
 - **Quiz Results**: View scores and feedback
-- **Progress Tracking**: Track quiz performance over time
 
 ### 👤 Profile Management
 - **Profile Information**: View and edit personal details
@@ -91,7 +90,6 @@ The app provides a structured approach to spiritual growth with features like da
 - **Subscription Plans**: Multiple subscription options
 - **Payment Integration**: Secure payment processing
 - **Payment Methods**: Support for various payment options (Visa, etc.)
-- **Invoice Management**: View and download invoices
 - **Trial Period**: Free trial with expiration handling
 - **Deep Linking**: Payment success callback handling
 
@@ -430,7 +428,6 @@ https://test3.fireai.agency
 - `POST /progress/stepcopmplete/` - Mark step as complete
 
 #### Daily Content
-- `GET /progress/today/` - Get today's content
 - `GET /progress/today/prayer` - Get today's prayer
 
 #### Payment
@@ -477,15 +474,6 @@ Users can change language from Profile → Language Settings
 ### iOS
 - **Minimum Version**: Configured in `ios/Podfile`
 - **Permissions**: Camera, photo library, microphone (if needed)
-
-### Web
-- Progressive Web App (PWA) support
-- Responsive design
-
-### Desktop
-- Windows support
-- macOS support
-- Linux support
 
 ## 💻 Development
 
@@ -562,12 +550,6 @@ DevicePreview(enabled: true, ...)
    ```
 3. **Archive**: Use Xcode to create archive and upload to App Store
 
-### Web
-
-```bash
-flutter build web --release
-```
-
 ## 🧪 Testing
 
 Run tests:
@@ -627,46 +609,16 @@ For sensitive data (API keys, etc.), consider using:
 - [Easy Localization](https://pub.dev/packages/easy_localization)
 - [HTTP Package](https://pub.dev/packages/http)
 
-## 🤝 Contributing
-
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
-
 ### Code Style
 - Follow Flutter/Dart style guidelines
 - Use meaningful variable and function names
 - Add comments for complex logic
 - Keep functions focused and small
 
-## 📄 License
-
-This project is private and not published to pub.dev. See `pubspec.yaml` for details:
-```yaml
-publish_to: 'none'
-```
-
 ## 👥 Team & Support
 
 For support, questions, or contributions, please contact the development team.
 
-## 🎯 Roadmap
-
-Potential future enhancements:
-- [ ] Offline mode for Bible reading
-- [ ] Social features (sharing, community)
-- [ ] Enhanced analytics and insights
-- [ ] More language support
-- [ ] Dark mode
-- [ ] Push notifications
-- [ ] Bookmarking and favorites
-- [ ] Reading plans
-- [ ] Audio Bible
-
----
-
-**Built with ❤️ using Flutter**
+**Built with using Flutter**
 
 For more information, visit the [Flutter website](https://flutter.dev/).
