@@ -43,8 +43,8 @@ class QuizIntroScreen extends StatelessWidget {
                 ),
 
                 const SizedBox(height: 4),
-                const Text("5-minute quiz",
-                    style: TextStyle(fontSize: 14, color: Colors.grey)),
+                // const Text("5-minute quiz",
+                //     style: TextStyle(fontSize: 14, color: Colors.grey)),
 
                 const SizedBox(height: 60),
 

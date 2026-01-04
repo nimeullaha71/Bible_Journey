@@ -12,7 +12,7 @@ void showDeactivatePopup(BuildContext context, {required VoidCallback onConfirm}
         child: Container(
           padding: const EdgeInsets.all(20),
           decoration: BoxDecoration(
-            color: const Color(0xFFE7EEE8),  // light greenish white like screenshot
+            color: const Color(0xFFE7EEE8),
             borderRadius: BorderRadius.circular(20),
             boxShadow: [
               BoxShadow(

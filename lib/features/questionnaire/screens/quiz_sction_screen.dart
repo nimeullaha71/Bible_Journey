@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'package:bible_journey/app/Urls.dart';
-import 'package:bible_journey/app/routes.dart';
+import 'package:bible_journey/features/auth/screens/premium_screen.dart';
 import 'package:bible_journey/features/questionnaire/widget/custom_quiz_app_bar.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -18,7 +18,6 @@ class QuizQuestionScreen extends StatefulWidget {
 class _QuizQuestionScreenState extends State<QuizQuestionScreen> {
   int currentQuestionIndex = 0;
 
-  /// 🔥 Question List
   List<Map<String, dynamic>> quizData = [
     {
       "question": "How would you describe your Bible study experience so far?",
@@ -118,7 +117,6 @@ class _QuizQuestionScreenState extends State<QuizQuestionScreen> {
     },
   ];
 
-  /// 🔐 SINGLE selection (−1 = nothing selected)
   List<int> selectedAnswers = List.generate(10, (index) => -1);
 
   void goPrevious() {
@@ -129,7 +127,6 @@ class _QuizQuestionScreenState extends State<QuizQuestionScreen> {
     }
   }
 
-  /// 🔁 Build API payload (same format)
   List<Map<String, String>> buildQAPairs() {
     List<Map<String, String>> qaPairs = [];
 
@@ -164,7 +161,7 @@ class _QuizQuestionScreenState extends State<QuizQuestionScreen> {
       );
 
       if (response.statusCode == 200) {
-        Navigator.pushNamed(context, AppRoutes.mainBottomNavScreen);
+        Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context)=>GoPremiumScreen()), (route)=>false);
       }
     } catch (e) {
       debugPrint("Error: $e");

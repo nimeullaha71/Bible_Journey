@@ -25,7 +25,7 @@ class CustomQuizAppBar extends StatelessWidget implements PreferredSizeWidget {
       leading: showBack
           ? IconButton(
         icon: const Icon(Icons.arrow_back, color: Colors.black),
-        onPressed: onBack,    // 🔥 এখন এটা স্ক্রিন থেকে control হবে
+        onPressed: onBack,
       )
           : const SizedBox(),
 

@@ -45,7 +45,6 @@ class _TodayActionScreenState extends State<TodayActionScreen> {
           builder: (_) => DailyReflectionScreen(
             journeyId: widget.journeyId,
             dayId: widget.dayId,
-            //days: widget.days,
           ),
         ),
       );
@@ -81,7 +80,6 @@ class _TodayActionScreenState extends State<TodayActionScreen> {
             builder: (_) => DailyReflectionScreen(
               journeyId: widget.journeyId,
               dayId: widget.dayId,
-              //days: widget.days,
             ),
           ),
         );

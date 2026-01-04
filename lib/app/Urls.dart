@@ -1,7 +1,9 @@
 class Urls {
-  static const String _baseUrl = "https://test3.fireai.agency";
+  //static const String _baseUrl = "https://test3.fireai.agency";
+  static const String _baseUrl = "http://23.26.207.33";
   //static const String _baseUrl = "http://10.0.2.2:8000";
-  static const String baseUrl = "https://test3.fireai.agency";
+  //static const String baseUrl = "https://test3.fireai.agency";
+  static const String baseUrl = "http://23.26.207.33";
   //static const String baseUrl = "http://10.0.2.2:8000";
   static const String signUpUrl = '${_baseUrl}/api/auth/signup/';
   static const String signInUrl = '${_baseUrl}/api/auth/login/';

@@ -2,8 +2,6 @@ import 'dart:convert';
 import 'package:bible_journey/app/Urls.dart';
 import 'package:bible_journey/app/constants.dart';
 import 'package:bible_journey/core/services/local_storage_service.dart';
-import 'package:bible_journey/features/Profile/screens/profile_screen.dart';
-import 'package:bible_journey/features/home/screen/home_screen.dart';
 import 'package:bible_journey/widgets/appbars/custom_appbar.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -60,14 +58,15 @@ class _TrialExpiredPaymentScreenState extends State<TrialExpiredPaymentScreen> {
           );
 
           if (result == true) {
-            // ✅ Payment successful → Go to main screen
             Navigator.pushAndRemoveUntil(
               context,
               MaterialPageRoute(
-                builder: (_) => const ProfileScreen(),
+                builder: (_) => const MainBottomNavScreen(),
               ),
                   (route) => false,
             );
+            //Navigator.popUntil(context, (route) => route.isFirst);
+
           } else {
             ScaffoldMessenger.of(context).showSnackBar(
               const SnackBar(content: Text("Payment cancelled")),

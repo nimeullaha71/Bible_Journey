@@ -19,6 +19,12 @@ class BibleScreen extends StatefulWidget {
 class _BibleScreenState extends State<BibleScreen> {
   bool isOld = true;
 
+  @override
+  void initState() {
+    super.initState();
+    debugPrint("OPENED: Bible Screen");
+  }
+
 
   final Map<String, CollapseController> controllers = {};
 
@@ -78,30 +84,6 @@ class _BibleScreenState extends State<BibleScreen> {
           ],
         ),
       ),
-      // bottomNavigationBar: CustomNavbar(
-      //   currentIndex: _selectedIndex,
-      //   onItemPressed: (index) {
-      //     setState(() => _selectedIndex = index);
-      //     switch (index) {
-      //       case 0:
-      //         Navigator.push(context,
-      //             MaterialPageRoute(builder: (_) => const MainBottomNavScreen()));
-      //         break;
-      //       case 1:
-      //         Navigator.push(context,
-      //             MaterialPageRoute(builder: (_) => const BibleScreen()));
-      //         break;
-      //       case 2:
-      //         Navigator.push(context,
-      //             MaterialPageRoute(builder: (_) => const JourneyScreen()));
-      //         break;
-      //       case 3:
-      //         Navigator.push(context,
-      //             MaterialPageRoute(builder: (_) => const ProfileScreen()));
-      //         break;
-      //     }
-      //   },
-      // ),
     );
   }
 

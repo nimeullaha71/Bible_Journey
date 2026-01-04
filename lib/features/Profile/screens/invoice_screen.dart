@@ -106,7 +106,7 @@ class _InvoiceScreenState extends State<InvoiceScreen> {
                     style: TextStyle(color: Colors.grey)),
                 const SizedBox(height: 4),
                 Text(
-                  "${_capitalize(sub.currentPlan)} Premium",
+                  "${_capitalize(sub.currentPlan)} ",
                   style: const TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.w600,

@@ -76,7 +76,6 @@ class _PaymentScreenState extends State<PaymentScreen> {
 
             const SizedBox(height: 25),
 
-            // Payment Method Label
             const Row(
               children: [
                 Icon(Icons.lock_outline, size: 18),
@@ -93,7 +92,6 @@ class _PaymentScreenState extends State<PaymentScreen> {
 
             const SizedBox(height: 16),
 
-            // Card Icons Row
             Row(
               children: [
                 Image.asset("assets/images/Visa.png", height: 36),
@@ -121,7 +119,6 @@ class _PaymentScreenState extends State<PaymentScreen> {
 
             const SizedBox(height: 20),
 
-            // Green Box Form
             Container(
               padding: const EdgeInsets.all(18),
               decoration: BoxDecoration(
@@ -191,7 +188,6 @@ class _PaymentScreenState extends State<PaymentScreen> {
 
             const SizedBox(height: 25),
 
-            // Pay button
             SizedBox(
               width: double.infinity,
               height: 55,

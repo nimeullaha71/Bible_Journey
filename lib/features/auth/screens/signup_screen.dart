@@ -99,7 +99,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
           SafeArea(
             child: Column(
               children: [
-                // 🔙 Back button
                 Align(
                   alignment: Alignment.centerLeft,
                   child: IconButton(
@@ -139,7 +138,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           ),
                           const SizedBox(height: 12),
 
-                          // Email
                           _label("sign_up.email".tr()),
                           CustomTextField(
                             label: "sign_up.email".tr(),
@@ -156,7 +154,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           ),
                           const SizedBox(height: 12),
 
-                          // Phone
                           _label("sign_up.phone".tr()),
                           CustomTextField(
                             label: "sign_up.phone".tr(),
@@ -170,7 +167,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           ),
                           const SizedBox(height: 12),
 
-                          // Password
                           _label("sign_up.password".tr()),
                           CustomTextField(
                             label: "sign_up.password".tr(),
@@ -188,7 +184,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           ),
                           const SizedBox(height: 12),
 
-                          // Confirm Password
                           _label("sign_up.confirm_password".tr()),
                           CustomTextField(
                             label: "sign_up.confirm_password".tr(),

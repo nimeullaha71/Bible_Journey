@@ -7,7 +7,7 @@ class ProgressApi {
 
   static Future<void> completeStep({
     required int dayId,
-    required String itemType, // prayer | devotion | action | reflection
+    required String itemType,
   }) async {
 
     final token = await LocalStorage.getToken();

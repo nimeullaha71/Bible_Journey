@@ -1,16 +1,11 @@
 import 'dart:io';
 import 'package:bible_journey/core/services/api_service.dart';
 import 'package:bible_journey/features/Profile/screens/profile_details.dart';
-import 'package:bible_journey/features/Profile/screens/profile_screen.dart';
-import 'package:bible_journey/features/bible/screens/bible_screen.dart';
-import 'package:bible_journey/features/journeys/screens/journey_screen.dart';
-import 'package:bible_journey/main_bottom_nav_screen.dart';
 import 'package:bible_journey/widgets/appbars/custom_appbar.dart';
 import 'package:bible_journey/widgets/buttons/custom_button.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import '../../../widgets/custom_nav_bar.dart';
 
 class EditProfileScreen extends StatefulWidget {
   const EditProfileScreen({super.key});
@@ -20,7 +15,6 @@ class EditProfileScreen extends StatefulWidget {
 }
 
 class _EditProfileScreenState extends State<EditProfileScreen> {
-  int _selectedIndex = 3;
 
   final nameController = TextEditingController();
   final emailController = TextEditingController();
@@ -180,7 +174,6 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
 
               const SizedBox(height: 60),
 
-              /// NAME FIELD
               TextField(
                 controller: nameController,
                 decoration: const InputDecoration(
@@ -192,7 +185,6 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
               ),
               const SizedBox(height: 12),
 
-              /// EMAIL FIELD (READ ONLY)
               TextField(
                 controller: emailController,
                 enabled: false,
@@ -205,7 +197,6 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
               ),
               const SizedBox(height: 12),
 
-              /// DOB FIELD WITH CALENDAR PICKER
               GestureDetector(
                 onTap: () async {
                   DateTime initialDate = DateTime.now();
@@ -244,7 +235,6 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
               ),
               const SizedBox(height: 12),
 
-              /// PHONE FIELD
               TextField(
                 controller: phoneController,
                 decoration: const InputDecoration(
@@ -256,7 +246,6 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
               ),
               const SizedBox(height: 12),
 
-              /// GENDER DROPDOWN
               InputDecorator(
                 decoration: const InputDecoration(
                   labelText: "Gender",
@@ -296,32 +285,6 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
           ),
         ),
       ),
-
-      /// BOTTOM NAV
-      // bottomNavigationBar: CustomNavbar(
-      //   currentIndex: _selectedIndex,
-      //   onItemPressed: (index) {
-      //     setState(() => _selectedIndex = index);
-      //     switch (index) {
-      //       case 0:
-      //         Navigator.push(context,
-      //             MaterialPageRoute(builder: (_) => const MainBottomNavScreen()));
-      //         break;
-      //       case 1:
-      //         Navigator.push(context,
-      //             MaterialPageRoute(builder: (_) => const BibleScreen()));
-      //         break;
-      //       case 2:
-      //         Navigator.push(context,
-      //             MaterialPageRoute(builder: (_) => const JourneyScreen()));
-      //         break;
-      //       case 3:
-      //         Navigator.push(context,
-      //             MaterialPageRoute(builder: (_) => const ProfileScreen()));
-      //         break;
-      //     }
-      //   },
-      // ),
     );
   }
 }

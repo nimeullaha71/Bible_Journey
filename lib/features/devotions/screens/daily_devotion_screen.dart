@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:http/http.dart' as http;
@@ -8,15 +7,9 @@ import '../../../app/constants.dart';
 import '../../../core/services/local_storage_service.dart';
 import '../../../widgets/appbars/custom_appbar.dart';
 import '../../../widgets/buttons/custom_button.dart';
-import '../../../widgets/custom_nav_bar.dart';
-import '../../Profile/screens/profile_screen.dart';
-import '../../bible/screens/bible_screen.dart';
-import '../../home/screen/home_screen.dart';
-import '../../journeys/screens/journey_screen.dart';
 import '../models/devotion_model.dart';
 import '../services/daily_devotion_api.dart';
 import 'daily_devotion_quiz_screen.dart';
-import 'devotion_detail_screen.dart';
 
 class DailyDevotionScreen extends StatefulWidget {
   final int journeyId;
@@ -33,7 +26,6 @@ class DailyDevotionScreen extends StatefulWidget {
 }
 
 class _DailyDevotionScreenState extends State<DailyDevotionScreen> {
-  int _selectedIndex = 2;
   int _selectedContainer = -1;
   late Future<DevotionResponse> devotionFuture;
 
@@ -42,8 +34,6 @@ class _DailyDevotionScreenState extends State<DailyDevotionScreen> {
     super.initState();
     devotionFuture = DevotionApi.getTodayDevotion(widget.journeyId, widget.dayId);
   }
-
-  bool _isCompleting = false;
 
   Future<void> completeDevotionStep(bool isCompleted) async {
     if (isCompleted) {
@@ -161,26 +151,6 @@ class _DailyDevotionScreenState extends State<DailyDevotionScreen> {
           );
         },
       ),
-      // bottomNavigationBar: CustomNavbar(
-      //   currentIndex: _selectedIndex,
-      //   onItemPressed: (index) {
-      //     setState(() => _selectedIndex = index);
-      //     switch (index) {
-      //       case 0:
-      //         Navigator.push(context, MaterialPageRoute(builder: (_) => const HomeScreen()));
-      //         break;
-      //       case 1:
-      //         Navigator.push(context, MaterialPageRoute(builder: (_) => const BibleScreen()));
-      //         break;
-      //       case 2:
-      //         Navigator.push(context, MaterialPageRoute(builder: (_) => const JourneyScreen()));
-      //         break;
-      //       case 3:
-      //         Navigator.push(context, MaterialPageRoute(builder: (_) => const ProfileScreen()));
-      //         break;
-      //     }
-      //   },
-      // ),
     );
   }
 

@@ -136,7 +136,6 @@ class _SetNewPasswordScreenState extends State<SetNewPasswordScreen> {
                 ),
                 SizedBox(height: height * 0.05),
 
-                // New Password
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -158,7 +157,6 @@ class _SetNewPasswordScreenState extends State<SetNewPasswordScreen> {
                 ),
                 SizedBox(height: height * 0.025),
 
-                // Confirm Password
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [

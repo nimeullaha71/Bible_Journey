@@ -2,7 +2,6 @@ import 'package:bible_journey/app/constants.dart';
 import 'package:bible_journey/core/services/auth_service.dart';
 import 'package:bible_journey/features/Profile/screens/change_password_screen.dart';
 import 'package:bible_journey/features/Profile/screens/deactivated_pop_up.dart';
-import 'package:bible_journey/features/Profile/screens/help_support_screen.dart';
 import 'package:bible_journey/features/Profile/screens/invoice_screen.dart';
 import 'package:bible_journey/features/Profile/screens/language_screen.dart';
 import 'package:bible_journey/features/Profile/screens/money_back_policy_screen.dart';
@@ -28,6 +27,13 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
+
+  @override
+  void initState() {
+    super.initState();
+    debugPrint("OPENED: Profile Screen");
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -342,11 +348,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             if (email != null && token != null) {
                               await AuthService().logOut(email: email);
                               await LocalStorage.clearAll();
-
-                              // Navigator.pushReplacement(
-                              //   context,
-                              //   MaterialPageRoute(builder: (_) => LoginScreen()),
-                              // );
                               Navigator.of(context, rootNavigator: true).pushAndRemoveUntil(
                                 MaterialPageRoute(builder: (_) => const LoginScreen()),
                                     (route) => false,

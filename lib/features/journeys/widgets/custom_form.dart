@@ -3,14 +3,14 @@ import 'package:flutter/material.dart';
 class CustomForm extends StatelessWidget {
   final String title;
   final Widget? leading;
-  final Widget? trailing; // ✅ NEW
+  final Widget? trailing;
   final VoidCallback? onTap;
 
   const CustomForm({
     super.key,
     required this.title,
     this.leading,
-    this.trailing, // ✅ NEW
+    this.trailing,
     this.onTap,
   });
 
@@ -47,7 +47,6 @@ class CustomForm extends StatelessWidget {
                 ),
               ),
 
-              // ✅ trailing থাকলে সেটা দেখাবে
               if (trailing != null)
                 trailing!
               else

@@ -7,7 +7,7 @@ import '../../../core/services/local_storage_service.dart';
 class DailyJourneyApi {
   static Future<DailyJourneyResponse> getDailyJourney(int journeyId) async {
     final token = await LocalStorage.getToken();
-    final url = Uri.parse(Urls.dailyJourneyDetailsUrl(journeyId)); // ✅ FIX
+    final url = Uri.parse(Urls.dailyJourneyDetailsUrl(journeyId));
 
     final response = await http.get(
       url,

@@ -4,7 +4,7 @@ class CustomTextField extends StatefulWidget {
   final String label;
   final bool obscureText;
   final TextEditingController controller;
-  final String? Function(String?)? validator; // <-- Validator added
+  final String? Function(String?)? validator;
 
   const CustomTextField({
     super.key,
@@ -32,7 +32,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
     return TextFormField(
       controller: widget.controller,
       obscureText: _obscureText,
-      validator: widget.validator, // <-- Use validator from parent
+      validator: widget.validator,
       style: const TextStyle(color: Colors.black),
       decoration: InputDecoration(
         filled: true,

@@ -1,12 +1,7 @@
-import 'package:bible_journey/features/Profile/screens/profile_screen.dart';
-import 'package:bible_journey/features/bible/screens/bible_screen.dart';
-import 'package:bible_journey/features/journeys/screens/journey_screen.dart';
-import 'package:bible_journey/main_bottom_nav_screen.dart';
 import 'package:bible_journey/widgets/appbars/custom_appbar.dart';
 import 'package:bible_journey/widgets/buttons/custom_button.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import '../../../widgets/custom_nav_bar.dart';
 import '../services/change_password_service.dart';
 import '../widgets/custom_password.dart';
 
@@ -18,7 +13,6 @@ class ChangePasswordScreen extends StatefulWidget {
 }
 
 class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
-  int _selectedIndex = 3;
 
   final oldPasswordController = TextEditingController();
   final newPasswordController = TextEditingController();
@@ -110,26 +104,6 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
           ),
         ),
       ),
-      // bottomNavigationBar: CustomNavbar(
-      //   currentIndex: _selectedIndex,
-      //   onItemPressed: (index) {
-      //     switch (index) {
-      //       case 0:
-      //         Navigator.push(context, MaterialPageRoute(builder: (_) => const MainBottomNavScreen()));
-      //         break;
-      //       case 1:
-      //         Navigator.push(context, MaterialPageRoute(builder: (_) => const BibleScreen()));
-      //         break;
-      //       case 2:
-      //         Navigator.push(context, MaterialPageRoute(builder: (_) => const JourneyScreen()));
-      //         break;
-      //       case 3:
-      //         Navigator.push(context, MaterialPageRoute(builder: (_) => const ProfileScreen()));
-      //         break;
-      //     }
-      //     setState(() => _selectedIndex = index);
-      //   },
-      // ),
     );
   }
 }

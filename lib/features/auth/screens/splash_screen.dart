@@ -1,6 +1,5 @@
 import 'package:bible_journey/app/constants.dart';
 import 'package:bible_journey/app/routes.dart';
-import 'package:bible_journey/features/Profile/screens/profile_details.dart';
 import 'package:bible_journey/features/auth/screens/signup_screen.dart';
 import 'package:bible_journey/widgets/buttons/auth_flow_custom_button.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -25,7 +24,6 @@ class _SplashScreenState extends State<SplashScreen> {
     final token = await LocalStorage.getToken();
 
     if (token != null && token.isNotEmpty) {
-      // Token thakle user already login, direct main screen
       Future.microtask(() {
         Navigator.pushReplacementNamed(
           context,
@@ -107,7 +105,6 @@ class _SplashScreenState extends State<SplashScreen> {
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                /// Custom Button
                 SizedBox(
                   width: double.infinity,
                   child: AuthCustomButton(

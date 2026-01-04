@@ -36,10 +36,10 @@ class CustomText extends StatelessWidget {
                   Row(
                     children: [
                       SvgPicture.asset(
-                        textIconPath,  // The path to your local SVG
+                        textIconPath,
                         color: Color(0xff83BF8B),
-                        width: 20,  // Adjust width to match the size you want
-                        height: 20, // Adjust height to match the size you want
+                        width: 20,
+                        height: 20,
                       ),
                       const SizedBox(width: 8),
                       Text(

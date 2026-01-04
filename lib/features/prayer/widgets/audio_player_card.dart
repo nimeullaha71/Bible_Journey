@@ -33,7 +33,6 @@ class _AudioPlayerCardState extends State<AudioPlayerCard> {
   void initState() {
     super.initState();
 
-    // Pass AudioPlayer to parent
     widget.playerControllerSetter?.call(_player);
 
     _loadAudio();

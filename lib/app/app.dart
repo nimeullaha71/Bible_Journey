@@ -37,7 +37,6 @@ class _MyAppState extends State<MyApp> {
   }
 
   void _handleDeepLink(Uri uri) {
-    // biblejourney://payment-success?order_id=123
     if (uri.scheme == 'biblejourney' &&
         uri.host == 'payment-success') {
 
@@ -58,10 +57,9 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      navigatorKey: navigatorKey, // ⭐ REQUIRED
+      navigatorKey: navigatorKey,
       debugShowCheckedModeBanner: false,
 
-      // Localization
       localizationsDelegates: context.localizationDelegates,
       supportedLocales: context.supportedLocales,
       locale: context.locale,

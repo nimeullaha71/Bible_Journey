@@ -3,19 +3,19 @@ import 'package:flutter/material.dart';
 class CustomPremium1 extends StatelessWidget {
   final String title;
   final String subtitle;
-  final VoidCallback? onTap; // <-- added
+  final VoidCallback? onTap;
 
   const CustomPremium1({
     super.key,
     required this.title,
     required this.subtitle,
-    this.onTap, // <-- added
+    this.onTap,
   });
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: onTap, // <-- added
+      onTap: onTap,
       borderRadius: BorderRadius.circular(12),
       child: Container(
         width: 383,

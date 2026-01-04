@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:bible_journey/app/Urls.dart';
 import 'package:bible_journey/core/services/local_storage_service.dart';
 import 'package:http/http.dart' as http;
@@ -11,11 +10,11 @@ class ChangePasswordApi{
     required String confirmPassword,
 })async{
   try{
-    final toekn = await LocalStorage.getToken();
+    final token = await LocalStorage.getToken();
     final response = await http.post(Uri.parse(Urls.changePasswordUrl),
     headers: {
       "Content-type":"application/json",
-      "Authorization": "Bearer $toekn"
+      "Authorization": "Bearer $token"
     },
       body: jsonEncode({
         "old_password" : oldPassword,

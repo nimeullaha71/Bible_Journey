@@ -20,7 +20,6 @@ class _ResetSuccessfulScreenState extends State<ResetSuccessfulScreen> {
       backgroundColor: Color.fromRGBO(255, 251, 231, 1),
       body: Stack(
         children: [
-          // 🌎 Full screen background image
           Container(
             width: double.infinity,
             height: double.infinity,
@@ -32,7 +31,6 @@ class _ResetSuccessfulScreenState extends State<ResetSuccessfulScreen> {
             // ),
           ),
 
-          // 🟦 Top container
           Positioned(
             top: 0,
             left: 0,
@@ -54,7 +52,6 @@ class _ResetSuccessfulScreenState extends State<ResetSuccessfulScreen> {
 
                     const SizedBox(height: 20),
 
-                    // ✅ Check icon
                     Image.asset(
                       'assets/images/check_circle.png',
                       height: 100,
@@ -63,7 +60,6 @@ class _ResetSuccessfulScreenState extends State<ResetSuccessfulScreen> {
 
                     const SizedBox(height: 20),
 
-                    // Title
                     const Text(
                       "Password Reset Successfully!",
                       textAlign: TextAlign.center,
@@ -76,7 +72,6 @@ class _ResetSuccessfulScreenState extends State<ResetSuccessfulScreen> {
 
                     const SizedBox(height: 12),
 
-                    // Subtitle
                     const Text(
                       "Your password has been successfully reset.\nYou can now log in with your new password.",
                       textAlign: TextAlign.center,

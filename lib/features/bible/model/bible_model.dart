@@ -16,8 +16,8 @@ class Verse {
 }
 
 class BibleBook {
-  final String title;     // UI name
-  final String apiKey;    // API name
+  final String title;
+  final String apiKey;
   final int chapters;
 
   BibleBook({

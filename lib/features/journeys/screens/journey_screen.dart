@@ -3,7 +3,6 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:bible_journey/app/constants.dart';
 import 'package:bible_journey/features/home/widgets/home_box.dart';
 import 'package:bible_journey/features/journeys/screens/journey_detail_screen.dart';
-import 'package:bible_journey/main_bottom_nav_screen.dart';
 import 'package:bible_journey/widgets/appbars/custom_appbar.dart';
 import '../models/journey_model.dart';
 import '../services/journey_api.dart';
@@ -22,6 +21,7 @@ class _JourneyScreenState extends State<JourneyScreen> {
   void initState() {
     super.initState();
     journeyFuture = JourneyApi.getJourneys();
+    debugPrint("OPENED: PrayerScreen");
   }
 
   int mapIndex(int uiIndex) {
@@ -37,13 +37,13 @@ class _JourneyScreenState extends State<JourneyScreen> {
       appBar: CustomAppBar(
 
         title: "life_area_journey".tr(),
-        onTap: () {
-          Navigator.pushAndRemoveUntil(
-            context,
-            MaterialPageRoute(builder: (_) => MainBottomNavScreen()),
-                (_) => false,
-          );
-        },
+        // onTap: () {
+        //   Navigator.pushAndRemoveUntil(
+        //     context,
+        //     MaterialPageRoute(builder: (_) => MainBottomNavScreen()),
+        //         (_) => false,
+        //   );
+        // },
         showBackButton: false,
       ),
       body: SafeArea(

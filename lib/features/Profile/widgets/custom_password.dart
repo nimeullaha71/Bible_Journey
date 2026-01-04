@@ -26,7 +26,6 @@ class _CustomPasswordState extends State<CustomPassword> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          /// Label
           Text(
             widget.label,
             style: const TextStyle(
@@ -36,12 +35,11 @@ class _CustomPasswordState extends State<CustomPassword> {
           ),
           const SizedBox(height: 6),
 
-          /// TextField Container
           Container(
             height: 55,
             padding: const EdgeInsets.symmetric(horizontal: 12),
             decoration: BoxDecoration(
-              color: Colors.white,               // White background
+              color: Colors.white,
               borderRadius: BorderRadius.circular(12),
               border: Border.all(
                 color: const Color(0xffBFBFBF),
@@ -51,7 +49,6 @@ class _CustomPasswordState extends State<CustomPassword> {
 
             child: Row(
               children: [
-                /// Actual TextField
                 Expanded(
                   child: TextField(
                     controller: widget.controller,
@@ -68,7 +65,6 @@ class _CustomPasswordState extends State<CustomPassword> {
                   ),
                 ),
 
-                /// Eye Icon Button
                 GestureDetector(
                   onTap: () {
                     setState(() {

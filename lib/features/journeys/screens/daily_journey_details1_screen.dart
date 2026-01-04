@@ -83,7 +83,6 @@ class _JourneyDetails1State extends State<JourneyDetails1> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                /// 🔹 Day Title
                 Text(
                   data.dayTitle,
                   style: const TextStyle(
@@ -94,7 +93,6 @@ class _JourneyDetails1State extends State<JourneyDetails1> {
 
                 const SizedBox(height: 20),
 
-                /// 🔹 Step List
                 ...data.steps.map((step) {
                   return Padding(
                     padding: const EdgeInsets.only(bottom: 10),
@@ -160,38 +158,6 @@ class _JourneyDetails1State extends State<JourneyDetails1> {
           );
         },
       ),
-
-      //   bottomNavigationBar: CustomNavbar(
-      //   currentIndex: 2,
-      //   onItemPressed: (index) {
-      //     switch (index) {
-      //       case 0:
-      //         Navigator.push(
-      //           context,
-      //           MaterialPageRoute(builder: (_) => const MainBottomNavScreen()),
-      //         );
-      //         break;
-      //       case 1:
-      //         Navigator.push(
-      //           context,
-      //           MaterialPageRoute(builder: (_) => const BibleScreen()),
-      //         );
-      //         break;
-      //       case 2:
-      //         Navigator.push(
-      //           context,
-      //           MaterialPageRoute(builder: (_) => const JourneyScreen()),
-      //         );
-      //         break;
-      //       case 3:
-      //         Navigator.push(
-      //           context,
-      //           MaterialPageRoute(builder: (_) => const ProfileScreen()),
-      //         );
-      //         break;
-      //     }
-      //   },
-      // ),
     );
   }
 }

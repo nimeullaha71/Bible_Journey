@@ -1,12 +1,6 @@
-import 'package:bible_journey/features/Profile/screens/profile_screen.dart';
-import 'package:bible_journey/features/bible/screens/bible_screen.dart';
-import 'package:bible_journey/features/journeys/screens/journey_screen.dart';
-import 'package:bible_journey/main_bottom_nav_screen.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
-import '../../../widgets/custom_nav_bar.dart';
 import '../widgets/custom_language.dart';
 
 class LanguageScreen extends StatefulWidget {
@@ -17,13 +11,12 @@ class LanguageScreen extends StatefulWidget {
 }
 
 class _LanguageScreenState extends State<LanguageScreen> {
-  int _selectedIndex = 3;
   Locale selectedLocale = const Locale('en');
 
   @override
   void initState() {
     super.initState();
-    loadLocale(); // load last selected language
+    loadLocale();
   }
 
   Future<void> saveLocale(Locale locale) async {
@@ -64,7 +57,6 @@ class _LanguageScreenState extends State<LanguageScreen> {
           children: [
             const SizedBox(height: 10),
 
-            // English (US)
             CustomLanguage(
               imagePath: "assets/images/US.svg",
               isSvg: true,
@@ -74,7 +66,6 @@ class _LanguageScreenState extends State<LanguageScreen> {
             ),
             const SizedBox(height: 10),
 
-            // Spanish
             CustomLanguage(
               imagePath: "assets/images/spanish.png",
               //isSvg: true,
@@ -84,7 +75,6 @@ class _LanguageScreenState extends State<LanguageScreen> {
             ),
             const SizedBox(height: 10),
 
-            // Italian
             CustomLanguage(
               imagePath: "assets/images/Italian.png",
               //isSvg: true,
@@ -94,7 +84,6 @@ class _LanguageScreenState extends State<LanguageScreen> {
             ),
             const SizedBox(height: 10),
 
-            // German
             CustomLanguage(
               //svgAssetPath: "assets/images/germanyflagsvg.svg",
               imagePath: "assets/images/germany flag svg.png",
@@ -104,7 +93,6 @@ class _LanguageScreenState extends State<LanguageScreen> {
             ),
             const SizedBox(height: 10),
 
-            // French
             CustomLanguage(
               imagePath: "assets/images/French.png",
               //isSvg: true,
@@ -114,7 +102,6 @@ class _LanguageScreenState extends State<LanguageScreen> {
             ),
             const SizedBox(height: 10),
 
-            // Portuguese
             CustomLanguage(
               //svgAssetPath: "assets/images/portugueseflag.svg",
               imagePath: "assets/images/portuguese flag.png",
@@ -123,49 +110,9 @@ class _LanguageScreenState extends State<LanguageScreen> {
               onTap: () => changeLanguage(const Locale('pt')),
             ),
             const SizedBox(height: 115),
-
-            // Done button
-            // Padding(
-            //   padding: const EdgeInsets.all(20),
-            //   child: CustomButton(
-            //     text: "Done",
-            //     onTap: () {
-            //       Navigator.pop(context); // back to previous screen
-            //     },
-            //   ),
-            // ),
           ],
         ),
       ),
-
-      // Bottom navigation
-      // bottomNavigationBar: CustomNavbar(
-      //   currentIndex: _selectedIndex,
-      //   onItemPressed: (index) {
-      //     setState(() {
-      //       _selectedIndex = index;
-      //     });
-      //
-      //     switch (index) {
-      //       case 0:
-      //         Navigator.push(context,
-      //             MaterialPageRoute(builder: (_) => const MainBottomNavScreen()));
-      //         break;
-      //       case 1:
-      //         Navigator.push(
-      //             context, MaterialPageRoute(builder: (_) => const BibleScreen()));
-      //         break;
-      //       case 2:
-      //         Navigator.push(
-      //             context, MaterialPageRoute(builder: (_) => const JourneyScreen()));
-      //         break;
-      //       case 3:
-      //         Navigator.push(
-      //             context, MaterialPageRoute(builder: (_) => const ProfileScreen()));
-      //         break;
-      //     }
-      //   },
-      // ),
     );
   }
 }

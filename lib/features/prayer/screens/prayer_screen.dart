@@ -2,7 +2,6 @@ import 'dart:convert';
 import 'package:bible_journey/app/Urls.dart';
 import 'package:bible_journey/core/services/local_storage_service.dart';
 import 'package:bible_journey/features/devotions/screens/daily_devotion_screen.dart';
-import 'package:bible_journey/main_bottom_nav_screen.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -10,11 +9,6 @@ import 'package:just_audio/just_audio.dart';
 import '../../../app/constants.dart';
 import '../../../widgets/appbars/custom_appbar.dart';
 import '../../../widgets/buttons/custom_button.dart';
-import '../../journeys/screens/journey_screen.dart';
-import '../../Profile/screens/profile_screen.dart';
-import '../../bible/screens/bible_screen.dart';
-import '../../home/screen/home_screen.dart';
-import '../../../widgets/custom_nav_bar.dart';
 import '../widgets/audio_player_card.dart';
 import '../models/prayer_model.dart';
 import '../services/prayer_api.dart';
@@ -30,9 +24,8 @@ class PrayerScreen extends StatefulWidget {
 }
 
 class _PrayerScreenState extends State<PrayerScreen> {
-  int _selectedIndex = 2;
   late Future<PrayerResponse> prayerFuture;
-  AudioPlayer? _audioPlayer; // Keep alive
+  AudioPlayer? _audioPlayer;
 
   @override
   void initState() {
@@ -45,7 +38,7 @@ class _PrayerScreenState extends State<PrayerScreen> {
   }
 
   Future<void> completePrayerStep(bool isCompleted) async {
-    stopAudio(); // Stop before navigation
+    stopAudio();
 
     if (isCompleted) {
       Navigator.push(
@@ -178,32 +171,6 @@ class _PrayerScreenState extends State<PrayerScreen> {
           );
         },
       ),
-      // bottomNavigationBar: CustomNavbar(
-      //   currentIndex: _selectedIndex,
-      //   onItemPressed: (index) {
-      //     stopAudio();
-      //     setState(() => _selectedIndex = index);
-      //
-      //     switch (index) {
-      //       case 0:
-      //         Navigator.push(context,
-      //             MaterialPageRoute(builder: (_) => const MainBottomNavScreen()));
-      //         break;
-      //       case 1:
-      //         Navigator.push(context,
-      //             MaterialPageRoute(builder: (_) => const BibleScreen()));
-      //         break;
-      //       case 2:
-      //         Navigator.push(context,
-      //             MaterialPageRoute(builder: (_) => const JourneyScreen()));
-      //         break;
-      //       case 3:
-      //         Navigator.push(context,
-      //             MaterialPageRoute(builder: (_) => const ProfileScreen()));
-      //         break;
-      //     }
-      //   },
-      // ),
     );
   }
 }

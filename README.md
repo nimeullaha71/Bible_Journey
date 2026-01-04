@@ -4,22 +4,22 @@ A comprehensive Flutter-based mobile application designed to guide users through
 
 ## 📋 Table of Contents
 
-- [Overview](#overview)
-- [Features](#features)
-- [Tech Stack](#tech-stack)
-- [Project Structure](#project-structure)
-- [Getting Started](#getting-started)
-- [Installation](#installation)
-- [Configuration](#configuration)
-- [Architecture](#architecture)
-- [Key Features Breakdown](#key-features-breakdown)
-- [API Integration](#api-integration)
-- [Localization](#localization)
-- [Platform Support](#platform-support)
-- [Development](#development)
-- [Building for Production](#building-for-production)
-- [Contributing](#contributing)
-- [License](#license)
+- Overview
+- Features
+- Tech Stack
+- Project Structure
+- Getting Started
+- Installation
+- Configuration
+- Architecture
+- Key Features Breakdown
+- API Integration
+- Localization
+- Platform Support
+- Development
+- Building for Production
+- Contributing
+- License
 
 ## 🎯 Overview
 

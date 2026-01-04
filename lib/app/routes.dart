@@ -45,7 +45,7 @@ class AppRoutes {
         return MaterialPageRoute(builder: (_) => const ForgotPasswordScreen());
 
       case otpScreen:
-        final email = settings.arguments as String; // ✅ email from previous screen
+        final email = settings.arguments as String;
         return MaterialPageRoute(
           builder: (_) => VerifyOtpScreen(email: email),
         );
@@ -53,8 +53,8 @@ class AppRoutes {
       case setPasswordScreen:
         return MaterialPageRoute(builder: (_) => const SetNewPasswordScreen());
 
-      case mainBottomNavScreen:
-        return MaterialPageRoute(builder: (_) => const MainBottomNavScreen());
+      // case mainBottomNavScreen:
+      //   return MaterialPageRoute(builder: (_) => const MainBottomNavScreen());
 
       case quizIntroScreen:
         return MaterialPageRoute(builder: (_) => const QuizIntroScreen());

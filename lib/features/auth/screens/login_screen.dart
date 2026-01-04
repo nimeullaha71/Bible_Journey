@@ -1,3 +1,4 @@
+import 'package:bible_journey/main_bottom_nav_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:bible_journey/app/constants.dart';
@@ -57,7 +58,8 @@ class _LoginScreenState extends State<LoginScreen> {
       if (response['category'] == null || response['category'].toString().isEmpty) {
         Navigator.pushReplacementNamed(context, AppRoutes.quizIntroScreen);
       } else {
-        Navigator.pushReplacementNamed(context, AppRoutes.mainBottomNavScreen);
+        // Navigator.pushReplacementNamed(context, AppRoutes.mainBottomNavScreen);
+        Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (_)=>MainBottomNavScreen()), (route)=>false);
       }
 
       ScaffoldMessenger.of(context).showSnackBar(

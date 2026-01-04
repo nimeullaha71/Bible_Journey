@@ -5,8 +5,6 @@ import 'package:bible_journey/app/Urls.dart';
 
 class QuizApi {
 
-  // ================= GET QUIZ =================
-
   static Future<List<dynamic>> getDayQuiz({
     required int journeyId,
     required int dayId,
@@ -32,8 +30,6 @@ class QuizApi {
     }
   }
 
-  // ================= SUBMIT QUIZ =================
-
   static Future<int> submitQuiz(List<Map<String, dynamic>> answers) async {
     final token = await LocalStorage.getToken();
 
@@ -53,7 +49,6 @@ class QuizApi {
     if (response.statusCode == 200) {
       final data = jsonDecode(response.body);
 
-      // backend থেকে score / points
       return data['points_added'] ?? 0;
     } else {
       throw Exception("Failed to submit quiz");

@@ -5,7 +5,7 @@ import '../../../core/services/local_storage_service.dart';
 
 class TodayContentApi {
   static Future<List<dynamic>> getContent({
-    required String type, // prayer | devotion | action
+    required String type,
     required int dayId,
   }) async {
     final token = await LocalStorage.getToken();

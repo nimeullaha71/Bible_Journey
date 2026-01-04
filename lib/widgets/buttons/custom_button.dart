@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 class CustomButton extends StatelessWidget {
   final String text;
   final VoidCallback onTap;
-  final double? height;     // <-- Add this
-  final double? width;      // <-- optional
+  final double? height;
+  final double? width;
   final double borderRadius;
 
   const CustomButton({
@@ -13,13 +13,13 @@ class CustomButton extends StatelessWidget {
     required this.onTap,
     this.height,
     this.width,
-    this.borderRadius = 15,  // default radius
+    this.borderRadius = 15,
   });
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: height ?? 60,   // <-- default height
+      height: height ?? 60,
       width: width ?? double.infinity,
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(

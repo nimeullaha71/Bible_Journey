@@ -13,7 +13,7 @@ class DailyJourneyResponse {
     return DailyJourneyResponse(
       journey: JourneyInfo.fromJson(json['journey']),
       journeyDetails:
-      JourneyDetails.fromJson(json['journey_details']), // ✅
+      JourneyDetails.fromJson(json['journey_details']),
       days: (json['days'] as List)
           .map((e) => Day.fromJson(e))
           .toList(),
@@ -71,7 +71,7 @@ class Day {
     return Day(
       dayId: json['day_id'],
       dayName: json['day_name'],
-      order: json['order'], // ✅ FIX
+      order: json['order'],
       status: json['status'],
     );
   }

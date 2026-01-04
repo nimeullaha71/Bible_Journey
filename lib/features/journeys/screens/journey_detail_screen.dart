@@ -58,10 +58,11 @@ class _JourneyDetailScreenState extends State<JourneyDetailScreen> {
       appBar: CustomAppBar(
         title: "journey_details".tr(),
         onTap: () {
-          Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(builder: (_) => const JourneyScreen()),
-          );
+          // Navigator.pushReplacement(
+          //   context,
+          //   MaterialPageRoute(builder: (_) => const JourneyScreen()),
+          // );
+          Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context)=>JourneyScreen()), (route)=>false);
         },
       ),
       body: FutureBuilder<DailyJourneyResponse>(
@@ -83,7 +84,6 @@ class _JourneyDetailScreenState extends State<JourneyDetailScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                /// 🔹 Banner Image
                 Container(
                   width: double.infinity,
                   height: 200,
@@ -97,7 +97,6 @@ class _JourneyDetailScreenState extends State<JourneyDetailScreen> {
                   ),
                 ),
 
-                /// 🔹 Journey Info
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 16),
                   child: Column(
@@ -129,7 +128,6 @@ class _JourneyDetailScreenState extends State<JourneyDetailScreen> {
 
                 const SizedBox(height: 16),
 
-                /// 🔹 Days List (STATUS-BASED ACCESS)
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 16),
                   child: Column(
@@ -144,10 +142,8 @@ class _JourneyDetailScreenState extends State<JourneyDetailScreen> {
                             getIcon(day.status),
                             color: getColor(day.status),
                           ),
-                          //onTap: isAllowed
                           onTap: isAllowed
                               ? () {
-                                  // 🔍 DEBUG PRINT
                                   print("Journey ID: ${data.journey.id}");
                                   print("Day ID: ${day.dayId}");
 
@@ -173,7 +169,7 @@ class _JourneyDetailScreenState extends State<JourneyDetailScreen> {
                                     ),
                                   );
                                 }
-                              : null, // 🔒 locked → no access
+                              : null,
                         ),
                       );
                     }).toList(),

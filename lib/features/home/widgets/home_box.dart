@@ -3,14 +3,14 @@ class HomeBox extends StatelessWidget {
   final Widget icon;
   final String title;
   final String subtitle;
-  final VoidCallback? onTap; // ✅ nullable
+  final VoidCallback? onTap;
 
   const HomeBox({
     super.key,
     required this.icon,
     required this.title,
     required this.subtitle,
-    this.onTap, // ✅ not required
+    this.onTap,
   });
 
   @override
