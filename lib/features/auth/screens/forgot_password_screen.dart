@@ -17,8 +17,48 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
   final TextEditingController emailController = TextEditingController();
   bool isLoading = false;
 
+  // Future<void> _sendOtp() async {
+  //   final email = emailController.text.trim();
+  //   if (email.isEmpty || !email.contains("@")) {
+  //     _showMessage("Enter a valid email");
+  //     return;
+  //   }
+  //
+  //   setState(() => isLoading = true);
+  //
+  //   try {
+  //     final response = await AuthService.forgotPassword(email);
+  //
+  //     if (response['status'] == 'otp_sent') {
+  //       if (!mounted) return;
+  //       setState(() => isLoading = false);
+  //       //await Future.delayed(const Duration(seconds: 10));
+  //
+  //       _showMessage("OTP sent to your email");
+  //
+  //       Navigator.push(
+  //         context,
+  //         MaterialPageRoute(
+  //           builder: (_) => VerifyOtpScreen(email: email),
+  //         ),
+  //       );
+  //     } else {
+  //       if (!mounted) return;
+  //       setState(() => isLoading = false);
+  //
+  //       _showMessage(response['message'] ?? "Failed to send OTP");
+  //     }
+  //   } catch (e) {
+  //     if (!mounted) return;
+  //     setState(() => isLoading = false);
+  //
+  //     _showMessage("Error: ${e.toString().replaceAll("Exception: ", "")}");
+  //   }
+  // }
+
   Future<void> _sendOtp() async {
-    final email = emailController.text.trim();
+    final email = emailController.text.trim().toLowerCase();
+
     if (email.isEmpty || !email.contains("@")) {
       _showMessage("Enter a valid email");
       return;
@@ -31,9 +71,14 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
 
       if (response['status'] == 'otp_sent') {
         if (!mounted) return;
-        setState(() => isLoading = false);
 
         _showMessage("OTP sent to your email");
+
+        // 🔒 OTP generate settle time
+        await Future.delayed(const Duration(seconds: 2));
+
+        if (!mounted) return;
+        setState(() => isLoading = false);
 
         Navigator.push(
           context,
@@ -42,18 +87,18 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
           ),
         );
       } else {
-        if (!mounted) return;
         setState(() => isLoading = false);
-
         _showMessage(response['message'] ?? "Failed to send OTP");
       }
     } catch (e) {
       if (!mounted) return;
       setState(() => isLoading = false);
-
-      _showMessage("Error: ${e.toString().replaceAll("Exception: ", "")}");
+      _showMessage(
+        e.toString().replaceAll("Exception: ", ""),
+      );
     }
   }
+
 
   void _showMessage(String msg) {
     ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(msg)));

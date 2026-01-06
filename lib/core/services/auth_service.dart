@@ -104,6 +104,33 @@ class AuthService {
     }
   }
 
+  // static Future<bool> verifyForgotPasswordOtp(String email, String otp) async {
+  //   final url = Uri.parse(Urls.otpVerifyUrl);
+  //
+  //   final response = await http.post(
+  //     url,
+  //     headers: {"Content-Type": "application/json"},
+  //     body: jsonEncode({
+  //       "email": email,
+  //       "otp": otp,
+  //     }),
+  //   );
+  //
+  //   final data = jsonDecode(response.body);
+  //
+  //   // if (response.statusCode == 200 && data["status"] == "verified") {
+  //   //   return true;
+  //   // }
+  //
+  //   if (response.statusCode == 200) {
+  //     if (data["status"] == "verified" || data["action"] == "reset_password") {
+  //       return true;
+  //     }
+  //   }
+  //   else {
+  //     throw Exception(data["message"] ?? "Invalid OTP");
+  //   }
+  // }
   static Future<bool> verifyForgotPasswordOtp(
       String email, String otp) async {
     final url = Uri.parse(Urls.otpVerifyUrl);
@@ -113,17 +140,20 @@ class AuthService {
       headers: {"Content-Type": "application/json"},
       body: jsonEncode({
         "email": email,
-        "otp": int.parse(otp),
+        "otp": otp, // ✅ String
       }),
     );
 
     final data = jsonDecode(response.body);
 
-    if (response.statusCode == 200 && data["status"] == "verified") {
+    if (response.statusCode == 200 &&
+        (data["status"] == "verified" ||
+            data["action"] == "reset_password")) {
       return true;
-    } else {
-      throw Exception(data["message"] ?? "Invalid OTP");
     }
+
+    // ✅ সব অন্য সব ক্ষেত্রে এখানেই আসবে
+    throw Exception(data["message"] ?? "Invalid OTP");
   }
 
 

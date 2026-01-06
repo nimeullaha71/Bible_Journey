@@ -14,23 +14,43 @@ class VerifyOtpScreen extends StatefulWidget {
   State<VerifyOtpScreen> createState() => _VerifyOtpScreenState();
 }
 
+
+
 class _VerifyOtpScreenState extends State<VerifyOtpScreen> {
   final TextEditingController OTPController = TextEditingController();
   bool isLoading = false;
 
-  String get email => widget.email;
+  //String get email => widget.email;
+  String get email => widget.email.toLowerCase();
+
+
+  Future<bool> verifyWithRetry(String email, String otp) async {
+    for (int i = 0; i < 2; i++) {
+      try {
+        return await AuthService.verifyForgotPasswordOtp(email, otp);
+      } catch (e) {
+        if (i == 1) rethrow;
+        await Future.delayed(const Duration(seconds: 2));
+      }
+    }
+    throw Exception("Invalid OTP");
+  }
+
 
   Future<void> _verifyOtp() async {
+    await Future.delayed(const Duration(milliseconds: 600));
     final otp = OTPController.text.trim();
     if (otp.length < 6) {
       _showMessage("Enter valid OTP");
       return;
     }
 
+    await Future.delayed(const Duration(seconds: 2));
     setState(() => isLoading = true);
 
     try {
-      final isVerified = await AuthService.verifyForgotPasswordOtp(email, otp);
+      //final isVerified = await AuthService.verifyForgotPasswordOtp(email, otp);
+      final isVerified = await verifyWithRetry(email, otp);
 
       if (isVerified) {
         _showMessage("OTP verified successfully");
