@@ -34,7 +34,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
       final response = await AuthService().signup(
         fullName: nameController.text.trim(),
         email: emailController.text.trim(),
-        phone: phoneController.text.trim(),
+        phone: phoneController.text.trim().isEmpty
+            ? null
+            : phoneController.text.trim(),
         password: passwordController.text.trim(),
         confirmPassword: confirmPasswordController.text.trim(),
       );
@@ -159,9 +161,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             label: "sign_up.phone".tr(),
                             controller: phoneController,
                             validator: (value) {
-                              if (value == null || value.trim().isEmpty) {
-                                return "Phone number is required";
-                              }
                               return null;
                             },
                           ),

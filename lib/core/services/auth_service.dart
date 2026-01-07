@@ -8,7 +8,7 @@ class AuthService {
   Future<Map<String, dynamic>> signup({
     required String fullName,
     required String email,
-    required String phone,
+    String? phone,
     required String password,
     required String confirmPassword,
   }) async {
@@ -16,7 +16,7 @@ class AuthService {
     final body = jsonEncode({
       "full_name": fullName,
       "email": email,
-      "phone": phone,
+      "phone": phone?.isEmpty == true ? null : phone,
       "password": password,
       "confirm_password": confirmPassword,
     });
