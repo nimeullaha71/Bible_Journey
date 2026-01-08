@@ -55,7 +55,7 @@ class _SetNewPasswordScreenState extends State<SetNewPasswordScreen> {
         new_password: pass,
       );
 
-      if (result['message'] == "Password reset successfully.") {
+      if (result['message'] == "Your password has been reset successfully. You can now log in with your new password.") {
         ScaffoldMessenger.of(context)
             .showSnackBar(
           const SnackBar(content: Text("Password reset successful")),

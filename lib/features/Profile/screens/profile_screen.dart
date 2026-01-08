@@ -65,7 +65,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 23),
                 margin: const EdgeInsets.symmetric(vertical: 5, horizontal: 12),
-                height: 170,
+                height: 140,
                 decoration: BoxDecoration(
                   color: const Color(0xffFCFAF9),
                   borderRadius: BorderRadius.circular(24),
@@ -107,14 +107,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
                             const SizedBox(height: 5),
 
-                            CustomText(
-                                textIconPath: 'assets/images/HandCoins.svg',
-                                text: "subscription".tr(),
-                                trailingIcon: Icons.arrow_forward_ios,
-                                onTap: (){
-                                  Navigator.push(
-                                      context, MaterialPageRoute(builder: (_) => const TrialExpiredPaymentScreen()));
-                                }),
+                            // CustomText(
+                            //     textIconPath: 'assets/images/HandCoins.svg',
+                            //     text: "subscription".tr(),
+                            //     trailingIcon: Icons.arrow_forward_ios,
+                            //     onTap: (){
+                            //       Navigator.push(
+                            //           context, MaterialPageRoute(builder: (_) => const TrialExpiredPaymentScreen()));
+                            //     }),
 
                             Padding(
                               padding: const EdgeInsets.only(left: 30),

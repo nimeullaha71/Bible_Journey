@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:bible_journey/app/Urls.dart';
 import 'package:bible_journey/features/auth/screens/premium_screen.dart';
 import 'package:bible_journey/features/questionnaire/widget/custom_quiz_app_bar.dart';
+import 'package:bible_journey/main_bottom_nav_screen.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:bible_journey/app/constants.dart';
@@ -29,12 +30,12 @@ class _QuizQuestionScreenState extends State<QuizQuestionScreen> {
       ]
     },
     {
-      "question": "How would you describe your Bible study experience so far?",
+      "question": "What motivates you to explore the Bible?",
       "options": [
-        "I'm a beginner",
-        "I know some parts",
-        "I've studied it deeply",
-        "Not sure"
+        "Personal spiritual growth",
+        "Finding guidance for life decisions",
+        "Curiosity and learning",
+        "I’m not sure yet"
       ]
     },
     {
@@ -161,7 +162,7 @@ class _QuizQuestionScreenState extends State<QuizQuestionScreen> {
       );
 
       if (response.statusCode == 200) {
-        Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context)=>GoPremiumScreen()), (route)=>false);
+        Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context)=>MainBottomNavScreen()), (route)=>false);
       }
     } catch (e) {
       debugPrint("Error: $e");

@@ -198,8 +198,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             onTap: () {
                               if (isTodayLoading || todayPrayer == null) return;
 
-                              bottomNavState?.goToTab(2);
-
+                              //bottomNavState?.goToTab(2);
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
@@ -210,6 +209,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   ),
                                 ),
                               );
+
                             },
                           ),
 
@@ -225,7 +225,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 return;
                               }
 
-                              bottomNavState?.goToTab(2);
+                              //bottomNavState?.goToTab(2);
 
                               Navigator.push(
                                 context,
@@ -250,7 +250,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             onTap: () {
                               if (isTodayLoading || todayAction == null) return;
 
-                              bottomNavState?.goToTab(2);
+                              //bottomNavState?.goToTab(2);
 
                               Navigator.push(
                                 context,

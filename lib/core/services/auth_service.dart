@@ -140,19 +140,16 @@ class AuthService {
       headers: {"Content-Type": "application/json"},
       body: jsonEncode({
         "email": email,
-        "otp": otp, // ✅ String
+        "otp": otp,
       }),
     );
 
     final data = jsonDecode(response.body);
 
-    if (response.statusCode == 200 &&
-        (data["status"] == "verified" ||
-            data["action"] == "reset_password")) {
+    if (response.statusCode == 200 ) {
       return true;
     }
 
-    // ✅ সব অন্য সব ক্ষেত্রে এখানেই আসবে
     throw Exception(data["message"] ?? "Invalid OTP");
   }
 

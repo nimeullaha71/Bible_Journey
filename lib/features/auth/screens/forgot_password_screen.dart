@@ -69,12 +69,11 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
     try {
       final response = await AuthService.forgotPassword(email);
 
-      if (response['status'] == 'otp_sent') {
+      if (response['message'] == 'OTP sent') {
         if (!mounted) return;
 
         _showMessage("OTP sent to your email");
 
-        // 🔒 OTP generate settle time
         await Future.delayed(const Duration(seconds: 2));
 
         if (!mounted) return;

@@ -46,14 +46,14 @@ class _LoginScreenState extends State<LoginScreen> {
       await LocalStorage.saveToken(response['token']);
       await LocalStorage.saveEmail(emailController.text.trim());
 
-      if (response['trial_expired'] != null &&
-          response['trial_expired'].toString().toLowerCase().contains("expired")) {
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => const TrialExpiredPaymentScreen()),
-        );
-        return;
-      }
+      // if (response['trial_expired'] != null &&
+      //     response['trial_expired'].toString().toLowerCase().contains("expired")) {
+      //   Navigator.push(
+      //     context,
+      //     MaterialPageRoute(builder: (context) => const TrialExpiredPaymentScreen()),
+      //   );
+      //   return;
+      // }
 
       if (response['category'] == null || response['category'].toString().isEmpty) {
         Navigator.pushReplacementNamed(context, AppRoutes.quizIntroScreen);
